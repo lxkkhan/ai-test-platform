@@ -133,10 +133,13 @@ export function matchTemplate(input: MatchInput): MatchResult {
     };
   }
 
-  // 2. 模糊页面匹配（操作类型一致，页面名包含关键词）
+  // 2. 模糊页面匹配（操作类型一致，页面名包含关键词或相似度>0.5）
   const fuzzyPageMatch = index.find(e =>
     e.operationType === input.operationType &&
-    (e.page.includes(input.targetPage) || input.targetPage.includes(e.page))
+    (e.page.includes(input.targetPage) || 
+     input.targetPage.includes(e.page) ||
+     hasCommonKeyword(e.page, input.targetPage) ||
+     similarity(e.page, input.targetPage) > 0.4)
   );
   if (fuzzyPageMatch) {
     return {
@@ -211,7 +214,24 @@ function similarity(a: string, b: string): number {
   return intersection.size / union.size;
 }
 
-// ─── 批量匹配 ─────────────────────────────────────────────────────────────────
+// ─── 辅助匹配函数 ─────────────────────────────────────────────────────────
+
+/** 检查两个字符串是否有共同的关键词（2字以上） */
+function hasCommonKeyword(a: string, b: string): boolean {
+  const extractKeywords = (s: string) => {
+    // 提取 2-4 字的关键词子串
+    const keywords: string[] = [];
+    for (let len = 2; len <= 4; len++) {
+      for (let i = 0; i <= s.length - len; i++) {
+        keywords.push(s.substring(i, i + len));
+      }
+    }
+    return keywords;
+  };
+  const ka = new Set(extractKeywords(a));
+  const kb = extractKeywords(b);
+  return kb.some(k => ka.has(k));
+}
 
 export interface BatchMatchInput {
   cases: MatchInput[];
@@ -265,6 +285,6 @@ async function main(): Promise<void> {
   }
 }
 
-if (require.main === module) {
+if (require.main === module || process.argv[1]?.endsWith('template-matcher.ts') || process.argv[1]?.endsWith('template-matcher.js')) {
   main();
 }

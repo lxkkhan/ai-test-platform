@@ -1,0 +1,28 @@
+# 页面模板：到货单列表
+# 自动生成于：2026-05-22T17:00:00+08:00
+
+页面: "到货单列表"
+URL: "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/inbound/arrival"
+recordCount: 1
+sourceCases:
+  - "case-001-查看到货单"
+
+元素映射:
+  导航:
+    - primary: 'await page.click("span:has-text(\"库存中心\")");'
+    - primary: 'await page.click("a:has-text(\"到货单\")");'
+    - primary: 'await page.waitForURL("**/inbound/arrival");'
+  按钮:
+    - primary: "button:has-text('查询')"
+      fallbacks: ["[aria-label='查询']"]
+    - primary: "button:has-text('重置')"
+      fallbacks: []
+    - primary: "button:has-text('新增')"
+      fallbacks: ["a:has-text('新增')"]
+    - primary: "button:has-text('删除')"
+      fallbacks: []
+  输入框:
+    - primary: "input[placeholder*='单据号']"
+      fallbacks: ["input#billNo"]
+    - primary: "input[placeholder*='供应商']"
+      fallbacks: []

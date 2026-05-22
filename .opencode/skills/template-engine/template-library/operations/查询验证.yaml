@@ -1,0 +1,19 @@
+# 操作模板：查询验证
+# 自动生成于：2026-05-22T17:00:00+08:00
+
+操作类型: "查询验证"
+目标页面: "到货单列表"
+recordCount: 1
+sourceCases:
+  - "case-001-查看到货单"
+
+步骤序列:
+  - type: "click"
+    selector: "span:has-text('库存中心')"
+    code: "await page.click('span:has-text(\"库存中心\")');"
+  - type: "click"
+    selector: "a:has-text('到货单')"
+    code: "await page.click('a:has-text(\"到货单\")');"
+  - type: "waitURL"
+    selector: "**/inbound/arrival"
+    code: "await page.waitForURL('**/inbound/arrival');"

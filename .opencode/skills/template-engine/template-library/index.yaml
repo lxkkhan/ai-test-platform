@@ -1,0 +1,20 @@
+# 模板库索引
+# 自动生成于：2026-05-22T17:00:00+08:00
+# 用于快速匹配和去重
+
+模板索引:
+  - 页面: "到货单列表"
+    操作类型: "查询验证"
+    pageTemplate: "pages/到货单列表.yaml"
+    operationTemplate: "operations/查询验证.yaml"
+    sourceCases: ["case-001-查看到货单"]
+    recordCount: 1
+    最后更新: "2026-05-22T17:00:00"
+
+  - 页面: "到货单列表"
+    操作类型: "新增提交"
+    pageTemplate: "pages/到货单列表.yaml"
+    operationTemplate: "operations/新增提交.yaml"
+    sourceCases: ["case-002-新增到货单"]
+    recordCount: 1
+    最后更新: "2026-05-22T17:00:00"

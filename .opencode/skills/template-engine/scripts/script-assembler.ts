@@ -447,7 +447,7 @@ function buildRobustDblClick(primary: string, fallbacks: string[]): string {
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
 
-  if (args.length < 3) {
+  if (args.length < 3 && (args.length < 2 || args[0] !== '--file')) {
     console.log('用法: npx tsx script-assembler.ts <caseName> <targetPage> <operationType> [outputDir]');
     console.log('');
     console.log('或读取 JSON 输入文件：');
@@ -505,7 +505,7 @@ async function main(): Promise<void> {
   }
 }
 
-if (require.main === module) {
+if (require.main === module || process.argv[1]?.endsWith('script-assembler.ts') || process.argv[1]?.endsWith('script-assembler.js')) {
   main().catch(err => {
     console.error('[assembler] 错误：', err);
     process.exit(1);
