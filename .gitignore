@@ -1,0 +1,36 @@
+# TAPD credentials - DO NOT commit
+.opencode/skills/*/config.json
+
+# oh-my-openagent internal files
+.omo/
+oh-my-openagent/
+
+# Browser extension (contains encrypted credentials, separate repo)
+browser-extension/credentials.enc.js
+
+# Playwright-mind is a separate repo, add as submodule
+.opencode/skills/playwright-mind/
+
+# Node modules
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test results & cache
+test-results/
+test-results/
+.opencode/skills/playwright-mind/test-results/
+.opencode/skills/playwright-mind/test_record/
+
+# Environment variables
+.env
+.env.local
+
+# Log files
+*.log

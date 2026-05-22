@@ -1,0 +1,336 @@
+/* ============================================
+   TAPD Bug Reporter — 沉稳·克制·持久
+   低饱和柔和色系 · 模块化规整 · 久看不累眼
+   ============================================ */
+
+@keyframes tapd-panel-enter {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes tapd-toast-enter {
+  from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@keyframes tapd-rec-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+/* ========== Panel ========== */
+.tapd-bug-panel {
+  position: fixed;
+  top: 28px; right: 28px;
+  width: 432px;
+  min-width: 320px;
+  min-height: 360px;
+  max-height: calc(100vh - 56px);
+  background: #f5f6f8;
+  color: #222;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 13px;
+  line-height: 1.55;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 4px 24px rgba(0,0,0,0.07);
+  z-index: 2147483646;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: tapd-panel-enter 0.2s ease-out;
+  user-select: none;
+}
+
+/* ========== Header ========== */
+.tapd-panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px;
+  cursor: move; flex-shrink: 0;
+  border-bottom: 1px solid #e2e4e8;
+  background: #eff0f3;
+}
+.tapd-panel-drag-handle {
+  display: flex; align-items: center; gap: 8px;
+}
+.tapd-panel-icon {
+  width: 24px; height: 24px;
+  background: #6b7280;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+}
+.tapd-panel-title {
+  font-size: 13px; font-weight: 600; color: #3a3a3a; letter-spacing: 0.03em;
+}
+.tapd-panel-actions { display: flex; gap: 2px; }
+.tapd-btn-icon {
+  width: 26px; height: 26px;
+  border: none; background: transparent; color: #7a7a7a;
+  font-size: 14px; border-radius: 5px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.tapd-btn-icon:hover { background: rgba(0,0,0,0.06); color: #4a4a4a; }
+.tapd-btn-close:hover { background: rgba(220,38,38,0.1); color: #dc2626; }
+
+/* ========== Settings ========== */
+.tapd-settings-panel {
+  background: #ecedf1;
+  border-bottom: 1px solid #e2e4e8;
+  flex-shrink: 0;
+}
+.tapd-settings-inner { padding: 16px 20px; }
+.tapd-settings-actions {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 12px; gap: 10px;
+}
+.tapd-settings-left { display: flex; align-items: center; gap: 4px; }
+.tapd-settings-right { display: flex; align-items: center; gap: 8px; }
+.tapd-btn-link.tapd-btn-icon-only {
+  margin-left: 0; color: #7a7a7a;
+}
+.tapd-btn-link.tapd-btn-icon-only:hover { color: #4a4a4a; background: rgba(0,0,0,0.06); }
+.tapd-btn-icon-only {
+  width: 32px; height: 32px; padding: 0; margin-left: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 16px; border-radius: 6px;
+  background: transparent; border: none; cursor: pointer;
+  color: #7a7a7a; transition: background 0.12s, color 0.12s;
+}
+.tapd-btn-icon-only:hover { background: rgba(0,0,0,0.06); color: #4a4a4a; }
+.tapd-test-result { font-size: 12px; font-weight: 500; }
+.tapd-test-ok  { color: #2d8a56; }
+.tapd-test-fail { color: #c53434; }
+
+/* ========== Body ========== */
+.tapd-panel-body-wrap {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  padding: 0 20px 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #d8dae0 transparent;
+}
+.tapd-panel-body-wrap::-webkit-scrollbar { width: 4px; }
+.tapd-panel-body-wrap::-webkit-scrollbar-track { background: transparent; }
+.tapd-panel-body-wrap::-webkit-scrollbar-thumb { background: #d8dae0; border-radius: 4px; }
+
+.tapd-body-inner { display: flex; flex-direction: column; gap: 12px; }
+
+/* ========== Section ========== */
+.tapd-section {
+  background: #ecedf1;
+  border-radius: 8px;
+  padding: 14px 18px;
+  border: 1px solid #e5e7ec;
+}
+.tapd-section-header {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 10px;
+}
+.tapd-section-title {
+  font-weight: 600; font-size: 12px; color: #5a5a5a;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.tapd-step-count { font-size: 11px; color: #8a8a8a; }
+.tapd-btn-link {
+  border: none; background: transparent; color: #5b6abf;
+  font-size: 12px; cursor: pointer; padding: 0; margin-left: auto;
+  font-weight: 500; transition: color 0.12s;
+}
+.tapd-btn-link:hover { color: #4a56a6; }
+
+/* ========== Steps ========== */
+.tapd-steps-list {
+  max-height: 148px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.tapd-steps-empty { text-align: center; color: #9a9a9a; font-size: 12px; padding: 20px 0; }
+.tapd-step-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 10px; border-radius: 6px;
+  background: #fafbfc;
+  font-size: 12px; line-height: 1.5;
+}
+.tapd-step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 18px;
+  background: #d8dbe2; color: #6a6a6a;
+  font-size: 10px; font-weight: 600; border-radius: 4px;
+}
+.tapd-step-action {
+  display: inline-block; padding: 2px 8px; border-radius: 3px;
+  font-size: 10px; font-weight: 600; white-space: nowrap;
+}
+.tapd-action-点击     { background: #e0ece4; color: #3d7a4b; }
+.tapd-action-输入     { background: #e2e8f4; color: #3b5cb8; }
+.tapd-action-修改     { background: #f0ece0; color: #8a6d2b; }
+.tapd-action-提交     { background: #ece4f4; color: #5e4ab8; }
+.tapd-action-跳转     { background: #f4e4e4; color: #b84a4a; }
+.tapd-action-打开页面 { background: #e0f0ec; color: #3d7a6b; }
+.tapd-step-target {
+  flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #3a3a3a;
+}
+.tapd-step-val {
+  color: #7a7a7a; font-size: 11px; max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* ========== Form ========== */
+.tapd-form-group { margin-bottom: 14px; }
+.tapd-form-group:last-child { margin-bottom: 0; }
+.tapd-label {
+  display: block; font-size: 12px; color: #5a5a5a; margin-bottom: 5px; font-weight: 500;
+}
+.tapd-required { color: #c53434; }
+.tapd-badge {
+  display: inline-block; background: #d8dbe2; color: #7a7a7a;
+  font-size: 10px; padding: 1px 6px; border-radius: 3px; margin-left: 4px; font-weight: 500;
+}
+.tapd-input {
+  width: 100%; box-sizing: border-box;
+  padding: 9px 12px;
+  background: #fafbfc; color: #222;
+  border: 1px solid #e0e2e7;
+  border-radius: 6px; font-size: 13px;
+  font-family: inherit; line-height: 1.5;
+  outline: none;
+  transition: border-color 0.12s, background 0.12s;
+}
+.tapd-input:hover { border-color: #cfd3db; }
+.tapd-input:focus {
+  border-color: #5b6abf;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(91,106,191,0.1);
+}
+.tapd-input::placeholder { color: #b0b0b0; }
+.tapd-input-sm { font-size: 12px; padding: 7px 10px; color: #5a5a5a; }
+textarea.tapd-input { resize: vertical; }
+select.tapd-input {
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5l3 3 3-3' fill='none' stroke='%237a7a7a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center; padding-right: 30px;
+}
+.tapd-row { display: flex; gap: 12px; }
+.tapd-col { flex: 1; min-width: 0; }
+.tapd-check-row { padding-top: 4px; }
+.tapd-check-label {
+  font-size: 12px; color: #7a7a7a; cursor: pointer; display: flex; align-items: center; gap: 5px;
+}
+.tapd-check-label input[type="checkbox"] {
+  accent-color: #5b6abf; width: 14px; height: 14px;
+}
+
+/* ========== Footer ========== */
+.tapd-panel-footer {
+  display: flex; align-items: center;
+  padding: 14px 20px;
+  border-top: 1px solid #e2e4e8;
+  flex-shrink: 0;
+  gap: 12px;
+  background: #eff0f3;
+}
+.tapd-footer-item { flex: 1; display: flex; justify-content: center; align-items: center; }
+.tapd-footer-item:first-child { justify-content: flex-start; }
+.tapd-footer-item:last-child { justify-content: flex-end; }
+.tapd-step-config {
+  font-size: 12px; color: #7a7a7a; display: flex; align-items: center; gap: 6px; white-space: nowrap;
+}
+.tapd-select-sm {
+  background: #fafbfc; color: #4a4a4a; border: 1px solid #e0e2e7;
+  border-radius: 5px; padding: 4px 8px; font-size: 12px; cursor: pointer;
+  transition: border-color 0.12s;
+}
+.tapd-select-sm:hover { border-color: #cfd3db; }
+
+/* ========== Buttons ========== */
+.tapd-btn {
+  padding: 8px 14px; border: none; border-radius: 6px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: background 0.12s; white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.tapd-btn-full { width: 100%; }
+.tapd-btn-primary {
+  background: #5b6abf; color: #fff;
+}
+.tapd-btn-primary:hover { background: #4e5ca8; }
+.tapd-btn-secondary {
+  background: #fafbfc; color: #4a4a4a; border: 1px solid #e0e2e7;
+}
+.tapd-btn-secondary:hover { background: #ecedf1; }
+.tapd-btn-sm {
+  padding: 6px 14px; font-size: 12px; border: none; border-radius: 5px;
+  cursor: pointer; font-weight: 500; white-space: nowrap;
+  transition: background 0.12s;
+  background: #fafbfc; color: #4a4a4a; border: 1px solid #e0e2e7;
+}
+.tapd-btn-sm:hover { background: #ecedf1; }
+.tapd-btn-warn { background: #f5e8e8; color: #c53434; border: 1px solid #e8cccc; }
+.tapd-btn-warn:hover { background: #eedddd; }
+.tapd-btn-remove { color: #c53434; font-size: 12px; margin-top: 6px; }
+
+/* ========== Toast ========== */
+.tapd-toast {
+  position: fixed; bottom: 48px; left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 24px; border-radius: 8px; font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  z-index: 2147483647;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  animation: tapd-toast-enter 0.2s ease-out;
+  letter-spacing: 0.01em;
+}
+.tapd-toast-success { background: #e4f0e8; color: #3d6b3d; }
+.tapd-toast-error   { background: #f4e4e4; color: #8b2e2e; }
+.tapd-toast-warn    { background: #f0ece0; color: #7a5c2b; }
+.tapd-toast-hide { opacity: 0; transition: opacity 0.2s; }
+
+/* ========== Media ========== */
+.tapd-section-media {
+  background: #ecedf1;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 4px;
+  border: 1px solid #e5e7ec;
+}
+.tapd-media-header { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+.tapd-media-hint { font-size: 11px; color: #8a8a8a; margin-left: 4px; }
+.tapd-media-toolbar { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.tapd-screenshot-preview {
+  margin-top: 10px; border-radius: 6px; overflow: hidden;
+  border: 1px solid #e0e2e7;
+}
+.tapd-screenshot-img { width: 100%; display: block; }
+
+.tapd-recording-status {
+  margin-top: 10px; display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; background: #f5e8e8; border-radius: 6px;
+  border: 1px solid #e8cccc;
+}
+.tapd-rec-indicator { display: flex; align-items: center; gap: 10px; }
+.tapd-rec-dot {
+  width: 8px; height: 8px; background: #c53434; border-radius: 50%;
+  animation: tapd-rec-pulse 1.2s infinite;
+}
+.tapd-rec-timer {
+  font-size: 14px; font-weight: 700; color: #c53434; font-variant-numeric: tabular-nums; letter-spacing: 0.04em;
+}
+
+/* ========== Custom Fields ========== */
+.tapd-custom-fields {
+  margin-top: 10px; padding-top: 12px;
+  border-top: 1px solid #d8dbe2;
+}
+.tapd-custom-fields .tapd-form-group { margin-bottom: 14px; }
+.tapd-custom-fields .tapd-label { font-size: 12px; color: #5a5a5a; }
+
+/* ========== Resize Handle ========== */
+.tapd-resize-handle {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 16px; height: 16px;
+  cursor: nwse-resize;
+  opacity: 0.25;
+  transition: opacity 0.12s;
+  background: linear-gradient(135deg, transparent 50%, #8a8a8a 50%, transparent 55%, #8a8a8a 55%, transparent 60%, #8a8a8a 60%);
+}
+.tapd-bug-panel:hover .tapd-resize-handle { opacity: 0.5; }
+.tapd-resize-handle:hover { opacity: 1 !important; }

@@ -1,0 +1,6 @@
+# 加密凭证文件（包含 API 密钥，禁止提交）
+credentials.enc.js
+
+# 备份文件
+*.bak
+*.bak2

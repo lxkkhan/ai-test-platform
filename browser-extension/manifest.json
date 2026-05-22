@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "TAPD Bug Reporter",
+  "version": "1.0.0",
+  "description": "浏览器功能测试提Bug工具 - 记录操作步骤并一键提交TAPD",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "contextMenus",
+    "cookies"
+  ],
+  "host_permissions": [
+    "https://api.tapd.cn/*",
+    "https://*.tapd.cn/*",
+    "https://*.tapd.woa.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "提Bug到TAPD (Alt+Q)",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "commands": {
+    "toggle-panel": {
+      "suggested_key": {
+        "default": "Alt+Q"
+      },
+      "description": "打开/关闭提Bug面板"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
