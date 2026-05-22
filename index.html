@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI测试平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #e0f2f1;
+        }
+        .tiffany-color {
+            color: #0abab5;
+        }
+        .tiffany-bg {
+            background-color: #0abab5;
+        }
+        .tiffany-border {
+            border-color: #0abab5;
+        }
+        .tab-content { 
+            display: none; 
+        }
+        .tab-content.active { 
+            display: block; 
+        }
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: #0abab5;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+        .notification.show {
+            display: block;
+            animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        @keyframes fadeOut {
+            from {opacity: 1; transform: translateY(0);}
+            to {opacity: 0; transform: translateY(20px);}
+        }
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-backdrop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        .modal-backdrop.show .modal-content {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="tiffany-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-robot text-2xl"></i>
+                <h1 class="text-xl font-bold">AI测试平台</h1>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" data-page="ai-function" class="nav-link hover:text-teal-200 transition font-bold">AI功能测试</a>
+                <a href="#" data-page="ai-interface" class="nav-link hover:text-teal-200 transition">AI接口测试</a>
+                <a href="#" data-page="ai-ui" class="nav-link hover:text-teal-200 transition">AI UI测试</a>
+                <a href="#" data-page="test-report" class="nav-link hover:text-teal-200 transition">测试报告</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 通知提示 -->
+    <div id="notification" class="notification">
+        <span id="notificationText"></span>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- AI功能测试页面 -->
+        <div id="ai-function" class="tab-content active">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold tiffany-color">AI功能测试用例管理</h2>
+                    <div class="flex space-x-3">
+                        <button id="addCase" class="px-4 py-2 tiffany-bg text-white rounded-md hover:bg-teal-600 transition flex items-center">
+                            <i class="fas fa-plus mr-1"></i> 新增
+                        </button>
+                        <button id="importCase" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition flex items-center">
+                            <i class="fas fa-file-import mr-1"></i> 导入
+                        </button>
+                        <button id="exportCase" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition flex items-center">
+                            <i class="fas fa-file-export mr-1"></i> 导出
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 查询筛选区域 -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">测试类型</label>
+                            <select id="functionFilterType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="all">全部</option>
+                                <option value="text">文本分类</option>
+                                <option value="image">图像识别</option>
+                                <option value="audio">语音识别</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">状态</label>
+                            <select id="functionFilterStatus" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="all">全部</option>
+                                <option value="active">已激活</option>
+                                <option value="inactive">未激活</option>
+                                <option value="archived">已归档</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">创建时间</label>
+                            <input id="functionFilterDate" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">关键词搜索</label>
+                            <input id="functionFilterKeyword" type="text" placeholder="输入关键词" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button id="functionSearch" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition mr-2">
+                            <i class="fas fa-search mr-1"></i> 查询
+                        </button>
+                        <button id="functionReset" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                            <i class="fas fa-redo mr-1"></i> 重置
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 测试用例列表 -->
+                <div id="functionCaseList" class="space-y-4">
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <h3 class="font-medium text-gray-800">情感分析准确性测试</h3>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">文本分类</span>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">高</span>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">已激活</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">测试AI模型对文本情感分类的准确性</p>
+                                <div class="flex flex-wrap gap-2 text-xs text-gray-500">
+                                    <span>ID: TC001</span>
+                                    <span>创建时间: 2023-10-10</span>
+                                    <span>预估时间: 15分钟</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2 ml-4">
+                                <button class="view-case-btn text-blue-600 hover:text-blue-800" data-id="TC001">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="edit-case-btn text-teal-600 hover:text-teal-800" data-id="TC001">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="execute-case-btn text-green-600 hover:text-green-800" data-id="TC001">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="delete-case-btn text-red-600 hover:text-red-800" data-id="TC001">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分页 -->
+                <div id="functionPagination" class="mt-6 flex justify-between items-center">
+                    <div class="text-sm text-gray-700">
+                        显示 <span id="functionPageInfo">1-10</span> 条，共 <span id="functionTotalCount">1</span> 条记录
+                    </div>
+                    <div id="functionPageButtons" class="flex space-x-2">
+                        <button class="px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">上一页</button>
+                        <button class="px-3 py-1 rounded-md tiffany-bg text-white">1</button>
+                        <button class="px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">下一页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI接口测试页面 -->
+        <div id="ai-interface" class="tab-content">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold tiffany-color">AI接口测试用例管理</h2>
+                    <div class="flex space-x-3">
+                        <button id="addInterfaceCase" class="px-4 py-2 tiffany-bg text-white rounded-md hover:bg-teal-600 transition flex items-center">
+                            <i class="fas fa-plus mr-1"></i> 新增
+                        </button>
+                        <button id="importInterfaceCase" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition flex items-center">
+                            <i class="fas fa-file-import mr-1"></i> 导入
+                        </button>
+                        <button id="exportInterfaceCase" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition flex items-center">
+                            <i class="fas fa-file-export mr-1"></i> 导出
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 查询筛选区域 -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">接口类型</label>
+                            <select id="interfaceFilterType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="all">全部</option>
+                                <option value="rest">REST API</option>
+                                <option value="graphql">GraphQL</option>
+                                <option value="rpc">RPC</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">状态</label>
+                            <select id="interfaceFilterStatus" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="all">全部</option>
+                                <option value="active">已激活</option>
+                                <option value="inactive">未激活</option>
+                                <option value="archived">已归档</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">创建时间</label>
+                            <input id="interfaceFilterDate" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">关键词搜索</label>
+                            <input id="interfaceFilterKeyword" type="text" placeholder="输入关键词" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button id="interfaceSearch" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition mr-2">
+                            <i class="fas fa-search mr-1"></i> 查询
+                        </button>
+                        <button id="interfaceReset" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                            <i class="fas fa-redo mr-1"></i> 重置
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 测试用例列表 -->
+                <div id="interfaceCaseList" class="space-y-4">
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <h3 class="font-medium text-gray-800">文本分类API测试</h3>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">REST API</span>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">高</span>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">已激活</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">测试文本分类API的功能和性能</p>
+                                <div class="flex flex-wrap gap-2 text-xs text-gray-500">
+                                    <span>ID: API001</span>
+                                    <span>创建时间: 2023-10-12</span>
+                                    <span>预估时间: 15分钟</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2 ml-4">
+                                <button class="view-case-btn text-blue-600 hover:text-blue-800" data-id="API001">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="edit-case-btn text-teal-600 hover:text-teal-800" data-id="API001">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="execute-case-btn text-green-600 hover:text-green-800" data-id="API001">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="delete-case-btn text-red-600 hover:text-red-800" data-id="API001">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分页 -->
+                <div id="interfacePagination" class="mt-6 flex justify-between items-center">
+                    <div class="text-sm text-gray-700">
+                        显示 <span id="interfacePageInfo">1-10</span> 条，共 <span id="interfaceTotalCount">1</span> 条记录
+                    </div>
+                    <div id="interfacePageButtons" class="flex space-x-2">
+                        <button class="px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">上一页</button>
+                        <button class="px-3 py-1 rounded-md tiffany-bg text-white">1</button>
+                        <button class="px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">下一页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI UI测试页面 -->
+        <div id="ai-ui" class="tab-content">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold tiffany-color">AI UI测试用例管理</h2>
+                    <div class="flex space-x-3">
+                        <button id="addUICase" class="px-4 py-2 tiffany-bg text-white rounded-md hover:bg-teal-600 transition flex items-center">
+                            <i class="fas fa-plus mr-1"></i> 新增
+                        </button>
+                        <button id="importUICase" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition flex items-center">
+                            <i class="fas fa-file-import mr-1"></i> 导入
+                        </button>
+                        <button id="exportUICase" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition flex items-center">
+                            <i class="fas fa-file-export mr-1"></i> 导出
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 查询筛选区域 -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">测试类型</label>
+                            <select id="uiFilterType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="all">全部</option>
+                                <option value="navigation">导航测试</option>
+                                <option value="form">表单测试</option>
+                                <option value="interaction">交互测试</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">状态</label>
+                            <select id="uiFilterStatus" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="all">全部</option>
+                                <option value="active">已激活</option>
+                                <option value="inactive">未激活</option>
+                                <option value="archived">已归档</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">创建时间</label>
+                            <input id="uiFilterDate" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">关键词搜索</label>
+                            <input id="uiFilterKeyword" type="text" placeholder="输入关键词" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button id="uiSearch" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition mr-2">
+                            <i class="fas fa-search mr-1"></i> 查询
+                        </button>
+                        <button id="uiReset" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                            <i class="fas fa-redo mr-1"></i> 重置
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 测试用例列表 -->
+                <div id="uiCaseList" class="space-y-4">
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <h3 class="font-medium text-gray-800">聊天界面导航测试</h3>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">导航测试</span>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">高</span>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">已激活</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">测试聊天界面的导航功能</p>
+                                <div class="flex flex-wrap gap-2 text-xs text-gray-500">
+                                    <span>ID: UI001</span>
+                                    <span>创建时间: 2023-10-15</span>
+                                    <span>预估时间: 10分钟</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2 ml-4">
+                                <button class="view-case-btn text-blue-600 hover:text-blue-800" data-id="UI001">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="edit-case-btn text-teal-600 hover:text-teal-800" data-id="UI001">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="execute-case-btn text-green-600 hover:text-green-800" data-id="UI001">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="delete-case-btn text-red-600 hover:text-red-800" data-id="UI001">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分页 -->
+                <div id="uiPagination" class="mt-6 flex justify-between items-center">
+                    <div class="text-sm text-gray-700">
+                        显示 <span id="uiPageInfo">1-10</span> 条，共 <span id="uiTotalCount">1</span> 条记录
+                    </div>
+                    <div id="uiPageButtons" class="flex space-x-2">
+                        <button class="px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">上一页</button>
+                        <button class="px-3 py-1 rounded-md tiffany-bg text-white">1</button>
+                        <button class="px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">下一页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 测试报告页面 -->
+        <div id="test-report" class="tab-content">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold tiffany-color">测试报告管理</h2>
+                    <div class="flex space-x-3">
+                        <button id="addReport" class="px-4 py-2 tiffany-bg text-white rounded-md hover:bg-teal-600 transition flex items-center">
+                            <i class="fas fa-plus mr-1"></i> 新增报告
+                        </button>
+                        <button id="importReport" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition flex items-center">
+                            <i class="fas fa-file-import mr-1"></i> 导入
+                        </button>
+                        <button id="exportReport" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition flex items-center">
+                            <i class="fas fa-file-export mr-1"></i> 导出
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 查询筛选区域 -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">测试类型</label>
+                            <select id="reportFilterType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="all">全部</option>
+                                <option value="function">AI功能测试</option>
+                                <option value="interface">AI接口测试</option>
+                                <option value="ui">AI UI测试</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">测试状态</label>
+                            <select id="reportFilterStatus" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="all">全部</option>
+                                <option value="success">成功</option>
+                                <option value="failure">失败</option>
+                                <option value="partial">部分成功</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">创建时间</label>
+                            <input id="reportFilterDate" type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">关键词搜索</label>
+                            <input id="reportFilterKeyword" type="text" placeholder="输入关键词" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button id="reportSearch" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition mr-2">
+                            <i class="fas fa-search mr-1"></i> 查询
+                        </button>
+                        <button id="reportReset" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                            <i class="fas fa-redo mr-1"></i> 重置
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 测试报告列表 -->
+                <div id="reportList" class="space-y-4">
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <h3 class="font-medium text-gray-800">文本分类模型测试报告</h3>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">AI功能测试</span>
+                                    <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">成功</span>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">测试完成，所有用例均通过，准确率达到预期标准</p>
+                                <div class="flex flex-wrap gap-2 text-xs text-gray-500">
+                                    <span>ID: R001</span>
+                                    <span>创建时间: 2023-10-15</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2 ml-4">
+                                <button class="view-report-btn text-blue-600 hover:text-blue-800" data-id="R001">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="delete-report-btn text-red-600 hover:text-red-800" data-id="R001">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分页 -->
+                <div id="reportPagination" class="mt-6 flex justify-between items-center">
+                    <div class="text-sm text-gray-700">
+                        显示 <span id="reportPageInfo">1-10</span> 条，共 <span id="reportTotalCount">1</span> 条记录
+                    </div>
+                    <div id="reportPageButtons" class="flex space-x-2">
+                        <button class="px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">上一页</button>
+                        <button class="px-3 py-1 rounded-md tiffany-bg text-white">1</button>
+                        <button class="px-3 py-1 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300">下一页</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增测试用例模态框 -->
+    <div id="addCaseModal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="tiffany-bg text-white p-4 rounded-t-lg flex justify-between items-center">
+                <h3 class="text-xl font-bold" id="modalTitle">新增AI功能测试用例</h3>
+                <button id="closeModal" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <form id="caseForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">用例名称</label>
+                            <input type="text" id="caseName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="输入用例名称" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">测试类型</label>
+                            <select id="caseType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="text">文本分类</option>
+                                <option value="image">图像识别</option>
+                                <option value="audio">语音识别</option>
+                                <option value="rest">REST API</option>
+                                <option value="graphql">GraphQL</option>
+                                <option value="rpc">RPC</option>
+                                <option value="navigation">导航测试</option>
+                                <option value="form">表单测试</option>
+                                <option value="interaction">交互测试</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">优先级</label>
+                            <select id="casePriority" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="high">高</option>
+                                <option value="medium">中</option>
+                                <option value="low">低</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">预估执行时间(分钟)</label>
+                            <input type="number" id="caseDuration" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="10">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">状态</label>
+                            <select id="caseStatus" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="active">已激活</option>
+                                <option value="inactive">未激活</option>
+                                <option value="archived">已归档</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">创建时间</label>
+                            <input type="date" id="caseCreateDate" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">测试描述</label>
+                            <textarea id="caseDescription" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 h-24" placeholder="输入测试描述"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">测试步骤</label>
+                            <div id="caseSteps" class="space-y-3">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-gray-500">1.</span>
+                                    <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="步骤1">
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-gray-500">2.</span>
+                                    <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="步骤2">
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-gray-500">3.</span>
+                                    <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="步骤3">
+                                </div>
+                            </div>
+                            <button type="button" id="addStep" class="mt-2 text-teal-600 hover:text-teal-800 transition flex items-center">
+                                <i class="fas fa-plus mr-1"></i> 添加步骤
+                            </button>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">预期结果</label>
+                            <textarea id="caseExpectedResult" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 h-24" placeholder="输入预期结果"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end space-x-3">
+                        <button type="button" id="cancelBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">取消</button>
+                        <button type="submit" class="px-4 py-2 tiffany-bg text-white rounded-md hover:bg-teal-600 transition">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 导入文件模态框 -->
+    <div id="importModal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="tiffany-bg text-white p-4 rounded-t-lg flex justify-between items-center">
+                <h3 class="text-xl font-bold">导入测试用例</h3>
+                <button id="closeImportModal" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div id="dropZone" class="border-2 border-dashed border-teal-500 rounded-lg p-8 text-center cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-3xl text-teal-500 mb-2"></i>
+                    <p class="text-gray-600">拖放文件到此处或点击选择文件</p>
+                    <p class="text-sm text-gray-500 mt-2">支持 JSON 格式文件</p>
+                    <input type="file" id="fileInput" class="hidden" accept=".json">
+                </div>
+                <div id="importPreview" class="mt-4 hidden">
+                    <h4 class="font-medium text-gray-700 mb-2">预览数据</h4>
+                    <div class="bg-gray-50 p-3 rounded-md max-h-60 overflow-y-auto">
+                        <pre id="previewContent" class="text-sm text-gray-700"></pre>
+                    </div>
+                    <div class="mt-4 flex justify-end space-x-3">
+                        <button id="cancelImport" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">取消</button>
+                        <button id="confirmImport" class="px-4 py-2 tiffany-bg text-white rounded-md hover:bg-teal-600 transition">确认导入</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑测试用例模态框 -->
+    <div id="editCaseModal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="tiffany-bg text-white p-4 rounded-t-lg flex justify-between items-center">
+                <h3 class="text-xl font-bold" id="editModalTitle">编辑AI功能测试用例</h3>
+                <button id="closeEditModal" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <form id="editCaseForm">
+                    <input type="hidden" id="editCaseId">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">用例名称</label>
+                            <input type="text" id="editCaseName" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="输入用例名称" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">测试类型</label>
+                            <select id="editCaseType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="text">文本分类</option>
+                                <option value="image">图像识别</option>
+                                <option value="audio">语音识别</option>
+                                <option value="rest">REST API</option>
+                                <option value="graphql">GraphQL</option>
+                                <option value="rpc">RPC</option>
+                                <option value="navigation">导航测试</option>
+                                <option value="form">表单测试</option>
+                                <option value="interaction">交互测试</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">优先级</label>
+                            <select id="editCasePriority" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="high">高</option>
+                                <option value="medium">中</option>
+                                <option value="low">低</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">预估执行时间(分钟)</label>
+                            <input type="number" id="editCaseDuration" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="10">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">状态</label>
+                            <select id="editCaseStatus" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="active">已激活</option>
+                                <option value="inactive">未激活</option>
+                                <option value="archived">已归档</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">创建时间</label>
+                            <input type="date" id="editCaseCreateDate" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">测试描述</label>
+                            <textarea id="editCaseDescription" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 h-24" placeholder="输入测试描述"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">测试步骤</label>
+                            <div id="editCaseSteps" class="space-y-3">
+                                <!-- 测试步骤将动态生成 -->
+                            </div>
+                            <button type="button" id="editAddStep" class="mt-2 text-teal-600 hover:text-teal-800 transition flex items-center">
+                                <i class="fas fa-plus mr-1"></i> 添加步骤
+                            </button>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">预期结果</label>
+                            <textarea id="editCaseExpectedResult" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 h-24" placeholder="输入预期结果"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end space-x-3">
+                        <button type="button" id="cancelEditBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">取消</button>
+                        <button type="submit" class="px-4 py-2 tiffany-bg text-white rounded-md hover:bg-teal-600 transition">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 查看测试用例详情模态框 -->
+    <div id="viewCaseModal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="tiffany-bg text-white p-4 rounded-t-lg flex justify-between items-center">
+                <h3 class="text-xl font-bold" id="viewModalTitle">测试用例详情</h3>
+                <button id="closeViewModal" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div id="viewCaseDetails">
+                    <!-- 测试用例详情将动态生成 -->
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button id="editCaseFromView" class="px-4 py-2 tiffany-bg text-white rounded-md hover:bg-teal-600 transition mr-2">
+                        <i class="fas fa-edit mr-1"></i> 编辑
+                    </button>
+                    <button id="closeViewBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                        关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 测试执行模态框 -->
+    <div id="executeCaseModal" class="modal-backdrop">
+        <div class="modal-content">
+            <div class="tiffany-bg text-white p-4 rounded-t-lg flex justify-between items-center">
+                <h3 class="text-xl font-bold" id="executeModalTitle">执行测试用例</h3>
+                <button id="closeExecuteModal" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <div id="executeCaseDetails">
+                    <!-- 测试用例执行详情将动态生成 -->
+                </div>
+                <div class="mt-6">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">测试结果</label>
+                        <select id="testResult" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                            <option value="success">成功</option>
+                            <option value="failure">失败</option>
+                            <option value="partial">部分成功</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">执行日志</label>
+                        <textarea id="testLog" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 h-24" placeholder="输入执行日志"></textarea>
+                    </div>
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" id="cancelExecuteBtn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">取消</button>
+                    <button id="saveExecuteResult" class="px-4 py-2 tiffany-bg text-white rounded-md hover:bg-teal-600 transition">
+                        保存结果
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化导航链接事件
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有导航链接的active类
+                    navLinks.forEach(navLink => {
+                        navLink.classList.remove('font-bold');
+                    });
+                    
+                    // 为当前点击的链接添加active类
+                    this.classList.add('font-bold');
+                    
+                    // 隐藏所有标签页内容
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    tabContents.forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    
+                    // 显示对应的标签页内容
+                    const pageId = this.getAttribute('data-page');
+                    document.getElementById(pageId).classList.add('active');
+                });
+            });
+            
+            // 初始化新增按钮事件
+            const addButtons = [
+                'addCase', 'addInterfaceCase', 'addUICase', 'addReport'
+            ];
+            
+            addButtons.forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        // 根据当前页面设置模态框标题
+                        const currentPage = document.querySelector('.nav-link.font-bold').getAttribute('data-page');
+                        const modalTitle = document.getElementById('modalTitle');
+                        
+                        if (buttonId === 'addCase' || buttonId === 'addInterfaceCase' || buttonId === 'addUICase') {
+                            modalTitle.textContent = '新增测试用例';
+                        } else if (buttonId === 'addReport') {
+                            modalTitle.textContent = '新增测试报告';
+                        }
+                        
+                        // 显示模态框
+                        const modal = document.getElementById('addCaseModal');
+                        modal.classList.add('show');
+                    });
+                }
+            });
+            
+            // 初始化导入按钮事件
+            const importButtons = [
+                'importCase', 'importInterfaceCase', 'importUICase', 'importReport'
+            ];
+            
+            importButtons.forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        // 显示导入模态框
+                        const modal = document.getElementById('importModal');
+                        modal.classList.add('show');
+                    });
+                }
+            });
+            
+            // 初始化导出按钮事件
+            const exportButtons = [
+                'exportCase', 'exportInterfaceCase', 'exportUICase', 'exportReport'
+            ];
+            
+            exportButtons.forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        showNotification('导出功能已触发，正在准备数据...');
+                    });
+                }
+            });
+            
+            // 删除模态框关闭按钮事件
+            const closeButtons = [
+                'closeModal', 'closeImportModal', 'closeEditModal', 
+                'closeViewModal', 'closeExecuteModal', 'cancelBtn', 
+                'cancelImport', 'cancelEditBtn', 'closeViewBtn', 
+                'cancelExecuteBtn'
+            ];
+            
+            closeButtons.forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        // 找到最近的模态框并关闭
+                        const modal = this.closest('.modal-backdrop');
+                        if (modal) {
+                            modal.classList.remove('show');
+                        }
+                    });
+                }
+            });
+            
+            // 初始化文件拖放区域事件
+            const dropZone = document.getElementById('dropZone');
+            const fileInput = document.getElementById('fileInput');
+            
+            if (dropZone && fileInput) {
+                dropZone.addEventListener('click', function() {
+                    fileInput.click();
+                });
+                
+                fileInput.addEventListener('change', function(e) {
+                    if (e.target.files.length > 0) {
+                        const file = e.target.files[0];
+                        if (file.type === 'application/json') {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const content = e.target.result;
+                                try {
+                                    const data = JSON.parse(content);
+                                    document.getElementById('previewContent').textContent = JSON.stringify(data, null, 2);
+                                    document.getElementById('importPreview').classList.remove('hidden');
+                                } catch (error) {
+                                    showNotification('文件格式错误，请上传有效的JSON文件', 'error');
+                                }
+                            };
+                            reader.readAsText(file);
+                        } else {
+                            showNotification('请上传JSON格式的文件', 'error');
+                        }
+                    }
+                });
+            }
+            
+            // 初始化添加步骤按钮事件
+            const addStepButton = document.getElementById('addStep');
+            if (addStepButton) {
+                addStepButton.addEventListener('click', function() {
+                    const stepsContainer = document.getElementById('caseSteps');
+                    const stepCount = stepsContainer.children.length + 1;
+                    
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'flex items-center space-x-2';
+                    stepDiv.innerHTML = `
+                        <span class="text-gray-500">${stepCount}.</span>
+                        <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="步骤${stepCount}">
+                        <button type="button" class="remove-step text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    
+                    stepsContainer.appendChild(stepDiv);
+                    
+                    // 添加删除步骤事件
+                    stepDiv.querySelector('.remove-step').addEventListener('click', function() {
+                        stepDiv.remove();
+                    });
+                });
+            }
+            
+            // 初始化编辑添加步骤按钮事件
+            const editAddStepButton = document.getElementById('editAddStep');
+            if (editAddStepButton) {
+                editAddStepButton.addEventListener('click', function() {
+                    const stepsContainer = document.getElementById('editCaseSteps');
+                    const stepCount = stepsContainer.children.length + 1;
+                    
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'flex items-center space-x-2';
+                    stepDiv.innerHTML = `
+                        <span class="text-gray-500">${stepCount}.</span>
+                        <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="步骤${stepCount}">
+                        <button type="button" class="remove-step text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    
+                    stepsContainer.appendChild(stepDiv);
+                    
+                    // 添加删除步骤事件
+                    stepDiv.querySelector('.remove-step').addEventListener('click', function() {
+                        stepDiv.remove();
+                    });
+                });
+            }
+            
+            // 初始化表单提交事件
+            const caseForm = document.getElementById('caseForm');
+            if (caseForm) {
+                caseForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showNotification('测试用例保存成功！');
+                    const modal = document.getElementById('addCaseModal');
+                    modal.classList.remove('show');
+                });
+            }
+            
+            const editCaseForm = document.getElementById('editCaseForm');
+            if (editCaseForm) {
+                editCaseForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showNotification('测试用例更新成功！');
+                    const modal = document.getElementById('editCaseModal');
+                    modal.classList.remove('show');
+                });
+            }
+            
+            // 初始化查询按钮事件
+            const searchButtons = [
+                'functionSearch', 'interfaceSearch', 'uiSearch', 'reportSearch'
+            ];
+            
+            searchButtons.forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        const currentPage = document.querySelector('.nav-link.font-bold').getAttribute('data-page');
+                        showNotification(`${currentPage}查询功能已触发，正在查询数据...`);
+                    });
+                }
+            });
+            
+            // 初始化重置按钮事件
+            const resetButtons = [
+                'functionReset', 'interfaceReset', 'uiReset', 'reportReset'
+            ];
+            
+            resetButtons.forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        const currentPage = document.querySelector('.nav-link.font-bold').getAttribute('data-page');
+                        showNotification(`${currentPage}筛选条件已重置`);
+                    });
+                }
+            });
+            
+            // 初始化查看按钮事件
+            const viewButtons = document.querySelectorAll('.view-case-btn, .view-report-btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    showNotification(`正在查看ID为${id}的详情`);
+                    
+                    const modal = document.getElementById('viewCaseModal');
+                    const modalTitle = document.getElementById('viewModalTitle');
+                    
+                    if (this.classList.contains('view-report-btn')) {
+                        modalTitle.textContent = '测试报告详情';
+                    } else {
+                        modalTitle.textContent = '测试用例详情';
+                    }
+                    
+                    // 模拟填充详情数据
+                    const details = document.getElementById('viewCaseDetails');
+                    details.innerHTML = `
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">基本信息</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <span class="text-gray-500">ID：</span>
+                                        <span class="font-medium">${id}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">状态：</span>
+                                        <span class="font-medium">已激活</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">创建时间：</span>
+                                        <span class="font-medium">2023-10-15</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">优先级：</span>
+                                        <span class="font-medium">高</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">描述</h4>
+                                <p class="text-sm text-gray-600">这是一个测试用例的详细描述，包含了测试的目标、范围和方法。</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">测试步骤</h4>
+                                <ol class="list-decimal pl-5 space-y-1 text-sm text-gray-600">
+                                    <li>准备测试环境和数据</li>
+                                    <li>执行测试用例</li>
+                                    <li>记录测试结果</li>
+                                    <li>验证预期结果</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">预期结果</h4>
+                                <p class="text-sm text-gray-600">测试用例执行成功，所有指标符合预期要求。</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    modal.classList.add('show');
+                });
+            });
+            
+            // 初始化编辑按钮事件
+            const editButtons = document.querySelectorAll('.edit-case-btn');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    showNotification(`正在编辑ID为${id}的测试用例`);
+                    
+                    const modal = document.getElementById('editCaseModal');
+                    const modalTitle = document.getElementById('editModalTitle');
+                    modalTitle.textContent = '编辑测试用例';
+                    
+                    // 模拟填充编辑表单
+                    document.getElementById('editCaseId').value = id;
+                    document.getElementById('editCaseName').value = '测试用例名称';
+                    document.getElementById('editCaseType').value = 'text';
+                    document.getElementById('editCasePriority').value = 'high';
+                    document.getElementById('editCaseDuration').value = '15';
+                    document.getElementById('editCaseStatus').value = 'active';
+                    document.getElementById('editCaseCreateDate').value = '2023-10-15';
+                    document.getElementById('editCaseDescription').value = '这是一个测试用例的描述';
+                    document.getElementById('editCaseExpectedResult').value = '预期结果描述';
+                    
+                    // 清空并添加步骤
+                    const stepsContainer = document.getElementById('editCaseSteps');
+                    stepsContainer.innerHTML = '';
+                    const steps = [
+                        '步骤1：准备测试环境',
+                        '步骤2：执行测试用例',
+                        '步骤3：记录测试结果'
+                    ];
+                    
+                    steps.forEach((step, index) => {
+                        const stepDiv = document.createElement('div');
+                        stepDiv.className = 'flex items-center space-x-2';
+                        stepDiv.innerHTML = `
+                            <span class="text-gray-500">${index + 1}.</span>
+                            <input type="text" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="步骤${index + 1}" value="${step}">
+                            <button type="button" class="remove-step text-red-600 hover:text-red-800">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        `;
+                        stepsContainer.appendChild(stepDiv);
+                    });
+                    
+                    modal.classList.add('show');
+                });
+            });
+            
+            // 初始化执行按钮事件
+            const executeButtons = document.querySelectorAll('.execute-case-btn');
+            executeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    showNotification(`正在执行ID为${id}的测试用例`);
+                    
+                    const modal = document.getElementById('executeCaseModal');
+                    const modalTitle = document.getElementById('executeModalTitle');
+                    modalTitle.textContent = '执行测试用例';
+                    
+                    // 模拟填充执行详情
+                    const details = document.getElementById('executeCaseDetails');
+                    details.innerHTML = `
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">测试用例信息</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <span class="text-gray-500">ID：</span>
+                                        <span class="font-medium">${id}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-500">名称：</span>
+                                        <span class="font-medium">测试用例名称</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-700 mb-2">测试描述</h4>
+                                <p class="text-sm text-gray-600">这是一个测试用例的描述，将在执行过程中进行验证。</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    modal.classList.add('show');
+                });
+            });
+            
+            // 初始化删除按钮事件
+            const deleteButtons = document.querySelectorAll('.delete-case-btn, .delete-report-btn');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    if (confirm(`确定要删除ID为${id}的项目吗？`)) {
+                        showNotification(`ID为${id}的项目已删除`);
+                    }
+                });
+            });
+            
+            // 初始化确认导入按钮事件
+            const confirmImportButton = document.getElementById('confirmImport');
+            if (confirmImportButton) {
+                confirmImportButton.addEventListener('click', function() {
+                    showNotification('导入成功！');
+                    const modal = document.getElementById('importModal');
+                    modal.classList.remove('show');
+                });
+            }
+            
+            // 初始化保存执行结果按钮事件
+            const saveExecuteResultButton = document.getElementById('saveExecuteResult');
+            if (saveExecuteResultButton) {
+                saveExecuteResultButton.addEventListener('click', function() {
+                    showNotification('测试结果已保存！');
+                    const modal = document.getElementById('executeCaseModal');
+                    modal.classList.remove('show');
+                });
+            }
+            
+            // 初始化从查看页编辑按钮事件
+            const editCaseFromViewButton = document.getElementById('editCaseFromView');
+            if (editCaseFromViewButton) {
+                editCaseFromViewButton.addEventListener('click', function() {
+                    const modal = document.getElementById('viewCaseModal');
+                    modal.classList.remove('show');
+                    
+                    // 触发编辑模态框
+                    setTimeout(() => {
+                        const editButtons = document.querySelectorAll('.edit-case-btn');
+                        if (editButtons.length > 0) {
+                            editButtons[0].click();
+                        }
+                    }, 300);
+                });
+            }
+            
+            // 初始化模态框背景点击关闭事件
+            const modals = document.querySelectorAll('.modal-backdrop');
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('show');
+                    }
+                });
+            });
+            
+            // 显示欢迎通知
+            setTimeout(() => {
+                showNotification('欢迎使用AI测试平台！');
+            }, 500);
+        });
+        
+        // 显示通知的函数
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
