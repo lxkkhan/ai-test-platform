@@ -1,9 +1,9 @@
 ---
 name: tapd-analyze
-description: >
-  从 TAPD 拉取需求并 AI 分析，提取功能点、测试范围、风险等级和验收标准。
-  触发词：/tapd-analyze、分析需求、需求解析、tapd需求分析。
-  当用户提到"分析需求"、"看看这个需求"、"需求提测"等涉及 TAPD 需求分析的请求时，必须使用此 Skill。
+description: 从 TAPD 拉取需求并 AI 分析，提取功能点、测试范围、风险等级和验收标准。触发词：/tapd-analyze、分析需求、需求解析、tapd需求分析。当用户提到"分析需求"、"看看这个需求"、"需求提测"等涉及 TAPD 需求分析的请求时，必须使用此 Skill。
+metadata:
+  audience: testers
+  workflow: tapd
 ---
 
 ## 功能概述

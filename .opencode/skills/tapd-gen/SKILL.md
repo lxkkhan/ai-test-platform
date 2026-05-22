@@ -1,9 +1,9 @@
 ---
 name: tapd-gen
-description: >
-  AI 生成测试用例并写入 TAPD（含 story_id 关联），支持批量生成、分类标记和用户审核。
-  触发词：/tapd-gen、生成用例、写测试用例、tapd生成用例。
-  当用户提到"生成测试用例"、"为需求写用例"、"测试用例设计"等涉及用例生成的请求时，必须使用此 Skill。
+description: AI 生成测试用例并写入 TAPD（含 story_id 关联），支持批量生成、分类标记和用户审核。触发词：/tapd-gen、生成用例、写测试用例、tapd生成用例。当用户提到"生成测试用例"、"为需求写用例"、"测试用例设计"等涉及用例生成的请求时，必须使用此 Skill。
+metadata:
+  audience: testers
+  workflow: tapd
 ---
 
 ## 功能概述
@@ -37,6 +37,7 @@ description: >
   "api_user": "你的API账号",
   "api_password": "你的API密码",
   "api_url": "https://api.tapd.cn",
+  "real_user": "TAPD登录用户名（如刘晓康）",
   "defaults": {
     "priority_label": "中",
     "severity": "一般",
@@ -44,15 +45,18 @@ description: >
     "testphase": "功能测试阶段"
   },
   "modules": ["登录", "注册", "首页", "订单管理", "用户中心", "设置", "报表", "其他"],
-  "owner_list": [],
+  "owner_list": ["刘晓康"],
   "default_story_id": "",
   "auto_upload": false,
   "default_reviewer": ""
 }
 ```
 
-> **注意**：`auto_upload` 默认为 `false`，即默认需要用户确认后上传。`default_reviewer` 为默认评审人，可选。
-> `api_url` 默认为 `https://api.tapd.cn`，私有化部署需修改为实际 API 地址。
+> **注意**：
+> - `auto_upload` 默认为 `false`，即默认需要用户确认后上传
+> - `real_user` **必须填写 TAPD 登录用户名**（非 API 账号），用于设置创建人、处理人等字段，确保 TAPD 中显示正确的归属人
+> - `api_url` 默认为 `https://api.tapd.cn`，私有化部署需修改为实际 API 地址
+> - `owner_list` 应包含项目中的 TAPD 真实用户名，用于用例/计划的处理人分配
 
 ## 工作流
 
@@ -108,59 +112,77 @@ description: >
 
 ### 第四步：创建测试计划
 
-在 TAPD 中创建测试计划：
+在 TAPD 中创建测试计划。**命名规范：`TP_S{story_id}_{序号}`**（序号格式如 `202606010001`）：
 
 ```bash
 curl.exe -u 'api_user:api_password' \
-  -X POST \
-  -d "workspace_id={workspace_id}&name={story_name}-测试计划&description=需求ID: {story_id}" \
+  --data-urlencode "workspace_id={workspace_id}" \
+  --data-urlencode "name=TP_S{story_id}_{序号}" \
+  --data-urlencode "owner={real_user}" \
+  --data-urlencode "description=story_id:S-{story_id}" \
   "{api_url}/test_plans"
 ```
 
+> **重要**：
+> - 测试计划名称使用 `TP_S{story_id}_{序号}` 格式（如 `TP_S1133671402001000032_202606010001`），TP 为 Test Plan 缩写
+> - `owner` 必须设置为 `config.json` 中的 `real_user`（TAPD 真实用户名），而非 API 账号
+> - 中文字段通过 `--data-urlencode` 传入避免乱码
+
 ### 第五步：批量创建测试用例
 
-使用 batch_save 接口批量创建测试用例：
+> **命名规范**：用例名称使用 `TC_S{story_id}_{序号}_{功能描述}` 格式（如 `TC_S1133671402001000032_001_接口抓取正常验证`），中文字段通过 `--data-urlencode` 传入避免乱码。
+> 
+> **分类说明**：TAPD API 不支持通过 API 创建用例分类（返回 403）。请使用 TAPD 界面中已有的分类 ID，或先在 TAPD 界面创建 `CD_S{story_id}_{序号}` 格式的分类后再使用。
+
+使用逐个创建方式（`POST /tcases`），单个创建可附带 `owner` 字段：
 
 ```bash
 curl.exe -u 'api_user:api_password' \
-  -X POST \
-  -d "workspace_id={workspace_id}" \
-  --data-urlencode "data=[{用例数组JSON}]" \
-  "{api_url}/tcases/batch_save"
+  --data-urlencode "workspace_id={workspace_id}" \
+  --data-urlencode "name=TC_S{story_id}_{seq}_{功能描述}" \
+  --data-urlencode "category_id={分类ID}" \
+  --data-urlencode "priority=1" \
+  --data-urlencode "owner={real_user}" \
+  --data-urlencode "module={模块}" \
+  --data-urlencode "description=前置条件：...&#10;步骤：1. ... 2. ..." \
+  "{api_url}/tcases"
 ```
 
-每个用例数据格式：
-
-```json
-{
-  "name": "登录-正常登录验证",
-  "description": "前置条件：用户已注册\n步骤：1. 打开登录页 2. 输入账号密码 3. 点击登录",
-  "priority": "1",
-  "category_id": "分类ID",
-  "module": "登录"
-}
-```
-
-> **注意**：TAPD batch_save 单次最多 100 条用例，超过需分批上传。
+> **重要**：
+> - `owner` 应设置为 `config.json` 中的 `real_user`（TAPD 真实用户名）
+> - `creator` 字段由 API 自动设置为 API 账号名，无法覆盖，这是 TAPD API 的限制
+> - 中文字段（name、module、description 等）必须通过 `--data-urlencode` 传入，避免编码乱码
+> - 分类使用已有分类 ID（可通过 `GET /categories?type=tcase` 查询），API 无法创建新分类
 
 ### 第六步：关联用例到测试计划
 
 ```bash
 curl.exe -u 'api_user:api_password' \
   -X POST \
-  -d "workspace_id={workspace_id}&plan_id={plan_id}&tcase_id={case_id1},{case_id2},{case_id3}" \
+  -d "workspace_id={workspace_id}&test_plan_id={plan_id}&tcase_ids={case_id1},{case_id2},{case_id3}&creator={real_user}" \
   "{api_url}/test_plans/create_tcase_relation"
 ```
 
+> **注意**：参数名为 `test_plan_id`（非 `plan_id`）、`tcase_ids`（非 `tcase_id`，复数形式，逗号分隔）和 `creator`（必填，使用 `real_user`）。
+
 ### 第七步：关联用例到需求
 
-将每个测试用例关联到需求（story_id）：
+**推荐方式**：使用通用 Relations API（`stories/create_story_tcase` 在部分 TAPD 版本可能返回 302）：
 
 ```bash
 curl.exe -u 'api_user:api_password' \
   -X POST \
-  -d "workspace_id={workspace_id}&story_id={story_id}&tcase_id={case_id}" \
-  "{api_url}/stories/create_story_tcase"
+  -d "workspace_id={workspace_id}&source_type=tcase&source_id={case_id}&target_type=story&target_id={story_id}" \
+  "{api_url}/relations"
+```
+
+对每个用例逐一关联。也可批量关联需求到测试计划：
+
+```bash
+curl.exe -u 'api_user:api_password' \
+  -X POST \
+  -d "workspace_id={workspace_id}&source_type=story&source_id={story_id}&target_type=test_plan&target_id={plan_id}" \
+  "{api_url}/relations"
 ```
 
 **关键**：所有用例必须通过 story_id 关联到需求，确保全链路追溯：Story → TestPlan → Tcase
@@ -182,7 +204,7 @@ curl.exe -u 'api_user:api_password' \
 
 | 场景 | 处理方式 |
 |------|---------|
-| 分类 ID 不存在 | 提示用户先在 TAPD 中创建对应分类，或使用已有分类 |
+| 分类 ID 不存在 | 提示用户先在 TAPD 界面中创建对应分类（API 不支持创建分类），或使用已有分类 |
 | API 创建失败 | 展示失败原因（info 字段），提供重试选项 |
 | 关联失败 | 记录关联失败的用例 ID，提供手动关联指引 |
 | 用例数量超过限制 | TAPD batch_save 单次最多 100 条，自动分批上传 |
@@ -214,3 +236,5 @@ curl.exe -u 'api_user:api_password' \
 3. 用例优先级与需求优先级对齐：P0 需求生成 P0 用例，P1 生成 P1/P2 用例
 4. 生成的 .spec.ts 测试文件由 nl-test-generator Skill 负责，本 Skill 只负责 TAPD 用例管理
 5. Windows 环境下使用 `curl.exe` 而非 `curl`（PowerShell 别名）
+6. 中文字段必须通过 `curl.exe --data-urlencode` 传入，避免编码乱码
+7. **creator 字段说明**：TAPD 中 `creator`（创建人）由 API 认证身份决定，始终显示 API 账号名（如 `CiOzjwRC`）。要让 creator 显示真实用户名（如 `刘晓康`），需要登录 TAPD 界面为该用户生成专属 API Token，然后替换 `config.json` 中的 `api_user` 和 `api_password`。`owner`（处理人）已设置为 `real_user`，可正常显示真实用户名。

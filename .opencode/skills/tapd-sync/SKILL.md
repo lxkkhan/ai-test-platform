@@ -1,9 +1,9 @@
 ---
 name: tapd-sync
-description: >
-  读取 Playwright 测试结果，回写 TAPD 用例状态，失败用例自动提 Bug 并关联 story_id。
-  触发词：/tapd-sync、同步结果、回写测试结果、tapd同步。
-  当用户提到"同步测试结果"、"回写用例状态"、"测试结果上传到tapd"等涉及结果同步的请求时，必须使用此 Skill。
+description: 读取 Playwright 测试结果，回写 TAPD 用例状态，失败用例自动提 Bug 并关联 story_id。触发词：/tapd-sync、同步结果、回写测试结果、tapd同步。当用户提到"同步测试结果"、"回写用例状态"、"测试结果上传到tapd"等涉及结果同步的请求时，必须使用此 Skill。
+metadata:
+  audience: testers
+  workflow: tapd
 ---
 
 ## 功能概述
@@ -33,6 +33,7 @@ description: >
   "api_user": "你的API账号",
   "api_password": "你的API密码",
   "api_url": "https://api.tapd.cn",
+  "real_user": "TAPD登录用户名（如刘晓康）",
   "defaults": {
     "priority_label": "中",
     "severity": "一般",
@@ -40,14 +41,17 @@ description: >
     "testphase": "功能测试阶段"
   },
   "modules": ["登录", "注册", "首页", "订单管理", "用户中心", "设置", "报表", "其他"],
-  "owner_list": [],
+  "owner_list": ["刘晓康"],
   "default_story_id": "",
   "test_results_dir": "",
   "case_map_file": ".tapd-case-map.json"
 }
 ```
 
-> **注意**：`test_results_dir` 为测试结果目录路径（默认为 auto-test-runner 的 test-results 目录）。`case_map_file` 为用例映射文件名，用于测试文件名到 TAPD 用例 ID 的映射。
+> **注意**：
+> - `test_results_dir` 为测试结果目录路径（默认为 auto-test-runner 的 test-results 目录）
+> - `case_map_file` 为用例映射文件名，用于测试文件名到 TAPD 用例 ID 的映射
+> - `real_user` **必须填写 TAPD 登录用户名**（非 API 账号），用于设置 Bug 的处理人等字段
 
 ## 工作流
 
@@ -106,12 +110,14 @@ curl.exe -u 'api_user:api_password' "{api_url}/tcases?workspace_id={workspace_id
 
 ### 第三步：回写用例执行状态
 
+> **注意**：`test_plans/run_case` 接口在部分 TAPD 版本（非企业版）可能返回 HTTP 302。如遇此问题，请在 TAPD 界面中手动标记用例结果，或升级至企业版。
+
 对每个已映射的用例，调用 TAPD API 回写执行结果：
 
 ```bash
 curl.exe -u 'api_user:api_password' \
   -X POST \
-  -d "workspace_id={workspace_id}&case_id={case_id}&plan_id={plan_id}&result={result}&runner={runner}" \
+  -d "workspace_id={workspace_id}&case_id={case_id}&plan_id={plan_id}&result={result}&runner={real_user}" \
   "{api_url}/test_plans/run_case"
 ```
 
@@ -131,23 +137,63 @@ result 映射表：
 ```bash
 curl.exe -u 'api_user:api_password' \
   -X POST \
-  -d "workspace_id={workspace_id}&title=[自动] {test_name} 测试失败&severity=一般&priority_label=中&module={module}&description={失败详情}&testtype=功能测试&testphase=功能测试阶段" \
+  -d "workspace_id={workspace_id}&title=[自动]+{test_name}+测试失败&severity=一般&priority_label=中&module={module}&current_owner={real_user}&description={失败详情}&testtype=功能测试&testphase=功能测试阶段" \
   "{api_url}/bugs"
 ```
 
+> **重要**：
+> - `current_owner` 必须设置为 `config.json` 中的 `real_user`（TAPD 真实用户名），而非 API 账号
+> - `reporter` 和 `creator` 字段由 API 自动设置为 API 账号名，无法覆盖，这是 TAPD API 的限制
+> - Bug 标题格式：`[自动] {用例名称} 测试失败`
+
 Bug 标题格式：`[自动] {用例名称} 测试失败`
 
-Bug 描述包含：
-- 测试用例名称和 ID
-- 失败的错误信息
-- 测试执行时间
-- TAPD 用例链接
+Bug 描述使用 HTML 格式（TAPD 支持 HTML 渲染），模板如下：
+
+```html
+<p><strong>【自动提交】</strong>由 tapd-sync Skill 根据测试结果自动创建</p>
+<hr/>
+<table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;width:100%'>
+<tr><td style='background:#f0f0f0;width:120px'><b>测试用例</b></td><td>{用例名称} ({用例ID})</td></tr>
+<tr><td style='background:#f0f0f0'><b>测试计划</b></td><td>{计划名称} ({计划ID})</td></tr>
+<tr><td style='background:#f0f0f0'><b>关联需求</b></td><td><a href='https://www.tapd.cn/{workspace_id}/prong/stories/view/{story_id}'>S-{story_id}</a></td></tr>
+</table>
+<h3>🔴 失败信息</h3>
+<p>{失败详情}</p>
+<h3>📋 复现步骤</h3>
+<ol>
+<li>{步骤1}</li>
+<li>{步骤2}</li>
+</ol>
+<h3>✅ 预期结果</h3>
+<p>{预期结果}</p>
+<h3>❌ 实际结果</h3>
+<p>{实际结果}</p>
+<hr/>
+<p style='color:#888'>执行时间：{执行时间} | 执行人：{real_user} | 生成工具：tapd-sync Skill</p>
+```
+
+> **重要**：
+> - TAPD 的 `description` 字段支持 HTML 渲染，使用 HTML 标签可以让详情页显示更美观的表格和分区
+> - `current_owner`（处理人）使用 `config.json` 中的 `real_user`（TAPD 真实用户名）
+> - Bug 标题、模块等中文字段通过 `curl.exe --data-urlencode` 传入，避免编码乱码
 
 ### 第五步：关联 Bug 到需求和用例
 
 Bug 创建成功后，进行两个关联：
 
 1. **Bug 关联需求**（如果 story_id 已知）：
+
+   **推荐方式**：使用通用 Relations API（`bugs/linked_stories` 在部分版本可能返回空响应）：
+
+```bash
+curl.exe -u 'api_user:api_password' \
+  -X POST \
+  -d "workspace_id={workspace_id}&source_type=bug&source_id={bug_id}&target_type=story&target_id={story_id}" \
+  "{api_url}/relations"
+```
+
+   **备选方式**：专用接口（可能返回空响应，建议优先使用 Relations API）：
 
 ```bash
 curl.exe -u 'api_user:api_password' \
@@ -230,3 +276,5 @@ curl.exe -u 'api_user:api_password' \
 3. Bug 关联 story_id 是必须的，确保全链路追溯
 4. 映射文件 `.tapd-case-map.json` 建议加入版本控制
 5. Windows 环境下使用 `curl.exe` 而非 `curl`（PowerShell 别名）
+6. 中文字段通过 `curl.exe --data-urlencode` 传入避免乱码
+7. **creator 字段说明**：TAPD 中 `creator`/`reporter`（创建人/报告人）由 API 认证身份决定，始终显示 API 账号名。要让其显示真实用户名，需要用真实用户的 API Token 替换 `config.json` 凭据。`current_owner`（处理人）已设置为 `real_user`，可正常显示。

@@ -37,25 +37,32 @@ POST {api_url}/tcases
 | 参数 | 说明 |
 |------|------|
 | `workspace_id` | 项目ID |
-| `name` | 用例名称 |
+| `name` | 用例名称（中文需用 --data-urlencode） |
 | `category_id` | 分类ID |
 
 **可选参数**：
 
 | 参数 | 说明 | 示例 |
 |------|------|------|
-| `description` | 步骤描述 | `1. 打开登录页\n2. 输入账号密码\n3. 点击登录` |
+| `description` | 步骤描述（支持 `&#10;` 换行） | `前置条件：...&#10;步骤：1. ... 2. ...` |
 | `priority` | 优先级 | `1/2/3/4` |
 | `status` | 状态 | `normal`（默认） |
-| `module` | 模块 | `登录` |
-| `owner` | 处理人 | - |
+| `module` | 模块 | `接口测试` |
+| `owner` | 处理人（使用 real_user） | `刘晓康` |
+
+> **重要**：`owner` 设置为 `config.json` 中的 `real_user`（TAPD 真实用户名）。`creator` 由 API 自动设为 API 账号名，无法覆盖。中文字段通过 `--data-urlencode` 传入。
 
 **示例**：
 
 ```bash
 curl.exe -u 'api_user:api_password' \
-  -X POST \
-  -d "workspace_id={workspace_id}&name=登录-正常登录验证&category_id=1&priority=2&module=登录&description=1.+打开登录页%0A2.+输入账号密码%0A3.+点击登录&expect=登录成功跳转首页" \
+  --data-urlencode "workspace_id={workspace_id}" \
+  --data-urlencode "name=TC_S{story_id}_001_接口抓取正常验证" \
+  --data-urlencode "category_id=1" \
+  --data-urlencode "priority=1" \
+  --data-urlencode "owner=刘晓康" \
+  --data-urlencode "module=接口测试" \
+  --data-urlencode "description=前置条件：系统已打开浏览器F12面板&#10;步骤：1. 打开系统页面 2. 开启Network面板 3. 执行业务操作" \
   "{api_url}/tcases"
 ```
 
@@ -133,9 +140,12 @@ POST {api_url}/test_plans
 ```bash
 curl.exe -u 'api_user:api_password' \
   -X POST \
-  -d "workspace_id={workspace_id}&name=登录功能测试计划&description=需求ID: S-xxx&owner=zhangsan&begin_date=2025-01-01&due_date=2025-01-31" \
+  -d "workspace_id={workspace_id}&name=TP_S1133671402001000032_202606010001&owner={real_user}&description=story_id:S-1133671402001000032" \
   "{api_url}/test_plans"
 ```
+
+> **命名规范**：测试计划名称使用 `TP_S{story_id}_{序号}` 格式（如 `TP_S1133671402001000032_202606010001`），TP 为 Test Plan 缩写。
+> **重要**：`owner` 必须设置为 TAPD 真实用户名（`real_user`），`creator` 由 API 自动设置为 API 账号名。
 
 ### 2.3 获取测试计划进展
 
@@ -166,11 +176,12 @@ POST {api_url}/test_plans/create_tcase_relation
 
 **参数**：
 
-| 参数 | 说明 |
-|------|------|
-| `workspace_id` | 项目ID |
-| `plan_id` | 测试计划ID |
-| `tcase_id` | 用例ID（多个用逗号分隔） |
+| 参数 | 说明 | 注意 |
+|------|------|------|
+| `workspace_id` | 项目ID | 必填 |
+| `test_plan_id` | 测试计划ID | 必填，注意是 `test_plan_id` 非非 `plan_id` |
+| `tcase_ids` | 用例ID（多个用逗号分隔） | 必填，注意是 `tcase_ids`（复数，非 `tcase_id`） |
+| `creator` | 创建人 | 必填，使用 `real_user`（TAPD 真实用户名） |
 
 ### 2.5 关联需求到测试计划
 
@@ -192,11 +203,27 @@ POST {api_url}/test_plans/create_story_plan_relation
 
 ### 3.1 关联用例到需求
 
+**推荐方式**：使用通用 Relations API（`stories/create_story_tcase` 在公有云版本可能返回 302）：
+
 ```
-POST {api_url}/stories/create_story_tcase
+POST {api_url}/relations
 ```
 
 **参数**：
+
+| 参数 | 说明 | 示例 |
+|------|------|------|
+| `workspace_id` | 项目ID | - |
+| `source_type` | 源类型 | `tcase` |
+| `source_id` | 用例ID | - |
+| `target_type` | 目标类型 | `story` |
+| `target_id` | 需求ID | - |
+
+**备选方式**（可能返回 302 重定向）：
+
+```
+POST {api_url}/stories/create_story_tcase
+```
 
 | 参数 | 说明 |
 |------|------|

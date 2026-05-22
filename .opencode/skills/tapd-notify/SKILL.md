@@ -1,9 +1,9 @@
 ---
 name: tapd-notify
-description: >
-  企业微信 Webhook 推送测试报告和通知，支持需求分析、测试计划、执行结果、Bug告警等5种通知类型。
-  触发词：/tapd-notify、推送通知、企业微信通知、测试报告推送。
-  当用户提到"通知团队"、"推送报告"、"发企微消息"等涉及通知推送的请求时，必须使用此 Skill。
+description: 企业微信 Webhook 推送测试报告和通知，支持需求分析、测试计划、执行结果、Bug告警等5种通知类型。触发词：/tapd-notify、推送通知、企业微信通知、测试报告推送。当用户提到"通知团队"、"推送报告"、"发企微消息"等涉及通知推送的请求时，必须使用此 Skill。
+metadata:
+  audience: testers
+  workflow: tapd
 ---
 
 ## 功能概述

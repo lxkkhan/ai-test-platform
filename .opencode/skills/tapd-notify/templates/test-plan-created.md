@@ -1,8 +1,9 @@
 ## 📝 测试计划已创建
 
-**计划名称**: {{plan_name}}
+**计划名称**: TP_S{{story_id}}_{{plan_seq}}
 **计划ID**: {{plan_id}}
 **关联需求**: S-{{story_id}}
+**处理人**: {{real_user}}
 
 ### 计划概要
 - 测试用例数: {{case_count}}

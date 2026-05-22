@@ -1,9 +1,9 @@
 ---
 name: tapd-test
-description: >
-  全流程 TAPD 测试自动化编排，串联需求分析→用例生成→测试执行→结果同步→通知推送。
-  触发词：/tapd-test、全流程测试、tapd测试。
-  当用户提到"开始测试流程"、"全流程跑一遍"、"tapd自动化测试"等涉及全流程测试的请求时，必须使用此 Skill。
+description: 全流程 TAPD 测试自动化编排，串联需求分析→用例生成→测试执行→结果同步→通知推送。触发词：/tapd-test、全流程测试、tapd测试。当用户提到"开始测试流程"、"全流程跑一遍"、"tapd自动化测试"等涉及全流程测试的请求时，必须使用此 Skill。
+metadata:
+  audience: testers
+  workflow: tapd
 ---
 
 ## 功能概述
@@ -47,6 +47,7 @@ description: >
   "api_user": "你的API账号",
   "api_password": "你的API密码",
   "api_url": "https://api.tapd.cn",
+  "real_user": "TAPD登录用户名（如刘晓康）",
   "defaults": {
     "priority_label": "中",
     "severity": "一般",
@@ -54,7 +55,7 @@ description: >
     "testphase": "功能测试阶段"
   },
   "modules": ["登录", "注册", "首页", "订单管理", "用户中心", "设置", "报表", "其他"],
-  "owner_list": [],
+  "owner_list": ["刘晓康"],
   "default_story_id": "",
   "wechat_webhook_url": "",
   "wechat_mentioned_list": [],
@@ -66,7 +67,9 @@ description: >
 }
 ```
 
-> **注意**：此配置是所有子 Skill 配置的合集。各子 Skill 只读取自己需要的字段。
+> **注意**：
+> - 此配置是所有子 Skill 配置的合集，各子 Skill 只读取自己需要的字段
+> - `real_user` **必须填写 TAPD 登录用户名**（非 API 账号），用于设置创建人、处理人等字段
 
 ## 全流程工作流
 
@@ -85,7 +88,7 @@ description: >
 2. AI 为每个功能点生成测试用例（正面 + 反面 + 交互）
 3. 默认模式下展示用例列表供用户审核
 4. `--auto` 模式跳过审核直接上传
-5. 创建测试计划 → 批量创建用例 → 关联到计划 → 关联到需求
+5. 创建测试计划（命名格式：`TP_S{story_id}_{序号}`）→ 逐个创建用例 → 关联到计划 → 关联到需求
 6. 保存用例 ID 列表到状态文件
 
 ### 第三步：测试执行（auto-test-runner）

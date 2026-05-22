@@ -76,37 +76,68 @@ POST {api_url}/bugs
 | 参数 | 说明 | 示例 |
 |------|------|------|
 | `workspace_id` | 项目ID | - |
-| `title` | Bug标题 | `[自动] 登录-密码错误提示 测试失败` |
+| `title` | Bug标题（中文请用 --data-urlencode） | `[自动] 接口抓取正常验证 测试失败` |
 
 **可选参数**：
 
 | 参数 | 说明 | 示例 |
 |------|------|------|
-| `description` | 详细描述 | 失败详情 |
+| `description` | 详细描述（支持HTML） | HTML格式的结构化描述 |
 | `severity` | 严重程度 | `致命/严重/一般/轻微` |
 | `priority_label` | 优先级 | `高/中/低` |
-| `module` | 模块 | `登录` |
-| `current_owner` | 处理人 | - |
+| `module` | 模块 | `接口测试` |
+| `current_owner` | 处理人（**使用real_user**） | `刘晓康` |
+| `reporter` | 报告人（**自动为API账号，不可覆盖**） | - |
 | `testtype` | 测试类型 | `功能测试` |
 | `testphase` | 测试阶段 | `功能测试阶段` |
 
-**自动创建 Bug 的标题格式**：`[自动] {用例名称} 测试失败`
+> **重要**：
+> - `current_owner`（处理人）必须使用 `config.json` 中的 `real_user`，而非 API 账号
+> - `reporter`/`creator` 由 API 自动设置为 API 账号名，无法覆盖
+> - 中文字段（title、description、module 等）通过 `curl.exe --data-urlencode` 传入避免乱码
 
-**自动创建 Bug 的描述模板**：
+**示例**：
 
+```bash
+curl.exe -u 'api_user:api_password' \
+  --data-urlencode "workspace_id={workspace_id}" \
+  --data-urlencode "title=[自动] 接口抓取正常验证 测试失败" \
+  --data-urlencode "severity=严重" \
+  --data-urlencode "priority_label=高" \
+  --data-urlencode "module=接口测试" \
+  --data-urlencode "current_owner=刘晓康" \
+  --data-urlencode "description=<p>HTML格式的描述</p>" \
+  --data-urlencode "testtype=功能测试" \
+  --data-urlencode "testphase=功能测试阶段" \
+  "{api_url}/bugs"
 ```
-【自动提交】由 tapd-sync Skill 根据测试结果自动创建
 
-测试用例：{case_name} ({case_id})
-测试计划：{plan_name} ({plan_id})
-关联需求：S-{story_id}
+**自动创建 Bug 的描述模板**（HTML 格式，TAPD 支持渲染）：
 
-失败信息：
-{error_message}
-
-执行时间：{execution_time}
-执行人：{runner}
+```html
+<p><strong>【自动提交】</strong>由 tapd-sync Skill 根据测试结果自动创建</p>
+<hr/>
+<table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;width:100%'>
+<tr><td style='background:#f0f0f0;width:120px'><b>测试用例</b></td><td>{用例名称} ({用例ID})</td></tr>
+<tr><td style='background:#f0f0f0'><b>测试计划</b></td><td>{计划名称} ({计划ID})</td></tr>
+<tr><td style='background:#f0f0f0'><b>关联需求</b></td><td><a href='https://www.tapd.cn/{workspace_id}/prong/stories/view/{story_id}'>S-{story_id}</a></td></tr>
+</table>
+<h3>🔴 失败信息</h3>
+<p>{错误信息}</p>
+<h3>📋 复现步骤</h3>
+<ol>
+<li>{步骤1}</li>
+<li>{步骤2}</li>
+</ol>
+<h3>✅ 预期结果</h3>
+<p>{预期结果}</p>
+<h3>❌ 实际结果</h3>
+<p>{实际结果}</p>
+<hr/>
+<p style='color:#888'>执行时间：{execution_time} | 执行人：{real_user} | 生成工具：tapd-sync Skill</p>
 ```
+
+> **重要**：Bug 描述使用 HTML 格式可让 TAPD 详情页展示美观的表格和分区。中文字段通过 `curl.exe --data-urlencode` 传入。
 
 ---
 

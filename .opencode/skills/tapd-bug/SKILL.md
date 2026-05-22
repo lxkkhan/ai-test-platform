@@ -22,6 +22,7 @@ metadata:
   "api_user": "你的API账号",
   "api_password": "你的API密码",
   "api_url": "https://api.tapd.cn",
+  "real_user": "TAPD登录用户名（如刘晓康）",
   "defaults": {
     "priority_label": "中",
     "severity": "一般",
@@ -29,12 +30,14 @@ metadata:
     "testphase": "功能测试阶段"
   },
   "modules": ["登录", "注册", "首页", "订单管理"],
-  "owner_list": []
+  "owner_list": ["刘晓康"]
 }
 ```
 
-> **注意**：`config.json` 中的 `api_user` 和 `api_password` 为明文，建议加入 `.gitignore` 避免泄露。
-> 若使用浏览器扩展，扩展已迁移至 AES-GCM 加密方案（`credentials.enc.js`），不受此 config.json 影响。
+> **注意**：
+> - `config.json` 中的 `api_user` 和 `api_password` 为明文，建议加入 `.gitignore` 避免泄露
+> - `real_user` **必须填写 TAPD 登录用户名**（非 API 账号），用于设置 Bug 的 `current_owner`（处理人）字段
+> - `creator`（报告人）字段由 API 自动设置为 API 账号名，无法覆盖，这是 TAPD API 的限制
 
 ## 工作流
 
@@ -120,11 +123,27 @@ curl.exe -u 'api_user:api_password' \
 
 ### 提交 Bug
 
+Bug 描述支持 HTML 格式，可使用表格、标题、列表等标签让详情页更美观：
+
 ```bash
 curl.exe -u 'api_user:api_password' \
-  -d 'title=BUG标题&workspace_id=项目ID&priority_label=中&severity=一般&module=模块&current_owner=处理人&description=描述内容' \
+  --data-urlencode "workspace_id={workspace_id}" \
+  --data-urlencode "title=[自动] {Bug标题}" \
+  --data-urlencode "severity=一般" \
+  --data-urlencode "priority_label=中" \
+  --data-urlencode "module={模块}" \
+  --data-urlencode "current_owner={real_user}" \
+  --data-urlencode "description=<p><strong>【自动提交】</strong>...</p><hr/>..." \
+  --data-urlencode "testtype=功能测试" \
+  --data-urlencode "testphase=功能测试阶段" \
   '$API_URL/bugs'
 ```
+
+> **重要**：
+> - 中文字段必须使用 `--data-urlencode` 传入，避免 PowerShell/curl 编码乱码
+> - `current_owner`（处理人）使用 `config.json` 中的 `real_user`（TAPD 真实用户名），而非 API 账号
+> - `creator`/`reporter` 由 API 自动设置为 API 账号名，无法覆盖
+> - Bug 描述推荐使用 HTML 格式，包含表格、分区标题和标签
 
 默认 API 地址为 `https://api.tapd.cn`。如企业微信集成 TAPD 使用私有化部署或有独立 API 网关，修改 `config.json` 中的 `api_url` 字段。
 
@@ -159,3 +178,5 @@ curl.exe -u 'api_user:api_password' \
 2. 密码等敏感信息不会出现在提交内容中（扩展端已脱敏）
 3. config.json 建议加入 `.gitignore`，避免泄露 API 凭证
 4. 如果用户没有浏览器扩展，可通过本 Skill 交互创建 Bug
+5. 中文字段通过 `curl.exe --data-urlencode` 传入避免乱码
+6. **creator/reporter 字段说明**：TAPD 中 Bug 的 `reporter`（报告人）和 `creator` 由 API 认证身份决定，始终显示 API 账号名（如 `CiOzjwRC`）。要让其显示真实用户名（如 `刘晓康`），需要登录 TAPD 界面为该用户生成专属 API Token，然后替换 `config.json` 凭据。`current_owner`（处理人）已设置为 `real_user`，可正常显示。
