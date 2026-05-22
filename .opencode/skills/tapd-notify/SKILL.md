@@ -80,11 +80,19 @@ metadata:
 
 ### Markdown 格式（推荐）
 
+**重要**：企业微信 Markdown 有限制：
+- **不支持** HTML 表格（`|---|` 会显示成纯文本，非常难看）
+- **不支持** 三级及以下标题（`###` 不渲染）
+- **不支持** emoji（部分 emoji 显示为 `?`）
+- **支持** `##` 二级标题、**加粗**、列表（`-`）、引用（`>`）、链接
+
+因此，所有模板使用**列表格式**代替表格，使用 `##` 标题和**加粗行**代替 `###`，不使用 emoji。
+
 ```json
 {
   "msgtype": "markdown",
   "markdown": {
-    "content": "## 测试报告通知\n> 需求: **{story_name}**\n> 计划: **{plan_name}**\n\n### 执行结果\n| 状态 | 数量 |\n|------|------|\n| ✅ 通过 | 20 |\n| ❌ 失败 | 3 |\n| ⚠️ 阻塞 | 2 |\n\n**通过率: 80%**",
+    "content": "## 测试执行完成\n\n**关联需求**: S-1133671402001000032\n**处理人**: 刘晓康\n\n**通过率: 80%** (20/25)\n\n**执行结果:**\n- 通过: 20\n- 失败: 3\n- 阻塞: 2\n\n> 详细结果请在 TAPD 中查看",
     "mentioned_list": ["zhangsan", "lisi"],
     "mentioned_mobile_list": ["13800138000"]
   }
@@ -135,11 +143,42 @@ metadata:
 
 ### 发送通知
 
+**重要**：Windows PowerShell 5.1 中 `curl.exe -d` 传递中文 JSON 会导致编码乱码。必须使用**文件方式**发送。
+
 ```bash
-curl.exe -X POST "{wechat_webhook_url}" \
+# 1. 将 JSON 消息写入临时文件（UTF-8 编码，无 BOM）
+# 文件路径：$TEMP/opencode/wechat_notify.json
+
+# 2. 用 --data-binary @file 方式发送（避免编码问题）
+curl.exe -s -X POST "{wechat_webhook_url}" \
   -H "Content-Type: application/json" \
-  -d '{消息JSON}'
+  --data-binary "@$TEMP/opencode/wechat_notify.json"
 ```
+
+**Windows PowerShell 发送示例**（推荐方式）：
+
+```powershell
+# 使用 Write 工具写入 JSON 文件（自动 UTF-8 无 BOM）
+# 然后用 curl.exe --data-binary 发送
+
+$notifyJson = @{
+    msgtype = "markdown"
+    markdown = @{
+        content = "## 测试执行完成`n`n**关联需求**: S-{story_id}`n**处理人**: {real_user}"
+    }
+} | ConvertTo-Json -Depth 5 -Compress
+
+# 转义中文为 Unicode 序列避免 PowerShell 5.1 编码问题
+$jsonBytes = [System.Text.Encoding]::UTF8.GetBytes($notifyJson)
+[System.IO.File]::WriteAllBytes("$env:TEMP\opencode\wechat_notify.json", $jsonBytes)
+
+# 用 --data-binary 发送
+curl.exe -s -X POST "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx" `
+  -H "Content-Type: application/json" `
+  --data-binary "@$env:TEMP\opencode\wechat_notify.json"
+```
+
+**绝对不要**使用 `curl.exe -d '...'` 直接在命令行传递包含中文的 JSON，会导致编码乱码。
 
 ### 限流规则
 
@@ -153,11 +192,13 @@ curl.exe -X POST "{wechat_webhook_url}" \
 
 | 模板文件 | 通知类型 | 占位符 |
 |---------|---------|--------|
-| `analysis-complete.md` | 需求分析完成 | `{{story_name}}`, `{{story_id}}`, `{{feature_count}}`, `{{risk_summary}}` |
-| `test-plan-created.md` | 测试计划创建 | `{{plan_name}}`, `{{plan_id}}`, `{{case_count}}`, `{{story_id}}` |
-| `test-execution-complete.md` | 测试执行完成 | `{{total}}`, `{{passed}}`, `{{failed}}`, `{{blocked}}`, `{{pass_rate}}`, `{{story_id}}` |
-| `new-bug.md` | 新 Bug 提醒 | `{{bug_title}}`, `{{bug_id}}`, `{{severity}}`, `{{story_id}}` |
+| `analysis-complete.md` | 需求分析完成 | `{{story_name}}`, `{{story_id}}`, `{{feature_count}}`, `{{risk_high}}`, `{{risk_medium}}`, `{{risk_low}}`, `{{risk_summary}}` |
+| `test-plan-created.md` | 测试计划创建 | `{{plan_name}}`, `{{plan_seq}}`, `{{plan_id}}`, `{{case_count}}`, `{{positive_count}}`, `{{negative_count}}`, `{{interaction_count}}`, `{{story_id}}`, `{{real_user}}` |
+| `test-execution-complete.md` | 测试执行完成 | `{{total}}`, `{{passed}}`, `{{failed}}`, `{{blocked}}`, `{{skipped}}`, `{{pass_rate}}`, `{{story_id}}`, `{{plan_seq}}`, `{{plan_id}}`, `{{real_user}}`, `{{failed_list}}`, `{{bug_list}}` |
+| `new-bug.md` | 新 Bug 提醒 | `{{bug_title}}`, `{{bug_id}}`, `{{severity}}`, `{{priority_label}}`, `{{real_user}}`, `{{story_id}}` |
 | `critical-bug.md` | 严重 Bug 告警 | `{{bug_title}}`, `{{bug_id}}`, `{{severity}}`, `{{story_id}}`, `{{description}}` |
+
+> **模板格式说明**：所有模板不使用 emoji 和 HTML 表格（企微 Markdown 不支持），使用 `##` 标题 + **加粗行** + 列表格式。
 
 ## 错误处理
 
@@ -187,4 +228,6 @@ curl.exe -X POST "{wechat_webhook_url}" \
 2. Markdown 内容限制 4096 字节，超长内容自动截断
 3. 企业微信限流 20 条/分钟，连续发送多条通知时注意间隔
 4. CRITICAL_BUG 类型会自动 @ config.json 中配置的相关人员
-5. Windows 环境下使用 `curl.exe` 而非 `curl`（PowerShell 别名）
+5. **中文编码**：Windows PowerShell 5.1 中 `curl.exe -d` 传递中文 JSON 会导致乱码，必须使用 `--data-binary @file` 方式发送，JSON 文件必须为 UTF-8 无 BOM 编码
+6. **格式限制**：企微 Markdown 不支持表格、多级标题(`###`)、emoji，所有模板使用列表格式和 `##` 标题
+7. Windows 环境下使用 `curl.exe` 而非 `curl`（PowerShell 别名）

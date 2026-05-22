@@ -1,4 +1,4 @@
-## 🐛 新 Bug 提醒
+## 新 Bug 提醒
 
 **Bug标题**: {{bug_title}}
 **Bug ID**: {{bug_id}}

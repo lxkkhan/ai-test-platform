@@ -36,12 +36,17 @@ https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx
 
 ### 2.2 Markdown 消息（推荐）
 
+**重要格式限制**：
+- **不支持** HTML 表格（`|---|` 会显示成纯文本，非常难看）→ 使用**列表格式**
+- **不支持** 三级及以下标题（`###` 不渲染）→ 使用 `##` 或**加粗行**
+- **部分 emoji 渲染异常**（可能显示为 `?`）→ 不使用 emoji
+
 ```json
 {
   "msgtype": "markdown",
   "markdown": {
-    "content": "## 测试报告\n> **通过率: 80%**\n\n| 状态 | 数量 |\n|------|------|\n| ✅ 通过 | 20 |\n| ❌ 失败 | 3 |",
-    "mentioned_list": ["zhangsan"],
+    "content": "## 测试执行完成\n\n**关联需求**: S-1133671402001000032\n**处理人**: 刘晓康\n\n**通过率: 80%** (20/25)\n\n**执行结果:**\n- 通过: 20\n- 失败: 3\n- 阻塞: 2\n\n> 详细结果请在 TAPD 中查看",
+    "mentioned_list": ["zhangsan", "lisi"],
     "mentioned_mobile_list": ["13800138000"]
   }
 }
@@ -91,24 +96,48 @@ https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx
 
 ## 3. 发送消息
 
+**重要**：Windows PowerShell 5.1 中 `curl.exe -d` 传递中文 JSON 会导致编码乱码（中文显示为问号或乱码）。必须使用**文件方式**发送。
+
+### 方式一：文件方式（推荐，避免编码问题）
+
 ```bash
-curl.exe -X POST "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx" \
+# 1. 将 JSON 消息写入临时文件（UTF-8 无 BOM 编码）
+# 2. 用 --data-binary @file 方式发送
+
+curl.exe -s -X POST "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx" \
   -H "Content-Type: application/json" \
-  -d '{消息JSON}'
+  --data-binary "@$TEMP/opencode/wechat_notify.json"
 ```
 
-或者使用 PowerShell：
+### 方式二：PowerShell 方式
 
 ```powershell
-$body = @{
+# 构建消息对象并转为 JSON，写入 UTF-8 无 BOM 文件
+$notifyJson = @{
     msgtype = "markdown"
     markdown = @{
-        content = "## 测试通知`n> 通过率: 80%"
+        content = "## 测试执行完成`n`n**通过率: 80%** (20/25)"
     }
-} | ConvertTo-Json -Depth 5
+} | ConvertTo-Json -Depth 5 -Compress
 
-Invoke-RestMethod -Uri "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx" `
-  -Method Post -ContentType "application/json" -Body $body
+# 注意：PowerShell 5.1 的 ConvertTo-Json 对中文处理有编码问题
+# 推荐使用 Write 工具或 [System.IO.File]::WriteAllBytes 写入 UTF-8 文件
+$jsonBytes = [System.Text.Encoding]::UTF8.GetBytes($notifyJson)
+[System.IO.File]::WriteAllBytes("$env:TEMP\opencode\wechat_notify.json", $jsonBytes)
+
+# 用 curl.exe --data-binary 发送
+curl.exe -s -X POST "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx" `
+  -H "Content-Type: application/json" `
+  --data-binary "@$env:TEMP\opencode\wechat_notify.json"
+```
+
+### 绝对不要使用的方式
+
+```bash
+# 错误！PowerShell 5.1 会将中文按 GBK 编码传递给 curl.exe，导致乱码
+curl.exe -d '{"msgtype":"markdown","markdown":{"content":"测试通知"}}' ...
+# 错误！单引号中的中文在 PowerShell 中会被错误解析
+curl.exe -d '中文字符' ...
 ```
 
 ---

@@ -1,9 +1,9 @@
-## 📋 需求分析完成
+## 需求分析完成
 
 **需求**: {{story_name}}
 **需求ID**: {{story_id}}
 
-### 分析概要
+**分析概要:**
 - 功能点数量: {{feature_count}}
 - 高风险项: {{risk_high}}
 - 中风险项: {{risk_medium}}
