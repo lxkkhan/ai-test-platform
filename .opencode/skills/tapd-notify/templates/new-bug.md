@@ -1,4 +1,4 @@
-## 新 Bug 提醒
+## 🐛 新 Bug 提醒
 
 **Bug标题**: {{bug_title}}
 **Bug ID**: {{bug_id}}
@@ -7,4 +7,4 @@
 **处理人**: {{real_user}}
 **关联需求**: S-{{story_id}}
 
-> Bug 已自动关联到对应需求，处理人为 {{real_user}}，请在 TAPD 中查看详情
+> 📎 Bug 已自动关联到对应需求，处理人为 {{real_user}}，请在 TAPD 中查看详情
