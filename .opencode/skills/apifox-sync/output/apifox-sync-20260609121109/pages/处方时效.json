@@ -1,0 +1,246 @@
+{
+  "menuName": "处方时效",
+  "menuCategory": "基础数据 > 配送管理",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/PrescriptionAgingOrg",
+  "apis": [
+    {
+      "id": "GET_/pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser?functionCode=PrescriptionAging_org&orgLevel=org",
+      "pathname": "/pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "functionCode": "PrescriptionAging_org",
+        "orgLevel": "org"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780979045945,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "GET_/pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser?functionCode=PrescriptionAging_org",
+      "pathname": "/pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "functionCode": "PrescriptionAging_org"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780979045945,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "GET_/pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup?code=pageSize&pkGroup=1787720377238028288",
+      "pathname": "/pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "code": "pageSize",
+        "pkGroup": "1787720377238028288"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780979045945,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "GET_/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel?value=tcm_user_orgTree",
+      "pathname": "/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "value": "tcm_user_orgTree"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780979046109,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "POST_/pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme___page__false__sortName___sort___queryConditions_____field___userId___value___20019___operation___eq",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "tcm-sign2": "6846B73165FC8B108CB580EBA63685358E78DCDB9F8EA4E651E3E70A6CE55B2B",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "rnFKArTbxzJO7U5",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780979046108",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"page\":false,\"sortName\":\"sort\",\"queryConditions\":[{\"field\":\"userId\",\"value\":[20019],\"operation\":\"eq\"},{\"field\":\"templateType\",\"value\":[0],\"operation\":\"eq\"},{\"field\":\"functionCode\",\"value\":[\"PrescriptionAging_org\"],\"operation\":\"eq\"},{\"field\":\"deleteflag\",\"value\":[0],\"operation\":\"eq\"},{\"field\":\"enableflag\",\"value\":[0],\"operation\":\"eq\"},{\"field\":\"pkOrg\",\"value\":[\"00013A1000000000VGSD\"],\"operation\":\"in\"}]}",
+      "requestContentType": "application/json",
+      "timestamp": 1780979046110,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "GET_/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItems_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItems?dictionaryCode=select_delivery_type",
+      "pathname": "/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItems",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "dictionaryCode": "select_delivery_type"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780979046171,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "POST_/pszxSaasServer/org/orgOrgCtrl/getOrgTree_functionCodeObj_query_OrgOrg_org",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/org/orgOrgCtrl/getOrgTree",
+      "pathname": "/pszxSaasServer/org/orgOrgCtrl/getOrgTree",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "tcm-sign2": "8D06B155E84EB419FB6A990E580A87F68C7B41013F7001E5EBE682149D67FA2A",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "o8NCXQiCrN8JuYJ",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780979046181",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json;charset=UTF-8"
+      },
+      "queryParams": {},
+      "postData": "{\"functionCodeObj\":{\"query\":\"OrgOrg_org\"},\"page\":false,\"sortName\":\"\",\"queryConditions\":[{\"field\":\"id\",\"value\":[\"${user.belongOrgList}\"],\"operation\":\"in\"},{\"field\":\"pkGroup\",\"value\":[\"1\"],\"operation\":\"eq\"}]}",
+      "requestContentType": "application/json;charset=UTF-8",
+      "timestamp": 1780979046183,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "POST_/pszxSaasServer/hospital/hospitalDistributeCtrl/listByScheme___page__false__functionCodeObj____header___HospitalDistribute_org_source____queryConditions_____fiel",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/hospital/hospitalDistributeCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/hospital/hospitalDistributeCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "tcm-sign2": "9E225BF1D69FB2E4B3CD0E9B4624AD087E3DCAA190E6BC0FF610EC6FB147999E",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "hPwSNDqWv3tpstk",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780979046198",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"page\":false,\"functionCodeObj\":{\"header\":\"HospitalDistribute_org_source\"},\"queryConditions\":[{\"field\":\"hospitalFullName\",\"value\":[],\"operation\":\"like\"},{\"field\":\"deleteflag\",\"value\":[0],\"operation\":\"eq\"},{\"field\":\"headDeleteflag\",\"value\":[0],\"operation\":\"eq\"},{\"field\":\"headEnableflag\",\"value\":[\"0\"],\"operation\":\"eq\"},{\"field\":\"name\",\"value\":[],\"operation\":\"like\"},{\"field\":\"ha_full_name,ha_code\",\"value\":[],\"operation\":\"like\"},{\"field\":\"pkOrg\",\"operation\":\"in\",\"value\":[\"00013A1000000000VGSD\",\"1787720377238028288\",\"global\"]},{\"field\":\"head.pkOrg\",\"operation\":\"in\",\"value\":[\"00013A1000000000VGSD\",\"1787720377238028288\",\"global\"]},{\"field\":\"enableflag\",\"value\":[0],\"operation\":\"eq\"}]}",
+      "requestContentType": "application/json",
+      "timestamp": 1780979046200,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "POST_/pszxSaasServer/prescription/aging/prescriptionAgingCtrl/listByScheme___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___af06f0579",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/prescription/aging/prescriptionAgingCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/prescription/aging/prescriptionAgingCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "tcm-sign2": "A7CF156A8A622C81C44356C301985CF87E92573D04B3FC65403AD232DB0E7180",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "0fxefozymGSWFiS",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780979046207",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"af06f05794d94a838bbbe8878a11b4da\",\"value\":[\"00013A1000000000VGSD\",\"1787720377238028288\",\"global\"],\"field\":\"pkOrg\",\"operation\":\"in\"},{\"id\":\"487e2231dcba45948836d5b2e64b6417\",\"value\":[null],\"field\":\"tcmdef1\",\"operation\":\"like\"},{\"id\":\"9dae75dabee7493baa08f08da6b1ce5f\",\"value\":[null],\"field\":\"pkHispital\",\"operation\":\"in\"},{\"id\":\"a36b20659db14076967dd308ca414430\",\"value\":[null],\"field\":\"code\",\"operation\":\"like\"},{\"id\":\"1a42afdcfe6c4ae9a7d592f6cbe37acb\",\"value\":[null],\"field\":\"deptName\",\"operation\":\"like\"},{\"id\":\"ac9d2f0ed50e41fdabbd8daf865c36dc\",\"value\":[null],\"field\":\"deliveryType\",\"operation\":\"in\"},{\"id\":\"a6f19484f1b9496fb2403a8bf38006e9\",\"value\":[null],\"field\":\"pkBusinessType\",\"operation\":\"in\"},{\"id\":\"698bf5abb5b1469ba3b464692853dfa2\",\"value\":[null],\"field\":\"agingLevel\",\"operation\":\"in\"},{\"id\":\"fd4210c44da04255a006713d9fbd17c1\",\"value\":[null],\"field\":\"remarks\",\"operation\":\"like\"},{\"id\":\"2073c96d3c204d2da8f1573ca775079e\",\"value\":[null],\"field\":\"enableflag\",\"operation\":\"eq\"}],\"templateId\":\"f3cc6daa7ae849a9a6b07c6b39beb619\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isFlow\":false,\"isOrg\":true,\"auth\":\"PrescriptionAgingOrg\",\"header\":\"PrescriptionAging_org\",\"query\":\"PrescriptionAging_org\",\"bill\":\"PrescriptionAging_org\",\"controller\":\"/prescription/aging/prescriptionAgingCtrl\",\"importProperty\":{\"functionCode\":\"PrescriptionAging_org\",\"billType\":\"处方时效表\",\"orgLevel\":\"org\"}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780979046208,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

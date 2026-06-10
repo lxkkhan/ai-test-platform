@@ -1,0 +1,9 @@
+﻿{
+    "_extends": "../_shared/tapd-config.json",
+    "wechat_webhook_url": "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=a05414b0-db30-41ee-bb0e-f41e5c1d0578",
+    "wechat_mentioned_list": [],
+    "wechat_mentioned_mobile_list": [],
+    "auto_upload": false,
+    "test_results_dir": "",
+    "case_map_file": ".tapd-case-map.json"
+}

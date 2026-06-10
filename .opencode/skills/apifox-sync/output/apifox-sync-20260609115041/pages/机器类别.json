@@ -1,0 +1,35 @@
+{
+  "menuName": "机器类别",
+  "menuCategory": "基础数据 > 机器管理",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/MachineCategoryGlobal",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/machine/category/machineCategoryCtrl/listByScheme___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___a4a02d703",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/machine/category/machineCategoryCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/machine/category/machineCategoryCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiI4NDA4ZmFhMGVkOGQ0MjdiYTdmNDNjODNiNGU1YzI4MCIsImlhdCI6MTc4MDk3NzA0OSwiZXhwIjoxNzgxMDM0NjQ5LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._6V4DfS3XghpO4GyoD_fPmAMB003gcDvy9ykdREPqSD1dL_dyyu_rIABrKqIFiQNEAxcW52W51IRUY42dqGzsg",
+        "tcm-sign2": "B8054FAA2947110F46DE27EAE6D982B431F8BE2EDB86AF0C5D7B2E3FEDE5BB31",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "NESBXkfnd8Ahj1b",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780977826193",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"a4a02d703d4942b7b79ecfc57aadb8ce\",\"value\":[null],\"field\":\"code\",\"operation\":\"like\"},{\"id\":\"28a2095a908149d3aab73223416e4ddb\",\"value\":[null],\"field\":\"name\",\"operation\":\"like\"},{\"id\":\"9489c23eb58e42818d4cf64846363100\",\"value\":[null],\"field\":\"parentId\",\"operation\":\"in\"},{\"id\":\"84be355190474a76ad9399a1dad6fe56\",\"value\":[null],\"field\":\"remarks\",\"operation\":\"like\"},{\"id\":\"0f84e542c9c2403f95cb25778f82dca4\",\"value\":[null],\"field\":\"enableflag\",\"operation\":\"eq\"}],\"templateId\":\"b53813fae8294a1abecf53c54d1e5b1b\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isFlow\":false,\"auth\":\"MachineCategoryGlobal\",\"header\":\"MachineCategory_global\",\"query\":\"MachineCategory_global\",\"bill\":\"MachineCategory_global\",\"controller\":\"/machine/category/machineCategoryCtrl\",\"importProperty\":{\"functionCode\":\"MachineCategory_global\",\"billType\":\"机器类别表\",\"orgLevel\":\"global\"}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780977826195,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

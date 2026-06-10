@@ -1,0 +1,35 @@
+{
+  "menuName": "批号",
+  "menuCategory": "基础数据 > 物料信息",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/PszxLotInfoGroup",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/lotInfo/lotInfoCtrl/listByScheme___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___5eaadf517",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/lotInfo/lotInfoCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/lotInfo/lotInfoCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjNTQ3ZGNkMWIwZTQ0YjcyYThiNzU2NjEzZDRhY2Q3MyIsImlhdCI6MTc4MDk4MjA5MCwiZXhwIjoxNzgxMDM5NjkwLCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.44D_MxfE3BaZ4Dcx5lO4sWyqxgBZUMM4EBlojfVjIZJZskG_RN4y-rjnAvVUV65bOwlOBAnmOk7F6RRvQbK-Tg",
+        "tcm-sign2": "B512D6E4F9B6637B4DBE6B74DBF8A88518B9499FB9A95933659F96E860872033",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "xjgM8XP4LYfU4wz",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780982399588",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"5eaadf517c6f43ff80c77b9c372eca5e\",\"value\":[\"1787720377238028288\",\"global\"],\"field\":\"pkGroup\",\"operation\":\"in\"},{\"id\":\"a55b0c3b3b07441e898fd4b8d4f6c2bf\",\"value\":[null],\"field\":\"code\",\"operation\":\"like\"},{\"id\":\"e2ded9c956294a2996fde1dc111693f2\",\"value\":[null],\"field\":\"pkMat\",\"operation\":\"in\"},{\"id\":\"8d1b4599dd5a4006b7572fe6861f41e7\",\"value\":[null],\"field\":\"enableflag\",\"operation\":\"eq\"},{\"id\":\"31b541f281f04417a4e1c02c99ca1220\",\"value\":[],\"field\":\"productDate\",\"operation\":\"between\"},{\"id\":\"a7f23d80a292479eaf9a4a16dbad4718\",\"value\":[],\"field\":\"expiryDate\",\"operation\":\"between\"},{\"id\":\"9805725209cd4ac3abbbbefd73813e27\",\"value\":[null],\"field\":\"source\",\"operation\":\"in\"},{\"id\":\"789df16a5ddc4548ae023840ebb28b3f\",\"value\":[null],\"field\":\"remarks\",\"operation\":\"like\"},{\"id\":\"5ffc7692cf6449b1a3a2be7a980ab463\",\"value\":[null],\"field\":\"createUserName\",\"operation\":\"like\"},{\"id\":\"78604d256ff34d83b34b652bbfa91ebc\",\"value\":[null],\"field\":\"lastUpdateUserName\",\"operation\":\"like\"},{\"id\":\"8eedd7b4ff444963bb98ca77bdcc7b94\",\"value\":[null],\"field\":\"ncCode\",\"operation\":\"like\"}],\"templateId\":\"19f489e81fe247f3b739c848f5a9ddac\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isFlow\":false,\"isGroup\":true,\"auth\":\"PszxLotInfoGroup\",\"header\":\"PSZX_LOT_INFO_group\",\"query\":\"PSZX_LOT_INFO_group\",\"bill\":\"PSZX_LOT_INFO_group\",\"controller\":\"/lotInfo/lotInfoCtrl\",\"importProperty\":{\"functionCode\":\"PSZX_LOT_INFO_group\",\"billType\":\"批号表\",\"orgLevel\":\"group\"}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780982399599,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

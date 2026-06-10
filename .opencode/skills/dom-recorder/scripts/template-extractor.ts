@@ -226,17 +226,51 @@ function parseIndex(content: string): TemplateIndexEntry[] {
 function extractSteps(specContent: string): Array<{ selector: string; type: string; code: string }> {
   const steps: Array<{ selector: string; type: string; code: string }> = [];
   const lines = specContent.split('\n');
+  let inTryBlock = '';
+  let tryCode = '';
 
   for (const line of lines) {
     const trimmed = line.trim();
-    if (trimmed.startsWith('//')) continue;
-    if (trimmed.startsWith('console.log')) continue;
+    if (trimmed.startsWith('//') || trimmed.startsWith('console.log')) continue;
+
+    // 捕获多行 try/catch/await page.xxx() 块
+    if (trimmed.startsWith('try {')) {
+      inTryBlock = 'try';
+      tryCode = line;
+      continue;
+    }
+    if (inTryBlock) {
+      tryCode += '\n' + line;
+      if (trimmed === '}') {
+        // 从 try 块中提取第一个 page action
+        const innerMatch = tryCode.match(/await page\.(\w+)\(/);
+        if (innerMatch) {
+          const actionType = innerMatch[1];
+          if (actionType === 'click') {
+            const sel = tryCode.match(/await page\.click\('([^']+)'/);
+            steps.push({ selector: sel?.[1] || '', type: 'click', code: tryCode });
+          } else if (actionType === 'fill') {
+            const match = tryCode.match(/await page\.fill\('([^']+)',\s*'([^']+)'/);
+            steps.push({ selector: match?.[1] || '', type: 'input', code: tryCode });
+          }
+        }
+        inTryBlock = '';
+        tryCode = '';
+      }
+      continue;
+    }
+
+    // 捕获 catch/关闭花括号
+    if (trimmed.startsWith('} catch {')) continue;
+    if (trimmed === '}') continue;
+
+    // 单行 page action
     if (trimmed.startsWith('await page.click(')) {
       const selector = trimmed.match(/page\.click\('([^']+)'/) || [];
       steps.push({ selector: selector[1] || '', type: 'click', code: trimmed });
     } else if (trimmed.startsWith('await page.fill(')) {
       const match = trimmed.match(/page\.fill\('([^']+)',\s*'([^']+)'/) || [];
-      steps.push({ selector: match[1] || '', type: 'fill', code: trimmed });
+      steps.push({ selector: match[1] || '', type: 'input', code: trimmed });
     } else if (trimmed.startsWith('await page.dblclick(')) {
       const selector = trimmed.match(/page\.dblclick\('([^']+)'/) || [];
       steps.push({ selector: selector[1] || '', type: 'dblclick', code: trimmed });
@@ -326,7 +360,7 @@ function buildPageTemplate(entry: ManifestEntry, steps: Array<{ selector: string
   lines.push(`元素映射:`);
 
   const clicks = steps.filter(s => s.type === 'click');
-  const fills = steps.filter(s => s.type === 'fill');
+  const inputs = steps.filter(s => s.type === 'input');
   const waits = steps.filter(s => s.type.startsWith('wait'));
 
   if (clicks.length > 0) {
@@ -334,21 +368,22 @@ function buildPageTemplate(entry: ManifestEntry, steps: Array<{ selector: string
     for (const s of clicks) {
       lines.push(`    - primary: "${s.selector}"`);
       lines.push(`      fallbacks: []`);
+      if (s.code) {
+        const desc = s.code.replace(/"/g, '\\"').slice(0, 60);
+        lines.push(`      description: "${desc}"`);
+      }
     }
   }
 
-  if (fills.length > 0) {
+  if (inputs.length > 0) {
     lines.push(`  输入框:`);
-    for (const s of fills) {
+    for (const s of inputs) {
       lines.push(`    - primary: "${s.selector}"`);
       lines.push(`      fallbacks: []`);
-    }
-  }
-
-  if (waits.length > 0) {
-    lines.push(`  等待:`);
-    for (const s of waits) {
-      lines.push(`    - "${s.selector}"`);
+      if (s.code) {
+        const desc = s.code.replace(/"/g, '\\"').slice(0, 60);
+        lines.push(`      description: "${desc}"`);
+      }
     }
   }
 

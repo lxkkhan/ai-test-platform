@@ -297,8 +297,8 @@
     '            <input type="text" id="tapd-project-id" class="tapd-input tapd-input-sm" placeholder="TAPD项目ID">' +
     '          </div>' +
     '          <div class="tapd-form-group tapd-col">' +
-    '            <label class="tapd-label">📋 需求 ID</label>' +
-    '            <input type="text" id="tapd-requirement-id" class="tapd-input tapd-input-sm" placeholder="需求ID（可选）">' +
+    '            <label class="tapd-label">📋 需求 ID <span class="tapd-required">*</span> <span class="tapd-badge">自动保存</span></label>' +
+    '            <input type="text" id="tapd-requirement-id" class="tapd-input tapd-input-sm" placeholder="需求ID">' +
     '          </div>' +
     '        </div>' +
     '        <div class="tapd-form-group">' +
@@ -440,6 +440,10 @@
     if (pidEl) pidEl.addEventListener('change', saveProjectId);
     if (pidEl) pidEl.addEventListener('blur', saveProjectId);
 
+    var ridEl = document.getElementById('tapd-requirement-id');
+    if (ridEl) ridEl.addEventListener('change', saveRequirementId);
+    if (ridEl) ridEl.addEventListener('blur', saveRequirementId);
+
     // Focus title field
     setTimeout(function() {
       var titleEl = document.getElementById('tapd-title');
@@ -529,10 +533,12 @@
 
   function loadSettings() {
     if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.local) return;
-    chrome.storage.local.get(['tapd_workspace_id', 'tapd_reporter'], function(cfg) {
+    chrome.storage.local.get(['tapd_workspace_id', 'tapd_reporter', 'tapd_requirement_id'], function(cfg) {
       setVal('tapd-workspace-id', cfg.tapd_workspace_id || '');
       setVal('tapd-project-id', cfg.tapd_workspace_id || '');
+      _lastProjectId = cfg.tapd_workspace_id || '';
       if (cfg.tapd_reporter) setVal('tapd-reporter', cfg.tapd_reporter);
+      if (cfg.tapd_requirement_id) setVal('tapd-requirement-id', cfg.tapd_requirement_id);
       if (cfg.tapd_workspace_id) {
         loadCachedProjectData(cfg.tapd_workspace_id);
       }
@@ -557,14 +563,52 @@
     });
   }
 
+  var _lastProjectId = '';
+
+  function resetProjectUI() {
+    var severityEl = document.getElementById('tapd-severity');
+    if (severityEl) {
+      severityEl.innerHTML = '<option value="">-- 请选择 --</option><option value="致命">致命</option><option value="严重">严重</option><option value="一般" selected>一般</option><option value="轻微">轻微</option><option value="建议">建议</option>';
+    }
+    var priorityEl = document.getElementById('tapd-priority');
+    if (priorityEl) {
+      priorityEl.innerHTML = '<option value="">-- 请选择 --</option><option value="高">高</option><option value="中" selected>中</option><option value="低">低</option>';
+    }
+    var moduleEl = document.getElementById('tapd-module');
+    if (moduleEl) {
+      moduleEl.innerHTML = '<option value="">-- 请选择 --</option>';
+    }
+    var ownerEl = document.getElementById('tapd-owner');
+    if (ownerEl && ownerEl.tagName === 'SELECT') {
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.id = 'tapd-owner';
+      input.className = 'tapd-input';
+      input.placeholder = '处理人';
+      ownerEl.parentNode.replaceChild(input, ownerEl);
+    }
+    var container = document.getElementById('tapd-custom-fields');
+    if (container) container.innerHTML = '';
+  }
+
   function saveProjectId() {
     var pid = document.getElementById('tapd-project-id').value.trim();
-    if (pid) {
+    if (pid && pid !== _lastProjectId) {
+      _lastProjectId = pid;
+      resetProjectUI();
       document.getElementById('tapd-workspace-id').value = pid;
       if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
         chrome.storage.local.set({ tapd_workspace_id: pid });
       }
       loadCachedProjectData(pid);
+    }
+    saveRequirementId();
+  }
+
+  function saveRequirementId() {
+    var rid = document.getElementById('tapd-requirement-id').value.trim();
+    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+      chrome.storage.local.set({ tapd_requirement_id: rid });
     }
   }
 
@@ -592,15 +636,23 @@
     btn.textContent = '⏳ 测试中...';
     if (resultEl) { resultEl.textContent = ''; resultEl.className = 'tapd-test-result'; }
 
-    // Clear cached project data so modules are fetched fresh
-    if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
-      var wsId = getVal('tapd-project-id') || getVal('tapd-workspace-id');
-      if (wsId) chrome.storage.local.remove('tapd_project_' + wsId);
+    // Always sync main form project ID to settings, detect changes, reset UI
+    var pid = getVal('tapd-project-id');
+    if (pid) {
+      setVal('tapd-workspace-id', pid);
+      if (pid !== _lastProjectId) {
+        _lastProjectId = pid;
+        resetProjectUI();
+        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+          chrome.storage.local.set({ tapd_workspace_id: pid });
+          chrome.storage.local.remove('tapd_project_' + pid);
+        }
+      }
     }
-    clearModuleOptions();
+    resetProjectUI();
 
     var testData = {
-      workspace_id: getVal('tapd-workspace-id')
+      workspace_id: pid || getVal('tapd-workspace-id')
     };
 
     if (!testData.workspace_id) {
@@ -618,11 +670,11 @@
       btn.textContent = '🔌 测试连接';
         if (resp && resp.success) {
           var msg = resp.message;
-          if (resp.projectData && resp.projectData.template && resp.projectData.template.length > 0) {
-            msg += '，已加载 ' + resp.projectData.template.length + ' 个字段';
-            if (resp.projectData.users && resp.projectData.users.length > 0) {
-              msg += ' 和 ' + resp.projectData.users.length + ' 位成员';
-            }
+          if (resp.projectData) {
+            var fieldCount = resp.projectData.fields ? Object.keys(resp.projectData.fields).length : 0;
+            var templateCount = (resp.projectData.template || []).length;
+            var userCount = (resp.projectData.users || []).length;
+            msg += '，已加载 ' + templateCount + ' 个模板字段，' + fieldCount + ' 个字段选项' + (userCount ? '，' + userCount + ' 位成员' : '');
             console.log('[TAPD] projectData fields debug:', resp.projectData._debug_fields);
             console.log('[TAPD] projectData fields keys:', resp.projectData.fields ? Object.keys(resp.projectData.fields) : 'none');
             applyProjectFields(resp.projectData);
@@ -647,38 +699,39 @@
     if (!pd) return;
 
     var templateFields = pd.template || [];
+    var fieldSet = {};
+    for (var i = 0; i < templateFields.length; i++) {
+      fieldSet[(templateFields[i].name || '').toLowerCase()] = templateFields[i];
+    }
 
+    // Populate field options from API (independent of template)
+    console.log('[TAPD] applyProjectFields - pd.fields keys:', pd.fields ? Object.keys(pd.fields) : 'none');
+    console.log('[TAPD] applyProjectFields - pd.fields preview:', JSON.stringify(pd.fields).substring(0, 500));
+    if (pd.fields && Object.keys(pd.fields).length > 0) {
+      populateSelectFromField('tapd-severity', pd.fields, 'severity');
+      populateSelectFromField('tapd-priority', pd.fields, 'priority_label');
+      populateModulesFromField(pd.fields);
+    }
+    // Ensure defaults are present if API didn't fill
+    ensureDefaultOptions('tapd-severity', ['致命','严重','一般','轻微','建议']);
+    ensureDefaultOptions('tapd-priority', ['高','中','低']);
+
+    // 设置默认值（仅当选项存在时）
+    if (document.querySelector('#tapd-severity option[value=\'一般\']')) setVal('tapd-severity', '一般');
+    if (document.querySelector('#tapd-priority option[value=\'中\']')) setVal('tapd-priority', '中');
+
+    // Show/hide standard fields per template
+    showFieldIfInTemplate('tapd-severity-group', fieldSet, 'severity');
+    showFieldIfInTemplate('tapd-priority-group', fieldSet, 'priority_label', 'priority');
+
+    // Module: API didn't provide options? Convert to text input
+    if (!hasPopulatedOptions('tapd-module')) {
+      setModuleAsText();
+    }
+
+    // Render custom fields from template (with Chinese labels from fieldData)
     if (templateFields.length > 0) {
-      var fieldSet = {};
-      for (var i = 0; i < templateFields.length; i++) {
-        fieldSet[(templateFields[i].name || '').toLowerCase()] = templateFields[i];
-      }
-
-      // Try API field options first, fall back to defaults
-      console.log('[TAPD] applyProjectFields - pd.fields keys:', pd.fields ? Object.keys(pd.fields) : 'none');
-      console.log('[TAPD] applyProjectFields - pd.fields preview:', JSON.stringify(pd.fields).substring(0, 500));
-      if (pd.fields && Object.keys(pd.fields).length > 0) {
-        populateSelectFromField('tapd-severity', pd.fields, 'severity');
-        populateSelectFromField('tapd-priority', pd.fields, 'priority_label');
-        populateModulesFromField(pd.fields);
-      }
-      // Ensure defaults are present if API didn't fill
-      ensureDefaultOptions('tapd-severity', ['致命','严重','一般','轻微','建议']);
-      ensureDefaultOptions('tapd-priority', ['高','中','低']);
-
-      // Show/hide standard fields per template
-      showFieldIfInTemplate('tapd-severity-group', fieldSet, 'severity');
-      showFieldIfInTemplate('tapd-priority-group', fieldSet, 'priority_label', 'priority');
-
-      // Module: API didn't provide options? Convert to text input
-      if (!hasPopulatedOptions('tapd-module')) {
-        setModuleAsText();
-      }
-
-      // Render custom fields from template
-      renderCustomFields(templateFields);
-
-      // Mark required fields per template
+      renderCustomFields(templateFields, pd.fields);
       applyTemplateRequired(fieldSet);
     }
 
@@ -759,8 +812,18 @@
     }
   }
 
-  function renderCustomFields(templateFields) {
-    // Remove old custom fields container
+  function getFieldLabel(fieldData, fieldName) {
+    if (!fieldData) return fieldName;
+    var f = fieldData[fieldName];
+    if (!f) {
+      for (var k in fieldData) {
+        if (k.toLowerCase() === fieldName.toLowerCase()) { f = fieldData[k]; break; }
+      }
+    }
+    return f && f.label ? f.label : fieldName;
+  }
+
+  function renderCustomFields(templateFields, fieldData) {
     var oldContainer = document.getElementById('tapd-custom-fields');
     if (oldContainer) oldContainer.innerHTML = '';
 
@@ -779,36 +842,86 @@
       }
     }
 
-    var standardNames = ['title', 'severity', 'priority', 'priority_label', 'module', 'current_owner', 'description', 'workspace_id', 'id', 'status', 'reporter', 'created', 'modified', 'lastmodify', 'closed', 'resolved'];
+    var standardNames = ['title', 'severity', 'priority', 'priority_label', 'module', 'current_owner', 'description', 'workspace_id', 'id', 'status', 'reporter', 'created', 'modified', 'lastmodify', 'closed', 'resolved', 'testtype', 'testphase'];
+
+    var hasVisibleFields = false;
 
     for (var i = 0; i < templateFields.length; i++) {
       var f = templateFields[i];
       var name = f.name || '';
       if (!name || standardNames.indexOf(name.toLowerCase()) > -1) continue;
 
+      hasVisibleFields = true;
+      var fieldLabel = getFieldLabel(fieldData, name);
+
+      var fieldMeta = null;
+      if (fieldData) {
+        fieldMeta = fieldData[name];
+        if (!fieldMeta) {
+          for (var k in fieldData) {
+            if (k.toLowerCase() === name.toLowerCase()) { fieldMeta = fieldData[k]; break; }
+          }
+        }
+      }
+
       var div = document.createElement('div');
       div.className = 'tapd-form-group';
 
       var label = document.createElement('label');
       label.className = 'tapd-label';
-      label.textContent = name;
+      label.textContent = fieldLabel;
       if (f.required) label.innerHTML += ' <span class="tapd-required">*</span>';
       div.appendChild(label);
 
-      var input = document.createElement('input');
-      input.type = 'text';
-      input.className = 'tapd-input';
-      input.id = 'tapd-custom-' + name;
-      input.placeholder = f.required ? '必填' : '';
-      if (name === 'version_report' && !f.value) input.value = '1.0';
-      else if (f.value) input.value = f.value;
-      div.appendChild(input);
+      var fieldOptions = fieldMeta && fieldMeta.options;
+      var hasOptions = fieldOptions && typeof fieldOptions === 'object' && Object.keys(fieldOptions).length > 0;
+
+      if (hasOptions) {
+        var sel = document.createElement('select');
+        sel.className = 'tapd-input';
+        sel.id = 'tapd-custom-' + name;
+
+        var emptyOpt = document.createElement('option');
+        emptyOpt.value = '';
+        emptyOpt.textContent = '-- 请选择 --';
+        sel.appendChild(emptyOpt);
+
+        if (!Array.isArray(fieldOptions)) {
+          for (var optKey in fieldOptions) {
+            var opt = document.createElement('option');
+            opt.value = optKey;
+            opt.textContent = fieldOptions[optKey];
+            if (f.value === optKey) opt.selected = true;
+            sel.appendChild(opt);
+          }
+        } else {
+          fieldOptions.forEach(function(item) {
+            var opt = document.createElement('option');
+            if (typeof item === 'string') { opt.value = item; opt.textContent = item; }
+            else { opt.value = item.value || item.id || ''; opt.textContent = item.label || item.name || item.value || ''; }
+            if (f.value === opt.value) opt.selected = true;
+            if (opt.value) sel.appendChild(opt);
+          });
+        }
+        div.appendChild(sel);
+      } else {
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'tapd-input';
+        input.id = 'tapd-custom-' + name;
+        input.placeholder = f.required ? '必填' : '';
+        if (name === 'version_report' && !f.value) input.value = '1.0';
+        else if (f.value) input.value = f.value;
+        div.appendChild(input);
+      }
 
       container.appendChild(div);
     }
 
-    if (container.children.length === 0 && oldContainer) {
+    if (!hasVisibleFields && oldContainer) {
       oldContainer.style.display = 'none';
+    } else {
+      container.style.display = '';
     }
   }
 
@@ -1107,6 +1220,7 @@
       if (btn.disabled) return;
       var data = buildBugData();
       if (!data.title) { showToast('请先输入Bug标题', 'warn'); return; }
+      if (!data.requirement_id) { showToast('请填写需求ID', 'warn'); return; }
 
       btn.disabled = true;
       btn.textContent = '提交中...';
@@ -1115,7 +1229,16 @@
         chrome.runtime.sendMessage({ action: 'submitBug', data: data }, function(resp) {
           if (resp && resp.success) {
             var bugId = resp.data && resp.data.Bug ? resp.data.Bug.id : '';
-            showToast('Bug 已提交！ID: ' + bugId);
+            var linkStatus = resp.link;
+            if (linkStatus) {
+              if (linkStatus.success) {
+                showToast('Bug #' + bugId + ' 已提交并关联需求！');
+              } else {
+                showToast('Bug #' + bugId + ' 已提交，但需求关联失败: ' + (linkStatus.error || '未知错误'), 'warn');
+              }
+            } else {
+              showToast('Bug 已提交！ID: ' + bugId);
+            }
           } else {
             var errMsg = resp ? resp.error : '请检查TAPD配置';
             showToast('提交失败: ' + errMsg, 'error');

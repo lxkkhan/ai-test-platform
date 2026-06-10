@@ -1,0 +1,36 @@
+# 操作模板：查询验证
+
+操作类型: "查询验证"
+recordCount: 2
+
+用例列表:
+  - "人员-组织" (菜单点击)
+  - "业务类型-公司" (菜单点击)
+
+操作模式:
+  - input: #form_item_name_62e4527dc0d644f19cef3b875ee25060
+  - input: #form_item_name_62e4527dc0d644f19cef3b875ee25060
+  - input: #form_item_name_62e4527dc0d644f19cef3b875ee25060
+  - click: span:has-text("查询")
+  - click: path
+  - click: span:has-text("查询")
+  - input: #form_item_name_1b350ee61e714742941b0dd466110a0b
+  - input: #form_item_name_1b350ee61e714742941b0dd466110a0b
+  - input: #form_item_name_1b350ee61e714742941b0dd466110a0b
+  - click: span:has-text("查询")
+  - click: path
+  - input: input[placeholder*="请输入"]
+  - input: input[placeholder*="请输入"]
+  - input: input[placeholder*="请输入"]
+  - click: span:has-text("查询")
+  - click: div:has-text("手机号码 包含 等于")
+  - keydown: input[placeholder*="请输入"]
+  - input: input[placeholder*="请输入"]
+  - keydown: input[placeholder*="请输入"]
+  - click: div:has-text("### Error querying database. C")
+  - click: span:has-text("查询")
+  - click: div:has-text("11153")
+  - click: div:has-text("序号 编码 姓名 状态 NC编码 性别 身份证;自动识别 在")
+  - click: div
+  - click: #tag-content
+  - click: a:has-text("业务类型-公司")

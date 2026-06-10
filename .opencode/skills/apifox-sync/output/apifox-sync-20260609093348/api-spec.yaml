@@ -1,0 +1,445 @@
+openapi: 3.0.3
+info:
+  title: 配送中心 SAAS 接口文档
+  version: 2026-06-09-auto
+  description: |-
+    由 apifox-sync 自动捕获生成
+    捕获时间: 2026-06-09T01:34:51.218Z
+    共 5 个页面, 9 个接口
+servers:
+  - url: https://tcm-dc-sit.zgzykg.com.cn
+    description: 配送中心 SAAS 生产环境
+tags:
+  - name: 公司-全局
+    description: 常用 > 公司-全局
+  - name: 元数据属性
+    description: 系统配置 > 元数据 > 元数据属性
+  - name: 元数据表关联
+    description: 系统配置 > 元数据 > 元数据表关联
+  - name: 查询模板权限查看
+    description: 系统配置 > 模板管理 > 查询模板权限查看
+  - name: 列模板
+    description: 系统配置 > 模板管理 > 列模板
+paths:
+  /pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser:
+    get:
+      tags:
+        - 公司-全局
+        - 元数据属性
+        - 列模板
+      summary: GET /pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_templates_query_queryTemplateCtrl_getQueryTemplateByCurrentUser
+      parameters:
+        - name: functionCode
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: orgLevel
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser:
+    get:
+      tags:
+        - 公司-全局
+        - 元数据属性
+      summary: GET /pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_templates_column_columnTemplateCtrl_getShowColumnTemplateByCurrentUser
+      parameters:
+        - name: functionCode
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup:
+    get:
+      tags:
+        - 公司-全局
+        - 元数据属性
+        - 列模板
+      summary: GET /pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_basic_org_orgParamsCtrl_getParamsWithGroup
+      parameters:
+        - name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: pkGroup
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel:
+    get:
+      tags:
+        - 公司-全局
+      summary: GET /pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_sysmp_sysDictionaryItemCtrl_getDictionaryItemLabel
+      parameters:
+        - name: value
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme:
+    post:
+      tags:
+        - 公司-全局
+        - 元数据属性
+        - 列模板
+      summary: POST /pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme (page)
+      description: 捕获自页面「公司-全局」
+      operationId: post_pszxSaasServer_templates_query_personalTemplateCtrl_personalTemplateCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: boolean
+                  example: false
+                sortName:
+                  type: string
+                  example: sort
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: userId
+                      value:
+                        type: array
+                        items:
+                          type: number
+                          example: 20019
+                        example:
+                          - 20019
+                      operation:
+                        type: string
+                        example: eq
+                  example:
+                    - field: userId
+                      value:
+                        - 20019
+                      operation: eq
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/pszxOrgGroup/pszxOrgGroupCtrl/listByScheme:
+    post:
+      tags:
+        - 公司-全局
+      summary: POST /pszxSaasServer/pszxOrgGroup/pszxOrgGroupCtrl/listByScheme (pageSize)
+      description: 捕获自页面「公司-全局」
+      operationId: post_pszxSaasServer_pszxOrgGroup_pszxOrgGroupCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '1943516339784122368'
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: code
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - id: '1943516339784122368'
+                      value:
+                        - null
+                      field: code
+                      operation: like
+                templateId:
+                  type: string
+                  example: d92b4d2bf9c5452db7b18a75f8e47ddd
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: pszxOrgGroupGlobal
+                    header:
+                      type: string
+                      example: pszxOrgGroup_global
+                    query:
+                      type: string
+                      example: pszxOrgGroup_global
+                    bill:
+                      type: string
+                      example: pszxOrgGroup_global
+                    controller:
+                      type: string
+                      example: /pszxOrgGroup/pszxOrgGroupCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: pszxOrgGroup_global
+                        billType:
+                          type: string
+                          example: 公司表
+                        orgLevel:
+                          type: string
+                          example: global
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/aliOss/downloadFile/1e056d2b0ebd5c878c550da6ac5d3724:
+    get:
+      tags:
+        - 公司-全局
+      summary: GET /pszxSaasServer/aliOss/downloadFile/1e056d2b0ebd5c878c550da6ac5d3724
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_aliOss_downloadFile_1e056d2b0ebd5c878c550da6ac5d3724
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/meta/metaPropertyCtrl/listByScheme:
+    post:
+      tags:
+        - 元数据属性
+      summary: POST /pszxSaasServer/meta/metaPropertyCtrl/listByScheme (pageSize)
+      description: 捕获自页面「元数据属性」
+      operationId: post_pszxSaasServer_meta_metaPropertyCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 4574d04ad7dc4b1ca144cb78b2bfdddc
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: tableName
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - id: 4574d04ad7dc4b1ca144cb78b2bfdddc
+                      value:
+                        - null
+                      field: tableName
+                      operation: like
+                templateId:
+                  type: string
+                  example: 77ca788ed7994b31a28252b3e3e82d30
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: MetaProperty
+                    header:
+                      type: string
+                      example: MetaProperty_global
+                    query:
+                      type: string
+                      example: MetaProperty_global
+                    bill:
+                      type: string
+                      example: MetaProperty_global
+                    controller:
+                      type: string
+                      example: /meta/metaPropertyCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: MetaProperty_global
+                        billType:
+                          type: string
+                          example: 元数据属性
+                        orgLevel:
+                          type: string
+                          example: global
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/column/columnTemplateHeadCtrl/listWithChildren:
+    post:
+      tags:
+        - 列模板
+      summary: POST /pszxSaasServer/templates/column/columnTemplateHeadCtrl/listWithChildren (pageSize)
+      description: 捕获自页面「列模板」
+      operationId: post_pszxSaasServer_templates_column_columnTemplateHeadCtrl_listWithChildren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '1638426612599095296'
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: head.funcCode
+                      operation:
+                        type: string
+                        example: eq
+                  example:
+                    - id: '1638426612599095296'
+                      value:
+                        - null
+                      field: head.funcCode
+                      operation: eq
+                templateId:
+                  type: string
+                  example: 50c65bf9-f19d-488a-b9ed-6677a4f247b2
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误

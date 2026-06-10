@@ -1,0 +1,7 @@
+{
+    "_extends": "../_shared/tapd-config.json",
+    "mode": "selector",
+    "fallback_mode": "midscene",
+    "auto_execute": false,
+    "skip_notify_on_success": false
+}

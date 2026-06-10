@@ -1,0 +1,54 @@
+# 操作模板：编辑修改（通用降级）
+# 适用于所有页面的编辑修改操作，仅操作 AUTO_TEST_ 前缀数据
+
+操作类型: "编辑修改"
+目标页面: "通用"
+recordCount: 0
+sourceCases: []
+isGeneric: true
+
+步骤序列:
+  - type: "navigate"
+    placeholder: "TARGET_PAGE"
+    code: "// 导航到目标页面（由匹配引擎自动填充）"
+  - type: "waitURL"
+    placeholder: "TARGET_URL_PATTERN"
+    code: "await page.waitForURL('**/TARGET_URL');"
+  - type: "input"
+    placeholder: "AUTO_TEST_ 查询条件"
+    code: "// 在查询条件中输入 AUTO_TEST_ 前缀数据以定位目标记录"
+  - type: "click"
+    selector: "span:has-text('查询')"
+    code: "await page.click('span:has-text(\"查询\")');"
+  - type: "wait"
+    selector: ".ant-spin"
+    code: "await page.waitForSelector('.ant-spin', { state: 'hidden', timeout: 5000 }).catch(() => {});"
+  - type: "dblclick"
+    selector: ".surely-table-cell-content, .ant-table-cell"
+    code: "// 双击选中 AUTO_TEST_ 前缀的记录（由用例生成器填充具体选择器）"
+  - type: "click"
+    selector: "button:has-text('修改'), a:has-text('修改'), span:has-text('修改')"
+    code: "try { await page.click('button:has-text(\"修改\")', { timeout: 3000 }); } catch { try { await page.click('a:has-text(\"修改\")', { timeout: 3000 }); } catch { await page.click('span:has-text(\"修改\")'); } }"
+  - type: "wait"
+    selector: ".ant-modal, .ant-drawer, .ant-form"
+    code: "await page.waitForSelector('.ant-modal, .ant-drawer, .ant-form', { state: 'visible', timeout: 5000 });"
+  - type: "input"
+    placeholder: "修改数据"
+    code: "// 修改表单数据（由用例生成器填充）"
+  - type: "click"
+    selector: "button:has-text('保存'), button:has-text('确定')"
+    code: "try { await page.click('button:has-text(\"保存\")', { timeout: 3000 }); } catch { await page.click('button:has-text(\"确定\")'); }"
+  - type: "wait"
+    selector: ".ant-message-success, .ant-notification-success"
+    code: "await page.waitForSelector('.ant-message-success, .ant-notification-success', { timeout: 5000 }).catch(() => {});"
+
+断言:
+  - type: "visible"
+    target: ".ant-message-success, .ant-notification-success"
+    expected: "true"
+    description: "修改成功提示可见"
+
+数据标记:
+  prefix: "AUTO_TEST_"
+  strategy: "edit"
+  queryFilter: "AUTO_TEST_"

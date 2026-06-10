@@ -1,0 +1,33 @@
+{
+  "menuName": "任务执行监控-全局",
+  "menuCategory": "系统调度平台",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/QuartzTaskExecLog",
+  "apis": [
+    {
+      "id": "method() {\n        return this._fallbackOverrides.method || this._initializer.method;\n      }_/api/7/envelope/",
+      "method": "POST",
+      "url": "https://dev.zgzykg.com.cn/api/7/envelope/?sentry_version=7&sentry_key=c4c5b2660795f6b50120182f02770dbc&sentry_client=sentry.javascript.vue%2F10.32.1",
+      "pathname": "/api/7/envelope/",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "content-type": "text/plain;charset=UTF-8",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "sentry_version": "7",
+        "sentry_key": "c4c5b2660795f6b50120182f02770dbc",
+        "sentry_client": "sentry.javascript.vue/10.32.1"
+      },
+      "postData": "{\"sent_at\":\"2026-06-09T01:19:16.148Z\",\"sdk\":{\"name\":\"sentry.javascript.vue\",\"version\":\"10.32.1\"}}\n{\"type\":\"session\"}\n{\"sid\":\"f888941841564e2fb694074f1e6b6e84\",\"init\":false,\"started\":\"2026-06-09T01:19:08.458Z\",\"timestamp\":\"2026-06-09T01:19:16.148Z\",\"status\":\"exited\",\"errors\":0,\"attrs\":{\"release\":\"af57a632cad761548f9c7d1556028408923e165e\",\"environment\":\"production\",\"ip_address\":\"{{auto}}\",\"user_agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36\"}}",
+      "requestContentType": "text/plain;charset=UTF-8",
+      "timestamp": 1780967956152,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

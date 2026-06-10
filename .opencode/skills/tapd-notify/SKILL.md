@@ -28,31 +28,21 @@ metadata:
 
 ## 配置文件
 
-本 Skill 依赖 `config.json`，需包含以下字段：
+本 Skill 依赖 `config.json`，通过 `_extends` 引用共享凭证 `_shared/tapd-config.json`：
 
 ```json
 {
-  "workspace_id": "你的TAPD项目ID",
-  "api_user": "你的API账号",
-  "api_password": "你的API密码",
-  "api_url": "https://api.tapd.cn",
-  "defaults": {
-    "priority_label": "中",
-    "severity": "一般",
-    "testtype": "功能测试",
-    "testphase": "功能测试阶段"
-  },
-  "modules": ["登录", "注册", "首页", "订单管理", "用户中心", "设置", "报表", "其他"],
-  "owner_list": [],
-  "default_story_id": "",
+  "_extends": "../_shared/tapd-config.json",
   "wechat_webhook_url": "",
   "wechat_mentioned_list": [],
   "wechat_mentioned_mobile_list": []
 }
 ```
 
-> **注意**：`wechat_webhook_url` 为企业微信机器人 Webhook 地址，格式：`https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx`。
-> `wechat_mentioned_list` 为 @成员的 userid 列表，`wechat_mentioned_mobile_list` 为 @成员的手机号列表。
+> **共享凭证**：所有 TAPD Skill 的共用字段统一在 `_shared/tapd-config.json` 管理。
+>
+> `wechat_webhook_url` 为企业微信机器人 Webhook 地址，格式：`https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxx`。
+> > `wechat_mentioned_list` 为 @成员的 userid 列表，`wechat_mentioned_mobile_list` 为 @成员的手机号列表。
 
 ## 通知类型
 

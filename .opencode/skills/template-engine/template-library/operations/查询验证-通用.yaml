@@ -1,0 +1,32 @@
+# 操作模板：查询验证（通用降级）
+# 适用于所有页面的查询验证操作
+
+操作类型: "查询验证"
+目标页面: "通用"
+recordCount: 0
+sourceCases: []
+isGeneric: true
+
+步骤序列:
+  - type: "navigate"
+    placeholder: "TARGET_PAGE"
+    code: "// 导航到目标页面（由匹配引擎自动填充）"
+  - type: "waitURL"
+    placeholder: "TARGET_URL_PATTERN"
+    code: "await page.waitForURL('**/TARGET_URL');"
+  - type: "click"
+    selector: "span:has-text('查询')"
+    code: "await page.click('span:has-text(\"查询\")');"
+  - type: "wait"
+    selector: ".ant-spin"
+    code: "await page.waitForSelector('.ant-spin', { state: 'hidden', timeout: 5000 }).catch(() => {});"
+
+断言:
+  - type: "visible"
+    target: ".surely-table, .ant-table, .ant-list"
+    expected: "true"
+    description: "查询结果列表可见"
+
+数据标记:
+  prefix: ""
+  strategy: "readonly"

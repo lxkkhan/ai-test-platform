@@ -1,0 +1,4 @@
+﻿{
+    "_extends": "../_shared/tapd-config.json",
+    "analyze_fields": []
+}

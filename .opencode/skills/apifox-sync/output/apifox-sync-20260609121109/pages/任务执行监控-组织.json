@@ -1,0 +1,60 @@
+{
+  "menuName": "任务执行监控-组织",
+  "menuCategory": "系统调度平台",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/QuartzTaskExecLogOrg",
+  "apis": [
+    {
+      "id": "GET_/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItems_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItems?dictionaryCode=sys_code",
+      "pathname": "/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItems",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "dictionaryCode": "sys_code"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780978428402,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "GET_/pszxSaasServer/sysmp/quartzTaskExecLogCtrl/list_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/sysmp/quartzTaskExecLogCtrl/list?orgFlag=true&pageSize=50&pageNum=1&sortName=",
+      "pathname": "/pszxSaasServer/sysmp/quartzTaskExecLogCtrl/list",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "orgFlag": "true",
+        "pageSize": "50",
+        "pageNum": "1",
+        "sortName": ""
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780978428402,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

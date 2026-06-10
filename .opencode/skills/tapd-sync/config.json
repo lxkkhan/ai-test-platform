@@ -1,0 +1,5 @@
+﻿{
+    "_extends": "../_shared/tapd-config.json",
+    "test_results_dir": "",
+    "case_map_file": ".tapd-case-map.json"
+}

@@ -1,0 +1,8 @@
+{
+    "_extends": "../_shared/tapd-config.json",
+    "output_dir": "design-analysis",
+    "analysis_depth": "detailed",
+    "max_screens": 20,
+    "auto_update_tapd": false,
+    "auto_gen_cases": false
+}

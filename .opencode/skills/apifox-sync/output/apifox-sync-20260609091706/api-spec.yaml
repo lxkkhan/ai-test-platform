@@ -1,0 +1,191 @@
+openapi: 3.0.3
+info:
+  title: 配送中心 SAAS 接口文档
+  version: 2026-06-09-auto
+  description: |-
+    由 apifox-sync 自动捕获生成
+    捕获时间: 2026-06-09T01:24:12.536Z
+    共 50 个页面, 1 个接口
+servers:
+  - url: https://tcm-dc-sit.zgzykg.com.cn
+    description: 配送中心 SAAS 生产环境
+tags:
+  - name: 公司-全局
+    description: 常用 > 公司-全局
+  - name: 元数据属性
+    description: 系统配置 > 元数据 > 元数据属性
+  - name: 元数据表关联
+    description: 系统配置 > 元数据 > 元数据表关联
+  - name: 查询模板权限查看
+    description: 系统配置 > 模板管理 > 查询模板权限查看
+  - name: 列模板
+    description: 系统配置 > 模板管理 > 列模板
+  - name: 表单模板
+    description: 系统配置 > 模板管理 > 表单模板
+  - name: 查询模板
+    description: 系统配置 > 模板管理 > 查询模板
+  - name: 微信号管理-全局
+    description: 系统配置 > 弹性配置 > 微信号管理-全局
+  - name: 脚本设置-公司
+    description: 系统配置 > 弹性配置 > 脚本设置-公司
+  - name: 操作审计日志
+    description: 系统配置 > 日志 > 操作审计日志
+  - name: 项目初始化清单日志
+    description: 系统配置 > 日志 > 项目初始化清单日志
+  - name: 项目初始化清单
+    description: 系统配置 > 日志 > 项目初始化清单
+  - name: 字典管理
+    description: 系统调度平台 > 字典管理
+  - name: 定时任务配置-全局
+    description: 系统调度平台 > 定时任务配置-全局
+  - name: 任务执行监控-全局
+    description: 系统调度平台 > 任务执行监控-全局
+  - name: 定时任务配置-组织
+    description: 系统调度平台 > 定时任务配置-组织
+  - name: 任务执行监控-组织
+    description: 系统调度平台 > 任务执行监控-组织
+  - name: 异常原因档案
+    description: 基础数据 > 异常原因档案
+  - name: 配送中心-公司
+    description: 基础数据 > 组织管理 > 配送中心-公司
+  - name: 人员-组织
+    description: 基础数据 > 组织管理 > 人员-组织
+  - name: 业务类型-公司
+    description: 基础数据 > 组织管理 > 业务类型-公司
+  - name: 参数模板设置-全局
+    description: 基础数据 > 组织管理 > 参数模板设置-全局
+  - name: 业务参数-全局
+    description: 基础数据 > 组织管理 > 业务参数-全局
+  - name: 业务参数-公司
+    description: 基础数据 > 组织管理 > 业务参数-公司
+  - name: 业务参数-配送中心
+    description: 基础数据 > 组织管理 > 业务参数-配送中心
+  - name: 物料类别-公司
+    description: 基础数据 > 物料信息 > 物料类别-公司
+  - name: 物料档案-公司
+    description: 基础数据 > 物料信息 > 物料档案-公司
+  - name: 物料档案
+    description: 基础数据 > 物料信息 > 物料档案
+  - name: 仓库
+    description: 基础数据 > 物料信息 > 仓库
+  - name: 货位
+    description: 基础数据 > 物料信息 > 货位
+  - name: 批号-公司
+    description: 基础数据 > 物料信息 > 批号-公司
+  - name: 批号
+    description: 基础数据 > 物料信息 > 批号
+  - name: 批次号-公司
+    description: 基础数据 > 物料信息 > 批次号-公司
+  - name: 批次号
+    description: 基础数据 > 物料信息 > 批次号
+  - name: 计量单位-全局
+    description: 基础数据 > 物料信息 > 计量单位-全局
+  - name: 药品性质-公司
+    description: 基础数据 > 物料信息 > 药品性质-公司
+  - name: 配伍禁忌-公司
+    description: 基础数据 > 物料信息 > 配伍禁忌-公司
+  - name: 配伍禁忌
+    description: 基础数据 > 物料信息 > 配伍禁忌
+  - name: 协定方档案-公司
+    description: 基础数据 > 物料信息 > 协定方档案-公司
+  - name: 协定方档案
+    description: 基础数据 > 物料信息 > 协定方档案
+  - name: 生产厂家-公司
+    description: 基础数据 > 物料信息 > 生产厂家-公司
+  - name: 包装规格-公司
+    description: 基础数据 > 物料信息 > 包装规格-公司
+  - name: 等级-公司
+    description: 基础数据 > 物料信息 > 等级-公司
+  - name: 产地-公司
+    description: 基础数据 > 物料信息 > 产地-公司
+  - name: 药用部位-公司
+    description: 基础数据 > 物料信息 > 药用部位-公司
+  - name: 煎煮要求-全局
+    description: 基础数据 > 物料信息 > 煎煮要求-全局
+  - name: 物料用量限制
+    description: 基础数据 > 物料信息 > 物料用量限制
+  - name: NC物料映射
+    description: 基础数据 > 物料信息 > NC物料映射
+  - name: 物料申请单
+    description: 基础数据 > 物料信息 > 物料申请单
+  - name: 库存状态-全局
+    description: 基础数据 > 物料信息 > 库存状态-全局
+paths:
+  /api/7/envelope/:
+    post:
+      tags:
+        - 公司-全局
+        - 元数据属性
+        - 元数据表关联
+        - 查询模板权限查看
+        - 列模板
+        - 表单模板
+        - 查询模板
+        - 微信号管理-全局
+        - 脚本设置-公司
+        - 操作审计日志
+        - 项目初始化清单日志
+        - 字典管理
+        - 定时任务配置-全局
+        - 任务执行监控-全局
+        - 定时任务配置-组织
+        - 任务执行监控-组织
+        - 异常原因档案
+        - 配送中心-公司
+        - 人员-组织
+        - 业务类型-公司
+        - 参数模板设置-全局
+        - 业务参数-全局
+        - 业务参数-公司
+        - 业务参数-配送中心
+        - 物料类别-公司
+        - 物料档案-公司
+        - 仓库
+        - 货位
+        - 批号-公司
+        - 批次号-公司
+        - 计量单位-全局
+        - 药品性质-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+        - 生产厂家-公司
+        - 包装规格-公司
+        - 等级-公司
+        - 产地-公司
+        - 药用部位-公司
+        - 煎煮要求-全局
+        - 物料用量限制
+        - NC物料映射
+        - 物料申请单
+        - 库存状态-全局
+      summary: POST /api/7/envelope/
+      description: 捕获自页面「公司-全局」
+      operationId: post_api_7_envelope_
+      parameters:
+        - name: sentry_version
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: sentry_key
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sentry_client
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误

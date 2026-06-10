@@ -1,0 +1,38 @@
+[
+  {
+    "type": "click",
+    "timestamp": 1779679314515,
+    "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/sysmp/user-center",
+    "x": 33,
+    "y": 128,
+    "el": {
+      "tag": "span",
+      "id": "",
+      "name": "",
+      "type": "",
+      "placeholder": "",
+      "ariaLabel": "menu-unfold",
+      "title": "",
+      "role": "img",
+      "text": "",
+      "className": ".anticon.anticon-menu-unfold",
+      "desc": "span.anticon.anticon-menu-unfold"
+    },
+    "ancestorEl": {
+      "tag": "div",
+      "id": "",
+      "name": "",
+      "type": "",
+      "placeholder": "",
+      "ariaLabel": "",
+      "title": "",
+      "role": "",
+      "text": "作业控制台 数据源管理 空间消杀记录 数据源管理",
+      "className": ".sider",
+      "desc": "div.sider[\"作业控制台 数据源管理 空间消杀记录 数据源管理\"]"
+    },
+    "target": "span.anticon.anticon-menu-unfold",
+    "elementId": "",
+    "tagName": "span"
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "apifox": {
+    "project_id": 2620342,
+    "access_token": "afxp_bd17ebBiJKhV6YQIgIp2BHDbPgH2cGBqKV6P",
+    "api_base_url": "https://api.apifox.com"
+  },
+  "capture": {
+    "cdp_port": 9302,
+    "output_dir": "output",
+    "wait_strategy": "networkidle",
+    "min_wait_ms": 2000,
+    "exclude_patterns": [
+      "login",
+      "logout",
+      "captcha",
+      ".js",
+      ".css",
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".gif",
+      ".ico",
+      ".woff",
+      ".ttf",
+      ".map",
+      "hot-update",
+      "sockjs"
+    ],
+    "include_only": []
+  },
+  "sync": {
+    "merge_mode": "merge",
+    "unique_keys": ["tag", "path", "method"]
+  },
+  "defaults": {
+    "timeout": 30000
+  }
+}

@@ -1,0 +1,11 @@
+# 页面模板：未命名页面
+
+页面: "未命名页面"
+recordCount: 1
+
+元素映射:
+  按钮:
+    - 描述: "单击 → span.anticon.anticon-menu-unfold"
+    primary: "[aria-label="menu-unfold"]"
+    fallbacks: ["[role="img"]"]
+  输入框:

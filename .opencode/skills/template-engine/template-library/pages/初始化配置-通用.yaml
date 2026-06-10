@@ -1,0 +1,27 @@
+# 页面模板：初始化配置页面（通用）
+# 适用于"事务管理"、"作业环节"、"作业流程"等初始化配置类页面
+
+页面: "初始化配置-通用"
+URL: "dynamic"
+recordCount: 0
+sourceCases: []
+isGeneric: true
+
+元素映射:
+  导航:
+    - primary: 'await page.click("span:has-text(\"NAV_CATEGORY\")");'
+    - primary: 'await page.click("a:has-text(\"NAV_ITEM\")");'
+  按钮:
+    - primary: "span:has-text('查询')"
+      fallbacks: ["button:has-text('查询')"]
+    - primary: "span:has-text('重置')"
+      fallbacks: ["button:has-text('重置')"]
+    - primary: "button:has-text('新增')"
+      fallbacks: ["a:has-text('新增')"]
+    - primary: "button:has-text('修改')"
+      fallbacks: ["span:has-text('修改')"]
+    - primary: "button:has-text('删除')"
+      fallbacks: ["span:has-text('删除')"]
+  输入框:
+    - primary: "input[placeholder*='请输入']"
+      fallbacks: []

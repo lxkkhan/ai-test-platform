@@ -28,46 +28,56 @@ metadata:
 
 ## 配置文件
 
-本 Skill 依赖同级目录下的 `config.json`，需包含以下字段：
+> **认证方式**：TAPD API 使用 OAuth 2.0 `client_credentials` 模式，通过 `api_user:api_password` 换取 `access_token`（有效期 7200s），后续统一使用 `Authorization: Bearer` 头。
+
+本 Skill 通过 `_extends` 引用共享凭证 `_shared/tapd-config.json`，自身只保留 Skill 特有字段：
 
 ```json
 {
-  "workspace_id": "你的TAPD项目ID",
-  "api_user": "你的API账号",
-  "api_password": "你的API密码",
-  "api_url": "https://api.tapd.cn",
-  "defaults": {
-    "priority_label": "中",
-    "severity": "一般",
-    "testtype": "功能测试",
-    "testphase": "功能测试阶段"
-  },
-  "modules": ["登录", "注册", "首页", "订单管理", "用户中心", "设置", "报表", "其他"],
-  "owner_list": [],
-  "default_story_id": "",
-  "default_reviewer": "",
+  "_extends": "../_shared/tapd-config.json",
   "analyze_fields": []
 }
 ```
 
-> **注意**：`api_url` 默认为 `https://api.tapd.cn`，私有化部署需修改为实际 API 地址。`api_user` 和 `api_password` 为明文，建议加入 `.gitignore`。
+> **共享凭证**：所有 TAPD Skill 的 `api_user`、`api_password`、`api_url`、`token_url`、`token_expires_in` 等共用字段统一管理在 `_shared/tapd-config.json`。修改凭证只需改一处，所有 Skill 自动同步。
+
+### 获取 access_token
+
+```bash
+curl.exe -u "api_user:api_password" -d "grant_type=client_credentials" "{token_url}"
+```
+
+返回示例：
+```json
+{
+  "status": 1,
+  "data": {
+    "access_token": "970ccf04ac...",
+    "expires_in": 7200,
+    "token_type": "Bearer"
+  }
+}
+```
+
+> Token 有效期 2 小时，过期后需重新获取。所有后续 API 调用统一使用 `-H "Authorization: Bearer {access_token}"`
 
 ## 工作流
 
-### 第一步：读取配置并验证连通性
+### 第一步：读取配置并获取 access_token
 
-1. 读取 `config.json` 获取 TAPD 凭证和项目配置
-2. 验证 TAPD API 连通性：
+1. 读取 `config.json`（自动合并 `_shared/tapd-config.json`）获取凭证
+2. 使用 `api_user:api_password` 通过 `client_credentials` 换取 access_token：
    ```bash
-   curl.exe -u 'api_user:api_password' "{api_url}/workspaces/projects?id={workspace_id}"
+   curl.exe -u "api_user:api_password" -d "grant_type=client_credentials" "{api_url}/tokens/request_token"
    ```
-3. 如果连通失败，提示用户检查 config.json 中的 api_url、api_user、api_password
+   提取返回中的 `access_token`（有效期 7200s）
+3. 后续所有 API 调用统一使用 `-H "Authorization: Bearer {access_token}"`
 
 ### 第二步：拉取需求详情
 
 1. 根据 story_id 调用 TAPD Stories API：
    ```bash
-   curl.exe -u 'api_user:api_password' "{api_url}/stories/{story_id}?workspace_id={workspace_id}"
+   curl.exe -H "Authorization: Bearer {access_token}" "{api_url}/stories/{story_id}?workspace_id={workspace_id}"
    ```
 2. 解析返回的 JSON，提取需求的标题、描述、优先级、状态、处理人等字段
 3. 如果需求不存在或 ID 无效，提示用户检查 story_id

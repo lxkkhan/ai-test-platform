@@ -1,0 +1,14 @@
+# 操作模板：其他
+
+操作类型: "其他"
+recordCount: 1
+
+用例列表:
+  - "默认用例" (默认)
+
+操作模式:
+  - click: span:has-text("系统配置")
+  - click: span:has-text("元数据")
+  - click: span:has-text("基础数据")
+  - click: span:has-text("组织管理")
+  - click: a:has-text("人员-组织")

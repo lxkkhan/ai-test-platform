@@ -1,0 +1,18 @@
+{
+    "template_library_dir": ".opencode/skills/template-engine/template-library",
+    "output_dir": "test_pool",
+    "match_threshold": {
+        "exact": 100,
+        "fuzzy_page": 75,
+        "fuzzy_type": 60,
+        "partial": 40,
+        "minimum": 40
+    },
+    "fallback_settings": {
+        "enabled": true,
+        "timeout_per_selector": 3000,
+        "max_fallbacks": 5
+    },
+    "default_wait_strategy": "networkidle",
+    "fixture_import": "@fixture/auth-fixture"
+}

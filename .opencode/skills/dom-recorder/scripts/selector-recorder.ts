@@ -17,25 +17,21 @@
  */
 
 import { chromium } from 'playwright';
-import { PlaywrightAgent } from '@midscene/web/playwright';
 import { spawn, spawnSync, ChildProcess } from 'child_process';
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
-import { performLogin } from '../../auto-record-replay/../auto-test-runner/scripts/perform-login';
+import { performLogin } from './perform-login-lite';
 import { buildSelector, buildSelectorFallbacks, ElementAttrs, scoreSelectorPrecision } from './selector-builder';
 
-// ─── 路径解析：复用 auto-record-replay 的 playwrigh/Chrome 依赖 ──────────────
-// 注意：dom-recorder 依赖 playwright-mind 插件的 auto-record-replay + auto-test-runner 环境。
-// 需要在项目根目录下运行（与现有 .env、scripts/、tests/ 同级）。
+// ─── 路径解析 ──────────────────────────────────────────────────────────────
 
-// __dirname = <skill>/scripts/，上一级为 skill 根目录
 const SKILL_DIR = path.resolve(__dirname, '..');
 const SKILL_ENV_PATH = path.resolve(SKILL_DIR, '.env');
 
-// 优先加载 skill 自身的 .env，若不存在则回退到 auto-record-replay 的 .env
-const fallbackEnvPath = path.resolve(__dirname, '../../auto-record-replay/.env');
+// 优先加载 skill 自身的 .env，若不存在则回退到 playwright-mind 的 .env
+const fallbackEnvPath = path.resolve(__dirname, '../../playwright-mind/.env');
 if (fs.existsSync(fallbackEnvPath) && !fs.existsSync(SKILL_ENV_PATH)) {
   fs.copyFileSync(fallbackEnvPath, SKILL_ENV_PATH);
 }
@@ -339,9 +335,22 @@ const INIT_SCRIPT = `
   var lastInputClick = null;
   var inputTypingStarted = new WeakSet();
 
+  function isRecorderElement(el) {
+    if (!el) return false;
+    if (el.closest) {
+      var inToolbar = el.closest('#__rec_toolbar__, #__rec_panel__, #__rec_indicator__');
+      if (inToolbar) return true;
+    }
+    if (el.id && typeof el.id === 'string' && el.id.startsWith('__rec_')) return true;
+    if (el.parentElement && isRecorderElement(el.parentElement)) return true;
+    return false;
+  }
+
   function onMouse(type) {
     return function(ev) {
       var t = ev.target;
+      // 忽略录制器自身工具栏的点击
+      if (isRecorderElement(t)) return;
       var tag = t ? (t.tagName || '').toLowerCase() : '';
       if (type === 'click' && (tag === 'input' || tag === 'textarea')) {
         lastInputClick = {
@@ -372,6 +381,8 @@ const INIT_SCRIPT = `
 
   document.addEventListener('keydown', function(ev) {
     if (['Control','Alt','Shift','Meta'].includes(ev.key)) return;
+    // 忽略录制器工具栏上的键盘事件
+    if (isRecorderElement(ev.target)) return;
     window.__recordAction({
       type: 'keydown',
       timestamp: Date.now(),
@@ -386,6 +397,8 @@ const INIT_SCRIPT = `
 
   document.addEventListener('input', function(ev) {
     var t = ev.target;
+    // 忽略录制器工具栏上的输入事件
+    if (isRecorderElement(t)) return;
     var tag = t ? (t.tagName || '').toLowerCase() : '';
     var isInputLike = tag === 'input' || tag === 'textarea';
     var value = (t && t.value !== undefined) ? String(t.value).slice(0, 500) : '';
@@ -438,6 +451,104 @@ const INIT_SCRIPT = `
       window.__urlChanged && window.__urlChanged(oldUrl, location.href);
     }
   }, 500);
+
+// ── 侧边菜单点击自动分割用例 ──────────────────────────────────────────
+  // 一级菜单（目录）= 只展开，不分割用例
+  // 二/三级叶子菜单（<a> inside .ant-menu-item）= 新建用例
+  document.addEventListener('click', function(ev) {
+    var target = ev.target;
+    // 忽略录制器工具栏
+    if (isRecorderElement(target)) return;
+    var link = target.closest ? target.closest('a') : null;
+    if (!link) return;
+    // 只处理叶子菜单项（.ant-menu-item 内的 <a>），排除子菜单标题（一级目录）
+    var menuItem = link.closest ? link.closest('.ant-menu-item') : null;
+    if (!menuItem) return;
+    // 一级菜单展开是在 .ant-menu-submenu-title 上，不触发分割
+    if (link.closest('.ant-menu-submenu-title')) return;
+    var text = (link.innerText || link.textContent || '').trim().slice(0, 50);
+    if (!text) return;
+    // 触发自动分割
+    window.__menuClick && window.__menuClick(text, location.href);
+  }, true);
+
+// ── 浮动指示器（小圆点，始终显示）──────────────────────────────
+  var indicator = document.createElement('div');
+  indicator.id = '__rec_indicator__';
+  indicator.style.cssText = 'position:fixed;top:10px;right:10px;z-index:999999;background:#1a1a2e;color:#fff;border-radius:8px;padding:6px 10px;font-family:monospace;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer;display:flex;align-items:center;gap:6px;';
+  indicator.innerHTML = '<span style="width:8px;height:8px;background:#ff4444;border-radius:50%;animation:__rec_blink 1s infinite;"></span><span style="font-weight:bold;">REC</span><span id="__rec_status__" style="color:#aaa;">#1</span>';
+  var style = document.createElement('style');
+  style.textContent = '@keyframes __rec_blink{0%,100%{opacity:1}50%{opacity:0.2}}';
+  document.head.appendChild(style);
+  document.body.appendChild(indicator);
+
+  indicator.addEventListener('click', function() {
+    var tb = document.getElementById('__rec_toolbar__');
+    if (tb) tb.style.display = tb.style.display === 'none' ? 'flex' : 'none';
+  });
+
+  // ── 工具栏面板（默认隐藏，Ctrl+Alt+N 调出，Ctrl+Alt+E 关闭）────────
+  var toolbar = document.createElement('div');
+  toolbar.id = '__rec_toolbar__';
+  toolbar.style.cssText = 'position:fixed;top:10px;right:80px;z-index:999999;background:#1a1a2e;color:#fff;border-radius:8px;padding:8px 12px;font-family:monospace;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,0.3);display:none;align-items:center;gap:8px;';
+  toolbar.innerHTML = '<button id="__rec_new_case__" style="background:#16537e;color:#fff;border:none;border-radius:4px;padding:4px 10px;cursor:pointer;font-size:12px;">New Case</button>'
+    + '<button id="__rec_stop__" style="background:#c0392b;color:#fff;border:none;border-radius:4px;padding:4px 10px;cursor:pointer;font-size:12px;">Stop</button>';
+  document.body.appendChild(toolbar);
+
+  // ── 新建用例对话框（Ctrl+Alt+N 弹出）────────────────────────────
+  var panel = document.createElement('div');
+  panel.id = '__rec_panel__';
+  panel.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1000000;background:#1a1a2e;color:#fff;border-radius:12px;padding:20px;font-family:monospace;font-size:14px;box-shadow:0 8px 32px rgba(0,0,0,0.5);display:none;min-width:300px;';
+  panel.innerHTML = '<div style="font-size:16px;font-weight:bold;margin-bottom:12px;">New Test Case</div>'
+    + '<div style="margin-bottom:8px;"><label>Name:</label><br><input id="__rec_case_name__" style="width:100%;padding:6px;border-radius:4px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:13px;" placeholder="e.g. 查看到货单" /></div>'
+    + '<div style="margin-bottom:12px;"><label>Type:</label><br><select id="__rec_case_type__" style="width:100%;padding:6px;border-radius:4px;border:1px solid #444;background:#2a2a4a;color:#fff;font-size:13px;">'
+    + '<option value="1">查询验证</option><option value="2">新增提交</option><option value="3">编辑修改</option><option value="4">删除确认</option><option value="5">导出下载</option><option value="6">其他</option></select></div>'
+    + '<div style="display:flex;gap:8px;justify-content:flex-end;"><button id="__rec_panel_ok__" style="background:#16537e;color:#fff;border:none;border-radius:4px;padding:6px 16px;cursor:pointer;">OK</button>'
+    + '<button id="__rec_panel_cancel__" style="background:#555;color:#fff;border:none;border-radius:4px;padding:6px 16px;cursor:pointer;">Cancel</button></div>';
+  document.body.appendChild(panel);
+
+  document.getElementById('__rec_new_case__').addEventListener('click', function() {
+    var nameInput = document.getElementById('__rec_case_name__');
+    nameInput.value = '';
+    panel.style.display = 'block';
+    nameInput.focus();
+  });
+  document.getElementById('__rec_panel_ok__').addEventListener('click', function() {
+    var name = document.getElementById('__rec_case_name__').value.trim();
+    var opType = document.getElementById('__rec_case_type__').value;
+    panel.style.display = 'none';
+    if (name) {
+      window.__newCase && window.__newCase(name, opType);
+    }
+  });
+  document.getElementById('__rec_panel_cancel__').addEventListener('click', function() {
+    panel.style.display = 'none';
+  });
+  document.getElementById('__rec_case_name__').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('__rec_panel_ok__').click();
+    if (e.key === 'Escape') document.getElementById('__rec_panel_cancel__').click();
+  });
+  document.getElementById('__rec_stop__').addEventListener('click', function() {
+    window.__stopRecording && window.__stopRecording();
+  });
+  document.getElementById('__rec_panel_ok__').addEventListener('click', function() {
+    var name = document.getElementById('__rec_case_name__').value.trim();
+    var opType = document.getElementById('__rec_case_type__').value;
+    panel.style.display = 'none';
+    if (name) {
+      window.__newCase && window.__newCase(name, opType);
+    }
+  });
+  document.getElementById('__rec_panel_cancel__').addEventListener('click', function() {
+    panel.style.display = 'none';
+  });
+  document.getElementById('__rec_case_name__').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('__rec_panel_ok__').click();
+    if (e.key === 'Escape') document.getElementById('__rec_panel_cancel__').click();
+  });
+  document.getElementById('__rec_stop__').addEventListener('click', function() {
+    window.__stopRecording && window.__stopRecording();
+  });
 })();
 `;
 
@@ -481,7 +592,43 @@ async function main(): Promise<void> {
       startStepIndex: allSteps.length,
       endStepIndex: -1,
     };
-    console.log(`\n[recorder] ── 新用例 #${caseIdCounter}: "${currentBoundary.name}" ──`);
+    console.log(`\n[recorder] ── 新用例 #${caseIdCounter}: "${currentBoundary.name}" (${currentBoundary.boundaryMethod}) ──`);
+  }
+
+  // 菜单点击合并逻辑：同名用例存在时追加，不存在时新建
+  function findOrStartCase(menuName: string, currentUrl: string): void {
+    // 查找已有同名用例
+    for (const b of boundaries) {
+      if (b.name === menuName) {
+        // 找到同名用例，追加操作：关闭当前用例，切换到该用例继续
+        if (currentBoundary) {
+          currentBoundary.endStepIndex = allSteps.length - 1;
+          boundaries.push({ ...currentBoundary });
+        }
+        currentBoundary = {
+          caseId: b.caseId,
+          name: b.name,
+          targetPage: b.targetPage || menuName,
+          operationType: b.operationType,
+          testData: b.testData || {},
+          assertions: b.assertions || [],
+          pageURL: currentUrl,
+          boundaryMethod: b.boundaryMethod,
+          startStepIndex: allSteps.length,
+          endStepIndex: -1,
+        };
+        console.log(`\n[recorder] 📋 追加到已有用例 #${b.caseId}: "${menuName}" ──`);
+        return;
+      }
+    }
+    // 没有同名用例，新建
+    startNewCase({
+      name: menuName,
+      targetPage: menuName,
+      operationType: '查询验证',
+      boundaryMethod: '菜单点击',
+      pageURL: currentUrl,
+    });
   }
 
   // 录制开始时创建默认第一个用例
@@ -513,6 +660,7 @@ async function main(): Promise<void> {
       }
     }
     isProcessingQueue = false;
+    saveCheckpoint();
   }
 
   // ── 启动 Chrome ────────────────────────────────────────────────────────
@@ -559,11 +707,117 @@ async function main(): Promise<void> {
   const context = contexts.length > 0 ? contexts[0] : await browser.newContext();
   const pages = context.pages();
   const page = pages.length > 0 ? pages[0] : await context.newPage();
-  const agent = new PlaywrightAgent(page);
 
   console.log('[recorder] 开始自动登录...');
-  await performLogin(page, agent, { tag: '[dom-recorder]' });
+  await performLogin(page, { tag: '[dom-recorder]' });
   console.log(`[recorder] ✓ 登录成功，当前页面：${page.url()}`);
+
+  // ── 自动扫描左侧菜单（展开所有子菜单）────────────────────────────────────
+  console.log('[recorder] 扫描左侧菜单...');
+  await page.waitForTimeout(2000);
+
+  // 先展开侧边栏（如果折叠的话）
+  const sidebarExpanded = await page.evaluate(async () => {
+    // 尝试点击折叠按钮展开侧边栏
+    const unfoldBtn = document.querySelector('[aria-label="menu-unfold"], [aria-label="menu-fold"], .anticon-menu-unfold, .anticon-menu-fold');
+    if (unfoldBtn) {
+      // 判断是否折叠（通过检测侧边栏宽度）
+      const sider = document.querySelector('.ant-layout-sider') as HTMLElement;
+      if (sider && sider.offsetWidth < 80) {
+        (unfoldBtn as HTMLElement).click();
+        await new Promise(r => setTimeout(r, 500));
+        return true;
+      }
+    }
+    return false;
+  });
+  if (sidebarExpanded) {
+    console.log('[recorder] 📂 展开侧边栏...');
+    await page.waitForTimeout(800);
+  }
+
+  // 展开所有子菜单组
+  const expandResult = await page.evaluate(async () => {
+    // 点击所有子菜单标题来展开
+    const submenuTitles = document.querySelectorAll('.ant-menu-submenu-title');
+    for (const title of submenuTitles) {
+      const el = title as HTMLElement;
+      // 检查是否已展开
+      const parent = el.closest('.ant-menu-submenu');
+      const isOpen = parent?.classList.contains('ant-menu-submenu-open') || parent?.classList.contains('ant-menu-submenu-selected');
+      if (!isOpen) {
+        el.click();
+        await new Promise(r => setTimeout(r, 300));
+      }
+    }
+    // 等待渲染
+    await new Promise(r => setTimeout(r, 500));
+
+    // 扫描菜单结构
+    const results: Array<{ category: string; name: string; level: number }> = [];
+    const submenus = document.querySelectorAll('.ant-menu-submenu');
+    submenus.forEach((submenu) => {
+      const titleEl = submenu.querySelector('.ant-menu-submenu-title');
+      const titleText = (titleEl?.textContent || '').trim().split('\n')[0].trim().slice(0, 50);
+      // 检查子菜单项（可能是二级或更深）
+      const subItems = submenu.querySelectorAll(':scope > .ant-menu-sub > .ant-menu-item');
+      subItems.forEach((item) => {
+        const link = item.querySelector('a');
+        const name = (link?.textContent || item.textContent || '').trim().slice(0, 50);
+        if (name) {
+          results.push({ category: titleText || '未分类', name, level: 2 });
+        }
+      });
+      // 也检查更深层嵌套的子菜单（三级）
+      const deepSubmenus = submenu.querySelectorAll('.ant-menu-submenu');
+      deepSubmenus.forEach((deepSub) => {
+        const deepTitle = (deepSub.querySelector('.ant-menu-submenu-title')?.textContent || '').trim().slice(0, 50);
+        const deepItems = deepSub.querySelectorAll(':scope > .ant-menu-sub > .ant-menu-item');
+        deepItems.forEach((item) => {
+          const link = item.querySelector('a');
+          const name = (link?.textContent || item.textContent || '').trim().slice(0, 50);
+          if (name) {
+            results.push({ category: titleText + ' > ' + deepTitle, name, level: 3 });
+          }
+        });
+      });
+    });
+    // 没有子菜单的顶级菜单项
+    const topItems = document.querySelectorAll('.ant-menu > .ant-menu-item');
+    topItems.forEach((item) => {
+      const link = item.querySelector('a');
+      const name = (link?.textContent || item.textContent || '').trim().slice(0, 50);
+      if (name && !results.some(r => r.name === name)) {
+        results.push({ category: '', name, level: 1 });
+      }
+    });
+    return results;
+  });
+
+  const menuItems = expandResult;
+
+  if (menuItems.length > 0) {
+    console.log(`[recorder] 📋 发现 ${menuItems.length} 个菜单项：`);
+    const categories = new Map<string, string[]>();
+    for (const item of menuItems) {
+      const cat = item.category || '根目录';
+      if (!categories.has(cat)) categories.set(cat, []);
+      categories.get(cat)!.push(item.name);
+    }
+    for (const [cat, names] of categories) {
+      console.log(`  [${cat}]`);
+      for (const name of names) {
+        console.log(`    - ${name}`);
+      }
+    }
+
+    // 保存菜单结构到会话目录
+    const menuStructurePath = path.join(sessionDir, 'menu-structure.json');
+    fs.writeFileSync(menuStructurePath, JSON.stringify(menuItems, null, 2), 'utf8');
+    console.log(`  ✓ 菜单结构已保存到 menu-structure.json`);
+  } else {
+    console.log('[recorder] ⚠ 未扫描到菜单项（页面可能需要展开侧边栏）');
+  }
 
   // ── 注入录制监听器 ────────────────────────────────────────────────────
 
@@ -611,32 +865,44 @@ async function main(): Promise<void> {
   console.log(`║  输出目录：${sessionDir.slice(-45).padEnd(45)}║`);
   console.log('║  模式：DOM 属性 → Selector → Playwright 代码                ║');
   console.log('║  键盘快捷键（在录制浏览器窗口中操作）：                        ║');
-  console.log('║    Ctrl+Shift+N  → 新建用例                                  ║');
-  console.log('║    Ctrl+Shift+E  → 结束录制                                  ║');
+  console.log('║    Ctrl+Alt+N  → 新建用例对话框                                ║');
+  console.log('║    Ctrl+Alt+E  → 关闭工具栏/对话框                            ║');
   console.log('║  URL 切换自动提示新用例                                      ║');
   console.log('║  关闭浏览器窗口 = 结束录制                                   ║');
   console.log('╚══════════════════════════════════════════════════════════════╝');
   console.log('');
 
   // 在浏览器页面中注入键盘快捷键监听
+  // Ctrl+Alt+N → 显示工具栏 + 打开新建用例对话框
+  // Ctrl+Alt+E → 关闭工具栏/对话框
   await page.evaluate(() => {
     document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.shiftKey && e.key === 'N') {
+      if (e.ctrlKey && e.altKey && e.key === 'N') {
         e.preventDefault();
-        const name = prompt('新建用例\n\n用例名称：', '');
-        if (name) {
-          const opType = prompt('操作类型：\n1=查询验证 2=新增提交 3=编辑修改 4=删除确认 5=导出下载 6=其他', '1');
-          (window as any).__newCase && (window as any).__newCase(name, opType);
+        // 显示工具栏
+        const tb = document.getElementById('__rec_toolbar__');
+        if (tb) tb.style.display = 'flex';
+        // 打开新建用例面板
+        const nameInput = document.getElementById('__rec_case_name__');
+        if (nameInput) {
+          nameInput.value = '';
+          const panel = document.getElementById('__rec_panel__');
+          if (panel) panel.style.display = 'block';
+          nameInput.focus();
         }
       }
-      if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+      if (e.ctrlKey && e.altKey && e.key === 'E') {
         e.preventDefault();
-        (window as any).__stopRecording && (window as any).__stopRecording();
+        // 关闭工具栏和面板
+        const tb = document.getElementById('__rec_toolbar__');
+        if (tb) tb.style.display = 'none';
+        const panel = document.getElementById('__rec_panel__');
+        if (panel) panel.style.display = 'none';
       }
     });
   });
 
-  // 暴露新建用例的 binding
+  // 暴露新建用例的 binding（Ctrl+Alt+N 强制新建，不合并同名）
   await context.exposeBinding('__newCase', async ({}, name: string, opType: string) => {
     const opTypeMap: Record<string, string> = {
       '1': '查询验证', '2': '新增提交', '3': '编辑修改',
@@ -648,6 +914,17 @@ async function main(): Promise<void> {
       boundaryMethod: '手动标记',
       pageURL: page.url(),
     });
+    // 更新工具栏状态
+    await page.evaluate((caseNum) => {
+      const status = document.getElementById('__rec_status__');
+      if (status) status.textContent = `#${caseNum}`;
+    }, caseIdCounter).catch(() => {});
+  });
+
+  // 暴露菜单点击 binding（同名合并，新名新建）
+  await context.exposeBinding('__menuClick', async ({}, menuText: string, currentUrl: string) => {
+    console.log(`\n[recorder] 📋 菜单点击：${menuText}`);
+    findOrStartCase(menuText, currentUrl);
   });
 
   // 暴露停止录制的 binding
@@ -655,6 +932,21 @@ async function main(): Promise<void> {
     console.log('\n[recorder] 收到停止信号...');
     await finalize();
   });
+
+  // ── 增量保存检查点（每 20 步保存一次，防止数据丢失） ──────────────────────────
+
+  let checkpointCounter = 0;
+  function saveCheckpoint(): void {
+    checkpointCounter++;
+    if (checkpointCounter % 20 !== 0) return;
+    try {
+      const rawPath = path.join(sessionDir, 'raw-actions.json');
+      fs.writeFileSync(rawPath, JSON.stringify(allSteps.map(s => s.rawEvent), null, 2), 'utf8');
+      console.log(`  [recorder] ✓ 检查点已保存（${allSteps.length} 步）`);
+    } catch (e) {
+      console.error(`  [recorder] ✗ 检查点保存失败：${(e as Error).message}`);
+    }
+  }
 
   // ── 结束时保存 ────────────────────────────────────────────────────────
 
@@ -673,11 +965,28 @@ async function main(): Promise<void> {
     const rawPath = path.join(sessionDir, 'raw-actions.json');
     fs.writeFileSync(rawPath, JSON.stringify(allSteps.map(s => s.rawEvent), null, 2), 'utf8');
 
-    // 为每个用例生成 .spec.ts
+    // 为每个用例生成 .spec.ts（合并同名用例的多段步骤）
     const specsDir = sessionDir;
     console.log(`\n[recorder] 生成用例文件...`);
 
+    // 合并同名用例的多段步骤
+    const mergedBoundaries: TestCaseBoundary[] = [];
+    const boundaryMap = new Map<string, TestCaseBoundary>();
     for (const b of boundaries) {
+      const key = b.name;
+      if (boundaryMap.has(key)) {
+        // 追加到已有同名用例
+        const existing = boundaryMap.get(key)!;
+        existing.endStepIndex = b.endStepIndex;
+        // 合并步骤到 existing（保留首段 startStepIndex）
+      } else {
+        const merged = { ...b, caseId: mergedBoundaries.length + 1 };
+        mergedBoundaries.push(merged);
+        boundaryMap.set(key, merged);
+      }
+    }
+
+    for (const b of mergedBoundaries) {
       const steps = allSteps.filter((_, i) =>
         i >= b.startStepIndex && i <= b.endStepIndex
       );
@@ -694,18 +1003,18 @@ async function main(): Promise<void> {
     }
 
     // 保存 manifest
-    const manifest = buildManifest(sessionTs, startIso, boundaries, allSteps);
+    const manifest = buildManifest(sessionTs, startIso, mergedBoundaries, allSteps);
     const manifestPath = path.join(sessionDir, 'manifest.yaml');
     fs.writeFileSync(manifestPath, manifest, 'utf8');
     console.log(`  ✓ manifest.yaml`);
 
-    // 保存初始模板
+    // 保存初始模板（用合并后的用例）
     const templatesDir = path.join(sessionDir, 'templates');
     fs.mkdirSync(templatesDir, { recursive: true });
-    saveInitialTemplates(boundaries, allSteps, templatesDir);
+    saveInitialTemplates(mergedBoundaries, allSteps, templatesDir);
 
     console.log('');
-    console.log(`[recorder] 录制结束，共 ${actionCount} 个事件，${boundaries.length} 个用例`);
+    console.log(`[recorder] 录制结束，共 ${actionCount} 个事件，${mergedBoundaries.length} 个用例（合并后）`);
     console.log(`[recorder] 输出目录：${sessionDir}`);
 
     if (chromeProc?.pid) {
@@ -729,6 +1038,13 @@ async function main(): Promise<void> {
   process.on('SIGINT', async () => {
     console.log('\n[recorder] 收到中断信号...');
     try { await browser.close(); } catch { await finalize(); }
+  });
+
+  process.on('beforeExit', () => {
+    console.log('\n[recorder] 进程即将退出，紧急保存...');
+    const rawPath = path.join(sessionDir, 'raw-actions.json');
+    fs.writeFileSync(rawPath, JSON.stringify(allSteps.map(s => s.rawEvent), null, 2), 'utf8');
+    console.log(`[recorder] ✓ 紧急保存完成（${allSteps.length} 步）`);
   });
 }
 
@@ -872,33 +1188,44 @@ function saveInitialTemplates(
 
   // 为每个页面生成页面元素映射模板
   for (const [pageName, cases] of pageGroups) {
-    const pageSteps = new Set<RecordedStep>();
+    const pageSteps: RecordedStep[] = [];
+    const seenSelectors = new Set<string>();
     for (const c of cases) {
       for (let i = c.startStepIndex; i <= c.endStepIndex; i++) {
-        pageSteps.add(allSteps[i]);
+        const step = allSteps[i];
+        if (step && !seenSelectors.has(step.selector + step.type)) {
+          seenSelectors.add(step.selector + step.type);
+          pageSteps.push(step);
+        }
       }
     }
+
+    const sourceCases = cases.map(c => `"${c.name}"`).join('\n    ');
+    const pageURL = cases.map(c => c.pageURL).find(Boolean) || '';
 
     const template: string[] = [];
     template.push(`# 页面模板：${pageName}`);
     template.push('');
     template.push(`页面: "${pageName}"`);
+    if (pageURL) template.push(`URL: "${pageURL}"`);
     template.push(`recordCount: ${cases.length}`);
+    template.push(`sourceCases:`);
+    template.push(`    ${sourceCases}`);
     template.push('');
     template.push(`元素映射:`);
 
     // 按类型分组
-    const clicks = Array.from(pageSteps).filter(s => s.type === 'click');
-    const inputs = Array.from(pageSteps).filter(s => s.type === 'input');
+    const clicks = pageSteps.filter(s => s.type === 'click');
+    const inputs = pageSteps.filter(s => s.type === 'input');
 
     template.push(`  按钮:`);
     for (const s of clicks) {
-      template.push(`    ${formatStepAsYaml(s)}`);
+      template.push(formatStepAsYaml(s));
     }
 
     template.push(`  输入框:`);
     for (const s of inputs) {
-      template.push(`    ${formatStepAsYaml(s)}`);
+      template.push(formatStepAsYaml(s));
     }
 
     const pageFileName = `${sanitizeFileName(pageName)}.yaml`;
@@ -920,20 +1247,23 @@ function saveInitialTemplates(
     content.push('');
     content.push(`操作类型: "${opType}"`);
     content.push(`recordCount: ${cases.length}`);
+    content.push(`sourceCases:`);
+    content.push(`  - "${cases[0].name}"`);
     content.push('');
-    content.push(`用例列表:`);
-    for (const c of cases) {
-      content.push(`  - "${c.name}" (${c.boundaryMethod})`);
-    }
-    content.push('');
-    content.push(`操作模式:`);
+    content.push(`步骤序列:`);
     // 取第一个用例的步骤作为参考
     const firstCase = cases[0];
     const firstSteps = allSteps.filter((_, i) =>
       i >= firstCase.startStepIndex && i <= firstCase.endStepIndex
     );
     for (const s of firstSteps) {
-      content.push(`  - ${s.type}: ${s.selector}`);
+      const escapedCode = s.selectorCode
+        .replace(/\\/g, '\\\\')
+        .replace(/"/g, '\\"');
+      const selector = s.selector.replace(/"/g, '\\"');
+      content.push(`  - type: "${s.type}"`);
+      content.push(`    selector: "${selector}"`);
+      content.push(`    code: "${escapedCode}"`);
     }
 
     fs.writeFileSync(path.join(templatesDir, opFileName), content.join('\n'), 'utf8');
@@ -943,7 +1273,10 @@ function saveInitialTemplates(
 }
 
 function formatStepAsYaml(step: RecordedStep): string {
-  return `- 描述: "${step.comment}"\n    primary: "${step.selector}"\n    fallbacks: [${step.fallbacks.slice(1).map(f => `"${f.selector}"`).join(', ')}]`;
+  const fallbackStr = step.fallbacks.slice(1).map(f => `"${f.selector}"`).join(', ');
+  const desc = step.comment.replace(/"/g, '\\"');
+  const selector = step.selector.replace(/"/g, '\\"');
+  return `    - primary: "${selector}"\n      fallbacks: [${fallbackStr}]\n      description: "${desc}"`;
 }
 
 // ─── 启动 ─────────────────────────────────────────────────────────────────────

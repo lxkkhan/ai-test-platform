@@ -14,32 +14,25 @@ metadata:
 
 ## 配置文件
 
-本 Skill 依赖同级目录下的 `config.json`，需包含以下字段：
+本 Skill 依赖同级目录下的 `config.json`，通过 `_extends` 引用共享凭证 `_shared/tapd-config.json`：
 
 ```json
 {
-  "workspace_id": "你的TAPD项目ID",
-  "api_user": "你的API账号",
-  "api_password": "你的API密码",
-  "api_url": "https://api.tapd.cn",
-  "real_user": "TAPD登录用户名（如刘晓康）",
-  "defaults": {
-    "priority_label": "中",
-    "severity": "一般",
-    "testtype": "功能测试",
-    "testphase": "功能测试阶段"
-  },
-  "modules": ["登录", "注册", "首页", "订单管理"],
-  "owner_list": ["刘晓康"]
+  "_extends": "../_shared/tapd-config.json"
 }
 ```
 
-> **注意**：
-> - `config.json` 中的 `api_user` 和 `api_password` 为明文，建议加入 `.gitignore` 避免泄露
-> - `real_user` **必须填写 TAPD 登录用户名**（非 API 账号），用于设置 Bug 的 `current_owner`（处理人）字段
-> - `creator`（报告人）字段由 API 自动设置为 API 账号名，无法覆盖，这是 TAPD API 的限制
+> **共享凭证**：所有 TAPD Skill 的 `api_user`、`api_password`、`workspace_id` 等共用字段统一在 `_shared/tapd-config.json` 管理。
 
 ## 工作流
+
+> **认证方式**：所有 TAPD API 调用使用 Bearer Token。先通过 `client_credentials` 换取 `access_token`：
+> ```bash
+> curl.exe -u "api_user:api_password" -d "grant_type=client_credentials" "{api_url}/tokens/request_token"
+> ```
+> 后续统一使用 `-H "Authorization: Bearer {access_token}"`。
+>
+> ---
 
 ### 场景A：用户粘贴浏览器扩展输出的 Bug 内容
 
@@ -62,11 +55,11 @@ https://xxx.com/login
 ```
 
 1. 解析用户粘贴的内容，提取标题、操作步骤、预期结果、实际结果等
-2. 读取 `config.json` 获取 TAPD 凭证和项目ID
+2. 读取 `config.json` 获取 TAPD 凭证和项目ID（需递归解析 `_extends` 引用）
 3. 如果缺少必要字段（严重程度、优先级、模块、处理人），向用户追问
 4. 组装最终的 Bug 内容，向用户展示预览
-5. 用户确认后，通过 curl 调用 TAPD API 提交
-6. （可选）如果用户提供了 story_id（需求ID），自动将 Bug 关联到对应需求（见「需求关联」章节）
+5. 用户确认后，通过 curl 调用 TAPD API 提交 Bug。**从响应中提取 Bug ID**，格式如 `data.Bug.id`
+6. **必须执行需求关联**：检查是否需要关联需求（条件见「获取 story_id」），如需关联则立即调用 Relations API（见「关联方式」）
 
 ### 场景B：用户口头描述 Bug
 
@@ -82,42 +75,69 @@ https://xxx.com/login
    - 预期结果 vs 实际结果
 2. 组装 Bug 内容并展示预览
 3. 确认后提交到 TAPD
-4. （可选）如果用户提供了 story_id，在 Bug 创建成功后自动关联 Bug 到需求（同场景A 步骤 6）
+4. **必须执行需求关联**：检查是否需要关联需求（条件见「获取 story_id」），如需关联则调用 Relations API（同场景A 步骤 6）
 
 ## 需求关联（story_id）
 
-story_id 是可选参数，用于将 Bug 关联到对应的需求（Story），实现全链路追溯。
+story_id 用于将 Bug 关联到对应的需求（Story），实现全链路追溯。
 
-### 获取 story_id
+### 获取 story_id（确定是否需要关联）
 
-- 用户可通过 `/tapd-bug S-xxx` 明确指定需求ID
-- 也可在对话中提供："提bug 登录按钮无响应，关联需求 S-1120003271001000123"
-- 如果不提供 story_id，Bug 正常创建，只是不关联需求
-- 默认值从 config.json 的 `default_story_id` 读取（如为空则不关联）
+按以下优先级确定 story_id：
+
+1. **用户显式提供** — 用户在对话中说"关联需求 S-xxx"或通过 `/tapd-bug S-xxx` 指定
+2. **config.json 的 default_story_id** — 若用户未提供，检查 config 中的 `default_story_id`（空字符串表示不关联）
+3. 如果两者均为空，则不进行关联
+
+> **注意**：只要任一来源有值（非空字符串），**必须**执行关联步骤。
 
 ### 关联方式
 
-Bug 创建成功后，调用 Relations API 关联 Bug 到需求：
+Bug 创建成功后，**必须**立即执行以下步骤：
 
-**方法一（推荐）：专用接口**
+**步骤 A：从提交响应中提取 Bug ID**
 
-```bash
-curl.exe -u 'api_user:api_password' \
-  -X POST \
-  -d "workspace_id={workspace_id}&bug_id={BUG_ID}&story_id={STORY_ID}" \
-  '{api_url}/bugs/linked_stories'
+Bug 创建 API 返回如下响应，需提取 `data.Bug.id`：
+```json
+{
+  "status": 1,
+  "data": {
+    "Bug": {
+      "id": "1120003271001000123",
+      ...
+    }
+  }
+}
 ```
 
-**方法二：通用接口**
+**步骤 B：调用 Relations API 关联**
+
+> `bugs/linked_stories` 专用接口在部分 TAPD 版本可能返回空响应导致关联静默失败，**必须先尝试通用 Relations API**。
+
+**方法一（首选）：通用 Relations API**
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -s -H "Authorization: Bearer {access_token}" \
   -X POST \
   -d "workspace_id={workspace_id}&source_type=bug&source_id={BUG_ID}&target_type=story&target_id={STORY_ID}" \
-  '{api_url}/relations'
+  "{api_url}/relations"
 ```
 
-关联成功后，TAPD 中 Bug 详情页会显示「关联需求」链接，点击可跳转到对应需求页面。
+检查返回的 JSON 状态码。如果 `status` 为 1 表示成功；如果请求失败（HTTP 非 2xx 或 status 非 1），执行方法二。
+
+**方法二（备选）：专用接口**
+
+```bash
+curl.exe -s -H "Authorization: Bearer {access_token}" \
+  -X POST \
+  -d "workspace_id={workspace_id}&bug_id={BUG_ID}&story_id={STORY_ID}" \
+  "{api_url}/bugs/linked_stories"
+```
+
+**步骤 C：验证关联结果**
+
+- 调用 `/relations` 返回 `{"status": 1}` 表示关联成功
+- 如果两种方法均失败，告知用户：**"Bug #{BUG_ID} 已创建，但需求关联失败，请手动在 TAPD 中关联"**
 
 ## TAPD API 调用
 
@@ -126,7 +146,7 @@ curl.exe -u 'api_user:api_password' \
 Bug 描述支持 HTML 格式，可使用表格、标题、列表等标签让详情页更美观：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   --data-urlencode "workspace_id={workspace_id}" \
   --data-urlencode "title=[自动] {Bug标题}" \
   --data-urlencode "severity=一般" \
@@ -136,7 +156,7 @@ curl.exe -u 'api_user:api_password' \
   --data-urlencode "description=<p><strong>【自动提交】</strong>...</p><hr/>..." \
   --data-urlencode "testtype=功能测试" \
   --data-urlencode "testphase=功能测试阶段" \
-  '$API_URL/bugs'
+  '{api_url}/bugs'
 ```
 
 > **重要**：

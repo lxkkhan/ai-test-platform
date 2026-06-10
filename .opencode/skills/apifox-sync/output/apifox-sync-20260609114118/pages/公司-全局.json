@@ -1,0 +1,186 @@
+{
+  "menuName": "公司-全局",
+  "menuCategory": "常用",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/pszxOrgGroupGlobal",
+  "apis": [
+    {
+      "id": "GET_/pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser?functionCode=pszxOrgGroup_global&orgLevel=global",
+      "pathname": "/pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiIzMjQ0OTQzZGI5YTU0M2FiOThmNGMxOTIwMmUzYzg5YiIsImlhdCI6MTc4MDk3NjQ4NiwiZXhwIjoxNzgxMDM0MDg2LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.fnn2NvhsgKDJhImJKlA5I1Wr8pztXD7jzIGyqoyjwz9NrxNmVzESTK2DofxNs6m1nKqC7AwyJI69pPNrzXuRAA",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "functionCode": "pszxOrgGroup_global",
+        "orgLevel": "global"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780976498429,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "GET_/pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser?functionCode=pszxOrgGroup_global",
+      "pathname": "/pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiIzMjQ0OTQzZGI5YTU0M2FiOThmNGMxOTIwMmUzYzg5YiIsImlhdCI6MTc4MDk3NjQ4NiwiZXhwIjoxNzgxMDM0MDg2LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.fnn2NvhsgKDJhImJKlA5I1Wr8pztXD7jzIGyqoyjwz9NrxNmVzESTK2DofxNs6m1nKqC7AwyJI69pPNrzXuRAA",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "functionCode": "pszxOrgGroup_global"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780976498430,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "GET_/pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup?code=pageSize&pkGroup=1787720377238028288",
+      "pathname": "/pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiIzMjQ0OTQzZGI5YTU0M2FiOThmNGMxOTIwMmUzYzg5YiIsImlhdCI6MTc4MDk3NjQ4NiwiZXhwIjoxNzgxMDM0MDg2LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.fnn2NvhsgKDJhImJKlA5I1Wr8pztXD7jzIGyqoyjwz9NrxNmVzESTK2DofxNs6m1nKqC7AwyJI69pPNrzXuRAA",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "code": "pageSize",
+        "pkGroup": "1787720377238028288"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780976498430,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "GET_/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel?value=tcm_ds_yesorno",
+      "pathname": "/pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiIzMjQ0OTQzZGI5YTU0M2FiOThmNGMxOTIwMmUzYzg5YiIsImlhdCI6MTc4MDk3NjQ4NiwiZXhwIjoxNzgxMDM0MDg2LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.fnn2NvhsgKDJhImJKlA5I1Wr8pztXD7jzIGyqoyjwz9NrxNmVzESTK2DofxNs6m1nKqC7AwyJI69pPNrzXuRAA",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {
+        "value": "tcm_ds_yesorno"
+      },
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780976498694,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "POST_/pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme___page__false__sortName___sort___queryConditions_____field___userId___value___20019___operation___eq",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiIzMjQ0OTQzZGI5YTU0M2FiOThmNGMxOTIwMmUzYzg5YiIsImlhdCI6MTc4MDk3NjQ4NiwiZXhwIjoxNzgxMDM0MDg2LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.fnn2NvhsgKDJhImJKlA5I1Wr8pztXD7jzIGyqoyjwz9NrxNmVzESTK2DofxNs6m1nKqC7AwyJI69pPNrzXuRAA",
+        "tcm-sign2": "9657DB12683ECD8919C3E335993BDD18A618BD970B4DB9552506242D60DAF240",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "0s6El5ntDkFOBoY",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780976498666",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"page\":false,\"sortName\":\"sort\",\"queryConditions\":[{\"field\":\"userId\",\"value\":[20019],\"operation\":\"eq\"},{\"field\":\"templateType\",\"value\":[0],\"operation\":\"eq\"},{\"field\":\"functionCode\",\"value\":[\"pszxOrgGroup_global\"],\"operation\":\"eq\"},{\"field\":\"deleteflag\",\"value\":[0],\"operation\":\"eq\"},{\"field\":\"enableflag\",\"value\":[0],\"operation\":\"eq\"},{\"field\":\"pkOrg\",\"value\":[\"00013A1000000000VGSD\"],\"operation\":\"in\"}]}",
+      "requestContentType": "application/json",
+      "timestamp": 1780976498695,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "POST_/pszxSaasServer/pszxOrgGroup/pszxOrgGroupCtrl/listByScheme___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___194351633",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/pszxOrgGroup/pszxOrgGroupCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/pszxOrgGroup/pszxOrgGroupCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiIzMjQ0OTQzZGI5YTU0M2FiOThmNGMxOTIwMmUzYzg5YiIsImlhdCI6MTc4MDk3NjQ4NiwiZXhwIjoxNzgxMDM0MDg2LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.fnn2NvhsgKDJhImJKlA5I1Wr8pztXD7jzIGyqoyjwz9NrxNmVzESTK2DofxNs6m1nKqC7AwyJI69pPNrzXuRAA",
+        "tcm-sign2": "11DA9C1B790F0CE7F366A649897DA2FB62910D92F6E5DFCA20567D94468D5A35",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "UTxq9mv3oatd0Kt",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780976498745",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"1943516339784122368\",\"value\":[null],\"field\":\"code\",\"operation\":\"like\"},{\"id\":\"1891ca6d808743c0b80324d02d6f3ea9\",\"value\":[null],\"field\":\"name\",\"operation\":\"like\"},{\"id\":\"1943516339784122369\",\"value\":[null],\"field\":\"ncCode\",\"operation\":\"like\"},{\"id\":\"93f73b7eeefc419196786d6f915b9456\",\"value\":[null],\"field\":\"region\",\"operation\":\"like\"},{\"id\":\"52e1ab781d17464db8daa128e26967d7\",\"value\":[null],\"field\":\"address\",\"operation\":\"like\"},{\"id\":\"3f59a29a5fef491ca14f746afa20a6ca\",\"value\":[null],\"field\":\"phone\",\"operation\":\"like\"},{\"id\":\"67d8979e1de749c7a68ffa1be852b4fe\",\"value\":[null],\"field\":\"customerServiceQq\",\"operation\":\"eq\"},{\"id\":\"a88fd735c6884d01a5b03006838e2f66\",\"value\":[null],\"field\":\"customerServiceEmail\",\"operation\":\"in\"},{\"id\":\"28536e236d074f42b7d0a806ada6d0a5\",\"value\":[null],\"field\":\"fax\",\"operation\":\"like\"},{\"id\":\"cec8102d97ac49a0a4546a5661e7456e\",\"value\":[null],\"field\":\"contact1Name\",\"operation\":\"in\"},{\"id\":\"d45f864abf97405cbd732c4047c37c74\",\"value\":[null],\"field\":\"contact1Position\",\"operation\":\"in\"},{\"id\":\"b0a67265a34e40259e4bf1cb38a26f83\",\"value\":[null],\"field\":\"contact1Phone\",\"operation\":\"like\"},{\"id\":\"0d4a9e949eee4e01b2976eabf81d2a60\",\"value\":[null],\"field\":\"contact2Name\",\"operation\":\"in\"},{\"id\":\"bfea2130547642e1a46abeb77c4b3e5f\",\"value\":[null],\"field\":\"contact2Position\",\"operation\":\"in\"},{\"id\":\"40fcce642877492eafdf30a677973ac3\",\"value\":[null],\"field\":\"contact2Phone\",\"operation\":\"like\"},{\"id\":\"4b0fcb2db2724c338d8dac2c7da28611\",\"value\":[null],\"field\":\"rxMaskedNameFlag\",\"operation\":\"in\"},{\"id\":\"5841c33d91094807b8c9a6eeab0eb46e\",\"value\":[null],\"field\":\"rxMaskedPhoneFlag\",\"operation\":\"like\"},{\"id\":\"e4d2d96b894840a3b4ad6bc965a4d613\",\"value\":[null],\"field\":\"rxMaskedIdCardFlag\",\"operation\":\"like\"},{\"id\":\"2ad96585642f480fa07e8b10caad6ff7\",\"value\":[null],\"field\":\"rxMaskedAddressFlag\",\"operation\":\"like\"},{\"id\":\"1297d3fbe49b442ebccb3fb0fc77a104\",\"value\":[null],\"field\":\"expressMaskedRecipientFlag\",\"operation\":\"like\"},{\"id\":\"32ef485fd5914948baca27d5b2d265c6\",\"value\":[null],\"field\":\"expressMaskedPhoneFlag\",\"operation\":\"like\"},{\"id\":\"2b822a6171a44dfb9b3116381d4b8d74\",\"value\":[null],\"field\":\"expressMaskedAddressFlag\",\"operation\":\"like\"},{\"id\":\"e104556ef2f0421a8cf9151bc385d301\",\"value\":[],\"field\":\"createUserId\",\"operation\":\"in\"}],\"templateId\":\"d92b4d2bf9c5452db7b18a75f8e47ddd\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isFlow\":false,\"auth\":\"pszxOrgGroupGlobal\",\"header\":\"pszxOrgGroup_global\",\"query\":\"pszxOrgGroup_global\",\"bill\":\"pszxOrgGroup_global\",\"controller\":\"/pszxOrgGroup/pszxOrgGroupCtrl\",\"importProperty\":{\"functionCode\":\"pszxOrgGroup_global\",\"billType\":\"公司表\",\"orgLevel\":\"global\"}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780976498746,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "GET_/pszxSaasServer/aliOss/downloadFile/1e056d2b0ebd5c878c550da6ac5d3724_",
+      "method": "GET",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/aliOss/downloadFile/1e056d2b0ebd5c878c550da6ac5d3724",
+      "pathname": "/pszxSaasServer/aliOss/downloadFile/1e056d2b0ebd5c878c550da6ac5d3724",
+      "headers": {
+        "sec-ch-ua-platform": "\"Windows\"",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0"
+      },
+      "queryParams": {},
+      "postData": null,
+      "requestContentType": null,
+      "timestamp": 1780976499049,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

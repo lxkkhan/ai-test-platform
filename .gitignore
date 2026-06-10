@@ -1,5 +1,5 @@
 # TAPD credentials - DO NOT commit
-.opencode/skills/*/config.json
+.opencode/skills/_shared/tapd-config.json
 
 # oh-my-openagent internal files
 .omo/
@@ -24,13 +24,16 @@ Thumbs.db
 
 # Test results & cache
 test-results/
-test-results/
 .opencode/skills/playwright-mind/test-results/
 .opencode/skills/playwright-mind/test_record/
 
 # Environment variables
 .env
 .env.local
+
+# Browser profile data (contains auth tokens, cookies, etc.)
+**/.auth/
+**/.codesign-mcp/
 
 # Log files
 *.log

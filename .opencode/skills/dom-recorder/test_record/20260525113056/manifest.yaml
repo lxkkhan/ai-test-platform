@@ -1,0 +1,38 @@
+# 录制清单
+# 录制时间：2026-05-25T03:30:56.831Z
+# 生成工具：dom-recorder
+
+录制会话:
+  录制时间: "2026-05-25T03:30:56.831Z"
+  录制模式: "selector"
+  总步骤数: 61
+  用例数: 3
+  输出目录: "20260525113056"
+
+用例列表:
+  - caseId: 1
+    name: "默认用例"
+    specFile: "case-001-默认用例.spec.ts"
+    targetPage: ""
+    pageURL: ""
+    operationType: "其他"
+    boundaryMethod: "默认"
+    stepRange: [0, 4]
+
+  - caseId: 2
+    name: "人员-组织"
+    specFile: "case-002-人员-组织.spec.ts"
+    targetPage: "人员-组织"
+    pageURL: "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/sysmp/user-center"
+    operationType: "查询验证"
+    boundaryMethod: "菜单点击"
+    stepRange: [5, 30]
+
+  - caseId: 3
+    name: "业务类型-公司"
+    specFile: "case-003-业务类型-公司.spec.ts"
+    targetPage: "业务类型-公司"
+    pageURL: "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/PszxStaffOrg"
+    operationType: "查询验证"
+    boundaryMethod: "菜单点击"
+    stepRange: [31, 60]

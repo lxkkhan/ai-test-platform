@@ -1,0 +1,10 @@
+# 操作模板：其他
+
+操作类型: "其他"
+recordCount: 1
+
+用例列表:
+  - "默认用例" (默认)
+
+操作模式:
+  - click: [aria-label="menu-unfold"]

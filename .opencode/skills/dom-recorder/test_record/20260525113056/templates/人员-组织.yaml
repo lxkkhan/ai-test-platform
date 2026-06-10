@@ -1,0 +1,80 @@
+# 页面模板：人员-组织
+
+页面: "人员-组织"
+recordCount: 1
+
+元素映射:
+  按钮:
+    - 描述: "单击 → span["查询"]"
+    primary: "span:has-text("查询")"
+    fallbacks: []
+    - 描述: "单击 → path"
+    primary: "path"
+    fallbacks: []
+    - 描述: "单击 → span["查询"]"
+    primary: "span:has-text("查询")"
+    fallbacks: []
+    - 描述: "单击 → span["查询"]"
+    primary: "span:has-text("查询")"
+    fallbacks: []
+    - 描述: "单击 → path"
+    primary: "path"
+    fallbacks: []
+    - 描述: "单击 → span["查询"]"
+    primary: "span:has-text("查询")"
+    fallbacks: []
+    - 描述: "单击 → div.ant-row.ant-form-item-row["手机号码 包含 等于"]"
+    primary: "div:has-text("手机号码 包含 等于")"
+    fallbacks: []
+    - 描述: "单击 → div["### Error querying database. Cause: org.postgresql"]"
+    primary: "div:has-text("### Error querying database. C")"
+    fallbacks: []
+    - 描述: "单击 → span["查询"]"
+    primary: "span:has-text("查询")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-cell-content.surely-table-cell-text-ellipsis["11153"]"
+    primary: "div:has-text("11153")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table.surely-table-support-sticky["序号 编码 姓名 状态 NC编码 性别 身份证;自动识别 在职状态 "
+    primary: "div:has-text("序号 编码 姓名 状态 NC编码 性别 身份证;自动识别 在")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-cell.surely-table-body-cell"
+    primary: "div"
+    fallbacks: []
+    - 描述: "单击 → div#tag-content["配送中心: 佛山配送中心，国药集团冯了性（佛山）药材饮片有限公司，全局"]"
+    primary: "#tag-content"
+    fallbacks: ["div:has-text("配送中心: 佛山配送中心，国药集团冯了性（佛山）药材饮片有限")"]
+    - 描述: "单击 → a["业务类型-公司"]"
+    primary: "a:has-text("业务类型-公司")"
+    fallbacks: []
+  输入框:
+    - 描述: "输入 → input#form_item_name_62e4527dc0d644f19cef3b875ee25060.ant-input.css-dev-only-do-"
+    primary: "#form_item_name_62e4527dc0d644f19cef3b875ee25060"
+    fallbacks: ["input[placeholder*="请输入"]", "input:has-text("2")"]
+    - 描述: "输入 → input#form_item_name_62e4527dc0d644f19cef3b875ee25060.ant-input.ant-input-status"
+    primary: "#form_item_name_62e4527dc0d644f19cef3b875ee25060"
+    fallbacks: ["input[placeholder*="请输入"]", "input:has-text("22")"]
+    - 描述: "输入 → input#form_item_name_62e4527dc0d644f19cef3b875ee25060.ant-input.ant-input-status"
+    primary: "#form_item_name_62e4527dc0d644f19cef3b875ee25060"
+    fallbacks: ["input[placeholder*="请输入"]", "input:has-text("222")"]
+    - 描述: "输入 → input#form_item_name_1b350ee61e714742941b0dd466110a0b.ant-input.css-dev-only-do-"
+    primary: "#form_item_name_1b350ee61e714742941b0dd466110a0b"
+    fallbacks: ["input[placeholder*="请输入"]", "input:has-text("2")"]
+    - 描述: "输入 → input#form_item_name_1b350ee61e714742941b0dd466110a0b.ant-input.ant-input-status"
+    primary: "#form_item_name_1b350ee61e714742941b0dd466110a0b"
+    fallbacks: ["input[placeholder*="请输入"]", "input:has-text("22")"]
+    - 描述: "输入 → input#form_item_name_1b350ee61e714742941b0dd466110a0b.ant-input.ant-input-status"
+    primary: "#form_item_name_1b350ee61e714742941b0dd466110a0b"
+    fallbacks: ["input[placeholder*="请输入"]", "input:has-text("222")"]
+    - 描述: "输入 → input.ant-input-number-input["2"]"
+    primary: "input[placeholder*="请输入"]"
+    fallbacks: ["input:has-text("2")", "[role="spinbutton"]"]
+    - 描述: "输入 → input.ant-input-number-input["22"]"
+    primary: "input[placeholder*="请输入"]"
+    fallbacks: ["input:has-text("22")", "[role="spinbutton"]"]
+    - 描述: "输入 → input.ant-input-number-input["222"]"
+    primary: "input[placeholder*="请输入"]"
+    fallbacks: ["input:has-text("222")", "[role="spinbutton"]"]
+    - 描述: "输入 → input.ant-input-number-input"
+    primary: "input[placeholder*="请输入"]"
+    fallbacks: ["[role="spinbutton"]"]

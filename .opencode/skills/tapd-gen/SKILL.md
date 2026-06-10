@@ -29,34 +29,18 @@ metadata:
 
 ## 配置文件
 
-本 Skill 依赖 `config.json`，需包含以下字段：
+本 Skill 依赖 `config.json`，通过 `_extends` 引用共享凭证 `_shared/tapd-config.json`：
 
 ```json
 {
-  "workspace_id": "你的TAPD项目ID",
-  "api_user": "你的API账号",
-  "api_password": "你的API密码",
-  "api_url": "https://api.tapd.cn",
-  "real_user": "TAPD登录用户名（如刘晓康）",
-  "defaults": {
-    "priority_label": "中",
-    "severity": "一般",
-    "testtype": "功能测试",
-    "testphase": "功能测试阶段"
-  },
-  "modules": ["登录", "注册", "首页", "订单管理", "用户中心", "设置", "报表", "其他"],
-  "owner_list": ["刘晓康"],
-  "default_story_id": "",
-  "auto_upload": false,
-  "default_reviewer": ""
+  "_extends": "../_shared/tapd-config.json",
+  "auto_upload": false
 }
 ```
 
-> **注意**：
-> - `auto_upload` 默认为 `false`，即默认需要用户确认后上传
-> - `real_user` **必须填写 TAPD 登录用户名**（非 API 账号），用于设置创建人、处理人等字段，确保 TAPD 中显示正确的归属人
-> - `api_url` 默认为 `https://api.tapd.cn`，私有化部署需修改为实际 API 地址
-> - `owner_list` 应包含项目中的 TAPD 真实用户名，用于用例/计划的处理人分配
+> **共享凭证**：所有 TAPD Skill 的共用字段统一在 `_shared/tapd-config.json` 管理。
+>
+> `auto_upload` 默认为 `false`，即默认需要用户确认后上传。
 
 ## 工作流
 
@@ -155,12 +139,22 @@ metadata:
 1. 跳过审核，直接进入下一步
 2. 建议仅在 AI 用例生成准确度 ≥ 90% 时使用自动模式
 
+### 获取 access_token
+
+所有 TAPD API 调用前必须先获取 Bearer Token：
+
+```bash
+curl.exe -u "api_user:api_password" -d "grant_type=client_credentials" "{api_url}/tokens/request_token"
+```
+
+提取返回的 `access_token`（有效期 7200s），后续统一使用 `-H "Authorization: Bearer {access_token}"`。
+
 ### 第四步：创建测试计划
 
 在 TAPD 中创建测试计划。**命名规范：`TP_S{story_id}_{序号}`**（序号格式如 `202606010001`）：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   --data-urlencode "workspace_id={workspace_id}" \
   --data-urlencode "name=TP_S{story_id}_{序号}" \
   --data-urlencode "owner={real_user}" \
@@ -182,7 +176,7 @@ curl.exe -u 'api_user:api_password' \
 使用逐个创建方式（`POST /tcases`），单个创建可附带 `owner` 字段：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   --data-urlencode "workspace_id={workspace_id}" \
   --data-urlencode "name=TC_S{story_id}_{seq}_{功能描述}" \
   --data-urlencode "category_id={分类ID}" \
@@ -202,7 +196,7 @@ curl.exe -u 'api_user:api_password' \
 ### 第六步：关联用例到测试计划
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   -X POST \
   -d "workspace_id={workspace_id}&test_plan_id={plan_id}&tcase_ids={case_id1},{case_id2},{case_id3}&creator={real_user}" \
   "{api_url}/test_plans/create_tcase_relation"
@@ -215,7 +209,7 @@ curl.exe -u 'api_user:api_password' \
 **推荐方式**：使用通用 Relations API（`stories/create_story_tcase` 在部分 TAPD 版本可能返回 302）：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   -X POST \
   -d "workspace_id={workspace_id}&source_type=tcase&source_id={case_id}&target_type=story&target_id={story_id}" \
   "{api_url}/relations"
@@ -224,7 +218,7 @@ curl.exe -u 'api_user:api_password' \
 对每个用例逐一关联。也可批量关联需求到测试计划：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   -X POST \
   -d "workspace_id={workspace_id}&source_type=story&source_id={story_id}&target_type=test_plan&target_id={plan_id}" \
   "{api_url}/relations"

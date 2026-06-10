@@ -1,0 +1,25 @@
+{
+    "record_port": 9301,
+    "output_dir": "test_record",
+    "enable_vlm_fallback": false,
+    "defaults": {
+        "operation_type": "查询验证",
+        "timeout": 3000,
+        "wait_strategy": "networkidle"
+    },
+    "selector_priority": [
+        "data-testid",
+        "stable-id",
+        "aria-label",
+        "name",
+        "placeholder",
+        "class+text",
+        "tag+text",
+        "tag-only"
+    ],
+    "boundary_rules": {
+        "url_change_prompt": true,
+        "url_change_threshold": "top-level-path",
+        "auto_split_enabled": false
+    }
+}

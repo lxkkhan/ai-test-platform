@@ -25,35 +25,28 @@ metadata:
 
 ## 配置文件
 
-本 Skill 依赖 `config.json`，需包含以下字段：
+本 Skill 依赖 `config.json`，通过 `_extends` 引用共享凭证 `_shared/tapd-config.json`：
 
 ```json
 {
-  "workspace_id": "你的TAPD项目ID",
-  "api_user": "你的API账号",
-  "api_password": "你的API密码",
-  "api_url": "https://api.tapd.cn",
-  "real_user": "TAPD登录用户名（如刘晓康）",
-  "defaults": {
-    "priority_label": "中",
-    "severity": "一般",
-    "testtype": "功能测试",
-    "testphase": "功能测试阶段"
-  },
-  "modules": ["登录", "注册", "首页", "订单管理", "用户中心", "设置", "报表", "其他"],
-  "owner_list": ["刘晓康"],
-  "default_story_id": "",
+  "_extends": "../_shared/tapd-config.json",
   "test_results_dir": "",
   "case_map_file": ".tapd-case-map.json"
 }
 ```
 
-> **注意**：
+> **共享凭证**：所有 TAPD Skill 的共用字段统一在 `_shared/tapd-config.json` 管理。
+>
 > - `test_results_dir` 为测试结果目录路径（默认为 auto-test-runner 的 test-results 目录）
 > - `case_map_file` 为用例映射文件名，用于测试文件名到 TAPD 用例 ID 的映射
-> - `real_user` **必须填写 TAPD 登录用户名**（非 API 账号），用于设置 Bug 的处理人等字段
 
 ## 工作流
+
+> **认证方式**：所有 TAPD API 调用使用 Bearer Token。先通过 `client_credentials` 换取 `access_token`：
+> ```bash
+> curl.exe -u "api_user:api_password" -d "grant_type=client_credentials" "{api_url}/tokens/request_token"
+> ```
+> 后续统一使用 `-H "Authorization: Bearer {access_token}"`。
 
 ### 第一步：读取测试结果
 
@@ -92,7 +85,7 @@ metadata:
 如果映射文件中没有对应条目，使用测试名称与 TAPD 用例标题进行模糊匹配：
 
 ```bash
-curl.exe -u 'api_user:api_password' "{api_url}/tcases?workspace_id={workspace_id}&name=登录-正常登录验证"
+curl.exe -H "Authorization: Bearer {access_token}" "{api_url}/tcases?workspace_id={workspace_id}&name=登录-正常登录验证"
 ```
 
 匹配规则：
@@ -115,7 +108,7 @@ curl.exe -u 'api_user:api_password' "{api_url}/tcases?workspace_id={workspace_id
 对每个已映射的用例，调用 TAPD API 回写执行结果：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   -X POST \
   -d "workspace_id={workspace_id}&case_id={case_id}&plan_id={plan_id}&result={result}&runner={real_user}" \
   "{api_url}/test_plans/run_case"
@@ -135,7 +128,7 @@ result 映射表：
 对每个失败（fail）的用例，自动创建 Bug：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   -X POST \
   -d "workspace_id={workspace_id}&title=[自动]+{test_name}+测试失败&severity=一般&priority_label=中&module={module}&current_owner={real_user}&description={失败详情}&testtype=功能测试&testphase=功能测试阶段" \
   "{api_url}/bugs"
@@ -187,7 +180,7 @@ Bug 创建成功后，进行两个关联：
    **推荐方式**：使用通用 Relations API（`bugs/linked_stories` 在部分版本可能返回空响应）：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   -X POST \
   -d "workspace_id={workspace_id}&source_type=bug&source_id={bug_id}&target_type=story&target_id={story_id}" \
   "{api_url}/relations"
@@ -196,7 +189,7 @@ curl.exe -u 'api_user:api_password' \
    **备选方式**：专用接口（可能返回空响应，建议优先使用 Relations API）：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   -X POST \
   -d "workspace_id={workspace_id}&bug_id={bug_id}&story_id={story_id}" \
   "{api_url}/bugs/linked_stories"
@@ -205,7 +198,7 @@ curl.exe -u 'api_user:api_password' \
 2. **Bug 关联用例**：
 
 ```bash
-curl.exe -u 'api_user:api_password' \
+curl.exe -H "Authorization: Bearer {access_token}" \
   -X POST \
   -d "workspace_id={workspace_id}&source_type=bug&source_id={bug_id}&target_type=tcase&target_id={case_id}" \
   "{api_url}/relations"

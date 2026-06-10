@@ -1,0 +1,23 @@
+# 页面模板：未命名页面
+
+页面: "未命名页面"
+recordCount: 1
+
+元素映射:
+  按钮:
+    - 描述: "单击 → span.ant-menu-title-content["系统配置"]"
+    primary: "span:has-text("系统配置")"
+    fallbacks: []
+    - 描述: "单击 → span.ant-menu-title-content["元数据"]"
+    primary: "span:has-text("元数据")"
+    fallbacks: []
+    - 描述: "单击 → span.ant-menu-title-content["基础数据"]"
+    primary: "span:has-text("基础数据")"
+    fallbacks: []
+    - 描述: "单击 → span.ant-menu-title-content["组织管理"]"
+    primary: "span:has-text("组织管理")"
+    fallbacks: []
+    - 描述: "单击 → a["人员-组织"]"
+    primary: "a:has-text("人员-组织")"
+    fallbacks: []
+  输入框:

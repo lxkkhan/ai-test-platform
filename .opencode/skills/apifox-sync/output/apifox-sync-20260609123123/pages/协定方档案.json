@@ -1,0 +1,63 @@
+{
+  "menuName": "协定方档案",
+  "menuCategory": "基础数据 > 物料信息",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/agreedArchiveBillGroup",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/agreedArchive/agreedArchiveCtrl/listWithChildren___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___197653931",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/agreedArchive/agreedArchiveCtrl/listWithChildren",
+      "pathname": "/pszxSaasServer/agreedArchive/agreedArchiveCtrl/listWithChildren",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiI5YTQ4ZDBlMThhMzc0ODZmOTAxODFmOWI2MTZmOWI4MiIsImlhdCI6MTc4MDk3OTQ5MCwiZXhwIjoxNzgxMDM3MDkwLCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.QW0ZEEZbkMoO3qogy_D0K7js6xhFOhpdt2SsVc_n-131G4wd7t77ojquoxaza8Irj1mX2GCvvM5If-T3Yrj0Cg",
+        "tcm-sign2": "6FFCC2CF0DE08B3EF2FB97938374DED06CE6B66620B1B09F564562E1EA04F9D3",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "hr8bGxFmiSZjD6w",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780979878777",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"1976539315647414274\",\"value\":[\"1787720377238028288\",\"global\"],\"field\":\"head.pkGroup\",\"operation\":\"in\"},{\"id\":\"1976539315647414278\",\"value\":[null],\"field\":\"head.code\",\"operation\":\"like\"},{\"id\":\"1976539315647414279\",\"value\":[null],\"field\":\"head.pkHospital\",\"operation\":\"like\"},{\"id\":\"1976539315647414281\",\"value\":[null],\"field\":\"head.pkBusinessType\",\"operation\":\"in\"},{\"id\":\"1976539315647414283\",\"value\":[null],\"field\":\"head.name\",\"operation\":\"like\"},{\"id\":\"1976539315647414284\",\"value\":[null],\"field\":\"head.deepDecoct\",\"operation\":\"like\"},{\"id\":\"1976539315647414285\",\"value\":[null],\"field\":\"head.outsideFlag\",\"operation\":\"like\"},{\"id\":\"1976539315647414286\",\"value\":[null],\"field\":\"head.gestationFlag\",\"operation\":\"like\"},{\"id\":\"1976539315647414287\",\"value\":[null],\"field\":\"head.childrenFlag\",\"operation\":\"like\"},{\"id\":\"1976539315647414288\",\"value\":[null],\"field\":\"head.remarks\",\"operation\":\"like\"},{\"id\":\"1976539315647414289\",\"value\":[null],\"field\":\"head.enableflag\",\"operation\":\"eq\"},{\"id\":\"1976539315764854796\",\"value\":[null],\"field\":\"body1.pkMat\",\"operation\":\"in\"},{\"id\":\"1976539315764854797\",\"value\":[null],\"field\":\"body1.pkDecoctRequirement\",\"operation\":\"in\"}],\"templateId\":\"1976539315588694016\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isGroup\":true,\"isFlow\":false,\"auth\":\"agreedArchiveBillGroup\",\"header\":\"agreedArchive_group\",\"query\":\"agreedArchive_group\",\"bill\":\"agreedArchive_group\",\"bodyController\":\"/agreedArchive/agreedArchiveBodyCtrl\",\"controller\":\"/agreedArchive/agreedArchiveBillCtrl\",\"agreedArchiveBody\":\"agreedArchiveBody_group\",\"agreedDistributeBody\":\"AgreedDistribute_group\",\"prescriptionBody\":\"agreedArchiveBody_group\",\"importProperty\":{\"functionCode\":\"agreedArchive_group\",\"billType\":\"协定方档案表\",\"indexFunctionCodeMap\":{\"0\":\"agreedArchiveBody_group\",\"1\":\"AgreedDistribute_group\"},\"orgLevel\":\"group\"},\"batchImportProperty\":{\"functionCode\":\"agreedArchive_group\",\"billType\":\"协定方档案表\",\"indexFunctionCodeMap\":{\"0\":\"agreedArchiveBody_group\",\"1\":\"AgreedDistribute_group\"},\"orgLevel\":\"group\",\"excludeFields\":[\"pkOrg\",\"pkGroup\"],\"excludeItemFields\":{\"0\":[\"pkOrg\",\"pkGroup\"],\"1\":[\"pkOrg\",\"pkGroup\"]}}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780979878784,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "POST_/pszxSaasServer/agreedArchive/agreedArchiveBillCtrl/getDetail_id_2059482092671864832",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/agreedArchive/agreedArchiveBillCtrl/getDetail",
+      "pathname": "/pszxSaasServer/agreedArchive/agreedArchiveBillCtrl/getDetail",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiI5YTQ4ZDBlMThhMzc0ODZmOTAxODFmOWI2MTZmOWI4MiIsImlhdCI6MTc4MDk3OTQ5MCwiZXhwIjoxNzgxMDM3MDkwLCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.QW0ZEEZbkMoO3qogy_D0K7js6xhFOhpdt2SsVc_n-131G4wd7t77ojquoxaza8Irj1mX2GCvvM5If-T3Yrj0Cg",
+        "tcm-sign2": "7B65C3A3F89C9B19C895091FDFCFAB70DF4F448B29D1C62735F7B8B5C0FFCC49",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "nbCfRiOZPK8eCo9",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780979878956",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"id\":\"2059482092671864832\",\"indexFunctionCodeMap\":{\"0\":\"agreedArchiveBody_group\",\"1\":\"AgreedDistribute_group\",\"2\":\"agreedArchiveBody_group\"}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780979878957,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

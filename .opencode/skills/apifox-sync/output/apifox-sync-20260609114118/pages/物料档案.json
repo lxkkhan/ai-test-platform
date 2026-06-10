@@ -1,0 +1,63 @@
+{
+  "menuName": "物料档案",
+  "menuCategory": "基础数据 > 物料信息",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/MaterialArchiveGroup",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/archive/mat/materialArchiveHeadCtrl/listWithChildren___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___4148a6884",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/archive/mat/materialArchiveHeadCtrl/listWithChildren",
+      "pathname": "/pszxSaasServer/archive/mat/materialArchiveHeadCtrl/listWithChildren",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiIzMjQ0OTQzZGI5YTU0M2FiOThmNGMxOTIwMmUzYzg5YiIsImlhdCI6MTc4MDk3NjQ4NiwiZXhwIjoxNzgxMDM0MDg2LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.fnn2NvhsgKDJhImJKlA5I1Wr8pztXD7jzIGyqoyjwz9NrxNmVzESTK2DofxNs6m1nKqC7AwyJI69pPNrzXuRAA",
+        "tcm-sign2": "13D1B4F0FF400070D5BED6A9B970AA2364D4B33D6A2E3C4B1422D32CEEC078FB",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "6gFxmH6g89LsEtZ",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780976739802",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"4148a6884228464bbc5a477667c871e4\",\"value\":[\"1787720377238028288\",\"global\"],\"field\":\"head.pkGroup\",\"operation\":\"in\"},{\"id\":\"5e4f522e27a64eac946da56f0412d388\",\"value\":[null],\"field\":\"head.code\",\"operation\":\"like\"},{\"id\":\"9ec04aecf6b24ad980a3ceae26d435a5\",\"value\":[null],\"field\":\"head.name\",\"operation\":\"like\"},{\"id\":\"0f60b697527c4a0b8962923d4f34c82e\",\"value\":[null],\"field\":\"head.enableflag\",\"operation\":\"eq\"},{\"id\":\"d14344eb6b3b425e8a02f6c624b69f6d\",\"value\":[null],\"field\":\"head.pkMatType\",\"operation\":\"in\"},{\"id\":\"6bf2db3a5e984790a392d33336f76648\",\"value\":[null],\"field\":\"head.matSpec\",\"operation\":\"like\"},{\"id\":\"5dd3460d9cb64d439bb8d1b5e9b6f808\",\"value\":[null],\"field\":\"head.matSource\",\"operation\":\"in\"},{\"id\":\"4a1e2d208e3645a1a84dd7879b13fe8b\",\"value\":[null],\"field\":\"head.matMnemonic\",\"operation\":\"in\"},{\"id\":\"ad4085bcd60c4130836a0748ad28a70e\",\"value\":[null],\"field\":\"head.pkUnit\",\"operation\":\"in\"},{\"id\":\"281b12403f17408c8e364cecf65edcfd\",\"value\":[null],\"field\":\"head.pkAssistUnit\",\"operation\":\"in\"},{\"id\":\"906e656e19174349bc8ec07a5fdcd774\",\"value\":[null],\"field\":\"head.convertUnit\",\"operation\":\"like\"},{\"id\":\"113dea44ae1947c18b37db63c456347f\",\"value\":[null],\"field\":\"head.benchmarkPackFlag\",\"operation\":\"in\"},{\"id\":\"069a2d7f3c3749a4971d0d79a2ac56df\",\"value\":[null],\"field\":\"head.packSpec\",\"operation\":\"like\"},{\"id\":\"2b1413960ceb4b22abe37594e03815da\",\"value\":[null],\"field\":\"head.pkDrugProperty\",\"operation\":\"in\"},{\"id\":\"55f631664ad84c4284008025243c0036\",\"value\":[null],\"field\":\"head.gestationFlag\",\"operation\":\"in\"},{\"id\":\"1ef79829ea774097b7dadea1be1a510c\",\"value\":[null],\"field\":\"head.prohibitedExplain\",\"operation\":\"like\"},{\"id\":\"8efbb725b2cb402592f180652dc2c771\",\"value\":[null],\"field\":\"head.pkDecoctRequirement\",\"operation\":\"in\"},{\"id\":\"7490310c4e4746389c94d2b4e10a542a\",\"value\":[null],\"field\":\"head.maxDose\",\"operation\":\"eq\"},{\"id\":\"d33bcfa449dc4ce79bbd5777e0d7ca89\",\"value\":[null],\"field\":\"head.minDose\",\"operation\":\"eq\"},{\"id\":\"3d258c5becbd4bdf819fc7a94de01b3e\",\"value\":[null],\"field\":\"head.equivalentHerbalPiece\",\"operation\":\"eq\"},{\"id\":\"3757c70356ff46aeb0815cb35d55dce4\",\"value\":[null],\"field\":\"head.purchaseTaxRate\",\"operation\":\"eq\"},{\"id\":\"0caff75d48944381b7b5fdb4000d05be\",\"value\":[null],\"field\":\"head.saleTaxRate\",\"operation\":\"eq\"},{\"id\":\"0e4406502d024e8fb05f5f152bd37280\",\"value\":[null],\"field\":\"head.remarks\",\"operation\":\"like\"}],\"templateId\":\"48e3859d6c624842b177778e20d02fdb\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isGroup\":true,\"isFlow\":false,\"auth\":\"MaterialArchiveGroup\",\"header\":\"MaterialArchiveHead_group\",\"query\":\"MaterialArchiveHead_group\",\"bill\":\"MaterialArchiveHead_group\",\"bodyController\":\"/archive/mat/materialArchiveDistributeCtrl\",\"controller\":\"/archive/mat/materialArchiveCtrl\",\"materialArchiveDistribute\":\"MaterialArchiveDistribute_group\",\"materialArchiveLocation\":\"MaterialArchiveLocation_group\",\"importProperty\":{\"functionCode\":\"MaterialArchiveHead_group\",\"billType\":\"物料档案表\",\"orgLevel\":\"group\",\"indexFunctionCodeMap\":{\"0\":\"MaterialArchiveDistribute_group_export\",\"1\":\"MaterialArchiveLocation_group\"}},\"batchImportProperty\":{\"functionCode\":\"MaterialArchiveHead_group\",\"billType\":\"物料档案表\",\"orgLevel\":\"group\",\"indexFunctionCodeMap\":{\"0\":\"MaterialArchiveDistribute_group\",\"1\":\"MaterialArchiveLocation_group\"},\"excludeFields\":[\"pkOrg\",\"pkGroup\",\"code\",\"pkUnit\",\"pkAssistUnit\",\"convertUnit\"],\"excludeItemFields\":{\"0\":[\"pkOrg\",\"pkGroup\"],\"1\":[\"pkOrg\",\"pkGroup\"]}}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780976739814,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    },
+    {
+      "id": "POST_/pszxSaasServer/archive/mat/materialArchiveCtrl/getDetail_id_2061717877588496384",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/archive/mat/materialArchiveCtrl/getDetail",
+      "pathname": "/pszxSaasServer/archive/mat/materialArchiveCtrl/getDetail",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiIzMjQ0OTQzZGI5YTU0M2FiOThmNGMxOTIwMmUzYzg5YiIsImlhdCI6MTc4MDk3NjQ4NiwiZXhwIjoxNzgxMDM0MDg2LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.fnn2NvhsgKDJhImJKlA5I1Wr8pztXD7jzIGyqoyjwz9NrxNmVzESTK2DofxNs6m1nKqC7AwyJI69pPNrzXuRAA",
+        "tcm-sign2": "70260BAD3B17F4B9FCBADD4A30D0D31F4AEE0B669F426EC09AFEE2399961C0B0",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "GerH4qI2PPX4T2w",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780976740091",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"id\":\"2061717877588496384\",\"indexFunctionCodeMap\":{\"0\":\"MaterialArchiveDistribute_group\",\"1\":\"MaterialArchiveLocation_group\"}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780976740091,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

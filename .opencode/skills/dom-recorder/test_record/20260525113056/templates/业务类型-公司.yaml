@@ -1,0 +1,89 @@
+# 页面模板：业务类型-公司
+
+页面: "业务类型-公司"
+recordCount: 1
+
+元素映射:
+  按钮:
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["主键"]"
+    primary: "span:has-text("主键")"
+    fallbacks: []
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["状态"]"
+    primary: "span:has-text("状态")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-cell.surely-table-header-cell["协定方备货"]"
+    primary: "[role="cell"]:has-text("协定方备货")"
+    fallbacks: ["[role="cell"]"]
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["协定方备货"
+    primary: "span:has-text("协定方备货")"
+    fallbacks: []
+    - 描述: "单击 → div.css-dev-only-do-not-override-1p3hq3p.ant-spin"
+    primary: "div"
+    fallbacks: []
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["协定方备货"
+    primary: "span:has-text("协定方备货")"
+    fallbacks: []
+    - 描述: "单击 → div.css-dev-only-do-not-override-1p3hq3p.ant-spin"
+    primary: "div"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-cell.surely-table-header-cell["公司"]"
+    primary: "[role="cell"]:has-text("公司")"
+    fallbacks: ["[role="cell"]"]
+    - 描述: "单击 → div.css-dev-only-do-not-override-1p3hq3p.ant-spin"
+    primary: "div"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-cell.surely-table-header-cell["公司"]"
+    primary: "[role="cell"]:has-text("公司")"
+    fallbacks: ["[role="cell"]"]
+    - 描述: "单击 → span.surely-table-drag-placeholder"
+    primary: "span"
+    fallbacks: []
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["NC编码""
+    primary: "span:has-text("NC编码")"
+    fallbacks: []
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["配送中心""
+    primary: "span:has-text("配送中心")"
+    fallbacks: []
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["备注"]"
+    primary: "span:has-text("备注")"
+    fallbacks: []
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["创建人"]"
+    primary: "span:has-text("创建人")"
+    fallbacks: []
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["NC编码""
+    primary: "span:has-text("NC编码")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-header-cell-title.surely-table-header-cell-filter-title["配送中心"]"
+    primary: "div:has-text("配送中心")"
+    fallbacks: []
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["配送中心""
+    primary: "span:has-text("配送中心")"
+    fallbacks: []
+    - 描述: "单击 → span.surely-table-header-cell-title-inner.surely-table-cell-text-ellipsis["公司"]"
+    primary: "span:has-text("公司")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-cell-inner["国药集团冯了性（佛山）药材饮片有限公司"]"
+    primary: "div:has-text("国药集团冯了性（佛山）药材饮片有限公司")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-center-container["2026-03-04 16:28:58 2029111850020503552 集团 国药"
+    primary: "div:has-text("2026-03-04 16:28:58 2029111850")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-cell-content.surely-table-cell-text-ellipsis["国药集团冯了性（佛山）药材饮片有限"
+    primary: "div:has-text("国药集团冯了性（佛山）药材饮片有限公司")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-cell-content.surely-table-cell-text-ellipsis["国药集团冯了性（佛山）药材饮片有限"
+    primary: "div:has-text("国药集团冯了性（佛山）药材饮片有限公司")"
+    fallbacks: []
+    - 描述: "单击 → div.surely-table-cell-content.surely-table-cell-text-ellipsis["国药集团冯了性（佛山）药材饮片有限"
+    primary: "div:has-text("国药集团冯了性（佛山）药材饮片有限公司")"
+    fallbacks: []
+    - 描述: "单击 → div.tcm-form-button-warpper["返回列表 刷新 新增 修改 删除 启用 停用 4/30"]"
+    primary: "div:has-text("返回列表 刷新 新增 修改 删除 启用 停用 4/30")"
+    fallbacks: []
+    - 描述: "单击 → span["返回列表"]"
+    primary: "span:has-text("返回列表")"
+    fallbacks: []
+    - 描述: "单击 → div.tcm-handle-buttons-warpper["新增 修改 删除 启用 停用 当前导出 全部导出 下载模板 导入excel"]"
+    primary: "div:has-text("新增 修改 删除 启用 停用 当前导出 全部导出 下载模板 ")"
+    fallbacks: []
+  输入框:

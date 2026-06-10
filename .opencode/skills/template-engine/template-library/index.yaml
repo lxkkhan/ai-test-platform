@@ -1,8 +1,9 @@
 # 模板库索引
-# 自动生成于：2026-05-22T17:00:00+08:00
+# 自动生成于：2026-05-25
 # 用于快速匹配和去重
 
 模板索引:
+  # ── 精确模板（从录制数据生成） ──
   - 页面: "到货单列表"
     操作类型: "查询验证"
     pageTemplate: "pages/到货单列表.yaml"
@@ -18,3 +19,40 @@
     sourceCases: ["case-002-新增到货单"]
     recordCount: 1
     最后更新: "2026-05-22T17:00:00"
+
+  # ── 通用降级模板（适用于任何页面） ──
+  - 页面: "通用"
+    操作类型: "查询验证"
+    pageTemplate: "pages/初始化配置-通用.yaml"
+    operationTemplate: "operations/查询验证-通用.yaml"
+    sourceCases: []
+    recordCount: 0
+    isGeneric: true
+    最后更新: "2026-05-25"
+
+  - 页面: "通用"
+    操作类型: "新增提交"
+    pageTemplate: "pages/初始化配置-通用.yaml"
+    operationTemplate: "operations/新增提交-通用.yaml"
+    sourceCases: []
+    recordCount: 0
+    isGeneric: true
+    最后更新: "2026-05-25"
+
+  - 页面: "通用"
+    操作类型: "编辑修改"
+    pageTemplate: "pages/初始化配置-通用.yaml"
+    operationTemplate: "operations/编辑修改-通用.yaml"
+    sourceCases: []
+    recordCount: 0
+    isGeneric: true
+    最后更新: "2026-05-25"
+
+  - 页面: "通用"
+    操作类型: "删除确认"
+    pageTemplate: "pages/初始化配置-通用.yaml"
+    operationTemplate: "operations/删除确认-通用.yaml"
+    sourceCases: []
+    recordCount: 0
+    isGeneric: true
+    最后更新: "2026-05-25"

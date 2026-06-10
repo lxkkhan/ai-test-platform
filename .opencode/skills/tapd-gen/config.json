@@ -1,0 +1,4 @@
+﻿{
+    "_extends": "../_shared/tapd-config.json",
+    "auto_upload": false
+}

@@ -1,0 +1,35 @@
+{
+  "menuName": "作业流程",
+  "menuCategory": "基础数据 > 作业中心配置",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/WorkCustomFuncOrg",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/work/custom/func/workCustomFuncCtrl/listByScheme___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___0c3625802",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/work/custom/func/workCustomFuncCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/work/custom/func/workCustomFuncCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJmYTNiNWZhNmExYWY0OWY4OThhNzRhMGI1YzdkZWYxMSIsImlhdCI6MTc4MDk4MjYyMiwiZXhwIjoxNzgxMDQwMjIyLCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.nI_ii2Qc-5UKQdN_-4jYiT1Vqj0i1utk-Lbn5_rIAPCuioJGbU6W6isSyyStleT3hfBL0PX5Z3mM46EfHncGJQ",
+        "tcm-sign2": "4F081B544F74CCBC2CCD84D83526CCCBB55E0614A0699DD511E606E94061B3AD",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "pmMokuq2YL1BU8U",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780983080408",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"0c3625802f2c4c009b0c09440af0ba04\",\"value\":[\"00013A1000000000VGSD\",\"1787720377238028288\",\"global\"],\"field\":\"pkOrg\",\"operation\":\"in\"},{\"id\":\"5fe22b62bcb5432bab359fe6653b03c1\",\"value\":[null],\"field\":\"pkWorkFlow\",\"operation\":\"in\"},{\"id\":\"76cca672b5d84920909ce508263c85c2\",\"value\":[null],\"field\":\"pkWorkAffair\",\"operation\":\"in\"},{\"id\":\"f9bd3bda052d4df39fc74d73557bcff0\",\"value\":[null],\"field\":\"funcType\",\"operation\":\"in\"},{\"id\":\"c66c161acc7c47b1b9996ce36455f282\",\"value\":[null],\"field\":\"orderNumber\",\"operation\":\"eq\"},{\"id\":\"3f7ff89c26e2494a90b5b1c10b833fa8\",\"value\":[null],\"field\":\"remarks\",\"operation\":\"like\"},{\"id\":\"48c41f31d7574f00b4785ddeece76adc\",\"value\":[null],\"field\":\"enableflag\",\"operation\":\"eq\"},{\"id\":\"e59be7c967ce4c79bf5dfb86f5d2ce61\",\"value\":[],\"field\":\"createUserId\",\"operation\":\"in\"}],\"templateId\":\"1f6e878e8a11448982b9c9523326dfb8\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isFlow\":false,\"isOrg\":true,\"auth\":\"WorkCustomFuncOrg\",\"header\":\"WorkCustomFunc_org\",\"query\":\"WorkCustomFunc_org\",\"bill\":\"WorkCustomFunc_org\",\"controller\":\"/work/custom/func/workCustomFuncCtrl\"}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780983080416,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

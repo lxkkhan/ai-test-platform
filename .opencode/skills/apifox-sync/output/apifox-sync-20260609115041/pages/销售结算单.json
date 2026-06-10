@@ -1,0 +1,35 @@
+{
+  "menuName": "销售结算单",
+  "menuCategory": "财务结算",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/SaleSettleOrderBillOrg",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/herb/convert/prescriptConvertCtrl/listByScheme___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions______templateId___",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/herb/convert/prescriptConvertCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/herb/convert/prescriptConvertCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiI4NDA4ZmFhMGVkOGQ0MjdiYTdmNDNjODNiNGU1YzI4MCIsImlhdCI6MTc4MDk3NzA0OSwiZXhwIjoxNzgxMDM0NjQ5LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._6V4DfS3XghpO4GyoD_fPmAMB003gcDvy9ykdREPqSD1dL_dyyu_rIABrKqIFiQNEAxcW52W51IRUY42dqGzsg",
+        "tcm-sign2": "566EA069237B69EF9A3DFD233B27E3040A382F079A89D913C2B8E7E8F47DC2E8",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "vdbzViW7zil6q7O",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780978224956",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[],\"templateId\":\"5ff50d2042f448a29bd8b612daa87782\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isFlow\":false,\"isOrg\":true,\"auth\":\"PrescriptConvertOrg\",\"header\":\"PrescriptConvert_org\",\"query\":\"PrescriptConvert_org\",\"bill\":\"PrescriptConvert_org\",\"controller\":\"/herb/convert/prescriptConvertCtrl\",\"importProperty\":{\"functionCode\":\"PrescriptConvert_org\",\"billType\":\"处方单转换定义\",\"orgLevel\":\"org\"}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780978224957,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

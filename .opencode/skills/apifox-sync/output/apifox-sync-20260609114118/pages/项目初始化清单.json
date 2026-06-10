@@ -1,0 +1,35 @@
+{
+  "menuName": "项目初始化清单",
+  "menuCategory": "系统配置 > 日志",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/SyncInitLogOrg",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/InitLog/syncInitLogCtrl/listByScheme___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___d4cd0c5f4",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/InitLog/syncInitLogCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/InitLog/syncInitLogCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiIzMjQ0OTQzZGI5YTU0M2FiOThmNGMxOTIwMmUzYzg5YiIsImlhdCI6MTc4MDk3NjQ4NiwiZXhwIjoxNzgxMDM0MDg2LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.fnn2NvhsgKDJhImJKlA5I1Wr8pztXD7jzIGyqoyjwz9NrxNmVzESTK2DofxNs6m1nKqC7AwyJI69pPNrzXuRAA",
+        "tcm-sign2": "18263FAB933465FB7CA23290326CB51B25428405BEB3A2592F43EF6790E07C9C",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "Pe4z3HAbx9BrxjQ",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780976599303",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"d4cd0c5f43db4c9d83ae6e52a8e562d3\",\"value\":[\"00013A1000000000VGSD\",\"1787720377238028288\",\"global\"],\"field\":\"pkOrg\",\"operation\":\"in\"},{\"id\":\"f11d9050d85b4a989074df439f016c04\",\"value\":[],\"field\":\"srcOrg\",\"operation\":\"in\"},{\"id\":\"3c67665be94c43b3a33265d69f91c1ab\",\"value\":[],\"field\":\"targetOrg\",\"operation\":\"in\"},{\"id\":\"42095d60598b41ec81e8cc216549a7e3\",\"value\":[null],\"field\":\"syncItem\",\"operation\":\"in\"},{\"id\":\"b08a529cf5134a219e9f53db4ee86d95\",\"value\":[null],\"field\":\"status\",\"operation\":\"like\"},{\"id\":\"eceb935124f240cc98e118f7e8900673\",\"value\":[null],\"field\":\"remarks\",\"operation\":\"like\"},{\"id\":\"d8cf286ec0a249dd8c9a88fc1358e098\",\"value\":[null],\"field\":\"enableflag\",\"operation\":\"eq\"},{\"id\":\"c476c6a2268f45f78b6287d6ab6f58f6\",\"value\":[],\"field\":\"createUserId\",\"operation\":\"in\"}],\"templateId\":\"0a730d835100495f98c4c3e740f0a8f7\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isFlow\":false,\"isOrg\":true,\"auth\":\"SyncInitLogOrg\",\"header\":\"SyncInitLog_org\",\"query\":\"SyncInitLog_org\",\"bill\":\"SyncInitLog_org\",\"controller\":\"/InitLog/syncInitLogCtrl\",\"importProperty\":{\"functionCode\":\"SyncInitLog_org\",\"billType\":\"项目初始化清单日志\",\"orgLevel\":\"org\"}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780976599314,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

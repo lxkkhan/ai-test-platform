@@ -1,0 +1,56 @@
+# 操作模板：删除确认（通用降级）
+# 适用于所有页面的删除确认操作，仅删除 AUTO_TEST_ 前缀数据
+
+操作类型: "删除确认"
+目标页面: "通用"
+recordCount: 0
+sourceCases: []
+isGeneric: true
+
+步骤序列:
+  - type: "navigate"
+    placeholder: "TARGET_PAGE"
+    code: "// 导航到目标页面（由匹配引擎自动填充）"
+  - type: "waitURL"
+    placeholder: "TARGET_URL_PATTERN"
+    code: "await page.waitForURL('**/TARGET_URL');"
+  - type: "input"
+    placeholder: "AUTO_TEST_ 查询条件"
+    code: "// 在查询条件中输入 AUTO_TEST_ 前缀数据以定位目标记录"
+  - type: "click"
+    selector: "span:has-text('查询')"
+    code: "await page.click('span:has-text(\"查询\")');"
+  - type: "wait"
+    selector: ".ant-spin"
+    code: "await page.waitForSelector('.ant-spin', { state: 'hidden', timeout: 5000 }).catch(() => {});"
+  - type: "click"
+    selector: ".surely-table-cell-content, .ant-table-cell"
+    code: "// 选中 AUTO_TEST_ 前缀的记录（由用例生成器填充具体选择器）"
+  - type: "click"
+    selector: "button:has-text('删除'), a:has-text('删除'), span:has-text('删除')"
+    code: "try { await page.click('button:has-text(\"删除\")', { timeout: 3000 }); } catch { try { await page.click('a:has-text(\"删除\")', { timeout: 3000 }); } catch { await page.click('span:has-text(\"删除\")'); } }"
+  - type: "wait"
+    selector: ".ant-modal-confirm, .ant-popconfirm"
+    code: "await page.waitForSelector('.ant-modal-confirm, .ant-popconfirm', { state: 'visible', timeout: 5000 });"
+  - type: "click"
+    selector: "button:has-text('确定'), button:has-text('确认')"
+    code: "try { await page.click('button:has-text(\"确定\")', { timeout: 3000 }); } catch { await page.click('button:has-text(\"确认\")'); }"
+  - type: "wait"
+    selector: ".ant-message-success, .ant-notification-success"
+    code: "await page.waitForSelector('.ant-message-success, .ant-notification-success', { timeout: 5000 }).catch(() => {});"
+
+断言:
+  - type: "visible"
+    target: ".ant-message-success, .ant-notification-success"
+    expected: "true"
+    description: "删除成功提示可见"
+  - type: "count"
+    target: "AUTO_TEST_ 前缀记录"
+    expected: "0"
+    description: "目标记录已从列表中消失"
+
+数据标记:
+  prefix: "AUTO_TEST_"
+  strategy: "delete"
+  queryFilter: "AUTO_TEST_"
+  cleanup: false

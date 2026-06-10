@@ -39,37 +39,21 @@ metadata:
 
 ## 配置文件
 
-本 Skill 依赖 `config.json`，包含所有子 Skill 的配置字段：
+本 Skill 依赖 `config.json`，通过 `_extends` 引用共享凭证，自身包含所有子 Skill 的融合字段：
 
 ```json
 {
-  "workspace_id": "你的TAPD项目ID",
-  "api_user": "你的API账号",
-  "api_password": "你的API密码",
-  "api_url": "https://api.tapd.cn",
-  "real_user": "TAPD登录用户名（如刘晓康）",
-  "defaults": {
-    "priority_label": "中",
-    "severity": "一般",
-    "testtype": "功能测试",
-    "testphase": "功能测试阶段"
-  },
-  "modules": ["登录", "注册", "首页", "订单管理", "用户中心", "设置", "报表", "其他"],
-  "owner_list": ["刘晓康"],
-  "default_story_id": "",
+  "_extends": "../_shared/tapd-config.json",
   "wechat_webhook_url": "",
   "wechat_mentioned_list": [],
   "wechat_mentioned_mobile_list": [],
   "auto_upload": false,
-  "default_reviewer": "",
   "test_results_dir": "",
   "case_map_file": ".tapd-case-map.json"
 }
 ```
 
-> **注意**：
-> - 此配置是所有子 Skill 配置的合集，各子 Skill 只读取自己需要的字段
-> - `real_user` **必须填写 TAPD 登录用户名**（非 API 账号），用于设置创建人、处理人等字段
+> **共享凭证**：所有 TAPD Skill 的共用字段统一在 `_shared/tapd-config.json` 管理。此配置是所有子 Skill 配置的合集，各子 Skill 只读取自己需要的字段。
 
 ## 全流程工作流
 

@@ -1,0 +1,35 @@
+{
+  "menuName": "医疗机构档案",
+  "menuCategory": "基础数据 > 医疗机构信息",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/HospitalArchiveBillGroup",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/hospital/hospitalArchiveCtrl/listWithChildren___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___196604737",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/hospital/hospitalArchiveCtrl/listWithChildren",
+      "pathname": "/pszxSaasServer/hospital/hospitalArchiveCtrl/listWithChildren",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjMjNlZjRlNDMxYzU0OWY1YjY4ZmViNTBmMzFmZGJhMyIsImlhdCI6MTc4MDk3ODI3OCwiZXhwIjoxNzgxMDM1ODc4LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._AU0vb6fHuVwRvzKfCyZy885OqbJUiqVGH9Wa1DGndd5pMClx5twYUw1JRWVoS3TUc0l6DX3lY-qtQmQGCltgg",
+        "tcm-sign2": "E99B2E50FA26613598C100D5A6E56753C3481856CF1529729277EEF34525B542",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "2mdnQ90aD1uNR9a",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780978772933",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"1966047374162001922\",\"value\":[\"1787720377238028288\",\"global\"],\"field\":\"head.pkGroup\",\"operation\":\"in\"},{\"id\":\"1966047374166196225\",\"value\":[null],\"field\":\"head.code\",\"operation\":\"like\"},{\"id\":\"1966047374166196226\",\"value\":[null],\"field\":\"head.fullName\",\"operation\":\"like\"},{\"id\":\"1966047374166196227\",\"value\":[null],\"field\":\"head.shortName\",\"operation\":\"like\"},{\"id\":\"1966047374166196228\",\"value\":[null],\"field\":\"head.pkHospitalType\",\"operation\":\"in\"},{\"id\":\"1966047374166196230\",\"value\":[null],\"field\":\"head.phone\",\"operation\":\"like\"},{\"id\":\"1966047374166196231\",\"value\":[null],\"field\":\"head.salesPerson\",\"operation\":\"in\"},{\"id\":\"1966047374166196232\",\"value\":[null],\"field\":\"head.hospitalAllianceFlag\",\"operation\":\"like\"},{\"id\":\"1966047374166196233\",\"value\":[null],\"field\":\"head.parentId\",\"operation\":\"in\"},{\"id\":\"1966047374166196234\",\"value\":[null],\"field\":\"head.upHospitalCalcFlag\",\"operation\":\"like\"},{\"id\":\"1966047374166196235\",\"value\":[null],\"field\":\"head.corporation\",\"operation\":\"like\"},{\"id\":\"1966047374166196236\",\"value\":[null],\"field\":\"head.regisAddress\",\"operation\":\"like\"},{\"id\":\"1966047374166196237\",\"value\":[null],\"field\":\"head.postCode\",\"operation\":\"like\"},{\"id\":\"1966047374166196238\",\"value\":[null],\"field\":\"head.fax\",\"operation\":\"like\"},{\"id\":\"1966047374166196239\",\"value\":[null],\"field\":\"head.organizCode\",\"operation\":\"in\"},{\"id\":\"1966047374166196240\",\"value\":[null],\"field\":\"head.creditCode\",\"operation\":\"in\"},{\"id\":\"1966047374166196241\",\"value\":[null],\"field\":\"head.bussSystemId\",\"operation\":\"in\"},{\"id\":\"1966047374166196243\",\"value\":[null],\"field\":\"head.taxNum\",\"operation\":\"in\"},{\"id\":\"1966047374166196244\",\"value\":[null],\"field\":\"head.bank\",\"operation\":\"like\"},{\"id\":\"1966047374166196245\",\"value\":[null],\"field\":\"head.bankAccount\",\"operation\":\"like\"},{\"id\":\"1966047374166196246\",\"value\":[null],\"field\":\"head.calcInstructions\",\"operation\":\"like\"},{\"id\":\"1966047374166196248\",\"value\":[null],\"field\":\"head.remarks\",\"operation\":\"like\"}],\"templateId\":\"1966047374149419008\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isGroup\":true,\"isFlow\":false,\"auth\":\"HospitalArchiveBillGroup\",\"header\":\"HospitalArchive_group\",\"query\":\"HospitalArchive_group\",\"bill\":\"HospitalArchive_group\",\"bodyController\":\"/hospital/hospitalDistributeCtrl\",\"controller\":\"/hospital/hospitalArchiveBillCtrl\",\"hospitalDistribute\":\"HospitalDistribute_group\",\"hospitalAccounts\":\"HospitalAccounts_org\",\"pszxWarehouseOrg\":\"hospital_archive_warehouse_org\",\"patientAddressMatch\":\"PatientAddressMatch_org\",\"importProperty\":{\"functionCode\":\"HospitalArchive_group\",\"billType\":\"医疗机构档案表\",\"indexFunctionCodeMap\":{\"0\":\"HospitalDistribute_group_export\"},\"orgLevel\":\"group\"},\"batchImportProperty\":{\"functionCode\":\"HospitalArchive_group\",\"billType\":\"医疗机构档案表\",\"indexFunctionCodeMap\":{\"0\":\"HospitalDistribute_group_export\"},\"orgLevel\":\"group\",\"excludeFields\":[\"pkOrg\",\"pkGroup\"],\"excludeItemFields\":{\"0\":[\"pkOrg\",\"pkGroup\"]}}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780978772944,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

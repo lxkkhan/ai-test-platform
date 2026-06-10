@@ -1,0 +1,35 @@
+{
+  "menuName": "批次号",
+  "menuCategory": "基础数据 > 物料信息",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/PszxBatchInfoGroup",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/batchInfo/batchInfoCtrl/listByScheme___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___e63a62e31",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/batchInfo/batchInfoCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/batchInfo/batchInfoCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiI4NDA4ZmFhMGVkOGQ0MjdiYTdmNDNjODNiNGU1YzI4MCIsImlhdCI6MTc4MDk3NzA0OSwiZXhwIjoxNzgxMDM0NjQ5LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ._6V4DfS3XghpO4GyoD_fPmAMB003gcDvy9ykdREPqSD1dL_dyyu_rIABrKqIFiQNEAxcW52W51IRUY42dqGzsg",
+        "tcm-sign2": "2BB381BE7F335BAD905FD4A36BCE58390F9D450BD1D1F259E4DCE6E13D473D27",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "Wt4LShl7Bvo1RXT",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780977361060",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"e63a62e312e643ac9a0f92486b08edd1\",\"value\":[\"1787720377238028288\",\"global\"],\"field\":\"pkGroup\",\"operation\":\"in\"},{\"id\":\"08b489f7635c43abae8b4a4476988622\",\"value\":[null],\"field\":\"code\",\"operation\":\"like\"},{\"id\":\"a1d3ca412ae4466c83aabcdb670b93a9\",\"value\":[null],\"field\":\"pkLot\",\"operation\":\"in\"},{\"id\":\"c3ad0b154dc94a97804f361367f000ca\",\"value\":[null],\"field\":\"pkMat\",\"operation\":\"in\"},{\"id\":\"6e3646442918481daf97ebad9e01589e\",\"value\":[null],\"field\":\"enableflag\",\"operation\":\"eq\"},{\"id\":\"496bee37653a47c68672279dc7cf9328\",\"value\":[],\"field\":\"inboundDate\",\"operation\":\"between\"},{\"id\":\"a7230ec079e6461ab763d548fc56cc91\",\"value\":[null],\"field\":\"source\",\"operation\":\"in\"},{\"id\":\"d0164ff7da764744a6d95c2308db3381\",\"value\":[null],\"field\":\"remarks\",\"operation\":\"like\"},{\"id\":\"55dc5811106e474f9f70fe74a6f04520\",\"value\":[null],\"field\":\"createUserName\",\"operation\":\"like\"},{\"id\":\"9775802d12bc449cb339ee6b57b5e665\",\"value\":[null],\"field\":\"ncCode\",\"operation\":\"like\"}],\"templateId\":\"e100c42e327f4d79ab1be741170c8357\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isFlow\":false,\"isGroup\":true,\"auth\":\"PszxBatchInfoGroup\",\"header\":\"PSZX_BATCH_INFO_group\",\"query\":\"PSZX_BATCH_INFO_group\",\"bill\":\"PSZX_BATCH_INFO_group\",\"controller\":\"/batchInfo/batchInfoCtrl\",\"addNewParams\":null,\"importProperty\":{\"functionCode\":\"PSZX_BATCH_INFO_group\",\"billType\":\"批次号表\",\"orgLevel\":\"group\"}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780977361065,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}

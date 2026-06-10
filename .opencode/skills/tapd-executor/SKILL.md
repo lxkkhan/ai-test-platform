@@ -19,6 +19,8 @@ metadata:
 5. **tapd-sync** — 结果同步：回写用例执行状态，失败自动提 Bug
 6. **tapd-notify** — 企微通知：推送测试执行报告
 
+> **设计稿增强**：当需求中包含 CoDesign/JSDesign 设计链接时，可用 `design-analyze` 替代步骤 1（tapd-analyze），在分析需求的基础上增加设计规格提取和回写。
+
 ## 与 tapd-test 的区别
 
 | 特性 | tapd-test（旧） | tapd-executor（新） |
@@ -32,34 +34,58 @@ metadata:
 ## 触发方式
 
 ```
-/tapd-executor S-xxx --full      # 全流程（分析→生成→组装→执行→同步→通知）
-/tapd-executor S-xxx --assemble   # 只执行组装步骤（已有用例，生成脚本并执行）
-/tapd-executor S-xxx --execute    # 只执行已有脚本
+/tapd-executor S-xxx --full         # 全流程（分析→生成→组装→执行→同步→通知）
+/tapd-executor S-xxx --full --design # 全流程（设计稿入口：design-analyze→gen→assemble→...）
+/tapd-executor S-xxx --assemble      # 只执行组装步骤（已有用例，生成脚本并执行）
+/tapd-executor S-xxx --execute       # 只执行已有脚本
 ```
 
 ## 配置文件
 
+本 Skill 通过 `_extends` 引用共享凭证 `_shared/tapd-config.json`，自身只保留 Skill 特有字段：
+
 ```json
 {
-  "workspace_id": "33671402",
-  "api_user": "CiOzjwRC",
-  "api_password": "xxx",
-  "api_url": "https://api.tapd.cn",
-  "real_user": "刘晓康",
-  "defaults": {
-    "priority_label": "中",
-    "severity": "一般"
-  }
+  "_extends": "../_shared/tapd-config.json",
+  "mode": "selector",
+  "fallback_mode": "midscene",
+  "auto_execute": false,
+  "skip_notify_on_success": false
 }
 ```
 
+> **共享凭证**：所有 TAPD Skill 的共用字段统一在 `_shared/tapd-config.json` 管理。详见 tapd-analyze SKILL.md。
+
 ## 全流程工作流
 
-### 第一步：需求分析（tapd-analyze）
+### 第一步：需求分析（tapd-analyze / design-analyze）
+
+**默认模式（tapd-analyze）**：
 
 1. 读取 config.json 获取 TAPD 凭证
 2. 根据 story_id 拉取需求详情
 3. AI 分析需求，输出结构化报告
+
+**设计稿增强模式（design-analyze，需 `--design` 标志）**：
+
+当 TAPD 需求中包含 CoDesign/JSDesign 设计链接时，使用 `--design` 标志自动切换到 design-analyze：
+
+1. 调用 tapd-analyze 获取 TAPD 需求详情
+2. 从需求描述中提取 CoDesign/JSDesign 设计链接
+3. 自动检测平台并提取设计规格数据
+4. AI 分析设计稿（含 6 个基础维度 + 2 个设计增强维度）
+5. 分析结果追加回写到 TAPD 需求 description
+6. 输出 JSON（兼容 tapd-gen 输入格式）
+
+```bash
+# 全流程 + 设计稿增强
+/tapd-executor S-xxx --full --design
+
+# 设计稿分析后继续生成用例 + 组装脚本
+/tapd-executor S-xxx --assemble --design
+```
+
+> **注意**：`--design` 模式下，步骤 1 的输出包含 `design_specs` 字段，可辅助 template-engine 进行更精确的模板匹配。
 
 ### 第二步：用例生成（tapd-gen 增强版）
 
@@ -120,13 +146,14 @@ npx tsx scripts/run-tests.ts test_pool/<生成的spec文件>
 
 ## 与其他 Skill 的协作
 
-- **tapd-analyze** — 需求分析（第一步）
+- **tapd-analyze** — 需求分析（第一步，默认入口）
 - **tapd-gen** — 标签化用例生成（第二步）
 - **template-engine** — 脚本组装（第三步）
 - **auto-test-runner** — 测试执行（第四步）
 - **tapd-sync** — 结果同步（第五步）
 - **tapd-notify** — 企微通知（第六步）
 - **dom-recorder** — 模板录制源头（前置依赖）
+- **design-analyze** — 设计稿增强入口（`--design` 标志自动调用）：当需求中包含 CoDesign/JSDesign 链接时，自动提取设计规格并增强分析报告。design_specs 字段可辅助 template-engine 模板匹配
 
 ## 注意事项
 

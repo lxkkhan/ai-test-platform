@@ -1,0 +1,18 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "@executeautomation/playwright-mcp-server@0.2.7"],
+      "enabled": true
+    },
+    "codesign-mcp": {
+      "type": "local",
+      "command": ["npx", "-y", "codesign-mcp@latest"],
+      "environment": {
+        "CODESIGN_WORKSPACE_DIR": "."
+      },
+      "enabled": true
+    }
+  }
+}

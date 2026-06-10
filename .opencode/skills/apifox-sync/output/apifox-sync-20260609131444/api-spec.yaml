@@ -1,0 +1,4722 @@
+openapi: 3.0.3
+info:
+  title: 配送中心 SAAS 接口文档
+  version: 2026-06-09-auto
+  description: |-
+    由 apifox-sync 自动捕获生成
+    捕获时间: 2026-06-09T05:23:02.285Z
+    共 50 个页面, 60 个接口
+servers:
+  - url: https://tcm-dc-sit.zgzykg.com.cn
+    description: 配送中心 SAAS 生产环境
+tags:
+  - name: 公司-全局
+    description: 常用 > 公司-全局
+  - name: 元数据属性
+    description: 系统配置 > 元数据 > 元数据属性
+  - name: 元数据表关联
+    description: 系统配置 > 元数据 > 元数据表关联
+  - name: 查询模板权限查看
+    description: 系统配置 > 模板管理 > 查询模板权限查看
+  - name: 列模板
+    description: 系统配置 > 模板管理 > 列模板
+  - name: 表单模板
+    description: 系统配置 > 模板管理 > 表单模板
+  - name: 查询模板
+    description: 系统配置 > 模板管理 > 查询模板
+  - name: 微信号管理-全局
+    description: 系统配置 > 弹性配置 > 微信号管理-全局
+  - name: 脚本设置-公司
+    description: 系统配置 > 弹性配置 > 脚本设置-公司
+  - name: 操作审计日志
+    description: 系统配置 > 日志 > 操作审计日志
+  - name: 项目初始化清单日志
+    description: 系统配置 > 日志 > 项目初始化清单日志
+  - name: 项目初始化清单
+    description: 系统配置 > 日志 > 项目初始化清单
+  - name: 字典管理
+    description: 系统调度平台 > 字典管理
+  - name: 定时任务配置-全局
+    description: 系统调度平台 > 定时任务配置-全局
+  - name: 任务执行监控-全局
+    description: 系统调度平台 > 任务执行监控-全局
+  - name: 定时任务配置-组织
+    description: 系统调度平台 > 定时任务配置-组织
+  - name: 任务执行监控-组织
+    description: 系统调度平台 > 任务执行监控-组织
+  - name: 异常原因档案
+    description: 基础数据 > 异常原因档案
+  - name: 配送中心-公司
+    description: 基础数据 > 组织管理 > 配送中心-公司
+  - name: 人员-组织
+    description: 基础数据 > 组织管理 > 人员-组织
+  - name: 业务类型-公司
+    description: 基础数据 > 组织管理 > 业务类型-公司
+  - name: 参数模板设置-全局
+    description: 基础数据 > 组织管理 > 参数模板设置-全局
+  - name: 业务参数-全局
+    description: 基础数据 > 组织管理 > 业务参数-全局
+  - name: 业务参数-公司
+    description: 基础数据 > 组织管理 > 业务参数-公司
+  - name: 业务参数-配送中心
+    description: 基础数据 > 组织管理 > 业务参数-配送中心
+  - name: 物料类别-公司
+    description: 基础数据 > 物料信息 > 物料类别-公司
+  - name: 物料档案-公司
+    description: 基础数据 > 物料信息 > 物料档案-公司
+  - name: 物料档案
+    description: 基础数据 > 物料信息 > 物料档案
+  - name: 仓库
+    description: 基础数据 > 物料信息 > 仓库
+  - name: 货位
+    description: 基础数据 > 物料信息 > 货位
+  - name: 批号-公司
+    description: 基础数据 > 物料信息 > 批号-公司
+  - name: 批号
+    description: 基础数据 > 物料信息 > 批号
+  - name: 批次号-公司
+    description: 基础数据 > 物料信息 > 批次号-公司
+  - name: 批次号
+    description: 基础数据 > 物料信息 > 批次号
+  - name: 计量单位-全局
+    description: 基础数据 > 物料信息 > 计量单位-全局
+  - name: 药品性质-公司
+    description: 基础数据 > 物料信息 > 药品性质-公司
+  - name: 配伍禁忌-公司
+    description: 基础数据 > 物料信息 > 配伍禁忌-公司
+  - name: 配伍禁忌
+    description: 基础数据 > 物料信息 > 配伍禁忌
+  - name: 协定方档案-公司
+    description: 基础数据 > 物料信息 > 协定方档案-公司
+  - name: 协定方档案
+    description: 基础数据 > 物料信息 > 协定方档案
+  - name: 生产厂家-公司
+    description: 基础数据 > 物料信息 > 生产厂家-公司
+  - name: 包装规格-公司
+    description: 基础数据 > 物料信息 > 包装规格-公司
+  - name: 等级-公司
+    description: 基础数据 > 物料信息 > 等级-公司
+  - name: 产地-公司
+    description: 基础数据 > 物料信息 > 产地-公司
+  - name: 药用部位-公司
+    description: 基础数据 > 物料信息 > 药用部位-公司
+  - name: 煎煮要求-全局
+    description: 基础数据 > 物料信息 > 煎煮要求-全局
+  - name: 物料用量限制
+    description: 基础数据 > 物料信息 > 物料用量限制
+  - name: NC物料映射
+    description: 基础数据 > 物料信息 > NC物料映射
+  - name: 物料申请单
+    description: 基础数据 > 物料信息 > 物料申请单
+  - name: 库存状态-全局
+    description: 基础数据 > 物料信息 > 库存状态-全局
+paths:
+  /pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser:
+    get:
+      tags:
+        - 公司-全局
+        - 元数据属性
+        - 列模板
+        - 表单模板
+        - 微信号管理-全局
+        - 脚本设置-公司
+        - 操作审计日志
+        - 项目初始化清单日志
+        - 定时任务配置-全局
+        - 定时任务配置-组织
+        - 异常原因档案
+        - 配送中心-公司
+        - 人员-组织
+        - 业务类型-公司
+        - 参数模板设置-全局
+        - 业务参数-全局
+        - 业务参数-公司
+        - 业务参数-配送中心
+        - 物料类别-公司
+        - 物料档案-公司
+        - 仓库
+        - 货位
+        - 批号-公司
+        - 批次号-公司
+        - 计量单位-全局
+        - 药品性质-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+        - 生产厂家-公司
+        - 包装规格-公司
+        - 等级-公司
+        - 产地-公司
+        - 药用部位-公司
+        - 煎煮要求-全局
+        - 物料用量限制
+        - NC物料映射
+        - 物料申请单
+        - 库存状态-全局
+      summary: GET /pszxSaasServer/templates/query/queryTemplateCtrl/getQueryTemplateByCurrentUser
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_templates_query_queryTemplateCtrl_getQueryTemplateByCurrentUser
+      parameters:
+        - name: functionCode
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: orgLevel
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser:
+    get:
+      tags:
+        - 公司-全局
+        - 元数据属性
+        - 微信号管理-全局
+        - 脚本设置-公司
+        - 操作审计日志
+        - 项目初始化清单日志
+        - 定时任务配置-全局
+        - 定时任务配置-组织
+        - 异常原因档案
+        - 配送中心-公司
+        - 人员-组织
+        - 业务类型-公司
+        - 参数模板设置-全局
+        - 业务参数-全局
+        - 业务参数-公司
+        - 业务参数-配送中心
+        - 物料类别-公司
+        - 物料档案-公司
+        - 仓库
+        - 货位
+        - 批号-公司
+        - 批次号-公司
+        - 计量单位-全局
+        - 药品性质-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+        - 生产厂家-公司
+        - 包装规格-公司
+        - 等级-公司
+        - 产地-公司
+        - 药用部位-公司
+        - 煎煮要求-全局
+        - 物料用量限制
+        - NC物料映射
+        - 物料申请单
+        - 库存状态-全局
+      summary: GET /pszxSaasServer/templates/column/columnTemplateCtrl/getShowColumnTemplateByCurrentUser
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_templates_column_columnTemplateCtrl_getShowColumnTemplateByCurrentUser
+      parameters:
+        - name: functionCode
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup:
+    get:
+      tags:
+        - 公司-全局
+        - 元数据属性
+        - 列模板
+        - 表单模板
+        - 微信号管理-全局
+        - 脚本设置-公司
+        - 操作审计日志
+        - 项目初始化清单日志
+        - 定时任务配置-全局
+        - 定时任务配置-组织
+        - 异常原因档案
+        - 配送中心-公司
+        - 人员-组织
+        - 业务类型-公司
+        - 参数模板设置-全局
+        - 业务参数-全局
+        - 业务参数-公司
+        - 业务参数-配送中心
+        - 物料类别-公司
+        - 物料档案-公司
+        - 仓库
+        - 货位
+        - 批号-公司
+        - 批次号-公司
+        - 计量单位-全局
+        - 药品性质-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+        - 生产厂家-公司
+        - 包装规格-公司
+        - 等级-公司
+        - 产地-公司
+        - 药用部位-公司
+        - 煎煮要求-全局
+        - 物料用量限制
+        - NC物料映射
+        - 物料申请单
+        - 库存状态-全局
+      summary: GET /pszxSaasServer/basic/org/orgParamsCtrl/getParamsWithGroup
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_basic_org_orgParamsCtrl_getParamsWithGroup
+      parameters:
+        - name: code
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: pkGroup
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel:
+    get:
+      tags:
+        - 公司-全局
+        - 微信号管理-全局
+        - 脚本设置-公司
+        - 操作审计日志
+        - 项目初始化清单日志
+        - 定时任务配置-全局
+        - 定时任务配置-组织
+        - 异常原因档案
+        - 配送中心-公司
+        - 人员-组织
+        - 业务类型-公司
+        - 参数模板设置-全局
+        - 业务参数-全局
+        - 业务参数-公司
+        - 业务参数-配送中心
+        - 物料类别-公司
+        - 物料档案-公司
+        - 仓库
+        - 货位
+        - 批号-公司
+        - 批次号-公司
+        - 计量单位-全局
+        - 药品性质-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+        - 生产厂家-公司
+        - 包装规格-公司
+        - 等级-公司
+        - 产地-公司
+        - 药用部位-公司
+        - 煎煮要求-全局
+        - 物料用量限制
+        - NC物料映射
+        - 物料申请单
+        - 库存状态-全局
+      summary: GET /pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItemLabel
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_sysmp_sysDictionaryItemCtrl_getDictionaryItemLabel
+      parameters:
+        - name: value
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme:
+    post:
+      tags:
+        - 公司-全局
+        - 元数据属性
+        - 列模板
+        - 表单模板
+        - 微信号管理-全局
+        - 脚本设置-公司
+        - 操作审计日志
+        - 项目初始化清单日志
+        - 定时任务配置-全局
+        - 定时任务配置-组织
+        - 异常原因档案
+        - 配送中心-公司
+        - 人员-组织
+        - 业务类型-公司
+        - 参数模板设置-全局
+        - 业务参数-全局
+        - 业务参数-公司
+        - 业务参数-配送中心
+        - 物料类别-公司
+        - 物料档案-公司
+        - 仓库
+        - 货位
+        - 批号-公司
+        - 批次号-公司
+        - 计量单位-全局
+        - 药品性质-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+        - 生产厂家-公司
+        - 包装规格-公司
+        - 等级-公司
+        - 产地-公司
+        - 药用部位-公司
+        - 煎煮要求-全局
+        - 物料用量限制
+        - NC物料映射
+        - 物料申请单
+        - 库存状态-全局
+      summary: POST /pszxSaasServer/templates/query/personalTemplateCtrl/personalTemplateCtrl/listByScheme (page)
+      description: 捕获自页面「公司-全局」
+      operationId: post_pszxSaasServer_templates_query_personalTemplateCtrl_personalTemplateCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: boolean
+                  example: false
+                sortName:
+                  type: string
+                  example: sort
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: userId
+                      value:
+                        type: array
+                        items:
+                          type: number
+                          example: 20019
+                        example:
+                          - 20019
+                      operation:
+                        type: string
+                        example: eq
+                  example:
+                    - field: userId
+                      value:
+                        - 20019
+                      operation: eq
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/pszxOrgGroup/pszxOrgGroupCtrl/listByScheme:
+    post:
+      tags:
+        - 公司-全局
+      summary: POST /pszxSaasServer/pszxOrgGroup/pszxOrgGroupCtrl/listByScheme (pageSize)
+      description: 捕获自页面「公司-全局」
+      operationId: post_pszxSaasServer_pszxOrgGroup_pszxOrgGroupCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '1943516339784122368'
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: code
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - id: '1943516339784122368'
+                      value:
+                        - null
+                      field: code
+                      operation: like
+                templateId:
+                  type: string
+                  example: d92b4d2bf9c5452db7b18a75f8e47ddd
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: pszxOrgGroupGlobal
+                    header:
+                      type: string
+                      example: pszxOrgGroup_global
+                    query:
+                      type: string
+                      example: pszxOrgGroup_global
+                    bill:
+                      type: string
+                      example: pszxOrgGroup_global
+                    controller:
+                      type: string
+                      example: /pszxOrgGroup/pszxOrgGroupCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: pszxOrgGroup_global
+                        billType:
+                          type: string
+                          example: 公司表
+                        orgLevel:
+                          type: string
+                          example: global
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/aliOss/downloadFile/1e056d2b0ebd5c878c550da6ac5d3724:
+    get:
+      tags:
+        - 公司-全局
+      summary: GET /pszxSaasServer/aliOss/downloadFile/1e056d2b0ebd5c878c550da6ac5d3724
+      description: 捕获自页面「公司-全局」
+      operationId: get_pszxSaasServer_aliOss_downloadFile_1e056d2b0ebd5c878c550da6ac5d3724
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/meta/metaPropertyCtrl/listByScheme:
+    post:
+      tags:
+        - 元数据属性
+      summary: POST /pszxSaasServer/meta/metaPropertyCtrl/listByScheme (pageSize)
+      description: 捕获自页面「元数据属性」
+      operationId: post_pszxSaasServer_meta_metaPropertyCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 4574d04ad7dc4b1ca144cb78b2bfdddc
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: tableName
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - id: 4574d04ad7dc4b1ca144cb78b2bfdddc
+                      value:
+                        - null
+                      field: tableName
+                      operation: like
+                templateId:
+                  type: string
+                  example: 77ca788ed7994b31a28252b3e3e82d30
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: MetaProperty
+                    header:
+                      type: string
+                      example: MetaProperty_global
+                    query:
+                      type: string
+                      example: MetaProperty_global
+                    bill:
+                      type: string
+                      example: MetaProperty_global
+                    controller:
+                      type: string
+                      example: /meta/metaPropertyCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: MetaProperty_global
+                        billType:
+                          type: string
+                          example: 元数据属性
+                        orgLevel:
+                          type: string
+                          example: global
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/column/columnTemplateHeadCtrl/listWithChildren:
+    post:
+      tags:
+        - 列模板
+      summary: POST /pszxSaasServer/templates/column/columnTemplateHeadCtrl/listWithChildren (pageSize)
+      description: 捕获自页面「列模板」
+      operationId: post_pszxSaasServer_templates_column_columnTemplateHeadCtrl_listWithChildren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '1638426612599095296'
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: head.funcCode
+                      operation:
+                        type: string
+                        example: eq
+                  example:
+                    - id: '1638426612599095296'
+                      value:
+                        - null
+                      field: head.funcCode
+                      operation: eq
+                templateId:
+                  type: string
+                  example: 50c65bf9-f19d-488a-b9ed-6677a4f247b2
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/bill/billTemplateHeadCtrl/listWithChildren:
+    post:
+      tags:
+        - 表单模板
+      summary: POST /pszxSaasServer/templates/bill/billTemplateHeadCtrl/listWithChildren (pageSize)
+      description: 捕获自页面「表单模板」
+      operationId: post_pszxSaasServer_templates_bill_billTemplateHeadCtrl_listWithChildren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 969c9b50-fae6-4cf3-a72e-63bef37413b3
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: head.funcCode
+                      operation:
+                        type: string
+                        example: eq
+                  example:
+                    - id: 969c9b50-fae6-4cf3-a72e-63bef37413b3
+                      value:
+                        - null
+                      field: head.funcCode
+                      operation: eq
+                templateId:
+                  type: string
+                  example: 969c9b50-fae6-4cf3-a72e-63bef37413bk
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/org/orgWxAccountCtrl/listByScheme:
+    post:
+      tags:
+        - 微信号管理-全局
+      summary: POST /pszxSaasServer/org/orgWxAccountCtrl/listByScheme (pageSize)
+      description: 捕获自页面「微信号管理-全局」
+      operationId: post_pszxSaasServer_org_orgWxAccountCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 1aeb07596994457e87c6cc9ff0558499
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: originalId
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - id: 1aeb07596994457e87c6cc9ff0558499
+                      value:
+                        - null
+                      field: originalId
+                      operation: like
+                templateId:
+                  type: string
+                  example: 2563f6f0b8204dd48c14e5a72c4d1cdc
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: OrgWxAccountGlobal
+                    header:
+                      type: string
+                      example: OrgWxAccount_global
+                    query:
+                      type: string
+                      example: OrgWxAccount_global
+                    bill:
+                      type: string
+                      example: OrgWxAccount_global
+                    controller:
+                      type: string
+                      example: /org/orgWxAccountCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: OrgWxAccount_global
+                        billType:
+                          type: string
+                          example: 微信号管理表
+                        orgLevel:
+                          type: string
+                          example: global
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/gyg/basic/sysmp/sysUserVOCtrl/listByScheme:
+    post:
+      tags:
+        - 微信号管理-全局
+        - 配送中心-公司
+        - 人员-组织
+      summary: POST /pszxSaasServer/gyg/basic/sysmp/sysUserVOCtrl/listByScheme (page)
+      description: 捕获自页面「微信号管理-全局」
+      operationId: post_pszxSaasServer_gyg_basic_sysmp_sysUserVOCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: boolean
+                  example: true
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: id
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      operation:
+                        type: string
+                        example: eq
+                  example:
+                    - field: id
+                      value:
+                        - null
+                      operation: eq
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItems:
+    get:
+      tags:
+        - 脚本设置-公司
+        - 定时任务配置-全局
+        - 任务执行监控-全局
+        - 定时任务配置-组织
+        - 任务执行监控-组织
+        - 异常原因档案
+        - 配送中心-公司
+        - 业务类型-公司
+        - 参数模板设置-全局
+        - 业务参数-全局
+        - 业务参数-公司
+        - 业务参数-配送中心
+        - 物料档案-公司
+        - 仓库
+        - 批号-公司
+        - 批次号-公司
+        - 生产厂家-公司
+        - 包装规格-公司
+        - 等级-公司
+        - 产地-公司
+        - 药用部位-公司
+        - 物料申请单
+      summary: GET /pszxSaasServer/sysmp/sysDictionaryItemCtrl/getDictionaryItems
+      description: 捕获自页面「脚本设置-公司」
+      operationId: get_pszxSaasServer_sysmp_sysDictionaryItemCtrl_getDictionaryItems
+      parameters:
+        - name: dictionaryCode
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/org/orgGroupCtrl/getGroupTree:
+    post:
+      tags:
+        - 脚本设置-公司
+        - 配送中心-公司
+        - 业务类型-公司
+        - 业务参数-公司
+        - 物料类别-公司
+        - 物料档案-公司
+        - 批号-公司
+        - 批次号-公司
+        - 药品性质-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+        - 生产厂家-公司
+        - 包装规格-公司
+        - 等级-公司
+        - 产地-公司
+        - 药用部位-公司
+        - NC物料映射
+      summary: POST /pszxSaasServer/org/orgGroupCtrl/getGroupTree (functionCode=OrgGroup)
+      description: 捕获自页面「脚本设置-公司」
+      operationId: post_pszxSaasServer_org_orgGroupCtrl_getGroupTree
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                functionCode:
+                  type: string
+                  example: OrgGroup
+                page:
+                  type: boolean
+                  example: false
+                sortName:
+                  type: string
+                  example: ''
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: id
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: ${user.pkGroupList}
+                        example:
+                          - ${user.pkGroupList}
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - field: id
+                      value:
+                        - ${user.pkGroupList}
+                      operation: in
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/config/dbScriptCtrl/listByScheme:
+    post:
+      tags:
+        - 脚本设置-公司
+      summary: POST /pszxSaasServer/config/dbScriptCtrl/listByScheme (pageSize)
+      description: 捕获自页面「脚本设置-公司」
+      operationId: post_pszxSaasServer_config_dbScriptCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: a91435f0827c4db8bcda56164b43d745
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: a91435f0827c4db8bcda56164b43d745
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: da68a1dd05284167825e7a1a37789eda
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: dbScriptGroup
+                    header:
+                      type: string
+                      example: dbScript_group
+                    query:
+                      type: string
+                      example: dbScript_group
+                    bill:
+                      type: string
+                      example: dbScript_group
+                    controller:
+                      type: string
+                      example: /config/dbScriptCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: dbScript_group
+                        billType:
+                          type: string
+                          example: 脚本设置
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/org/orgOrgCtrl/getOrgTree:
+    post:
+      tags:
+        - 操作审计日志
+        - 项目初始化清单日志
+        - 定时任务配置-组织
+        - 异常原因档案
+        - 人员-组织
+        - 业务参数-配送中心
+        - 仓库
+        - 货位
+        - 物料用量限制
+        - 物料申请单
+      summary: POST /pszxSaasServer/org/orgOrgCtrl/getOrgTree (functionCodeObj)
+      description: 捕获自页面「操作审计日志」
+      operationId: post_pszxSaasServer_org_orgOrgCtrl_getOrgTree
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                functionCodeObj:
+                  type: object
+                  properties:
+                    query:
+                      type: string
+                      example: OrgOrg_org
+                page:
+                  type: boolean
+                  example: false
+                sortName:
+                  type: string
+                  example: ''
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: id
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: ${user.belongOrgList}
+                        example:
+                          - ${user.belongOrgList}
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - field: id
+                      value:
+                        - ${user.belongOrgList}
+                      operation: in
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/audit/auditRecordCtrl/listByScheme:
+    post:
+      tags:
+        - 操作审计日志
+      summary: POST /pszxSaasServer/audit/auditRecordCtrl/listByScheme (pageSize)
+      description: 捕获自页面「操作审计日志」
+      operationId: post_pszxSaasServer_audit_auditRecordCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 081c86aeddb645b396f1ee48e01d5a68
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: 00013A1000000000VGSD
+                        example:
+                          - 00013A1000000000VGSD
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 081c86aeddb645b396f1ee48e01d5a68
+                      value:
+                        - 00013A1000000000VGSD
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: 8c45e92ad10b4a1bb979f7a6b2752e98
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isOrg:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: AuditRecordOrg
+                    header:
+                      type: string
+                      example: AuditRecord_org
+                    query:
+                      type: string
+                      example: AuditRecord_org
+                    bill:
+                      type: string
+                      example: AuditRecord_org
+                    controller:
+                      type: string
+                      example: /audit/auditRecordCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: AuditRecord_org
+                        billType:
+                          type: string
+                          example: 审计记录
+                        orgLevel:
+                          type: string
+                          example: org
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/InitLog/syncInitLogCtrl/listByScheme:
+    post:
+      tags:
+        - 项目初始化清单日志
+        - 项目初始化清单
+      summary: POST /pszxSaasServer/InitLog/syncInitLogCtrl/listByScheme (pageSize)
+      description: 捕获自页面「项目初始化清单日志」
+      operationId: post_pszxSaasServer_InitLog_syncInitLogCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: d4cd0c5f43db4c9d83ae6e52a8e562d3
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: 00013A1000000000VGSD
+                        example:
+                          - 00013A1000000000VGSD
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: d4cd0c5f43db4c9d83ae6e52a8e562d3
+                      value:
+                        - 00013A1000000000VGSD
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: 0a730d835100495f98c4c3e740f0a8f7
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isOrg:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: SyncInitLogOrg
+                    header:
+                      type: string
+                      example: SyncInitLog_org
+                    query:
+                      type: string
+                      example: SyncInitLog_org
+                    bill:
+                      type: string
+                      example: SyncInitLog_org
+                    controller:
+                      type: string
+                      example: /InitLog/syncInitLogCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: SyncInitLog_org
+                        billType:
+                          type: string
+                          example: 项目初始化清单日志
+                        orgLevel:
+                          type: string
+                          example: org
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/InitItem/syncInitItemCtrl/listByScheme:
+    post:
+      tags:
+        - 项目初始化清单日志
+      summary: POST /pszxSaasServer/InitItem/syncInitItemCtrl/listByScheme (page)
+      description: 捕获自页面「项目初始化清单日志」
+      operationId: post_pszxSaasServer_InitItem_syncInitItemCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: boolean
+                  example: true
+                pageSize:
+                  type: number
+                  example: 20
+                functionCodeObj:
+                  type: object
+                  properties:
+                    header:
+                      type: string
+                      example: SyncInitItem_global
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: code
+                      value:
+                        type: array
+                        items:
+                          type: object
+                        example: []
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - field: code
+                      value: []
+                      operation: like
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/sysmp/sysDictionaryCtrl/list:
+    get:
+      tags:
+        - 字典管理
+      summary: GET /pszxSaasServer/sysmp/sysDictionaryCtrl/list
+      description: 捕获自页面「字典管理」
+      operationId: get_pszxSaasServer_sysmp_sysDictionaryCtrl_list
+      parameters:
+        - name: basicEntity.deleteflag
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: pageNum
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/sysmp/quartzTaskConfigCtrl/list:
+    get:
+      tags:
+        - 定时任务配置-全局
+        - 定时任务配置-组织
+      summary: GET /pszxSaasServer/sysmp/quartzTaskConfigCtrl/list
+      description: 捕获自页面「定时任务配置-全局」
+      operationId: get_pszxSaasServer_sysmp_quartzTaskConfigCtrl_list
+      parameters:
+        - name: pageNum
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: basicEntity.deleteflag
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: basicEntity.orgFlag
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/sysmp/quartzTaskExecLogCtrl/list:
+    get:
+      tags:
+        - 任务执行监控-全局
+        - 任务执行监控-组织
+      summary: GET /pszxSaasServer/sysmp/quartzTaskExecLogCtrl/list
+      description: 捕获自页面「任务执行监控-全局」
+      operationId: get_pszxSaasServer_sysmp_quartzTaskExecLogCtrl_list
+      parameters:
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: pageNum
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: sortName
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/print/printTmpCtrl/listByScheme:
+    post:
+      tags:
+        - 异常原因档案
+        - 物料申请单
+      summary: POST /pszxSaasServer/print/printTmpCtrl/listByScheme (functionCodeObj)
+      description: 捕获自页面「异常原因档案」
+      operationId: post_pszxSaasServer_print_printTmpCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                functionCodeObj:
+                  type: object
+                  properties:
+                    header:
+                      type: string
+                      example: PrintTmp_org
+                    query:
+                      type: string
+                      example: PrintTmp_org
+                page:
+                  type: boolean
+                  example: false
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: enableflag
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '0'
+                        example:
+                          - '0'
+                      operation:
+                        type: string
+                        example: eq
+                  example:
+                    - field: enableflag
+                      value:
+                        - '0'
+                      operation: eq
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/main/exceptionReason/pszxExceptionReasonCtrl/listByScheme:
+    post:
+      tags:
+        - 异常原因档案
+      summary: POST /pszxSaasServer/main/exceptionReason/pszxExceptionReasonCtrl/listByScheme (pageSize)
+      description: 捕获自页面「异常原因档案」
+      operationId: post_pszxSaasServer_main_exceptionReason_pszxExceptionReasonCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 220aa0c6ff844361b9bda5909b45e8b0
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: 00013A1000000000VGSD
+                        example:
+                          - 00013A1000000000VGSD
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 220aa0c6ff844361b9bda5909b45e8b0
+                      value:
+                        - 00013A1000000000VGSD
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: 0e6a9d6ef11640babe799f1b0c092db4
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isOrg:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: PszxExceptionReasonOrg
+                    header:
+                      type: string
+                      example: PszxExceptionReason_org
+                    query:
+                      type: string
+                      example: PszxExceptionReason_org
+                    bill:
+                      type: string
+                      example: PszxExceptionReason_org
+                    controller:
+                      type: string
+                      example: /main/exceptionReason/pszxExceptionReasonCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: PszxExceptionReason_org
+                        billType:
+                          type: string
+                          example: 异常原因档案
+                        orgLevel:
+                          type: string
+                          example: org
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/pszxOrgOrg/pszxOrgOrgCtrl/listByScheme:
+    post:
+      tags:
+        - 配送中心-公司
+        - 物料档案-公司
+        - 协定方档案-公司
+      summary: POST /pszxSaasServer/pszxOrgOrg/pszxOrgOrgCtrl/listByScheme (pageSize)
+      description: 捕获自页面「配送中心-公司」
+      operationId: post_pszxSaasServer_pszxOrgOrg_pszxOrgOrgCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: db051413f45941418370c2c345737e30
+                      value:
+                        type: array
+                        items:
+                          type: object
+                        example: []
+                      field:
+                        type: string
+                        example: pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: db051413f45941418370c2c345737e30
+                      value: []
+                      field: pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: 5e9534a6378e4692a7f3556ae4e51809
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: PszxOrgOrgGroup
+                    header:
+                      type: string
+                      example: pszxOrgOrg_group
+                    query:
+                      type: string
+                      example: pszxOrgOrg_group
+                    bill:
+                      type: string
+                      example: pszxOrgOrg_group
+                    controller:
+                      type: string
+                      example: /pszxOrgOrg/pszxOrgOrgCtrl
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/org/orgOrgCtrl/getCurrentOrg:
+    get:
+      tags:
+        - 人员-组织
+      summary: GET /pszxSaasServer/org/orgOrgCtrl/getCurrentOrg
+      description: 捕获自页面「人员-组织」
+      operationId: get_pszxSaasServer_org_orgOrgCtrl_getCurrentOrg
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/pszxDept/deptCtrl/listTree:
+    post:
+      tags:
+        - 人员-组织
+      summary: POST /pszxSaasServer/pszxDept/deptCtrl/listTree (queryConditions[2])
+      description: 捕获自页面「人员-组织」
+      operationId: post_pszxSaasServer_pszxDept_deptCtrl_listTree
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: deleteflag
+                      operation:
+                        type: string
+                        example: eq
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '0'
+                        example:
+                          - '0'
+                  example:
+                    - field: deleteflag
+                      operation: eq
+                      value:
+                        - '0'
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/pszxStaff/staffCtrl/listByScheme:
+    post:
+      tags:
+        - 人员-组织
+      summary: POST /pszxSaasServer/pszxStaff/staffCtrl/listByScheme (pageSize)
+      description: 捕获自页面「人员-组织」
+      operationId: post_pszxSaasServer_pszxStaff_staffCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 3a2f115a7da84cdcbdd2c6e22a17c77c
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: 00013A1000000000VGSD
+                        example:
+                          - 00013A1000000000VGSD
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 3a2f115a7da84cdcbdd2c6e22a17c77c
+                      value:
+                        - 00013A1000000000VGSD
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: e1455ea1b743461e9645f3b72431a5a8
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isOrg:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: PszxStaffOrg
+                    header:
+                      type: string
+                      example: pszxStaff_org
+                    query:
+                      type: string
+                      example: pszxStaff_org
+                    bill:
+                      type: string
+                      example: pszxStaff_org
+                    controller:
+                      type: string
+                      example: /pszxStaff/staffCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: pszxStaff_org
+                        billType:
+                          type: string
+                          example: 人员
+                        orgLevel:
+                          type: string
+                          example: org
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/businessType/businessTypeCtrl/listByScheme:
+    post:
+      tags:
+        - 业务类型-公司
+        - 仓库
+        - 协定方档案-公司
+      summary: POST /pszxSaasServer/businessType/businessTypeCtrl/listByScheme (pageSize)
+      description: 捕获自页面「业务类型-公司」
+      operationId: post_pszxSaasServer_businessType_businessTypeCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 82ac821bda2743feb54f6bbe11068eb8
+                      value:
+                        type: array
+                        items:
+                          type: object
+                        example: []
+                      field:
+                        type: string
+                        example: pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 82ac821bda2743feb54f6bbe11068eb8
+                      value: []
+                      field: pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: 24c12a351996495f97585b70ac6ee314
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: businessTypeGroup
+                    header:
+                      type: string
+                      example: businessType_group
+                    query:
+                      type: string
+                      example: businessType_group
+                    bill:
+                      type: string
+                      example: businessType_group
+                    controller:
+                      type: string
+                      example: /businessType/businessTypeCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: businessType_group
+                        billType:
+                          type: string
+                          example: 业务类型表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/basic/org/orgParamsTemplateCtrl/listByScheme:
+    post:
+      tags:
+        - 参数模板设置-全局
+      summary: POST /pszxSaasServer/basic/org/orgParamsTemplateCtrl/listByScheme (pageSize)
+      description: 捕获自页面「参数模板设置-全局」
+      operationId: post_pszxSaasServer_basic_org_orgParamsTemplateCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 7998f06343e8408d91339215b1c51320
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: code
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - id: 7998f06343e8408d91339215b1c51320
+                      value:
+                        - null
+                      field: code
+                      operation: like
+                templateId:
+                  type: string
+                  example: 8d79634444ab4a9f8f884d41b75ffc34
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    auth:
+                      type: string
+                      example: OrgParamsTemplateGlobal
+                    header:
+                      type: string
+                      example: OrgParamsTemplate_global
+                    query:
+                      type: string
+                      example: OrgParamsTemplate_global
+                    bill:
+                      type: string
+                      example: OrgParamsTemplate_global
+                    controller:
+                      type: string
+                      example: /basic/org/orgParamsTemplateCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: OrgParamsTemplate_global
+                        billType:
+                          type: string
+                          example: 参数模板设置表
+                        orgLevel:
+                          type: string
+                          example: global
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/basic/org/orgParamsCtrl/listByScheme:
+    post:
+      tags:
+        - 业务参数-全局
+        - 业务参数-公司
+        - 业务参数-配送中心
+      summary: POST /pszxSaasServer/basic/org/orgParamsCtrl/listByScheme (pageSize)
+      description: 捕获自页面「业务参数-全局」
+      operationId: post_pszxSaasServer_basic_org_orgParamsCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '1941370228323647494'
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: code
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - id: '1941370228323647494'
+                      value:
+                        - null
+                      field: code
+                      operation: like
+                templateId:
+                  type: string
+                  example: '1941370228315258880'
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    auth:
+                      type: string
+                      example: OrgParamsGlobal
+                    header:
+                      type: string
+                      example: OrgParams_global
+                    query:
+                      type: string
+                      example: OrgParams_global
+                    bill:
+                      type: string
+                      example: OrgParams_global
+                    controller:
+                      type: string
+                      example: /basic/org/orgParamsCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: OrgParams_global
+                        billType:
+                          type: string
+                          example: 业务参数表
+                        orgLevel:
+                          type: string
+                          example: global
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/archive/mat/type/materialArchiveTypeHeadCtrl/listWithChildren:
+    post:
+      tags:
+        - 物料类别-公司
+        - 物料档案-公司
+        - 物料申请单
+      summary: POST /pszxSaasServer/archive/mat/type/materialArchiveTypeHeadCtrl/listWithChildren (pageSize)
+      description: 捕获自页面「物料类别-公司」
+      operationId: post_pszxSaasServer_archive_mat_type_materialArchiveTypeHeadCtrl_listWithChildren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: c17137e269ac4a3c8b98ff53c5469b7c
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: head.pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: c17137e269ac4a3c8b98ff53c5469b7c
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: head.pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: a3d6567d04a04f799f767c61594fd328
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isGroup:
+                      type: boolean
+                      example: true
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: MaterialArchiveTypeGroup
+                    header:
+                      type: string
+                      example: MaterialArchiveTypeHead_group
+                    query:
+                      type: string
+                      example: MaterialArchiveTypeHead_group
+                    bill:
+                      type: string
+                      example: MaterialArchiveTypeHead_group
+                    bodyController:
+                      type: string
+                      example: /archive/mat/type/materialArchiveTypeBodyCtrl
+                    controller:
+                      type: string
+                      example: /archive/mat/type/materialArchiveTypeCtrl
+                    materialArchiveTypeBody:
+                      type: string
+                      example: MaterialArchiveTypeBody_group
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: MaterialArchiveTypeHead_group
+                        billType:
+                          type: string
+                          example: 物料类别表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/bill/billTemplateCtrl/getBillTemplateByCurrentUser:
+    get:
+      tags:
+        - 物料档案-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+      summary: GET /pszxSaasServer/templates/bill/billTemplateCtrl/getBillTemplateByCurrentUser
+      description: 捕获自页面「物料档案-公司」
+      operationId: get_pszxSaasServer_templates_bill_billTemplateCtrl_getBillTemplateByCurrentUser
+      parameters:
+        - name: functionCode
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: orgLevel
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/column/columnTemplateCtrl/getEditColumnTemplateByCurrentUser:
+    get:
+      tags:
+        - 物料档案-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+      summary: GET /pszxSaasServer/templates/column/columnTemplateCtrl/getEditColumnTemplateByCurrentUser
+      description: 捕获自页面「物料档案-公司」
+      operationId: get_pszxSaasServer_templates_column_columnTemplateCtrl_getEditColumnTemplateByCurrentUser
+      parameters:
+        - name: functionCode
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/templates/rule/billTemplateRuleCtrl/getFormTemplateRulesByCurrentUser:
+    get:
+      tags:
+        - 物料档案-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+      summary: GET /pszxSaasServer/templates/rule/billTemplateRuleCtrl/getFormTemplateRulesByCurrentUser
+      description: 捕获自页面「物料档案-公司」
+      operationId: get_pszxSaasServer_templates_rule_billTemplateRuleCtrl_getFormTemplateRulesByCurrentUser
+      parameters:
+        - name: functionCode
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/archive/mat/materialArchiveHeadCtrl/listWithChildren:
+    post:
+      tags:
+        - 物料档案-公司
+        - 物料档案
+        - 批号-公司
+        - 批次号-公司
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+      summary: POST /pszxSaasServer/archive/mat/materialArchiveHeadCtrl/listWithChildren (pageSize)
+      description: 捕获自页面「物料档案-公司」
+      operationId: post_pszxSaasServer_archive_mat_materialArchiveHeadCtrl_listWithChildren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 4148a6884228464bbc5a477667c871e4
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: head.pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 4148a6884228464bbc5a477667c871e4
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: head.pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: 48e3859d6c624842b177778e20d02fdb
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isGroup:
+                      type: boolean
+                      example: true
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: MaterialArchiveGroup
+                    header:
+                      type: string
+                      example: MaterialArchiveHead_group
+                    query:
+                      type: string
+                      example: MaterialArchiveHead_group
+                    bill:
+                      type: string
+                      example: MaterialArchiveHead_group
+                    bodyController:
+                      type: string
+                      example: /archive/mat/materialArchiveDistributeCtrl
+                    controller:
+                      type: string
+                      example: /archive/mat/materialArchiveCtrl
+                    materialArchiveDistribute:
+                      type: string
+                      example: MaterialArchiveDistribute_group
+                    materialArchiveLocation:
+                      type: string
+                      example: MaterialArchiveLocation_group
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: MaterialArchiveHead_group
+                        billType:
+                          type: string
+                          example: 物料档案表
+                        orgLevel:
+                          type: string
+                          example: group
+                        indexFunctionCodeMap:
+                          type: object
+                          properties:
+                            '0':
+                              type: string
+                              example: MaterialArchiveDistribute_group_export
+                            '1':
+                              type: string
+                              example: MaterialArchiveLocation_group
+                    batchImportProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: MaterialArchiveHead_group
+                        billType:
+                          type: string
+                          example: 物料档案表
+                        orgLevel:
+                          type: string
+                          example: group
+                        indexFunctionCodeMap:
+                          type: object
+                          properties:
+                            '0':
+                              type: string
+                              example: MaterialArchiveDistribute_group
+                            '1':
+                              type: string
+                              example: MaterialArchiveLocation_group
+                        excludeFields:
+                          type: array
+                          items:
+                            type: string
+                            example: pkOrg
+                          example:
+                            - pkOrg
+                        excludeItemFields:
+                          type: object
+                          properties:
+                            '0':
+                              type: array
+                              items:
+                                type: string
+                                example: pkOrg
+                              example:
+                                - pkOrg
+                            '1':
+                              type: array
+                              items:
+                                type: string
+                                example: pkOrg
+                              example:
+                                - pkOrg
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/archive/mat/materialArchiveCtrl/getDetail:
+    post:
+      tags:
+        - 物料档案-公司
+        - 物料档案
+      summary: POST /pszxSaasServer/archive/mat/materialArchiveCtrl/getDetail (id=2061717877588496384)
+      description: 捕获自页面「物料档案-公司」
+      operationId: post_pszxSaasServer_archive_mat_materialArchiveCtrl_getDetail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: '2061717877588496384'
+                indexFunctionCodeMap:
+                  type: object
+                  properties:
+                    '0':
+                      type: string
+                      example: MaterialArchiveDistribute_group
+                    '1':
+                      type: string
+                      example: MaterialArchiveLocation_group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/measurementUnit/measurementUnitCtrl/listByScheme:
+    post:
+      tags:
+        - 物料档案-公司
+        - 计量单位-全局
+      summary: POST /pszxSaasServer/measurementUnit/measurementUnitCtrl/listByScheme (page)
+      description: 捕获自页面「物料档案-公司」
+      operationId: post_pszxSaasServer_measurementUnit_measurementUnitCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: boolean
+                  example: false
+                functionCodeObj:
+                  type: object
+                  properties:
+                    header:
+                      type: string
+                      example: PSZX_MEASUREMENT_UNIT_global
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: code
+                      value:
+                        type: array
+                        items:
+                          type: object
+                        example: []
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - field: code
+                      value: []
+                      operation: like
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/drugProperty/drugPropertyCtrl/listByScheme:
+    post:
+      tags:
+        - 物料档案-公司
+        - 药品性质-公司
+      summary: POST /pszxSaasServer/drugProperty/drugPropertyCtrl/listByScheme (page)
+      description: 捕获自页面「物料档案-公司」
+      operationId: post_pszxSaasServer_drugProperty_drugPropertyCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: boolean
+                  example: false
+                functionCodeObj:
+                  type: object
+                  properties:
+                    header:
+                      type: string
+                      example: PSZX_DRUG_PROPERTY_group
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: code
+                      value:
+                        type: array
+                        items:
+                          type: object
+                        example: []
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - field: code
+                      value: []
+                      operation: like
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/decoctRequirement/decoctRequirementCtrl/listByScheme:
+    post:
+      tags:
+        - 物料档案-公司
+        - 协定方档案-公司
+        - 煎煮要求-全局
+      summary: POST /pszxSaasServer/decoctRequirement/decoctRequirementCtrl/listByScheme (page)
+      description: 捕获自页面「物料档案-公司」
+      operationId: post_pszxSaasServer_decoctRequirement_decoctRequirementCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: boolean
+                  example: false
+                functionCodeObj:
+                  type: object
+                  properties:
+                    header:
+                      type: string
+                      example: decoctRequirement_global
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: code
+                      value:
+                        type: array
+                        items:
+                          type: object
+                        example: []
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - field: code
+                      value: []
+                      operation: like
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/hospital/hospitalDistributeCtrl/listByScheme:
+    post:
+      tags:
+        - 仓库
+        - 物料用量限制
+      summary: POST /pszxSaasServer/hospital/hospitalDistributeCtrl/listByScheme (page)
+      description: 捕获自页面「仓库」
+      operationId: post_pszxSaasServer_hospital_hospitalDistributeCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: boolean
+                  example: false
+                functionCodeObj:
+                  type: object
+                  properties:
+                    header:
+                      type: string
+                      example: HospitalDistribute_org_source
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: hospitalFullName
+                      value:
+                        type: array
+                        items:
+                          type: object
+                        example: []
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - field: hospitalFullName
+                      value: []
+                      operation: like
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/warehouse/warehouseCtrl/listByScheme:
+    post:
+      tags:
+        - 仓库
+        - 货位
+      summary: POST /pszxSaasServer/warehouse/warehouseCtrl/listByScheme (pageSize)
+      description: 捕获自页面「仓库」
+      operationId: post_pszxSaasServer_warehouse_warehouseCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 165e316a6e1a4bebb23e7070d103bdef
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: 00013A1000000000VGSD
+                        example:
+                          - 00013A1000000000VGSD
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 165e316a6e1a4bebb23e7070d103bdef
+                      value:
+                        - 00013A1000000000VGSD
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: e083cad9bee2454ea817e5a565857ff1
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isOrg:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: PszxWarehouseOrg
+                    header:
+                      type: string
+                      example: PSZX_WAREHOUSE_org
+                    query:
+                      type: string
+                      example: PSZX_WAREHOUSE_org
+                    bill:
+                      type: string
+                      example: PSZX_WAREHOUSE_org
+                    controller:
+                      type: string
+                      example: /warehouse/warehouseCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: PSZX_WAREHOUSE_org
+                        billType:
+                          type: string
+                          example: 仓库表
+                        orgLevel:
+                          type: string
+                          example: org
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/location/locationCtrl/listByScheme:
+    post:
+      tags:
+        - 货位
+      summary: POST /pszxSaasServer/location/locationCtrl/listByScheme (pageSize)
+      description: 捕获自页面「货位」
+      operationId: post_pszxSaasServer_location_locationCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 8924ff42e5c640fc8de987e7ece6dd8f
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: 00013A1000000000VGSD
+                        example:
+                          - 00013A1000000000VGSD
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 8924ff42e5c640fc8de987e7ece6dd8f
+                      value:
+                        - 00013A1000000000VGSD
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: 10a71fe9595a471fa67635fcc34499a2
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isOrg:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: PszxLocationOrg
+                    header:
+                      type: string
+                      example: PSZX_LOCATION_org
+                    query:
+                      type: string
+                      example: PSZX_LOCATION_org
+                    bill:
+                      type: string
+                      example: PSZX_LOCATION_org
+                    controller:
+                      type: string
+                      example: /location/locationCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: PSZX_LOCATION_org
+                        billType:
+                          type: string
+                          example: 货位表
+                        orgLevel:
+                          type: string
+                          example: org
+                    batchImportProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: PSZX_LOCATION_org
+                        billType:
+                          type: string
+                          example: 货位表
+                        orgLevel:
+                          type: string
+                          example: org
+                        excludeFields:
+                          type: array
+                          items:
+                            type: string
+                            example: pkOrg
+                          example:
+                            - pkOrg
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/lotInfo/lotInfoCtrl/listByScheme:
+    post:
+      tags:
+        - 批号-公司
+        - 批号
+        - 批次号-公司
+      summary: POST /pszxSaasServer/lotInfo/lotInfoCtrl/listByScheme (pageSize)
+      description: 捕获自页面「批号-公司」
+      operationId: post_pszxSaasServer_lotInfo_lotInfoCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 5eaadf517c6f43ff80c77b9c372eca5e
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 5eaadf517c6f43ff80c77b9c372eca5e
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: 19f489e81fe247f3b739c848f5a9ddac
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: PszxLotInfoGroup
+                    header:
+                      type: string
+                      example: PSZX_LOT_INFO_group
+                    query:
+                      type: string
+                      example: PSZX_LOT_INFO_group
+                    bill:
+                      type: string
+                      example: PSZX_LOT_INFO_group
+                    controller:
+                      type: string
+                      example: /lotInfo/lotInfoCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: PSZX_LOT_INFO_group
+                        billType:
+                          type: string
+                          example: 批号表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/batchInfo/batchInfoCtrl/listByScheme:
+    post:
+      tags:
+        - 批次号-公司
+        - 批次号
+      summary: POST /pszxSaasServer/batchInfo/batchInfoCtrl/listByScheme (pageSize)
+      description: 捕获自页面「批次号-公司」
+      operationId: post_pszxSaasServer_batchInfo_batchInfoCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: e63a62e312e643ac9a0f92486b08edd1
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: e63a62e312e643ac9a0f92486b08edd1
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: e100c42e327f4d79ab1be741170c8357
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: PszxBatchInfoGroup
+                    header:
+                      type: string
+                      example: PSZX_BATCH_INFO_group
+                    query:
+                      type: string
+                      example: PSZX_BATCH_INFO_group
+                    bill:
+                      type: string
+                      example: PSZX_BATCH_INFO_group
+                    controller:
+                      type: string
+                      example: /batchInfo/batchInfoCtrl
+                    addNewParams:
+                      type: object
+                      properties: {}
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: PSZX_BATCH_INFO_group
+                        billType:
+                          type: string
+                          example: 批次号表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/archive/pro/prohibitedCombinationHeadCtrl/listWithChildren:
+    post:
+      tags:
+        - 配伍禁忌-公司
+        - 配伍禁忌
+      summary: POST /pszxSaasServer/archive/pro/prohibitedCombinationHeadCtrl/listWithChildren (pageSize)
+      description: 捕获自页面「配伍禁忌-公司」
+      operationId: post_pszxSaasServer_archive_pro_prohibitedCombinationHeadCtrl_listWithChildren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '1960536903900069889'
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: head.pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: '1960536903900069889'
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: head.pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: 8b93faca94fb4f3696e2b4966723bad7
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isGroup:
+                      type: boolean
+                      example: true
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: ProhibitedCombinationGroup
+                    header:
+                      type: string
+                      example: ProhibitedCombinationHead_group
+                    query:
+                      type: string
+                      example: ProhibitedCombinationHead_group
+                    bill:
+                      type: string
+                      example: ProhibitedCombinationHead_group
+                    bodyController:
+                      type: string
+                      example: /archive/pro/prohibitedCombinationBodyCtrl
+                    controller:
+                      type: string
+                      example: /archive/pro/prohibitedCombinationCtrl
+                    prohibitedCombinationBody:
+                      type: string
+                      example: ProhibitedCombinationBody_group
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: ProhibitedCombinationHead_group
+                        indexFunctionCodeMap:
+                          type: object
+                          properties:
+                            '0':
+                              type: string
+                              example: ProhibitedCombinationBody_group
+                        orgLevel:
+                          type: string
+                          example: group
+                    batchImportProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: ProhibitedCombinationHead_group
+                        indexFunctionCodeMap:
+                          type: object
+                          properties:
+                            '0':
+                              type: string
+                              example: ProhibitedCombinationBody_group
+                        orgLevel:
+                          type: string
+                          example: group
+                        excludeFields:
+                          type: array
+                          items:
+                            type: string
+                            example: pkOrg
+                          example:
+                            - pkOrg
+                        excludeItemFields:
+                          type: object
+                          properties:
+                            '0':
+                              type: array
+                              items:
+                                type: string
+                                example: pkOrg
+                              example:
+                                - pkOrg
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/hospital/hospitalArchiveCtrl/listWithChildren:
+    post:
+      tags:
+        - 配伍禁忌-公司
+        - 协定方档案-公司
+      summary: POST /pszxSaasServer/hospital/hospitalArchiveCtrl/listWithChildren (page)
+      description: 捕获自页面「配伍禁忌-公司」
+      operationId: post_pszxSaasServer_hospital_hospitalArchiveCtrl_listWithChildren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: boolean
+                  example: false
+                functionCodeObj:
+                  type: object
+                  properties:
+                    header:
+                      type: string
+                      example: HospitalArchive_group
+                    query:
+                      type: string
+                      example: HospitalArchive_group
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      field:
+                        type: string
+                        example: head.code,head.fullName
+                      value:
+                        type: array
+                        items:
+                          type: object
+                        example: []
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - field: head.code,head.fullName
+                      value: []
+                      operation: like
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/archive/pro/prohibitedCombinationCtrl/getDetail:
+    post:
+      tags:
+        - 配伍禁忌-公司
+        - 配伍禁忌
+      summary: POST /pszxSaasServer/archive/pro/prohibitedCombinationCtrl/getDetail (id=2048637239839293440)
+      description: 捕获自页面「配伍禁忌-公司」
+      operationId: post_pszxSaasServer_archive_pro_prohibitedCombinationCtrl_getDetail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: '2048637239839293440'
+                indexFunctionCodeMap:
+                  type: object
+                  properties:
+                    '0':
+                      type: string
+                      example: ProhibitedCombinationBody_group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/agreedArchive/agreedArchiveCtrl/listWithChildren:
+    post:
+      tags:
+        - 协定方档案-公司
+        - 协定方档案
+      summary: POST /pszxSaasServer/agreedArchive/agreedArchiveCtrl/listWithChildren (pageSize)
+      description: 捕获自页面「协定方档案-公司」
+      operationId: post_pszxSaasServer_agreedArchive_agreedArchiveCtrl_listWithChildren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '1976539315647414274'
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: head.pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: '1976539315647414274'
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: head.pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: '1976539315588694016'
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isGroup:
+                      type: boolean
+                      example: true
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: agreedArchiveBillGroup
+                    header:
+                      type: string
+                      example: agreedArchive_group
+                    query:
+                      type: string
+                      example: agreedArchive_group
+                    bill:
+                      type: string
+                      example: agreedArchive_group
+                    bodyController:
+                      type: string
+                      example: /agreedArchive/agreedArchiveBodyCtrl
+                    controller:
+                      type: string
+                      example: /agreedArchive/agreedArchiveBillCtrl
+                    agreedArchiveBody:
+                      type: string
+                      example: agreedArchiveBody_group
+                    agreedDistributeBody:
+                      type: string
+                      example: AgreedDistribute_group
+                    prescriptionBody:
+                      type: string
+                      example: agreedArchiveBody_group
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: agreedArchive_group
+                        billType:
+                          type: string
+                          example: 协定方档案表
+                        indexFunctionCodeMap:
+                          type: object
+                          properties:
+                            '0':
+                              type: string
+                              example: agreedArchiveBody_group
+                            '1':
+                              type: string
+                              example: AgreedDistribute_group
+                        orgLevel:
+                          type: string
+                          example: group
+                    batchImportProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: agreedArchive_group
+                        billType:
+                          type: string
+                          example: 协定方档案表
+                        indexFunctionCodeMap:
+                          type: object
+                          properties:
+                            '0':
+                              type: string
+                              example: agreedArchiveBody_group
+                            '1':
+                              type: string
+                              example: AgreedDistribute_group
+                        orgLevel:
+                          type: string
+                          example: group
+                        excludeFields:
+                          type: array
+                          items:
+                            type: string
+                            example: pkOrg
+                          example:
+                            - pkOrg
+                        excludeItemFields:
+                          type: object
+                          properties:
+                            '0':
+                              type: array
+                              items:
+                                type: string
+                                example: pkOrg
+                              example:
+                                - pkOrg
+                            '1':
+                              type: array
+                              items:
+                                type: string
+                                example: pkOrg
+                              example:
+                                - pkOrg
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/agreedArchive/agreedArchiveBillCtrl/getDetail:
+    post:
+      tags:
+        - 协定方档案-公司
+        - 协定方档案
+      summary: POST /pszxSaasServer/agreedArchive/agreedArchiveBillCtrl/getDetail (id=2059482092671864832)
+      description: 捕获自页面「协定方档案-公司」
+      operationId: post_pszxSaasServer_agreedArchive_agreedArchiveBillCtrl_getDetail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: '2059482092671864832'
+                indexFunctionCodeMap:
+                  type: object
+                  properties:
+                    '0':
+                      type: string
+                      example: agreedArchiveBody_group
+                    '1':
+                      type: string
+                      example: AgreedDistribute_group
+                    '2':
+                      type: string
+                      example: agreedArchiveBody_group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/producer/producerCtrl/listByScheme:
+    post:
+      tags:
+        - 生产厂家-公司
+      summary: POST /pszxSaasServer/producer/producerCtrl/listByScheme (pageSize)
+      description: 捕获自页面「生产厂家-公司」
+      operationId: post_pszxSaasServer_producer_producerCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 5b6eda1e21b248379f385bac966fad17
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 5b6eda1e21b248379f385bac966fad17
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: f525e2dff1b541cb882d08e838c9fc1a
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: PszxProducerGroup
+                    header:
+                      type: string
+                      example: PSZX_PRODUCER_group
+                    query:
+                      type: string
+                      example: PSZX_PRODUCER_group
+                    bill:
+                      type: string
+                      example: PSZX_PRODUCER_group
+                    controller:
+                      type: string
+                      example: /producer/producerCtrl
+                    addNewParams:
+                      type: object
+                      properties: {}
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: PSZX_PRODUCER_group
+                        billType:
+                          type: string
+                          example: 生产厂家表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/specification/specificationCtrl/listByScheme:
+    post:
+      tags:
+        - 包装规格-公司
+      summary: POST /pszxSaasServer/specification/specificationCtrl/listByScheme (pageSize)
+      description: 捕获自页面「包装规格-公司」
+      operationId: post_pszxSaasServer_specification_specificationCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: e5ecc4da74c346249c0b2d73f584bf69
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: e5ecc4da74c346249c0b2d73f584bf69
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: 78013a7ec01b4a34bbbb576a0b8294ea
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: specificationGroup
+                    header:
+                      type: string
+                      example: PSZX_SPECIFICATION_group
+                    query:
+                      type: string
+                      example: PSZX_SPECIFICATION_group
+                    bill:
+                      type: string
+                      example: PSZX_SPECIFICATION_group
+                    controller:
+                      type: string
+                      example: /specification/specificationCtrl
+                    addNewParams:
+                      type: object
+                      properties: {}
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: PSZX_SPECIFICATION_group
+                        billType:
+                          type: string
+                          example: 包装规格表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/level/levelCtrl/listByScheme:
+    post:
+      tags:
+        - 等级-公司
+      summary: POST /pszxSaasServer/level/levelCtrl/listByScheme (pageSize)
+      description: 捕获自页面「等级-公司」
+      operationId: post_pszxSaasServer_level_levelCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 1a9e232c6d8d4cfba56b876466fe0da0
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 1a9e232c6d8d4cfba56b876466fe0da0
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: 13e7de8c6b6649b2bf6a8ed5a13cac2e
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: levelGroup
+                    header:
+                      type: string
+                      example: PSZX_LEVEL_group
+                    query:
+                      type: string
+                      example: PSZX_LEVEL_group
+                    bill:
+                      type: string
+                      example: PSZX_LEVEL_group
+                    controller:
+                      type: string
+                      example: /level/levelCtrl
+                    addNewParams:
+                      type: object
+                      properties: {}
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: PSZX_LEVEL_group
+                        billType:
+                          type: string
+                          example: 等级表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/area/areaCtrl/listByScheme:
+    post:
+      tags:
+        - 产地-公司
+      summary: POST /pszxSaasServer/area/areaCtrl/listByScheme (pageSize)
+      description: 捕获自页面「产地-公司」
+      operationId: post_pszxSaasServer_area_areaCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 70bc1ac10a824c5da0b73c3f3c83d4c8
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 70bc1ac10a824c5da0b73c3f3c83d4c8
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: 616b15aa7461476a8bbb0de923d6f921
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: AreaGroup
+                    header:
+                      type: string
+                      example: Area_group
+                    query:
+                      type: string
+                      example: Area_group
+                    bill:
+                      type: string
+                      example: Area_group
+                    controller:
+                      type: string
+                      example: /area/areaCtrl
+                    addNewParams:
+                      type: object
+                      properties: {}
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: Area_group
+                        billType:
+                          type: string
+                          example: 产地表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/archive/drug/part/drugPartCtrl/listByScheme:
+    post:
+      tags:
+        - 药用部位-公司
+      summary: POST /pszxSaasServer/archive/drug/part/drugPartCtrl/listByScheme (pageSize)
+      description: 捕获自页面「药用部位-公司」
+      operationId: post_pszxSaasServer_archive_drug_part_drugPartCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 69c1271b51d047a892287e1d1cdf17fa
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: pkGroup
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 69c1271b51d047a892287e1d1cdf17fa
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: pkGroup
+                      operation: in
+                templateId:
+                  type: string
+                  example: 862b3d0523834395a06ee14b4a348c7d
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: DrugPartGroup
+                    header:
+                      type: string
+                      example: DrugPart_group
+                    query:
+                      type: string
+                      example: DrugPart_group
+                    bill:
+                      type: string
+                      example: DrugPart_group
+                    controller:
+                      type: string
+                      example: /archive/drug/part/drugPartCtrl
+                    addNewParams:
+                      type: object
+                      properties: {}
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: DrugPart_group
+                        billType:
+                          type: string
+                          example: 药品部位表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/hospital/hospitalMaterialLimitCtrl/listByScheme:
+    post:
+      tags:
+        - 物料用量限制
+      summary: POST /pszxSaasServer/hospital/hospitalMaterialLimitCtrl/listByScheme (pageSize)
+      description: 捕获自页面「物料用量限制」
+      operationId: post_pszxSaasServer_hospital_hospitalMaterialLimitCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 8bed35f70efa4fb2aeda3499b17fe2ed
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: 00013A1000000000VGSD
+                        example:
+                          - 00013A1000000000VGSD
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 8bed35f70efa4fb2aeda3499b17fe2ed
+                      value:
+                        - 00013A1000000000VGSD
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: 7c748198db4a473f8ce41bb3ad6149e9
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isOrg:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: HospitalArchiveBillOrg
+                    header:
+                      type: string
+                      example: HospitalMaterialLimit_org
+                    query:
+                      type: string
+                      example: HospitalMaterialLimit_org
+                    bill:
+                      type: string
+                      example: HospitalMaterialLimit_org
+                    controller:
+                      type: string
+                      example: /hospital/hospitalMaterialLimitCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: HospitalMaterialLimit_org
+                        billType:
+                          type: string
+                          example: 物料用量限制表
+                        orgLevel:
+                          type: string
+                          example: org
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/archive/nc/ncMaterialRelationCtrl/listByScheme:
+    post:
+      tags:
+        - NC物料映射
+      summary: POST /pszxSaasServer/archive/nc/ncMaterialRelationCtrl/listByScheme (pageSize)
+      description: 捕获自页面「NC物料映射」
+      operationId: post_pszxSaasServer_archive_nc_ncMaterialRelationCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 0ad1a78b133d4a438ac7557e41c4d3a2
+                      value:
+                        type: array
+                        items:
+                          type: string
+                          example: '1787720377238028288'
+                        example:
+                          - '1787720377238028288'
+                      field:
+                        type: string
+                        example: pkOrg
+                      operation:
+                        type: string
+                        example: in
+                  example:
+                    - id: 0ad1a78b133d4a438ac7557e41c4d3a2
+                      value:
+                        - '1787720377238028288'
+                        - global
+                      field: pkOrg
+                      operation: in
+                templateId:
+                  type: string
+                  example: 5b13a8a2b6584175879de827c1b5ef99
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    isGroup:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: NcMaterialRelationGroup
+                    header:
+                      type: string
+                      example: NcMaterialRelation_group
+                    query:
+                      type: string
+                      example: NcMaterialRelation_group
+                    bill:
+                      type: string
+                      example: NcMaterialRelation_group
+                    controller:
+                      type: string
+                      example: /archive/nc/ncMaterialRelationCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: NcMaterialRelation_group
+                        billType:
+                          type: string
+                          example: NC物料映射表
+                        orgLevel:
+                          type: string
+                          example: group
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/archive/apply/materialApplyCtrl/listByScheme:
+    post:
+      tags:
+        - 物料申请单
+      summary: POST /pszxSaasServer/archive/apply/materialApplyCtrl/listByScheme (pageSize)
+      description: 捕获自页面「物料申请单」
+      operationId: post_pszxSaasServer_archive_apply_materialApplyCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 418cd1d9f5f34c94b9295af6a96a1440
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: drugAdvice
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - id: 418cd1d9f5f34c94b9295af6a96a1440
+                      value:
+                        - null
+                      field: drugAdvice
+                      operation: like
+                templateId:
+                  type: string
+                  example: f2893eaf2b704beb9f7097f6ab563749
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: true
+                    isOrg:
+                      type: boolean
+                      example: true
+                    auth:
+                      type: string
+                      example: MaterialApplyOrg
+                    header:
+                      type: string
+                      example: MaterialApply_org
+                    query:
+                      type: string
+                      example: MaterialApply_org
+                    bill:
+                      type: string
+                      example: MaterialApply_org
+                    controller:
+                      type: string
+                      example: /archive/apply/materialApplyCtrl
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/sysmp/messageInfoCtrl/listUnreadMessages:
+    get:
+      tags:
+        - 库存状态-全局
+      summary: GET /pszxSaasServer/sysmp/messageInfoCtrl/listUnreadMessages
+      description: 捕获自页面「库存状态-全局」
+      operationId: get_pszxSaasServer_sysmp_messageInfoCtrl_listUnreadMessages
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误
+  /pszxSaasServer/archive/inventoryStatusCtrl/listByScheme:
+    post:
+      tags:
+        - 库存状态-全局
+      summary: POST /pszxSaasServer/archive/inventoryStatusCtrl/listByScheme (pageSize)
+      description: 捕获自页面「库存状态-全局」
+      operationId: post_pszxSaasServer_archive_inventoryStatusCtrl_listByScheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  example: 50
+                pageNum:
+                  type: number
+                  example: 1
+                sortName:
+                  type: string
+                  example: ''
+                extQueryConditions:
+                  type: array
+                  items:
+                    type: object
+                  example: []
+                queryConditions:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: 11c3959c208f42db9ed1d7a46362ed68
+                      value:
+                        type: array
+                        items:
+                          type: object
+                          properties: {}
+                        example:
+                          - null
+                      field:
+                        type: string
+                        example: code
+                      operation:
+                        type: string
+                        example: like
+                  example:
+                    - id: 11c3959c208f42db9ed1d7a46362ed68
+                      value:
+                        - null
+                      field: code
+                      operation: like
+                templateId:
+                  type: string
+                  example: 14cda4dedbc7453182f2bd86e86bb776
+                groupByFields:
+                  type: string
+                  example: ''
+                reloadColumnFlag:
+                  type: number
+                  example: 0
+                functionCodeObj:
+                  type: object
+                  properties:
+                    isFlow:
+                      type: boolean
+                      example: false
+                    auth:
+                      type: string
+                      example: InventoryStatusGlobal
+                    header:
+                      type: string
+                      example: InventoryStatus_global
+                    query:
+                      type: string
+                      example: InventoryStatus_global
+                    bill:
+                      type: string
+                      example: InventoryStatus_global
+                    controller:
+                      type: string
+                      example: /archive/inventoryStatusCtrl
+                    importProperty:
+                      type: object
+                      properties:
+                        functionCode:
+                          type: string
+                          example: InventoryStatus_global
+                        billType:
+                          type: string
+                          example: 库存状态
+                        orgLevel:
+                          type: string
+                          example: global
+      responses:
+        '200':
+          description: 成功
+        '500':
+          description: 服务器内部错误

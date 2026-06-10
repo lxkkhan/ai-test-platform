@@ -143,6 +143,48 @@ function base64ToUint8(b64) {
   return bytes;
 }
 
+// ===== Bearer Token 管理 =====
+
+var _accessToken = null;
+var _tokenExpiresAt = 0;
+
+function getAccessToken() {
+  if (_accessToken && Date.now() < _tokenExpiresAt) {
+    return Promise.resolve(_accessToken);
+  }
+  var creds = getCredentials();
+  var user = creds.api_user;
+  var pass = creds.api_password;
+  var tokenUrl = (creds.api_url || 'https://api.tapd.cn').replace(/\/+$/, '') + '/tokens/request_token';
+
+  if (!user || !pass) {
+    return Promise.reject(new Error('管理员尚未配置 API 凭证'));
+  }
+
+  var auth = 'Basic ' + btoa(user + ':' + pass);
+  console.log('[TAPD] 请求 Bearer Token...', tokenUrl);
+
+  return fetch(tokenUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': auth,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'grant_type=client_credentials'
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(json) {
+    if (json.status === 1 && json.data && json.data.access_token) {
+      _accessToken = json.data.access_token;
+      var expiresIn = json.data.expires_in || 7200;
+      _tokenExpiresAt = Date.now() + (expiresIn - 300) * 1000;
+      console.log('[TAPD] Bearer Token 获取成功，有效期', expiresIn, '秒');
+      return _accessToken;
+    }
+    throw new Error(json.info || 'Token 获取失败');
+  });
+}
+
 // ===== 扩展事件 =====
 
 chrome.runtime.onInstalled.addListener(function() {
@@ -196,67 +238,77 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
 function submitBug(bugData, sendResponse) {
   var creds = getCredentials();
-  var user = creds.api_user;
-  var pass = creds.api_password;
   var apiUrl = (creds.api_url || 'https://api.tapd.cn').replace(/\/+$/, '');
   var wsId = bugData.workspace_id;
 
-  if (!user || !pass) {
-    sendResponse({ success: false, error: '管理员尚未配置 API 凭证' });
-    return;
-  }
   if (!wsId) {
     sendResponse({ success: false, error: '未填写项目ID' });
     return;
   }
 
-  var payload = {
-    workspace_id: wsId,
-    title: bugData.title,
-    reporter: bugData.reporter || '',
-    priority_label: bugData.priority_label || '中',
-    severity: bugData.severity || '一般',
-    module: bugData.module || '',
-    current_owner: bugData.current_owner || '',
-    description: bugData.description || '',
-    testtype: bugData.testtype || '功能测试',
-    testphase: bugData.testphase || '功能测试阶段'
-  };
+  var STANDARD_FIELDS = ['deadline', 'begin', 'due', 'iteration_id'];
 
-  var customFields = bugData.custom_fields || {};
-  for (var ck in customFields) {
-    if (customFields[ck]) payload['cus_' + ck] = customFields[ck];
-  }
+  getAccessToken().then(function(token) {
+    var payload = {
+      workspace_id: wsId,
+      title: bugData.title,
+      reporter: bugData.reporter || '',
+      priority_label: bugData.priority_label || '中',
+      severity: bugData.severity || '一般',
+      module: bugData.module || '',
+      current_owner: bugData.current_owner || '',
+      description: bugData.description || '',
+      testtype: bugData.testtype || '功能测试',
+      testphase: bugData.testphase || '功能测试阶段'
+    };
 
-  var auth = 'Basic ' + btoa(user + ':' + pass);
+    // Include story_id in bug creation (TAPD 可能原生支持)
+    if (bugData.requirement_id) {
+      payload.story_id = bugData.requirement_id.replace(/^S-/i, '');
+    }
 
-  var body = new URLSearchParams();
-  for (var k in payload) {
-    if (payload[k]) body.append(k, payload[k]);
-  }
+    var customFields = bugData.custom_fields || {};
+    for (var ck in customFields) {
+      if (!customFields[ck]) continue;
+      // Known standard fields: use as-is (no cus_ prefix)
+      if (STANDARD_FIELDS.indexOf(ck) > -1) {
+        payload[ck] = customFields[ck];
+      } else {
+        payload['cus_' + ck] = customFields[ck];
+      }
+    }
 
-  console.log('[TAPD] 提交Bug to', apiUrl + '/bugs', 'project', wsId);
+    var body = new URLSearchParams();
+    for (var k in payload) {
+      if (payload[k]) body.append(k, payload[k]);
+    }
 
-  fetch(apiUrl + '/bugs', {
-    method: 'POST',
-    headers: {
-      'Authorization': auth,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: body.toString()
-  })
-  .then(function(r) {
-    console.log('[TAPD] 响应状态:', r.status);
-    return r.json();
+    console.log('[TAPD] 提交Bug to', apiUrl + '/bugs', 'project', wsId);
+    console.log('[TAPD] 提交字段:', Object.keys(payload).join(', '));
+
+    return fetch(apiUrl + '/bugs', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+      },
+      body: body.toString()
+    }).then(function(r) {
+      console.log('[TAPD] 响应状态:', r.status);
+      return r.json();
+    });
   })
   .then(function(json) {
     console.log('[TAPD] 响应数据:', JSON.stringify(json).substring(0, 200));
     if (json.status === 1) {
-      // 关联需求（如果有需求ID）
       var bugResult = json.data && json.data.Bug ? json.data.Bug : json.data;
       var bugId = bugResult ? bugResult.id : null;
+      // Try direct story_id first, fallback to relations API
       if (bugId && bugData.requirement_id) {
-        linkBugToStory(apiUrl, auth, wsId, bugId, bugData.requirement_id);
+        return tryLinkBugToStory(apiUrl, wsId, bugId, bugData.requirement_id).then(function(linkResult) {
+          sendResponse({ success: true, data: json.data, link: linkResult });
+        });
       }
       sendResponse({ success: true, data: json.data });
     } else {
@@ -269,34 +321,79 @@ function submitBug(bugData, sendResponse) {
   });
 }
 
-function linkBugToStory(apiUrl, auth, wsId, bugId, storyId) {
+function tryLinkBugToStory(apiUrl, wsId, bugId, storyId) {
+  var numericStoryId = String(storyId).replace(/^S-/i, '');
+  console.log('[TAPD] 尝试关联需求:', bugId, '->', numericStoryId);
+
+  return getAccessToken().then(function(token) {
+    // 方法一：专用接口 /bugs/linked_stories（加 Accept 头 + 记录状态码）
+    return tryLinkViaLinkedStories(apiUrl, wsId, bugId, numericStoryId, token).then(function(result) {
+      if (result && result.success) return result;
+      // 方法二：尝试通用 Relations API
+      console.warn('[TAPD] linked_stories 失败, 尝试 /relations...');
+      return tryLinkViaRelations(apiUrl, wsId, bugId, numericStoryId, token);
+    });
+  });
+}
+
+function doLinkFetch(url, body, token) {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    },
+    body: body.toString()
+  }).then(function(r) {
+    var status = r.status;
+    var location = r.headers.get('location') || '';
+    console.log('[TAPD] 关联响应状态码:', status, 'location:', location.substring(0, 100));
+    var ct = r.headers.get('content-type') || '';
+    if (ct.indexOf('json') === -1 && ct.indexOf('javascript') === -1) {
+      return r.text().then(function(t) {
+        return { status: 0, info: '非JSON响应(HTTP ' + status + '): ' + t.substring(0, 300) };
+      });
+    }
+    return r.json().catch(function() { return { status: 0, info: 'JSON解析失败(HTTP ' + status + ')' }; });
+  });
+}
+
+function tryLinkViaLinkedStories(apiUrl, wsId, bugId, storyId, token) {
+  var body = new URLSearchParams();
+  body.append('workspace_id', wsId);
+  body.append('bug_id', String(bugId));
+  body.append('story_id', storyId);
+
+  return doLinkFetch(apiUrl + '/bugs/linked_stories', body, token)
+  .then(function(json) {
+    if (json && json.status === 1) {
+      console.log('[TAPD] ✅ linked_stories 关联成功:', storyId);
+      return { success: true, story_id: storyId, method: 'linked_stories' };
+    }
+    var errMsg = (json && json.info) || JSON.stringify(json) || '未知错误';
+    console.warn('[TAPD] ❌ linked_stories 失败:', errMsg);
+    return { success: false, story_id: storyId, error: errMsg };
+  });
+}
+
+function tryLinkViaRelations(apiUrl, wsId, bugId, storyId, token) {
   var body = new URLSearchParams();
   body.append('workspace_id', wsId);
   body.append('source_type', 'bug');
   body.append('target_type', 'story');
   body.append('source_id', String(bugId));
-  body.append('target_id', String(storyId));
+  body.append('target_id', storyId);
 
-  console.log('[TAPD] 关联需求:', bugId, '->', storyId);
-
-  fetch(apiUrl + '/relations', {
-    method: 'POST',
-    headers: {
-      'Authorization': auth,
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: body.toString()
-  })
-  .then(function(r) { return r.json(); })
+  return doLinkFetch(apiUrl + '/relations', body, token)
   .then(function(json) {
-    if (json.status === 1) {
-      console.log('[TAPD] 需求关联成功:', storyId);
-    } else {
-      console.warn('[TAPD] 需求关联失败:', json.info);
+    if (json && json.status === 1) {
+      console.log('[TAPD] ✅ Relations API 关联成功:', storyId);
+      return { success: true, story_id: storyId, method: 'relations' };
     }
-  })
-  .catch(function(err) {
-    console.warn('[TAPD] 需求关联请求失败:', err.message);
+    var errMsg = (json && json.info) || JSON.stringify(json) || '未知错误';
+    console.warn('[TAPD] ❌ /relations 失败:', errMsg);
+    return { success: false, story_id: storyId, error: errMsg };
   });
 }
 
@@ -322,9 +419,9 @@ function captureScreenshot(sendResponse) {
 
 function testAuth(cfg, sendResponse) {
   var creds = getCredentials();
-  var apiUrl = (creds.api_url || 'https://api.tapd.cn').replace(/\/+$/, '');
   var user = creds.api_user;
   var pass = creds.api_password;
+  var apiUrl = (creds.api_url || 'https://api.tapd.cn').replace(/\/+$/, '');
   var wsId = cfg.workspace_id;
 
   if (!user || !pass) {
@@ -332,43 +429,21 @@ function testAuth(cfg, sendResponse) {
     return;
   }
 
-  var auth = 'Basic ' + btoa(user + ':' + pass);
-  var testUrl = apiUrl + '/quickstart/testauth';
+  console.log('[TAPD] 测试连接...');
 
-  console.log('[TAPD] 测试连接...', testUrl, 'user:', user);
+  getAccessToken().then(function(token) {
+    console.log('[TAPD] Token 获取成功，验证项目权限...');
 
-  fetch(testUrl, {
-    method: 'GET',
-    headers: { 'Authorization': auth }
-  })
-  .then(function(r) {
-    return r.text().then(function(t) {
-      console.log('[TAPD] raw response:', t.substring(0, 300));
-      if (t.charAt(0) !== '{') throw new Error('服务器返回非JSON (可能是认证失败页面): ' + t.substring(0, 100));
-      return JSON.parse(t);
-    });
-  })
-  .then(function(json) {
-    console.log('[TAPD] testauth status:', json.status, 'info:', json.info);
-    if (json.status !== 1) {
-      sendResponse({ success: false, error: (json.info || '认证失败') + '。请检查API账号密码是否正确，或API账号是否已过期' });
-      return;
-    }
     if (!wsId) {
       sendResponse({ success: true, message: 'API凭证有效（未填写项目ID，跳过字段获取）' });
       return;
     }
-    var baseUrl = apiUrl;
-    console.log('[TAPD] 正在获取项目 ' + wsId + ' 的缺陷字段配置...');
 
-    // Step 1: Get template list, find the default template ID
-    fetchTemplateFields(apiUrl, auth, wsId).then(function(templateResult) {
-      return Promise.all([
-        Promise.resolve(templateResult),
-        fetchBugFieldInfo(apiUrl, auth, wsId),
-        fetchWorkspaceUsers(apiUrl, auth, wsId)
-      ]);
-    }).then(function(results) {
+    return Promise.all([
+      fetchTemplateFields(apiUrl, wsId),
+      fetchBugFieldInfo(apiUrl, wsId),
+      fetchWorkspaceUsers(apiUrl, wsId)
+    ]).then(function(results) {
       var fieldInfoData = results[1].parsed || {};
       sendResponse({
         success: true,
@@ -381,113 +456,38 @@ function testAuth(cfg, sendResponse) {
         },
         _debug: results[1].raw || (fieldInfoData ? 'fields已获取' : 'fields为空')
       });
-    })
-    .catch(function(err) {
-      console.error('[TAPD] 获取字段失败:', err);
-      sendResponse({
-        success: true,
-        message: 'API凭证有效，但获取项目字段失败: ' + err.message,
-        projectData: null,
-        debug: baseUrl + '/bugs/get_fields_info?workspace_id=' + wsId
-      });
     });
   })
   .catch(function(err) {
     console.error('[TAPD] 测试失败:', err);
-    sendResponse({ success: false, error: '网络请求失败: ' + err.message });
+    sendResponse({ success: false, error: '连接失败: ' + err.message });
   });
 }
 
 // ===== TAPD API 辅助函数 =====
 
-function tapdApiFetch(apiUrl, pathWithQuery, options) {
-  var url = apiUrl + pathWithQuery;
-  var basicAuth = options.basicAuth;
-  var needCookies = options.needCookies;
-  var cookieDomain = extractDomain(apiUrl);
+function tapdApiFetch(apiUrl, pathWithQuery) {
+  return getAccessToken().then(function(token) {
+    var url = apiUrl + pathWithQuery;
+    console.log('[TAPD] 请求:', url);
 
-  var headers = { 'Accept': 'application/json' };
-  if (basicAuth) headers['Authorization'] = basicAuth;
-
-  console.log('[TAPD] 请求:', url);
-
-  function doFetch(headersToUse) {
-    return fetch(url, { method: 'GET', headers: headersToUse })
-      .then(function(r) { return r.text(); })
-      .then(function(t) {
-        if (t.charAt(0) !== '{') throw new Error('TAPD返回非JSON: ' + t.substring(0, 150));
-        return JSON.parse(t);
-      });
-  }
-
-  return doFetch(headers).then(function(json) {
-    // If Basic Auth gets 401, retry with cookies
-    if (needCookies && json.status !== 1 && (json.status === 401 || json.status === 403)) {
-      console.log('[TAPD] Basic Auth返回', json.status, '，尝试Cookie认证...');
-      return getTapdCookies(cookieDomain).then(function(cookieStr) {
-        if (!cookieStr) throw new Error('未找到TAPD Cookie，请先登录');
-        console.log('[TAPD] 使用Cookie重试, Cookie长度:', cookieStr.length);
-        return doFetch({ 'Cookie': cookieStr, 'Accept': 'application/json' });
-      });
-    }
-    return json;
-  });
-}
-
-function extractDomain(url) {
-  try {
-    var m = url.match(/:\/\/([^\/:]+)/);
-    return m ? m[1] : '';
-  } catch(e) { return ''; }
-}
-
-function tryCookieFetch(url, apiDomain) {
-  return getTapdCookies(apiDomain).then(function(cookieStr) {
-    if (!cookieStr) throw new Error('未找到TAPD登录Cookie，请在浏览器中打开并登录TAPD');
-    console.log('[TAPD] 使用Cookie认证, Cookie长度:', cookieStr.length);
     return fetch(url, {
       method: 'GET',
-      headers: { 'Cookie': cookieStr, 'Accept': 'application/json' },
-      credentials: 'include'
-    }).then(function(r) { return r.text(); });
-  }).then(function(t) {
-    if (t.charAt(0) === '{') return JSON.parse(t);
-    throw new Error('Cookie认证也失败(仍返回HTML), 请确认已登录TAPD');
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/json'
+      }
+    })
+    .then(function(r) { return r.text(); })
+    .then(function(t) {
+      if (t.charAt(0) !== '{') throw new Error('TAPD返回非JSON: ' + t.substring(0, 150));
+      return JSON.parse(t);
+    });
   });
 }
 
-function getTapdCookies(apiDomain) {
-  return new Promise(function(resolve) {
-    var domains = [];
-    if (apiDomain) {
-      domains.push(apiDomain);
-      domains.push('.' + apiDomain.split('.').slice(-2).join('.')); // e.g. .tapd.cn
-    }
-    domains.push('.tapd.cn', '.tapd.woa.com', 'www.tapd.cn', 'api.tapd.cn');
-    // Deduplicate
-    domains = domains.filter(function(d, i) { return domains.indexOf(d) === i; });
-    console.log('[TAPD] 尝试Cookie域:', domains.join(', '));
-    tryDomains(0);
-
-    function tryDomains(i) {
-      if (i >= domains.length) { console.log('[TAPD] 所有域均无Cookie'); resolve(''); return; }
-      chrome.cookies.getAll({ domain: domains[i] }, function(cookies) {
-        if (cookies && cookies.length > 0) {
-          console.log('[TAPD] 从域', domains[i], '获取到', cookies.length, '个Cookie:', cookies.map(function(c) { return c.name; }).join(', '));
-          var pairs = [];
-          cookies.forEach(function(c) { pairs.push(c.name + '=' + c.value); });
-          resolve(pairs.join('; '));
-        } else {
-          console.log('[TAPD] 域', domains[i], '无Cookie');
-          tryDomains(i + 1);
-        }
-      });
-    }
-  });
-}
-
-function fetchBugFieldInfo(apiUrl, auth, wsId) {
-  return tapdApiFetch(apiUrl, '/bugs/get_fields_info?workspace_id=' + wsId, { basicAuth: auth, needCookies: true })
+function fetchBugFieldInfo(apiUrl, wsId) {
+  return tapdApiFetch(apiUrl, '/bugs/get_fields_info?workspace_id=' + wsId)
   .then(function(json) {
     console.log('[TAPD] get_fields_info status:', json.status, 'info:', json.info);
     if (json.status === 1 && json.data) {
@@ -502,15 +502,13 @@ function fetchBugFieldInfo(apiUrl, auth, wsId) {
   });
 }
 
-function fetchTemplateFields(apiUrl, auth, wsId) {
-  // Step 1: Get template list to find the default template
-  return tapdApiFetch(apiUrl, '/bugs/template_list?workspace_id=' + wsId, { basicAuth: auth, needCookies: true })
+function fetchTemplateFields(apiUrl, wsId) {
+  return tapdApiFetch(apiUrl, '/bugs/template_list?workspace_id=' + wsId)
   .then(function(json) {
     if (json.status !== 1 || !json.data || !json.data.length) {
       console.warn('[TAPD] 未获取到模板列表');
       return [];
     }
-    // Find the default template (default === "1") or first one
     var defaultTemplate = null;
     for (var i = 0; i < json.data.length; i++) {
       var t = json.data[i];
@@ -523,15 +521,13 @@ function fetchTemplateFields(apiUrl, auth, wsId) {
     }
     console.log('[TAPD] 使用模板: id=' + defaultTemplate.id + ' name=' + defaultTemplate.name);
 
-    // Step 2: Get template fields using the template ID
-    return tapdApiFetch(apiUrl, '/bugs/get_default_bug_template?template_id=' + defaultTemplate.id + '&workspace_id=' + wsId + '&use_priority_label=1', { basicAuth: auth, needCookies: true });
+    return tapdApiFetch(apiUrl, '/bugs/get_default_bug_template?template_id=' + defaultTemplate.id + '&workspace_id=' + wsId + '&use_priority_label=1');
   })
   .then(function(json) {
     if (json.status !== 1 || !json.data) {
       console.warn('[TAPD] 未获取到模板字段');
       return [];
     }
-    // Convert to flat field list
     var fields = [];
     json.data.forEach(function(item) {
       var tf = item.WorkitemTemplateField || item;
@@ -554,8 +550,8 @@ function fetchTemplateFields(apiUrl, auth, wsId) {
   });
 }
 
-function fetchWorkspaceUsers(apiUrl, auth, wsId) {
-  return tapdApiFetch(apiUrl, '/workspaces/users?workspace_id=' + wsId, { basicAuth: auth, needCookies: true })
+function fetchWorkspaceUsers(apiUrl, wsId) {
+  return tapdApiFetch(apiUrl, '/workspaces/users?workspace_id=' + wsId)
   .then(function(json) {
     if (json.status !== 1 || !json.data) return [];
     var userData = json.data;

@@ -1,0 +1,962 @@
+[
+  {
+    "caseId": "TC_S1133671402001000033_001",
+    "caseName": "查询验证-事务管理-全局",
+    "targetPage": "事务管理-全局",
+    "operationType": "查询验证",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 事务管理-全局"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "断言",
+        "target": "查询结果列表可见"
+      }
+    ],
+    "testData": {},
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".surely-table, .ant-table",
+        "description": "事务管理-全局列表可见"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_002",
+    "caseName": "新增提交-事务管理-全局",
+    "targetPage": "事务管理-全局",
+    "operationType": "新增提交",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 事务管理-全局"
+      },
+      {
+        "action": "点击",
+        "target": "新增按钮"
+      },
+      {
+        "action": "等待",
+        "target": "表单/弹窗出现"
+      },
+      {
+        "action": "输入",
+        "target": "名称/编码输入框",
+        "value": "AUTO_TEST_测试数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存/提交按钮"
+      },
+      {
+        "action": "断言",
+        "target": "新增成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_事务管理-全局测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "新增成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_003",
+    "caseName": "编辑修改-事务管理-全局",
+    "targetPage": "事务管理-全局",
+    "operationType": "编辑修改",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 事务管理-全局"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "双击",
+        "target": "AUTO_TEST_前缀的记录行"
+      },
+      {
+        "action": "输入",
+        "target": "修改字段输入框",
+        "value": "AUTO_TEST_修改后数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存按钮"
+      },
+      {
+        "action": "断言",
+        "target": "修改成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_事务管理-全局测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "修改成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_004",
+    "caseName": "删除确认-事务管理-全局",
+    "targetPage": "事务管理-全局",
+    "operationType": "删除确认",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 事务管理-全局"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "点击",
+        "target": "AUTO_TEST_前缀的记录行（选中）"
+      },
+      {
+        "action": "点击",
+        "target": "删除按钮"
+      },
+      {
+        "action": "点击",
+        "target": "确定/确认按钮"
+      },
+      {
+        "action": "断言",
+        "target": "删除成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_事务管理-全局测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "删除成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_005",
+    "caseName": "查询验证-事务管理-公司",
+    "targetPage": "事务管理-公司",
+    "operationType": "查询验证",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 事务管理-公司"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "断言",
+        "target": "查询结果列表可见"
+      }
+    ],
+    "testData": {},
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".surely-table, .ant-table",
+        "description": "事务管理-公司列表可见"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_006",
+    "caseName": "新增提交-事务管理-公司",
+    "targetPage": "事务管理-公司",
+    "operationType": "新增提交",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 事务管理-公司"
+      },
+      {
+        "action": "点击",
+        "target": "新增按钮"
+      },
+      {
+        "action": "等待",
+        "target": "表单/弹窗出现"
+      },
+      {
+        "action": "输入",
+        "target": "名称/编码输入框",
+        "value": "AUTO_TEST_测试数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存/提交按钮"
+      },
+      {
+        "action": "断言",
+        "target": "新增成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_事务管理-公司测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "新增成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_007",
+    "caseName": "编辑修改-事务管理-公司",
+    "targetPage": "事务管理-公司",
+    "operationType": "编辑修改",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 事务管理-公司"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "双击",
+        "target": "AUTO_TEST_前缀的记录行"
+      },
+      {
+        "action": "输入",
+        "target": "修改字段输入框",
+        "value": "AUTO_TEST_修改后数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存按钮"
+      },
+      {
+        "action": "断言",
+        "target": "修改成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_事务管理-公司测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "修改成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_008",
+    "caseName": "删除确认-事务管理-公司",
+    "targetPage": "事务管理-公司",
+    "operationType": "删除确认",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 事务管理-公司"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "点击",
+        "target": "AUTO_TEST_前缀的记录行（选中）"
+      },
+      {
+        "action": "点击",
+        "target": "删除按钮"
+      },
+      {
+        "action": "点击",
+        "target": "确定/确认按钮"
+      },
+      {
+        "action": "断言",
+        "target": "删除成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_事务管理-公司测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "删除成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_009",
+    "caseName": "查询验证-作业流程自定义前后事务",
+    "targetPage": "作业流程自定义前后事务",
+    "operationType": "查询验证",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业流程自定义前后事务"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "断言",
+        "target": "查询结果列表可见"
+      }
+    ],
+    "testData": {},
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".surely-table, .ant-table",
+        "description": "作业流程自定义前后事务列表可见"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_010",
+    "caseName": "新增提交-作业流程自定义前后事务",
+    "targetPage": "作业流程自定义前后事务",
+    "operationType": "新增提交",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业流程自定义前后事务"
+      },
+      {
+        "action": "点击",
+        "target": "新增按钮"
+      },
+      {
+        "action": "等待",
+        "target": "表单/弹窗出现"
+      },
+      {
+        "action": "输入",
+        "target": "名称/编码输入框",
+        "value": "AUTO_TEST_测试数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存/提交按钮"
+      },
+      {
+        "action": "断言",
+        "target": "新增成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_作业流程自定义前后事务测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "新增成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_011",
+    "caseName": "编辑修改-作业流程自定义前后事务",
+    "targetPage": "作业流程自定义前后事务",
+    "operationType": "编辑修改",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业流程自定义前后事务"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "双击",
+        "target": "AUTO_TEST_前缀的记录行"
+      },
+      {
+        "action": "输入",
+        "target": "修改字段输入框",
+        "value": "AUTO_TEST_修改后数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存按钮"
+      },
+      {
+        "action": "断言",
+        "target": "修改成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_作业流程自定义前后事务测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "修改成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_012",
+    "caseName": "删除确认-作业流程自定义前后事务",
+    "targetPage": "作业流程自定义前后事务",
+    "operationType": "删除确认",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业流程自定义前后事务"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "点击",
+        "target": "AUTO_TEST_前缀的记录行（选中）"
+      },
+      {
+        "action": "点击",
+        "target": "删除按钮"
+      },
+      {
+        "action": "点击",
+        "target": "确定/确认按钮"
+      },
+      {
+        "action": "断言",
+        "target": "删除成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_作业流程自定义前后事务测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "删除成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_013",
+    "caseName": "查询验证-作业环节-公司",
+    "targetPage": "作业环节-公司",
+    "operationType": "查询验证",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业环节-公司"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "断言",
+        "target": "查询结果列表可见"
+      }
+    ],
+    "testData": {},
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".surely-table, .ant-table",
+        "description": "作业环节-公司列表可见"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_014",
+    "caseName": "新增提交-作业环节-公司",
+    "targetPage": "作业环节-公司",
+    "operationType": "新增提交",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业环节-公司"
+      },
+      {
+        "action": "点击",
+        "target": "新增按钮"
+      },
+      {
+        "action": "等待",
+        "target": "表单/弹窗出现"
+      },
+      {
+        "action": "输入",
+        "target": "名称/编码输入框",
+        "value": "AUTO_TEST_测试数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存/提交按钮"
+      },
+      {
+        "action": "断言",
+        "target": "新增成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_作业环节-公司测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "新增成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_015",
+    "caseName": "编辑修改-作业环节-公司",
+    "targetPage": "作业环节-公司",
+    "operationType": "编辑修改",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业环节-公司"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "双击",
+        "target": "AUTO_TEST_前缀的记录行"
+      },
+      {
+        "action": "输入",
+        "target": "修改字段输入框",
+        "value": "AUTO_TEST_修改后数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存按钮"
+      },
+      {
+        "action": "断言",
+        "target": "修改成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_作业环节-公司测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "修改成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_016",
+    "caseName": "删除确认-作业环节-公司",
+    "targetPage": "作业环节-公司",
+    "operationType": "删除确认",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业环节-公司"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "点击",
+        "target": "AUTO_TEST_前缀的记录行（选中）"
+      },
+      {
+        "action": "点击",
+        "target": "删除按钮"
+      },
+      {
+        "action": "点击",
+        "target": "确定/确认按钮"
+      },
+      {
+        "action": "断言",
+        "target": "删除成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_作业环节-公司测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "删除成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_017",
+    "caseName": "查询验证-作业流程",
+    "targetPage": "作业流程",
+    "operationType": "查询验证",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业流程"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "断言",
+        "target": "查询结果列表可见"
+      }
+    ],
+    "testData": {},
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".surely-table, .ant-table",
+        "description": "作业流程列表可见"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_018",
+    "caseName": "新增提交-作业流程",
+    "targetPage": "作业流程",
+    "operationType": "新增提交",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业流程"
+      },
+      {
+        "action": "点击",
+        "target": "新增按钮"
+      },
+      {
+        "action": "等待",
+        "target": "表单/弹窗出现"
+      },
+      {
+        "action": "输入",
+        "target": "名称/编码输入框",
+        "value": "AUTO_TEST_测试数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存/提交按钮"
+      },
+      {
+        "action": "断言",
+        "target": "新增成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_作业流程测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "新增成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_019",
+    "caseName": "编辑修改-作业流程",
+    "targetPage": "作业流程",
+    "operationType": "编辑修改",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业流程"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "双击",
+        "target": "AUTO_TEST_前缀的记录行"
+      },
+      {
+        "action": "输入",
+        "target": "修改字段输入框",
+        "value": "AUTO_TEST_修改后数据"
+      },
+      {
+        "action": "点击",
+        "target": "保存按钮"
+      },
+      {
+        "action": "断言",
+        "target": "修改成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_作业流程测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "修改成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  },
+  {
+    "caseId": "TC_S1133671402001000033_020",
+    "caseName": "删除确认-作业流程",
+    "targetPage": "作业流程",
+    "operationType": "删除确认",
+    "storyId": "S-1133671402001000033",
+    "steps": [
+      {
+        "action": "导航",
+        "target": "进入基础数据 > 作业中心配置 → 作业流程"
+      },
+      {
+        "action": "输入",
+        "target": "查询条件输入框",
+        "value": "AUTO_TEST_"
+      },
+      {
+        "action": "点击",
+        "target": "查询按钮"
+      },
+      {
+        "action": "等待",
+        "target": "列表数据加载完成"
+      },
+      {
+        "action": "点击",
+        "target": "AUTO_TEST_前缀的记录行（选中）"
+      },
+      {
+        "action": "点击",
+        "target": "删除按钮"
+      },
+      {
+        "action": "点击",
+        "target": "确定/确认按钮"
+      },
+      {
+        "action": "断言",
+        "target": "删除成功提示可见"
+      }
+    ],
+    "testData": {
+      "data_tag": "AUTO_TEST_",
+      "test_id": "AUTO_TEST_1779685868371",
+      "test_name": "AUTO_TEST_作业流程测试数据_1779685868371"
+    },
+    "assertions": [
+      {
+        "type": "visible",
+        "target": ".ant-message-success, .ant-notification-success",
+        "description": "删除成功提示"
+      }
+    ],
+    "dataTag": "AUTO_TEST_"
+  }
+]

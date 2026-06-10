@@ -1,0 +1,35 @@
+{
+  "menuName": "处方单",
+  "menuCategory": "处方受理",
+  "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/#/RxMatRelationErrOrg",
+  "apis": [
+    {
+      "id": "POST_/pszxSaasServer/archive/relationErr/rxMatRelationErrCtrl/listByScheme___pageSize__50__pageNum__1__sortName______extQueryConditions______queryConditions_____id___20632c81a",
+      "method": "POST",
+      "url": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaasServer/archive/relationErr/rxMatRelationErrCtrl/listByScheme",
+      "pathname": "/pszxSaasServer/archive/relationErr/rxMatRelationErrCtrl/listByScheme",
+      "headers": {
+        "tcm-appid": "pszx_saas",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "authorization": "tcm eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJ0Y20tY2hpbmEiLCJqdGkiOiJjNjcxNzJkNWYxODU0Yjk0OTA4M2FiM2RkOTM5MTRkOCIsImlhdCI6MTc4MDk4MzIxNywiZXhwIjoxNzgxMDQwODE3LCJhdWQiOiI3RHpTZ0ZVamF0az0ifQ.xUHnhA4A8QvezHaPW3dRY0bvaMRJlfhpljsqj0RrthLl3ygZ-1peVWkK3iPlfBxMyD0CXQVoQ7rBXaBUR6ymxg",
+        "tcm-sign2": "B6A5D7896E9B59EED7119BBC1EBFF8D8630C6981A8F49899FA496345C2CEBE0A",
+        "referer": "https://tcm-dc-sit.zgzykg.com.cn/pszxSaas/",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "tcm-noncestr": "AGD2JrlHoUcBsKM",
+        "sec-ch-ua-mobile": "?0",
+        "tcm-timestamp": "1780983454191",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+        "accept": "application/json, text/plain, */*",
+        "content-type": "application/json"
+      },
+      "queryParams": {},
+      "postData": "{\"pageSize\":50,\"pageNum\":1,\"sortName\":\"\",\"extQueryConditions\":[],\"queryConditions\":[{\"id\":\"20632c81ac3745bca2953e7e71258f38\",\"value\":[\"00013A1000000000VGSD\",\"1787720377238028288\",\"global\"],\"field\":\"pkOrg\",\"operation\":\"in\"},{\"id\":\"40ed47f08a07479180647055a6c69bbd\",\"value\":[null],\"field\":\"oriCode\",\"operation\":\"like\"},{\"id\":\"3a90429126194176afa5ceea773b71ca\",\"value\":[null],\"field\":\"pkHospital\",\"operation\":\"in\"},{\"id\":\"6890020b62ef49898cccb7c69914d11f\",\"value\":[null],\"field\":\"pkBusinessType\",\"operation\":\"in\"},{\"id\":\"b608ef5b6b3f4c7ea3b70f9f22f76349\",\"value\":[null],\"field\":\"hospitalMatCode\",\"operation\":\"like\"},{\"id\":\"3767cbc60b4b4cad8a6c61bc3a82dcac\",\"value\":[null],\"field\":\"hospitalMatName\",\"operation\":\"like\"},{\"id\":\"2b8089fe6de649d3bee8a6e7096b5d03\",\"value\":[null],\"field\":\"hospitalSpec\",\"operation\":\"like\"},{\"id\":\"88984b1103884350bc0855ed68639a89\",\"value\":[null],\"field\":\"hospitalUnit\",\"operation\":\"like\"},{\"id\":\"122b919b467246fc87ea2577d3006846\",\"value\":[null],\"field\":\"enableflag\",\"operation\":\"eq\"}],\"templateId\":\"32d1dd38ac5141cfae901b086899be6d\",\"groupByFields\":\"\",\"reloadColumnFlag\":0,\"functionCodeObj\":{\"isFlow\":false,\"isOrg\":true,\"auth\":\"RxMatRelationErrOrg\",\"header\":\"RxMatRelationErr_org\",\"query\":\"RxMatRelationErr_org\",\"bill\":\"RxMatRelationErr_org\",\"controller\":\"/archive/relationErr/rxMatRelationErrCtrl\",\"importProperty\":{\"functionCode\":\"RxMatRelationErr_org\",\"billType\":\"原处方单物料映射错误表\",\"orgLevel\":\"org\"}}}",
+      "requestContentType": "application/json",
+      "timestamp": 1780983454197,
+      "statusCode": null,
+      "responseHeaders": null,
+      "responseBodyPreview": null,
+      "responseContentType": null
+    }
+  ]
+}
