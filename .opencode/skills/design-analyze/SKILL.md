@@ -574,9 +574,9 @@ curl.exe -H "Authorization: Bearer {access_token}" \
 
 当 `auto_gen_cases` 为 `true` 或用户确认时自动执行。
 
-### 第九步：生成 XMind 思维导图（可选）
+### 第九步：生成 XMind 思维导图（可选，调用 playwright-mind）
 
-分析完成后，可根据 TAPD 需求内容生成 XMind 测试用例思维导图文件：
+分析完成后，可根据 TAPD 需求内容生成 XMind 测试用例思维导图文件（由 `playwright-mind` Skill 驱动）：
 
 #### XMind 文件结构规范
 
@@ -608,11 +608,11 @@ Root（需求标题）
 
 1. 从 TAPD story 获取标题和 ID，构建 story URL
 2. 根据分析报告中的测试要点（第四部分）生成测试用例数据
-3. 使用 `xmind` npm 包（`Workbook.createSheet` + `Zipper`）生成合法 `.xmind` 文件
+3. 调用 `playwright-mind` Skill 的 `gen_xmind_v5.js`，生成合法 `.xmind` 文件
 4. 输出的 `.xmind` 文件保存到 `test_pool/` 目录
 5. 文件命名格式：`{需求名称}.xmind`
 
-> XMind 文件由辅助脚本（如 `playwright-mind/gen_xmind_v5.js`）生成，所有新脚本必须遵循上述结构规范，确保 `href` 关联到 TAPD story。
+> XMind 文件由 [playwright-mind](../playwright-mind/SKILL.md) Skill 生成，所有新脚本必须遵循上述结构规范，确保 `href` 关联到 TAPD story。
 
 ## 错误处理
 
@@ -654,6 +654,7 @@ JSDesign Playwright 提取参考请参考 `references/jsdesign-api-reference.md`
 - **tapd-executor**：本 Skill 可替代 tapd-executor 中的 tapd-analyze 环节，形成新路线路：design-analyze → tapd-gen → template-engine → auto-test-runner → tapd-sync → tapd-notify
 - **template-engine**：设计规格中的 UI 组件可辅助模板匹配
 - **tapd-bug**：分析过程中发现的设计问题可提 Bug
+- **playwright-mind**：分析报告中的测试要点可导入 playwright-mind 生成 XMind 思维导图文件
 
 ### 与 tapd-analyze 的关系
 
@@ -680,6 +681,8 @@ design-analyze（设计稿分析）
   ├─ 逐页提取规格（字段/按钮/搜索条件）
   ├─ 备注说明提取（打开备注面板 → 解析序号 → 匹配字段名）
   ├─ 按页面菜单组织分析报告
+       ↓
+playwright-mind（XMind生成——可选）
        ↓
 tapd-gen（用例生成）
        ↓

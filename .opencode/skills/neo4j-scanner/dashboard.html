@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>AI 测试执行监控</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Microsoft YaHei','PingFang SC',sans-serif;background:#0f1923;color:#e0e0e0;padding:16px;height:100vh;display:flex;flex-direction:column}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-shrink:0}
+.header h1{font-size:18px;color:#00d4ff}
+.header h1 span{color:#ff6b35}
+.controls{display:flex;align-items:center;gap:10px}
+.controls span{color:#555;font-size:12px}
+
+.query-bar{display:flex;gap:5px;margin-bottom:8px;flex-shrink:0;flex-wrap:wrap}
+.query-bar input{flex:1;min-width:150px;padding:6px 10px;background:#1a2a3a;border:1px solid #333;border-radius:6px;color:#e0e0e0;font-size:12px}
+.query-bar input:focus{border-color:#00d4ff;outline:none}
+.query-bar button{padding:6px 12px;border:1px solid #333;border-radius:6px;background:#1a2a3a;color:#aaa;cursor:pointer;font-size:12px}
+.query-bar button:hover{background:#2a3a4a;color:#fff}
+.query-bar .query-btn{background:#00d4ff22;border-color:#00d4ff44;color:#00d4ff}
+.mode-tag{font-size:11px;padding:2px 8px;border-radius:4px}
+.mode-tag.realtime{background:#00e67622;color:#00e676}
+.mode-tag.graph{background:#ab47bc22;color:#ab47bc}
+.back-btn{display:none;padding:5px 10px;border:1px solid #00d4ff44;border-radius:6px;background:#00d4ff11;color:#00d4ff;cursor:pointer;font-size:11px;margin-left:auto}
+
+.stats{display:flex;gap:10px;padding:8px 14px;background:#1a2a3a;border-radius:8px;margin-bottom:8px;flex-shrink:0;flex-wrap:wrap}
+.stat{display:flex;align-items:center;gap:4px;font-size:12px}
+.stat .num{font-size:18px;font-weight:bold}
+.stat .label{color:#888;font-size:11px}
+.stat.total .num{color:#00d4ff}
+.stat.running .num{color:#ffb900}
+.stat.pass .num{color:#00e676}
+.stat.fail .num{color:#ff1744}
+.stat.waiting .num{color:#546e7a}
+.progress{height:3px;background:#1a2a3a;border-radius:2px;margin-bottom:8px;flex-shrink:0}
+.progress-fill{height:100%;background:linear-gradient(90deg,#00d4ff,#00e676);transition:width 0.5s ease}
+
+#graph{flex:1;background:#0d1b26;border-radius:8px;min-height:300px;position:relative;overflow:hidden}
+.graph-fallback{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px;padding:30px;width:100%;height:100%}
+.graph-fallback .node{display:inline-block;border-radius:50%;transition:all 0.3s;flex-shrink:0;cursor:pointer}
+.graph-fallback .node.pass{width:14px;height:14px;background:#00e676}
+.graph-fallback .node.fail{width:14px;height:14px;background:#ff1744}
+.graph-fallback .node.running{width:44px;height:44px;background:#ffb900;animation:breathe 1s ease-in-out infinite}
+.graph-fallback .node.waiting{width:12px;height:12px;background:#37474f}
+.graph-fallback .node.error{width:14px;height:14px;background:#ff9100}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.graph-fallback .node .tip{display:none;position:absolute;bottom:150%;left:50%;transform:translateX(-50%);background:#000;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;white-space:nowrap}
+.graph-fallback .node:hover .tip{display:block}
+.graph-fallback .node:hover{transform:scale(1.5);z-index:5}
+
+.running-info{display:none;align-items:center;gap:8px;padding:6px 14px;background:#1a2a3a;border-radius:8px;margin-bottom:8px;border:1px solid #ffb90033;flex-shrink:0;font-size:13px}
+.running-info.active{display:flex}
+.running-info .dot{width:10px;height:10px;border-radius:50%;background:#ffb900;animation:breathe 0.8s ease-in-out infinite}
+.running-info .fi{color:#ffb900;font-weight:bold}
+.running-info .ty{color:#888}
+
+#status{color:#888;font-size:12px;padding:4px 0;flex-shrink:0;display:flex;justify-content:space-between}
+#status .count{color:#00d4ff}
+
+.recent{background:#1a2a3a;border-radius:8px;padding:10px 14px;margin-top:8px;flex-shrink:0;max-height:80px;overflow-y:auto}
+.recent h3{font-size:12px;color:#888;margin-bottom:4px;font-weight:normal}
+.recent-wrap{display:flex;flex-wrap:wrap;gap:4px}
+.recent-item{font-size:11px;padding:2px 8px;border-radius:4px;border:1px solid #333}
+.recent-item.pass{border-color:#00e67644;color:#00e676}
+.recent-item.fail{border-color:#ff174444;color:#ff1744}
+.recent-item.running{border-color:#ffb90044;color:#ffb900}
+
+.legend{display:flex;gap:10px;margin:4px 0;font-size:11px;color:#888;flex-shrink:0;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:4px}
+.footer{text-align:center;color:#444;font-size:11px;margin-top:8px;flex-shrink:0}
+.vis-network:focus{outline:none}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>🤖</span> AI 测试执行监控</h1>
+  <div class="controls"><span id="updateTime"></span><span class="mode-tag realtime" id="modeTag">实时</span></div>
+</div>
+
+<div class="query-bar">
+  <input id="queryInput" placeholder="输入 Cypher 查询…" spellcheck="false" />
+  <button class="query-btn" onclick="doQuery()">▶ 查询</button>
+  <button onclick="preset('all')">全部</button>
+  <button onclick="preset('running')">执行中</button>
+  <button onclick="preset('done')">已执行</button>
+  <button class="back-btn" id="backBtn" onclick="back()">← 实时</button>
+</div>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+<div class="stats">
+  <div class="stat total"><span class="num" id="totalCount">-</span><span class="label">总计</span></div>
+  <div class="stat running"><span class="num" id="runningCount">-</span><span class="label">执行中</span></div>
+  <div class="stat pass"><span class="num" id="passCount">-</span><span class="label">通过</span></div>
+  <div class="stat fail"><span class="num" id="failCount">-</span><span class="label">失败</span></div>
+  <div class="stat waiting"><span class="num" id="waitingCount">-</span><span class="label">待执行</span></div>
+</div>
+
+<div id="runningInfo" class="running-info"></div>
+<div class="legend">
+  <span class="legend-item"><span style="width:10px;height:10px;border-radius:50%;display:inline-block;background:#ffb900"></span> 执行中</span>
+  <span class="legend-item"><span style="width:10px;height:10px;border-radius:50%;display:inline-block;background:#00e676"></span> 通过</span>
+  <span class="legend-item"><span style="width:10px;height:10px;border-radius:50%;display:inline-block;background:#ff1744"></span> 失败</span>
+  <span class="legend-item" style="border-left:1px solid #333;padding-left:10px">⭐ Module ▦ Page ◆ Area ▣ Field/Button ● TestCase</span>
+</div>
+
+<div id="status"><span>查询中...</span><span class="count"></span></div>
+<div id="graph"></div>
+
+<div class="recent"><h3>📋 最近执行</h3><div class="recent-wrap" id="recentList">暂无</div></div>
+<div class="footer">自动刷新 3s | Neo4j localhost:7474</div>
+
+<script>
+let net = null;
+let breatheTimer = null;
+let isQuery = false;
+let useVis = typeof vis !== 'undefined';
+
+// Breathing animation for running nodes
+setInterval(() => {
+  if (!net || !useVis) return;
+  net.body.nodes.forEach(node => {
+    if (node.options.group === 'running') {
+      const s = node.options.size;
+      node.options.size = s >= 40 ? 35 : 45;
+    }
+  });
+  net.redraw();
+}, 900);
+
+async function q(stmt) {
+  try {
+    const r = await fetch('/api/neo4j', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({statements:[{statement:stmt, resultDataContents:['row','graph']}]})
+    });
+    return await r.json();
+  } catch { return null; }
+}
+
+// Render as vis-network graph
+function renderGraph(graphData, label, cols) {
+  const container = document.getElementById('graph');
+
+  if (!useVis || !graphData || !graphData.nodes || graphData.nodes.length === 0) {
+    // Fallback: umbrella
+    showFallback(graphData, label);
+    return;
+  }
+
+  const nodeColor = (labels, props) => {
+    const l = labels[0] || '';
+    if (l === 'Module') return { bg:'#ef5350', shape:'star', sz:26 };
+    if (l === 'Page') return { bg:'#ab47bc', shape:'star', sz:20 };
+    if (l === 'Area') return { bg:'#26c6da', shape:'diamond', sz:16 };
+    if (l === 'Field') return { bg:'#42a5f5', shape:'box', sz:14 };
+    if (l === 'Button') return { bg:'#7c4dff', shape:'box', sz:14 };
+    if (l === 'TestCase') {
+      const st = props.lastRunStatus || 'waiting';
+      if (st === 'running') return { bg:'#ffb900', shape:'dot', sz:40, grp:'running' };
+      if (st === 'pass') return { bg:'#00e676', shape:'dot', sz:12, grp:'pass' };
+      if (st === 'fail') return { bg:'#ff1744', shape:'dot', sz:12, grp:'fail' };
+      return { bg:'#546e7a', shape:'dot', sz:10 };
+    }
+    return { bg:'#78909c', shape:'dot', sz:10 };
+  };
+
+  const visNodes = new vis.DataSet();
+  graphData.nodes.forEach(n => {
+    const c = nodeColor(n.labels, n.props);
+    const display = n.props?.field || n.props?.name || n.props?.label || n.labels?.[0] || '';
+    visNodes.add({
+      id: n.id,
+      label: display,
+      title: `<b>${display}</b><br>${n.labels?.join(',')||''}${n.props?.lastRunStatus?'<br>状态: '+n.props.lastRunStatus:''}`,
+      color: { background: c.bg, border: c.grp==='running'?'#ff6f00':c.bg },
+      shape: c.shape, size: c.sz, group: c.grp,
+      borderWidth: c.grp==='running'?5:1,
+      font: { color:'#e0e0e0', size: c.shape==='dot'?9:11, face:'Microsoft YaHei' },
+      physics: false, fixed: true,
+    });
+  });
+
+  const visEdges = new vis.DataSet();
+  (graphData.edges||[]).forEach(e => {
+    visEdges.add({
+      from: e.from, to: e.to, label: e.label,
+      color: { color:'#455a64' },
+      font: { size:8, color:'#546e7a', face:'Microsoft YaHei' },
+      arrows: { to: { enabled:true, scaleFactor:0.4 } },
+      width: 0.5,
+    });
+  });
+
+  const options = {
+    layout: {
+      hierarchical: { enabled:true, direction:'LR', sortMethod:'directed', nodeSpacing:100, levelSeparation:160, treeSpacing:20 }
+    },
+    physics: { enabled: false },
+    groups: { running: { shape:'dot', size:40 } },
+    interaction: { hover:true, tooltipDelay:300, dragNodes:false, zoomView:true },
+  };
+
+  if (net) net.setData({ nodes:visNodes, edges:visEdges });
+  else net = new vis.Network(container, { nodes:visNodes, edges:visEdges }, options);
+
+  document.getElementById('status').innerHTML =
+    `<span>${label||'图谱结果'}</span><span class="count">${graphData.nodes.length} 节点, ${graphData.edges?.length||0} 关系</span>`;
+}
+
+// Fallback umbrella grid
+function showFallback(graphData, label) {
+  const container = document.getElementById('graph');
+  container.innerHTML = '';
+  const wrap = document.createElement('div');
+  wrap.className = 'graph-fallback';
+
+  // Collect all unique TestCase nodes
+  const seen = {};
+  const addNode = (st, tip) => {
+    const key = st+':'+tip;
+    if (seen[key]) return;
+    seen[key] = true;
+    const el = document.createElement('span');
+    el.className = 'node ' + st;
+    if (tip) { const t=document.createElement('span'); t.className='tip'; t.textContent=tip; el.appendChild(t); }
+    wrap.appendChild(el);
+  };
+
+  if (graphData && graphData.nodes) {
+    graphData.nodes.forEach(n => {
+      if (n.labels?.includes('TestCase') && n.props) {
+        addNode(n.props.lastRunStatus||'waiting', n.props.field||'');
+      }
+    });
+  }
+
+  if (wrap.children.length === 0) {
+    wrap.innerHTML = '<span style="color:#555;padding:30px">无结果</span>';
+  }
+
+  container.appendChild(wrap);
+  const cnt = wrap.children.length;
+  document.getElementById('status').innerHTML =
+    `<span>${label||'伞状结果'}</span><span class="count">${cnt} 测试用例</span>`;
+}
+
+async function doQuery() {
+  const stmt = document.getElementById('queryInput').value.trim();
+  if (!stmt) return;
+  await runQuery(stmt, '自定义查询');
+}
+
+async function preset(name) {
+  const MAP = {
+    all: `MATCH (n)-[r]->(m) RETURN n,r,m LIMIT 200`,
+    running: `MATCH (n:TestCase {lastRunStatus:'running'}) RETURN n LIMIT 200`,
+    done: `MATCH (n:TestCase) WHERE n.lastRunAt IS NOT NULL RETURN n ORDER BY n.lastRunAt DESC LIMIT 200`,
+  };
+  document.getElementById('queryInput').value = MAP[name] || name;
+  await runQuery(MAP[name], { all:'全部用例', running:'执行中', done:'已执行' }[name] || name);
+}
+
+async function runQuery(stmt, label) {
+  isQuery = true;
+  document.getElementById('modeTag').textContent = '图谱查询';
+  document.getElementById('modeTag').className = 'mode-tag graph';
+  document.getElementById('backBtn').style.display = 'inline-block';
+  document.getElementById('status').innerHTML = '<span>查询中...</span>';
+
+  try {
+    const data = await q(stmt);
+    const graphData = extractGraph(data);
+    if (graphData && graphData.nodes.length > 0) {
+      renderGraph(graphData, label);
+    } else {
+      // If no graph data, try to extract from rows
+      const nodes = extractNodesFromRows(data);
+      if (nodes.length > 0) {
+        showFallback({ nodes }, label);
+      } else {
+        showFallback(null, label);
+      }
+    }
+  } catch(e) {
+    document.getElementById('status').innerHTML = '<span style="color:#ff1744">❌ ' + e.message + '</span>';
+  }
+}
+
+function extractGraph(data) {
+  if (!data?.results?.[0]?.data) return null;
+  const nodeMap = new Map();
+  const edgeMap = new Map();
+  for (const row of data.results[0].data) {
+    if (!row.graph) continue;
+    for (const n of (row.graph.nodes||[])) {
+      if (!nodeMap.has(n.id)) nodeMap.set(n.id, { id:n.id, labels:n.labels||[], props:n.properties||{} });
+    }
+    for (const e of (row.graph.relationships||[])) {
+      if (!edgeMap.has(e.id)) edgeMap.set(e.id, { id:e.id, from:e.startNode, to:e.endNode, label:e.type });
+    }
+  }
+  if (nodeMap.size === 0) return null;
+  return { nodes:[...nodeMap.values()], edges:[...edgeMap.values()] };
+}
+
+function extractNodesFromRows(data) {
+  if (!data?.results?.[0]) return [];
+  const cols = data.results[0].columns || [];
+  const statusIdx = cols.findIndex(c => c==='s'||c==='status'||c==='lastRunStatus');
+  const fieldIdx = cols.findIndex(c => c==='f'||c==='field');
+  return (data.results[0].data||[]).map(d => ({
+    props: { lastRunStatus: statusIdx>=0 ? d.row[statusIdx]||'waiting' : 'waiting', field: fieldIdx>=0 ? d.row[fieldIdx] : '' },
+    labels: ['TestCase'],
+  }));
+}
+
+function back() {
+  isQuery = false;
+  document.getElementById('modeTag').textContent = '实时';
+  document.getElementById('modeTag').className = 'mode-tag realtime';
+  document.getElementById('backBtn').style.display = 'none';
+  document.getElementById('queryInput').value = '';
+  update();
+}
+
+async function update() {
+  if (isQuery) return;
+
+  try {
+    const s = await q("MATCH (tc:TestCase) WITH coalesce(tc.lastRunStatus,'waiting') as s, count(tc) as cnt RETURN s as status, cnt");
+    const c = {total:0,pass:0,fail:0,running:0,waiting:0};
+    (s?.results?.[0]?.data||[]).forEach(d => { let v=d.row[0]; c[v]=(c[v]||0)+d.row[1]; c.total+=d.row[1]; });
+    ['total','pass','fail','running','waiting'].forEach(k => {
+      const el = document.getElementById(k+'Count');
+      if (el) el.textContent = c[k]||0;
+    });
+    document.getElementById('progressFill').style.width = c.total ? (((c.pass||0)+(c.fail||0))/c.total*100)+'%' : '0%';
+
+    const run = await q("MATCH (tc:TestCase {lastRunStatus:'running'}) RETURN tc.field, tc.type LIMIT 1");
+    const ri = document.getElementById('runningInfo');
+    if (run?.results?.[0]?.data?.length > 0) {
+      ri.className = 'running-info active';
+      ri.innerHTML = `<div class="dot"></div><span class="fi">${run.results[0].data[0].row[0]||''}</span><span class="ty">${run.results[0].data[0].row[1]||''}</span>`;
+    } else { ri.className = 'running-info'; ri.innerHTML = ''; }
+
+    const g = await q("MATCH (n)-[r]->(m) RETURN n,r,m LIMIT 200");
+    const graphData = extractGraph(g);
+    if (graphData) renderGraph(graphData, '实时监控');
+    else showFallback(null, '实时监控');
+  } catch(e) {
+    document.getElementById('status').innerHTML = '<span style="color:#ff1744">❌ ' + e.message + '</span>';
+  }
+
+  document.getElementById('updateTime').textContent = new Date().toLocaleTimeString();
+  setTimeout(update, 3000);
+}
+
+document.getElementById('queryInput').addEventListener('keydown', e => { if (e.key === 'Enter') doQuery(); });
+
+setTimeout(update, 500);
+</script>
+</body>
+</html>

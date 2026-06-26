@@ -1,0 +1,16 @@
+{
+  "配送中心系统": {
+    "login_url": "https://tcm-dc-sit.zgzykg.com.cn/#/user/login?sysCode=pszxSaas",
+    "username": "pszxAdmin",
+    "password": "TcmpszxAdmin199@.",
+    "app_name": "配送中心SAAS",
+    "app_code": "pszxSaas"
+  },
+  "营销系统SIT": {
+    "login_url": "https://tcm-dc-sit.zgzykg.com.cn/#/user/login",
+    "username": "lMY",
+    "password": "LXKLkkhan6394",
+    "app_name": "营销系统SIT",
+    "app_code": ""
+  }
+}

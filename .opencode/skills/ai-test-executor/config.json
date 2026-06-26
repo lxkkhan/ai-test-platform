@@ -1,0 +1,6 @@
+{
+  "_extends": "../_shared/tapd-config.json",
+  "story_id": "",
+  "default_severity": "一般",
+  "default_bug_due_days": 2
+}

@@ -1,0 +1,1393 @@
+{
+  "打单商业申请单": {
+    "pageName": "打单商业申请单",
+    "url": "https://codesign.qq.com/app/s/697313341916783",
+    "screenshots": [
+      "E:\\006Skills\\.opencode\\skills\\codesign_data\\打单商业申请单.png"
+    ],
+    "iframes": [
+      {
+        "idx": 0,
+        "src": "blob:https://codesign.qq.com/26f4f581-1e44-4104-94b3-c1c05cdf99e3#URL-/prototypes/2026/06/26/P39q226Wmbv2066Y70w26/n8m5a0xbvcxzohbb/02bd28b4736917c7b881a960407a8a9a.txt",
+        "text": "申请项目\n\n商业全称\n\n商业责任部门\n\n商业责任人\n\n单据编号\n\n从OA获取\n\n​\n2\n主表模式\n主子表模式\n报表模式\n\n更新到打单商业档案\n\n​\n3\n\n导出\n\n已选条件\n\n查询\n\n​\n1\n\n重置\n\n默认方案\n\n高级查询\n\n共 999 条\n\n2\n\n3\n\n4\n\n5\n\n前往\n\n5\n\n页\n\n100/页\n\n1\n\n管理员\n\n消息中心\n\n处理中心\n\n问题反馈\n\n切换组织\n\n紧急任务\n\n122\n\n主页\n\n标签页\n\n菜单名称 x\n\n原始流向管理\n\n常用\n\n序号\n\n处理标志\n\n​\n4\n\n通过标识\n\n​\n25\n\n处理人\n\n​\n5\n\n处理时间\n\n​\n6\n\n单据编号\n\n​\n7\n\n申请项目\n\n​\n8\n\n商业全称\n\n​\n9\n\n信用代码\n\n​\n22\n\n行政省份\n\n​\n23\n\n商业责任部门\n\n​\n10\n\n商业责任人\n\n​\n11\n\n流向收集部门（与商务对接）\n\n​\n12\n\n流向收集人（与商务对接）\n\n​\n13\n\n流向提交人（与信息组对接，商务部人员）\n\n​\n14\n\n商务分类\n\n​\n15\n\n客户属性\n\n​\n16\n\n新增打单年月\n\n​\n17\n\n终止打单年月\n\n​\n18\n\n申请原因\n\n​\n19\n\n申请人\n\n​\n20\n\n申请时间\n\n​\n21\n\n不通过说明\n\n新增、终止、变更\n\n流向提交人\n\n申请人\n\n打单商业申请单\n\n打单商业档案\n\n原始流向单\n\n下载原始流向\n\n导入提取结果单\n\n导入清洗结果单\n\n导入正式流向\n\n原始流向执行表\n\n原始流向明细表\n\n打单商业数据提交跟进表\n\n六个月未提交流向预警表\n\n处理标志\n\n请选择\n是\n否\n\nOA 流向打单商业申请单，需要添加\n\n选择修改原商业，点击选择原单位后\n\n才能确认真正要修改的单位。（数据从\n\n客户档案中获取）\n\nOA 流向打单商业申请单，需要反选\n\n这个商业公司的信用代码。（数据从\n\n客户档案中获取）\n\n客户档案\n\nOA打单商业申请\n\n原始流向\n\n拉取OA已审核的商业申请表\n\n（去重）\n\n标记是否通过\n\n​\n24\n\n标记是否通过\n\n请选择\n是\n否",
+        "widgetCount": 72,
+        "widgets": [
+          {
+            "id": "u1_text",
+            "text": "申请项目",
+            "parentIds": "u1,u0,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u4_text",
+            "text": "商业全称",
+            "parentIds": "u4,u3,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u8_text",
+            "text": "商业责任部门",
+            "parentIds": "u8,u7,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u11_text",
+            "text": "商业责任人",
+            "parentIds": "u11,u10,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u15_text",
+            "text": "单据编号",
+            "parentIds": "u15,u14,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u24_text",
+            "text": "从OA获取",
+            "parentIds": "u24,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u28_text",
+            "text": "更新到打单商业档案",
+            "parentIds": "u28,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u29_text",
+            "text": "导出",
+            "parentIds": "u29,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u32_text",
+            "text": "已选条件",
+            "parentIds": "u32,u31,u30",
+            "fontSize": ""
+          },
+          {
+            "id": "u35_text",
+            "text": "查询",
+            "parentIds": "u35,u30,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u36_text",
+            "text": "重置",
+            "parentIds": "u36,u30,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u38_text",
+            "text": "高级查询",
+            "parentIds": "u38,u30,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u41_text",
+            "text": "共 999 条",
+            "parentIds": "u41,u39,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u46_text",
+            "text": "前往",
+            "parentIds": "u46,u39,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u49_text",
+            "text": "100/页",
+            "parentIds": "u49,u39,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u58_text",
+            "text": "管理员",
+            "parentIds": "u58,u56_state0_content,u56_state0",
+            "fontSize": ""
+          },
+          {
+            "id": "u64_text",
+            "text": "消息中心",
+            "parentIds": "u64,u59,u56_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u70_text",
+            "text": "处理中心",
+            "parentIds": "u70,u65,u56_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u73_text",
+            "text": "问题反馈",
+            "parentIds": "u73,u71,u56_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u78_text",
+            "text": "切换组织",
+            "parentIds": "u78,u56_state0_content,u56_state0",
+            "fontSize": ""
+          },
+          {
+            "id": "u87_text",
+            "text": "紧急任务",
+            "parentIds": "u87,u56_state0_content,u56_state0",
+            "fontSize": ""
+          },
+          {
+            "id": "u88_text",
+            "text": "122",
+            "parentIds": "u88,u56_state0_content,u56_state0",
+            "fontSize": ""
+          },
+          {
+            "id": "u94_text",
+            "text": "主页",
+            "parentIds": "u94,u93,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u97_text",
+            "text": "标签页",
+            "parentIds": "u97,u96,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u100_text",
+            "text": "菜单名称 x",
+            "parentIds": "u100,u99,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u104_text",
+            "text": "原始流向管理",
+            "parentIds": "u104,u103,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u111_text",
+            "text": "常用",
+            "parentIds": "u111,u109,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u121_text",
+            "text": "序号",
+            "parentIds": "u121,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u122_text",
+            "text": "处理标志",
+            "parentIds": "u122,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u123_text",
+            "text": "通过标识",
+            "parentIds": "u123,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u124_text",
+            "text": "处理人",
+            "parentIds": "u124,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u125_text",
+            "text": "处理时间",
+            "parentIds": "u125,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u126_text",
+            "text": "单据编号",
+            "parentIds": "u126,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u127_text",
+            "text": "申请项目",
+            "parentIds": "u127,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u128_text",
+            "text": "商业全称",
+            "parentIds": "u128,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u129_text",
+            "text": "信用代码",
+            "parentIds": "u129,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u130_text",
+            "text": "行政省份",
+            "parentIds": "u130,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u131_text",
+            "text": "商业责任部门",
+            "parentIds": "u131,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u132_text",
+            "text": "商业责任人",
+            "parentIds": "u132,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u133_text",
+            "text": "流向收集部门（与商务对接）",
+            "parentIds": "u133,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u134_text",
+            "text": "流向收集人（与商务对接）",
+            "parentIds": "u134,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u135_text",
+            "text": "流向提交人（与信息组对接，商务部人员）",
+            "parentIds": "u135,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u136_text",
+            "text": "商务分类",
+            "parentIds": "u136,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u137_text",
+            "text": "客户属性",
+            "parentIds": "u137,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u138_text",
+            "text": "新增打单年月",
+            "parentIds": "u138,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u139_text",
+            "text": "终止打单年月",
+            "parentIds": "u139,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u140_text",
+            "text": "申请原因",
+            "parentIds": "u140,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u141_text",
+            "text": "申请人",
+            "parentIds": "u141,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u142_text",
+            "text": "申请时间",
+            "parentIds": "u142,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u143_text",
+            "text": "不通过说明",
+            "parentIds": "u143,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u150_text",
+            "text": "新增、终止、变更",
+            "parentIds": "u150,u120,u119_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u400_text",
+            "text": "流向提交人",
+            "parentIds": "u400,u399,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u404_text",
+            "text": "申请人",
+            "parentIds": "u404,u403,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u408-1_text",
+            "text": "打单商业申请单",
+            "parentIds": "u408-1,u407-1,u407",
+            "fontSize": ""
+          },
+          {
+            "id": "u408-2_text",
+            "text": "打单商业档案",
+            "parentIds": "u408-2,u407-2,u407",
+            "fontSize": ""
+          },
+          {
+            "id": "u408-3_text",
+            "text": "原始流向单",
+            "parentIds": "u408-3,u407-3,u407",
+            "fontSize": ""
+          },
+          {
+            "id": "u408-4_text",
+            "text": "下载原始流向",
+            "parentIds": "u408-4,u407-4,u407",
+            "fontSize": ""
+          },
+          {
+            "id": "u408-5_text",
+            "text": "导入提取结果单",
+            "parentIds": "u408-5,u407-5,u407",
+            "fontSize": ""
+          },
+          {
+            "id": "u408-6_text",
+            "text": "导入清洗结果单",
+            "parentIds": "u408-6,u407-6,u407",
+            "fontSize": ""
+          },
+          {
+            "id": "u408-7_text",
+            "text": "导入正式流向",
+            "parentIds": "u408-7,u407-7,u407",
+            "fontSize": ""
+          }
+        ],
+        "inputCount": 25,
+        "inputs": [
+          {
+            "id": "u2_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请输入",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u5_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请输入",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u9_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请输入",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u12_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请输入",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u16_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请输入",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u25_input",
+            "tag": "select",
+            "type": "select-one",
+            "value": "主表模式",
+            "text": "主表模式\n          主子表模式\n          报表模式",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u33_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u37_input",
+            "tag": "select",
+            "type": "select-one",
+            "value": "默认方案",
+            "text": "默认方案",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u117_input",
+            "tag": "input",
+            "type": "text",
+            "value": "搜索服务名称",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-1_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-2_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-3_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-4_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-5_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-6_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-7_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-8_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-9_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-10_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-11_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u398-12_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u401_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u405_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请输入",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u412_input",
+            "tag": "select",
+            "type": "select-one",
+            "value": "请选择",
+            "text": "请选择\n              是\n              否",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u428_input",
+            "tag": "select",
+            "type": "select-one",
+            "value": "请选择",
+            "text": "请选择\n              是\n              否",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          }
+        ],
+        "tableCount": 0
+      }
+    ],
+    "pageContent": "资料库 暂无内容       \n 暂无内容       \n 暂无内容       \n 暂无内容 \n  \n  \n  \n源文件 暂无源文件 \n 暂无源文件 \n 暂无源文件 \n 暂无源文件 \n\n备注说明 元素说明 1查询 注释 有权限控制2从OA获取 注释 从OA获取流程结束的打单商业申请单3更新到打单商业档案 注释 针对勾选记录，更新到打单商业档案，更新处理标志4处理标志 注释 更新到打单商业档案：是未更新到打单商业档案：否5处理人 注释 1、账号操作人姓名2、长度：100类型：字符串数据来源：当前模块6处理时间 注释 年月日-时分秒数据来源：当前模块动作：执行更新到打单商业档案的时间7单据编号 注释 长度：500类型：英文、数字数据来源：OA打单商业申请单单据号8申请项目 注释 新增终止=删除变更数据来源：OA打单商业申请单9商业全称 注释 长度：500类型：字符串数据来源：OA打单商业申请单10商业责任部门 注释 长度：500类型：字符串数据来源：OA打单商业申请单11商业责任人 注释 长度：100类型：字符串数据来源：OA打单商业申请单12流向收集部门（与商务对接） 注释 长度：100类型：字符串数据来源：OA打单商业申请单13流向收集人（与商务对接） 注释 长度：100类型：字符串数据来源：OA打单商业申请单14流向提交人（与信息组对接，商务部人员） 注释 长度：100类型：字符串数据来源：OA打单商业申请单15商务分类 注释 1、一级协议经销商 | 一级协议经销商2、二级协议分销商 | 二级协议分销商3、非协议商业 | 非协议商业4、连锁公司 | 连锁公司5、电商（B2B） | 电商（B2B）6、代理商商业 | 代理商商业数据来源：OA打单商业申请单16客户属性 注释 1、商业公司|商业公司2、连锁公司|连锁公司3、电商（B2B）|电商（B2B）数据来源：OA打单商业申请单17新增打单年月 注释 年-月数据来源：OA打单商业申请单18终止打单年月 注释 年-月数据来源：OA打单商业申请单19申请原因 注释 长度：1000类型：字符串数据来源：OA打单商业申请单20申请人 注释 长度：100类型：字符串数据来源：OA打单商业申请单21申请时间 注释 年月日-时分秒数据来源：OA打单商业申请单22信用代码 注释 长度：500类型：字符串数据来源：OA打单商业申请单23行政省份 注释 长度：500类型：字符串数据来源：OA打单商业申请单24标记是否通过 注释 是=可 【更新到打单商业档案】默认否=不可 【更新到打单商业档案】标记为否需要弹窗让用户填写，不通过说明。针对已处理标志的申请单不可修改。25通过标识 注释 是=可 【更新到打单商业档案】默认否=不可 【更新到打单商业档案】标记为否需要弹窗让用户填写，不通过说明。针对已处理标志的申请单不可修改。\n 元素说明 1查询 注释 有权限控制2从OA获取 注释 从OA获取流程结束的打单商业申请单3更新到打单商业档案 注释 针对勾选记录，更新到打单商业档案，更新处理标志4处理标志 注释 更新到打单商业档案：是未更新到打单商业档案：否5处理人 注释 1、账号操作人姓名2、长度：100类型：字符串数据来源：当前模块6处理时间 注释 年月日-时分秒数据来源：当前模块动作：执行更新到打单商业档案的时间7单据编号 注释 长度：500类型：英文、数字数据来源：OA打单商业申请单单据号8申请项目 注释 新增终止=删除变更数据来源：OA打单商业申请单9商业全称 注释 长度：500类型：字符串数据来源：OA打单商业申请单10商业责任部门 注释 长度：500类型：字符串数据来源：OA打单商业申请单11商业责任人 注释 长度：100类型：字符串数据来源：OA打单商业申请单12流向收集部门（与商务对接） 注释 长度：100类型：字符串数据来源：OA打单商业申请单13流向收集人（与商务对接） 注释 长度：100类型：字符串数据来源：OA打单商业申请单14流向提交人（与信息组对接，商务部人员） 注释 长度：100类型：字符串数据来源：OA打单商业申请单15商务分类 注释 1、一级协议经销商 | 一级协议经销商2、二级协议分销商 | 二级协议分销商3、非协议商业 | 非协议商业4、连锁公司 | 连锁公司5、电商（B2B） | 电商（B2B）6、代理商商业 | 代理商商业数据来源：OA打单商业申请单16客户属性 注释 1、商业公司|商业公司2、连锁公司|连锁公司3、电商（B2B）|电商（B2B）数据来源：OA打单商业申请单17新增打单年月 注释 年-月数据来源：OA打单商业申请单18终止打单年月 注释 年-月数据来源：OA打单商业申请单19申请原因 注释 长度：1000类型：字符串数据来源：OA打单商业申请单20申请人 注释 长度：100类型：字符串数据来源：OA打单商业申请单21申请时间 注释 年月日-时分秒数据来源：OA打单商业申请单22信用代码 注释 长度：500类型：字符串数据来源：OA打单商业申请单23行政省份 注释 长度：500类型：字符串数据来源：OA打单商业申请单24标记是否通过 注释 是=可 【更新到打单商业档案】默认否=不可 【更新到打单商业档案】标记为否需要弹窗让用户填写，不通过说明。针对已处理标志的申请单不可修改。25通过标识 注释 是=可 【更新到打单商业档案】默认否=不可 【更新到打单商业档案】标记为否需要弹窗让用户填写，不通过说明。针对已处理标志的申请单不可修改。\n有权限控制\n从OA获取流程结束的打单商业申请单\n针对勾选记录，更新到打单商业档案，更新处理标志\n更新到打单商业档案：是未更新到打单商业档案：否\n1、账号操作人姓名2、长度：100类型：字符串数据来源：当前模块\n年月日-时分秒数据来源：当前模块动作：执行更新到打单商业档案的时间\n长度：500类型：英文、数字数据来源：OA打单商业申请单单据号\n新增终止=删除变更数据来源：OA打单商业申请单\n长度：500类型：字符串数据来源：OA打单商业申请单\n长度：500类型：字符串数据来源：OA打单商业申请单\n长度：100类型：字符串数据来源：OA打单商业申请单\n长度：100类型：字符串数据来源：OA打单商业申请单\n长度：100类型：字符串数据来源：OA打单商业申请单\n长度：100类型：字符串数据来源：OA打单商业申请单\n1、一级协议经销商 | 一级协议经销商2、二级协议分销商 | 二级协议分销商3、非协议商业 | 非协议商业4、连锁公司 | 连锁公司5、电商（B2B） | 电商（B2B）6、代理商商业 | 代理商商业数据来源：OA打单商业申请单\n1、商业公司|商业公司2、连锁公司|连锁公司3、电商（B2B）|电商（B2B）数据来源：OA打单商业申请单\n年-月数据来源：OA打单商业申请单\n年-月数据来源：OA打单商业申请单\n长度：1000类型：字符串数据来源：OA打单商业申请单\n长度：100类型：字符串数据来源：OA打单商业申请单\n年月日-时分秒数据来源：OA打单商业申请单\n长度：500类型：字符串数据来源：OA打单商业申请单\n长度：500类型：字符串数据来源：OA打单商业申请单\n是=可 【更新到打单商",
+    "notesContent": {
+      "items": [
+        {
+          "num": "1",
+          "name": "查询",
+          "note": "有权限控制"
+        },
+        {
+          "num": "2",
+          "name": "从OA获取",
+          "note": "从OA获取流程结束的打单商业申请单"
+        },
+        {
+          "num": "3",
+          "name": "更新到打单商业档案",
+          "note": "针对勾选记录，更新到打单商业档案，更新处理标志"
+        },
+        {
+          "num": "4",
+          "name": "处理标志",
+          "note": "更新到打单商业档案：是未更新到打单商业档案：否"
+        },
+        {
+          "num": "5",
+          "name": "处理人",
+          "note": "1、账号操作人姓名2、长度：100类型：字符串数据来源：当前模块"
+        },
+        {
+          "num": "6",
+          "name": "处理时间",
+          "note": "年月日-时分秒数据来源：当前模块动作：执行更新到打单商业档案的时间"
+        },
+        {
+          "num": "7",
+          "name": "单据编号",
+          "note": "长度：500类型：英文、数字数据来源：OA打单商业申请单单据号"
+        },
+        {
+          "num": "8",
+          "name": "申请项目",
+          "note": "新增终止=删除变更数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "9",
+          "name": "商业全称",
+          "note": "长度：500类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "10",
+          "name": "商业责任部门",
+          "note": "长度：500类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "11",
+          "name": "商业责任人",
+          "note": "长度：100类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "12",
+          "name": "流向收集部门（与商务对接）",
+          "note": "长度：100类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "13",
+          "name": "流向收集人（与商务对接）",
+          "note": "长度：100类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "14",
+          "name": "流向提交人（与信息组对接，商务部人员）",
+          "note": "长度：100类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "15",
+          "name": "商务分类",
+          "note": "1、一级协议经销商 | 一级协议经销商2、二级协议分销商 | 二级协议分销商3、非协议商业 | 非协议商业4、连锁公司 | 连锁公司5、电商（B2B） | 电商（B2B）6、代理商商业 | 代理商商业数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "16",
+          "name": "客户属性",
+          "note": "1、商业公司|商业公司2、连锁公司|连锁公司3、电商（B2B）|电商（B2B）数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "17",
+          "name": "新增打单年月",
+          "note": "年-月数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "18",
+          "name": "终止打单年月",
+          "note": "年-月数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "19",
+          "name": "申请原因",
+          "note": "长度：1000类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "20",
+          "name": "申请人",
+          "note": "长度：100类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "21",
+          "name": "申请时间",
+          "note": "年月日-时分秒数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "22",
+          "name": "信用代码",
+          "note": "长度：500类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "23",
+          "name": "行政省份",
+          "note": "长度：500类型：字符串数据来源：OA打单商业申请单"
+        },
+        {
+          "num": "24",
+          "name": "标记是否通过",
+          "note": "是=可 【更新到打单商业档案】默认否=不可 【更新到打单商业档案】标记为否需要弹窗让用户填写，不通过说明。针对已处理标志的申请单不可修改。"
+        },
+        {
+          "num": "25",
+          "name": "通过标识",
+          "note": "是=可 【更新到打单商业档案】默认否=不可 【更新到打单商业档案】标记为否需要弹窗让用户填写，不通过说明。针对已处理标志的申请单不可修改。"
+        }
+      ],
+      "rawText": "备注说明 元素说明 1查询 注释 有权限控制2从OA获取 注释 从OA获取流程结束的打单商业申请单3更新到打单商业档案 注释 针对勾选记录，更新到打单商业档案，更新处理标志4处理标志 注释 更新到打单商业档案：是未更新到打单商业档案：否5处理人 注释 1、账号操作人姓名2、长度：100类型：字符串数据来源：当前模块6处理时间 注释 年月日-时分秒数据来源：当前模块动作：执行更新到打单商业档案的时间7单据编号 注释 长度：500类型：英文、数字数据来源：OA打单商业申请单单据号8申请项目 注释 新增终止=删除变更数据来源：OA打单商业申请单9商业全称 注释 长度：500类型：字符串数据来源：OA打单商业申请单10商业责任部门 注释 长度：500类型：字符串数据来源：OA打单商业申请单11商业责任人 注释 长度：100类型：字符串数据来源：OA打单商业申请单12流向收集部门（与商务对接） 注释 长度：100类型：字符串数据来源：OA打单商业申请单13流向收集人（与商务对接） 注释 长度：100类型：字符串数据来源：OA打单商业申请单14流向提交人（与信息组对接，商务部人员） 注释 长度：100类型：字符串数据来源：OA打单商业申请单15商务分类 注释 1、一级协议经销商 | 一级协议经销商2、二级协议分销商 | 二级协议分销商3、非协议商业 | 非协议商业4、连锁公司 | 连锁公司5、电商（B2B） | 电商（B2B）6、代理商商业 | 代理商商业数据来源：OA打单商业申请单16客户属性 注释 1、商业公司|商业公司2、连锁公司|连锁公司3、电商（B2B）|电商（B2B）数据来源：OA打单商业申请单17新增打单年月 注释 年-月数据来源：OA打单商业申请单18终止打单年月 注释 年-月数据来源：OA打单商业申请单19申请原因 注释 长度：1000类型：字符串数据来源：OA打单商业申请单20申请人 注释 长度：100类型：字符串数据来源：OA打单商业申请单21申请时间 注释 年月日-时分秒数据来源：OA打单商业申请单22信用代码 注释 长度：500类型：字符串数据来源：OA打单商业申请单23行政省份 注释 长度：500类型：字符串数据来源：OA打单商业申请单24标记是否通过 注释 是=可 【更新到打单商业档案】默认否=不可 【更新到打单商业档案】标记为否需要弹窗让用户填写，不通过说明。针对已处理标志的申请单不可修改。25通过标识 注释 是=可 【更新到打单商业档案】默认否=不可 【更新到打单商业档案】标记为否需要弹窗让用户填写，不通过说明。针对已处理标志的申请单不可修改。"
+    }
+  },
+  "打单商业档案": {
+    "pageName": "打单商业档案",
+    "url": "https://codesign.qq.com/app/s/697313341916783",
+    "screenshots": [
+      "E:\\006Skills\\.opencode\\skills\\codesign_data\\打单商业档案.png"
+    ],
+    "iframes": [
+      {
+        "idx": 0,
+        "src": "blob:https://codesign.qq.com/c5cb7a1a-9b9c-4925-abec-a9b0230559c3#URL-/prototypes/2026/06/26/P39q226Wmbv2066Y70w26/n8m5a0xbvcxzohbb/3ace8ebcd911f07052d0c2e4e4f120b5.txt",
+        "text": "信用代码\n\n行政区域\n\n创建人\n\n省区\n\n启用标志\n\n主表模式\n主子表模式\n报表模式\n\n导出\n\n已选条件\n\n查询\n\n重置\n\n默认方案\n\n高级查询\n\n共 999 条\n\n2\n\n3\n\n4\n\n5\n\n前往\n\n5\n\n页\n\n100/页\n\n1\n\n管理员\n\n消息中心\n\n处理中心\n\n问题反馈\n\n切换组织\n\n紧急任务\n\n122\n\n主页\n\n标签页\n\n菜单名称 x\n\n原始流向管理\n\n常用\n\n序号\n\n商业公司\n\n​\n1\n\n信用代码\n\n​\n3\n\n行政区域\n\n​\n2\n\n创建人\n\n​\n5\n\n创建日期\n\n​\n6\n\n启用标记\n\n​\n7\n\n责任部门\n\n​\n8\n\n责任人员\n\n​\n9\n\n流向提供人\n\n​\n10\n\n最后修改时间\n\n最后修改人\n\n责任部门\n\n责任人员\n\n商业公司\n\n打单商业申请单\n\n打单商业档案\n\n原始流向单\n\n下载原始流向\n\n导入提取结果单\n\n导入清洗结果单\n\n导入正式流向\n\n原始流向执行表\n\n原始流向明细表\n\n打单商业数据提交跟进表\n\n六个月未提交流向预警表\n\n修改",
+        "widgetCount": 52,
+        "widgets": [
+          {
+            "id": "u1_text",
+            "text": "信用代码",
+            "parentIds": "u1,u0,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u4_text",
+            "text": "行政区域",
+            "parentIds": "u4,u3,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u8_text",
+            "text": "创建人",
+            "parentIds": "u8,u7,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u11_text",
+            "text": "省区",
+            "parentIds": "u11,u10,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u15_text",
+            "text": "启用标志",
+            "parentIds": "u15,u14,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u27_text",
+            "text": "导出",
+            "parentIds": "u27,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u30_text",
+            "text": "已选条件",
+            "parentIds": "u30,u29,u28",
+            "fontSize": ""
+          },
+          {
+            "id": "u33_text",
+            "text": "查询",
+            "parentIds": "u33,u28,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u34_text",
+            "text": "重置",
+            "parentIds": "u34,u28,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u36_text",
+            "text": "高级查询",
+            "parentIds": "u36,u28,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u39_text",
+            "text": "共 999 条",
+            "parentIds": "u39,u37,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u44_text",
+            "text": "前往",
+            "parentIds": "u44,u37,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u47_text",
+            "text": "100/页",
+            "parentIds": "u47,u37,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u56_text",
+            "text": "管理员",
+            "parentIds": "u56,u54_state0_content,u54_state0",
+            "fontSize": ""
+          },
+          {
+            "id": "u62_text",
+            "text": "消息中心",
+            "parentIds": "u62,u57,u54_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u68_text",
+            "text": "处理中心",
+            "parentIds": "u68,u63,u54_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u71_text",
+            "text": "问题反馈",
+            "parentIds": "u71,u69,u54_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u76_text",
+            "text": "切换组织",
+            "parentIds": "u76,u54_state0_content,u54_state0",
+            "fontSize": ""
+          },
+          {
+            "id": "u85_text",
+            "text": "紧急任务",
+            "parentIds": "u85,u54_state0_content,u54_state0",
+            "fontSize": ""
+          },
+          {
+            "id": "u86_text",
+            "text": "122",
+            "parentIds": "u86,u54_state0_content,u54_state0",
+            "fontSize": ""
+          },
+          {
+            "id": "u92_text",
+            "text": "主页",
+            "parentIds": "u92,u91,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u95_text",
+            "text": "标签页",
+            "parentIds": "u95,u94,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u98_text",
+            "text": "菜单名称 x",
+            "parentIds": "u98,u97,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u102_text",
+            "text": "原始流向管理",
+            "parentIds": "u102,u101,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u109_text",
+            "text": "常用",
+            "parentIds": "u109,u107,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u119_text",
+            "text": "序号",
+            "parentIds": "u119,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u120_text",
+            "text": "商业公司",
+            "parentIds": "u120,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u121_text",
+            "text": "信用代码",
+            "parentIds": "u121,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u122_text",
+            "text": "行政区域",
+            "parentIds": "u122,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u123_text",
+            "text": "创建人",
+            "parentIds": "u123,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u124_text",
+            "text": "创建日期",
+            "parentIds": "u124,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u125_text",
+            "text": "启用标记",
+            "parentIds": "u125,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u126_text",
+            "text": "责任部门",
+            "parentIds": "u126,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u127_text",
+            "text": "责任人员",
+            "parentIds": "u127,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u128_text",
+            "text": "流向提供人",
+            "parentIds": "u128,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u129_text",
+            "text": "最后修改时间",
+            "parentIds": "u129,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u130_text",
+            "text": "最后修改人",
+            "parentIds": "u130,u118,u117_state0_content",
+            "fontSize": ""
+          },
+          {
+            "id": "u266_text",
+            "text": "责任部门",
+            "parentIds": "u266,u265,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u270_text",
+            "text": "责任人员",
+            "parentIds": "u270,u269,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u274_text",
+            "text": "商业公司",
+            "parentIds": "u274,u273,base",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-1_text",
+            "text": "打单商业申请单",
+            "parentIds": "u278-1,u277-1,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-2_text",
+            "text": "打单商业档案",
+            "parentIds": "u278-2,u277-2,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-3_text",
+            "text": "原始流向单",
+            "parentIds": "u278-3,u277-3,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-4_text",
+            "text": "下载原始流向",
+            "parentIds": "u278-4,u277-4,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-5_text",
+            "text": "导入提取结果单",
+            "parentIds": "u278-5,u277-5,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-6_text",
+            "text": "导入清洗结果单",
+            "parentIds": "u278-6,u277-6,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-7_text",
+            "text": "导入正式流向",
+            "parentIds": "u278-7,u277-7,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-8_text",
+            "text": "原始流向执行表",
+            "parentIds": "u278-8,u277-8,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-9_text",
+            "text": "原始流向明细表",
+            "parentIds": "u278-9,u277-9,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-10_text",
+            "text": "打单商业数据提交跟进表",
+            "parentIds": "u278-10,u277-10,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u278-11_text",
+            "text": "六个月未提交流向预警表",
+            "parentIds": "u278-11,u277-11,u277",
+            "fontSize": ""
+          },
+          {
+            "id": "u279_text",
+            "text": "修改",
+            "parentIds": "u279,base",
+            "fontSize": ""
+          }
+        ],
+        "inputCount": 24,
+        "inputs": [
+          {
+            "id": "u2_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请输入",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u5_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u9_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u12_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u16_input",
+            "tag": "input",
+            "type": "text",
+            "value": "下拉选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u24_input",
+            "tag": "select",
+            "type": "select-one",
+            "value": "主表模式",
+            "text": "主表模式\n          主子表模式\n          报表模式",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u31_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u35_input",
+            "tag": "select",
+            "type": "select-one",
+            "value": "默认方案",
+            "text": "默认方案",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u115_input",
+            "tag": "input",
+            "type": "text",
+            "value": "搜索服务名称",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-1_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-2_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-3_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-4_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-5_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-6_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-7_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-8_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-9_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-10_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-11_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u264-12_input",
+            "tag": "input",
+            "type": "checkbox",
+            "value": "checkbox",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u267_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u271_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          },
+          {
+            "id": "u275_input",
+            "tag": "input",
+            "type": "text",
+            "value": "请选择",
+            "text": "",
+            "placeholder": "",
+            "ariaLabel": "",
+            "name": ""
+          }
+        ],
+        "tableCount": 0
+      }
+    ],
+    "pageContent": "资料库 暂无内容       \n 暂无内容       \n 暂无内容       \n 暂无内容 \n  \n  \n  \n源文件 暂无源文件 \n 暂无源文件 \n 暂无源文件 \n 暂无源文件 \n\n备注说明 元素说明 1商业公司 注释 数据来源：【打单商业申请表】2行政区域 注释 长度：500类型：字符串数据来源：【打单商业申请表】3信用代码 注释 长度：500类型：字符串数据来源：【打单商业申请表】4 注释 长度：1000类型：字符串5创建人 注释 数据来源：【打单商业申请表】处理人6创建日期 注释 数据来源：【打单商业申请表】第一次更新创建数据的时间7启用标记 注释 默认启用下来选择是、否是：原始流向正常根据此商业进行流向处理。否：原始流向不可根据此商业进行流向处理。8责任部门 注释 数据来源：当前操作人所属部门9责任人员 注释 数据来源：当前操作人姓名10流向提供人 注释 数据来源：【打单商业申请表】流向收集人\n 元素说明 1商业公司 注释 数据来源：【打单商业申请表】2行政区域 注释 长度：500类型：字符串数据来源：【打单商业申请表】3信用代码 注释 长度：500类型：字符串数据来源：【打单商业申请表】4 注释 长度：1000类型：字符串5创建人 注释 数据来源：【打单商业申请表】处理人6创建日期 注释 数据来源：【打单商业申请表】第一次更新创建数据的时间7启用标记 注释 默认启用下来选择是、否是：原始流向正常根据此商业进行流向处理。否：原始流向不可根据此商业进行流向处理。8责任部门 注释 数据来源：当前操作人所属部门9责任人员 注释 数据来源：当前操作人姓名10流向提供人 注释 数据来源：【打单商业申请表】流向收集人\n数据来源：【打单商业申请表】\n长度：500类型：字符串数据来源：【打单商业申请表】\n长度：500类型：字符串数据来源：【打单商业申请表】\n长度：1000类型：字符串\n数据来源：【打单商业申请表】处理人\n数据来源：【打单商业申请表】第一次更新创建数据的时间\n默认启用下来选择是、否是：原始流向正常根据此商业进行流向处理。否：原始流向不可根据此商业进行流向处理。\n数据来源：当前操作人所属部门\n数据来源：当前操作人姓名\n数据来源：【打单商业申请表】流向收集人\n交互热区\n 画布自由缩放  打开后可在画布内自由缩放，如需固定宽度或高度时建议关闭 \n\n目录 全部51修订历史记录需求回应功能清单业务流程3原始流向管理正式流向管理正式流向处理管理原型图3原始流向管理11打单商业申请单打单商业档案原始流向单1原始流向单-新增下载原始流向导入提取结果单1导入提取结果单-详细导入清洗结果单1导入清洗结果单-详细导入正式流向原始流向执行表原始流向明细表打单商业数据提交跟进表六个月未提交流向预警表正式流向管理11正式流向单1正式流向单-详情渠道外流向单1渠道外流向单-详情流向明细表疑似重复流向表流向冲红流向申诉单管理1流向申诉单管理-制单流向申诉单1流向申诉单-制单流向申诉结果查询表数据查询单1数据查询单-制单添品查询表流向业绩对比表正式流向处理管理9匹配政策备案1匹配政策备案-制单商业备案1商业备案-制单匹配关系流向处理核对表是否发货批号修订单1是否发货批号修订单-制单是否参与业绩计算修订单1是否参与业绩计算修订单-制单流向等级修订单1流向等级修订单-制单批号修订单1批号修订单-制单发货批号数据中间表 点击或拖拽选框添加评论 未确认评论 暂无评论  点击页面任何位置即可添加评论 8/51默认比例\n目录 全部51修订历史记录需求回应功能清单业务流程3原始流向管理正式流向管理正式流向处理管理原型图3原始流向管理11打单商业申请单打单商业档案原始流向单1原始流向单-新增下载原始流向导入提取结果单1导入提取结果单-详细导入清洗结果单1导入清洗结果单-详细导入正式流向原始流向执行表原始流向明细表打单商业数据提交跟进表六个月未提交流向预警表正式流向管理11正式流向单1正式流向单-详情渠道外流向单1渠道外流向单-详情流向明细表疑似重复流向表流向冲红流向申诉单管理1流向申诉单管理-制单流向申诉单1流向申诉单-制单流向申诉结果查询表数据查询单1数据查询单-制单添品查询表流向业绩对比表正式流向处理管理9匹配政策备案1匹配政策备案-制单商业备案1商业备案-制单匹配关系流向处理核对表是否发货批号修订单1是否发货批号修订单-制单是否参与业绩计算修订单1是否参与业绩计算修订单-制单流向等级修订单1流向等级修订单-制单批号修订单1批号修订单-制单发货批号数据中间表\n目录 全部51修订历史记录需求回应功能清单业务流程3原始流向管理正式流向管理正式流向处理管理原型图3原始流向管理11打单商业申请单打单商业档案原始流向单1原始流向单-新增下载原始流向导入提取结果单1导入提取结果单-详细导入清洗结果单1导入清洗结果单-详细导入正式流向原始流向执行表原始流向明细表打单商业数据提交跟进表六个月未提交流向预警表正式流向管理11正式流向单1正式流向单-详情渠道外流向单1渠道外流向单-详情流向明细表疑似重复流向表流向冲红流向申诉单管理1流向申诉单管理-制单流向申诉单1流向申诉单-制单流向申诉结果查询表数据查询单1数据查询单-制单添品查询表流向业绩对比表正式流向处理管理9匹配政策备案1匹配政策备案-制单商业备案1商业备案-制单匹配关系流向处理核对表是否发货批号修订单1是否发货批号修订单-制单是否参与业绩计算修订单1是否参与业绩计算修订单-制单流向等级修订单1流向等级修订单-制单批号修订单1批号修订单-制单发货批号数据中间表\n目录 全部51\n目录\n\n\n 全部51\n修订历史记录需求回应功能清单业务流程3原始流向管理正式流向管理正式流向处理管理原型图3原始流向管理11打单商业申请单打单商业档案原始流向单1原始流向单-新增下载原始流向导入提取结果单1导入提取结果单-详细导入清洗结果单1导入清洗结果单-详细导入正式流向原始流向执行表原始流向明细表打单商业数据提交跟进表六个月未提交流向预警表正式流向管理11正式流向单1正式流向单-详情渠道外流向单1渠道外流向单-详情流向明细表疑似重复流向表流向冲红流向申诉单管理1流向申诉单管理-制单流向申诉单1流向申诉单-制单流向申诉结果查询表数据查询单1数据查询单-制单添品查询表流向业绩对比表正式流向处理管理9匹配政策备案1匹配政策备案-制单商业备案1商业备案-制单匹配关系流向处理核对表是否发货批号修订单1是否发货批号修订单-制单是否参与业绩计算修订单1是否参与业绩计算修订单-制单流向等级修订单1流向等级修订单-制单批号修订单1批号修订单-制单发货批号数据中间表\n\n未确认评论 暂无评论  点击页面任何位置即可添加评论 \n 暂无评论  点击页面任何位置即可添加评论 \n默认比例\n",
+    "notesContent": {
+      "items": [
+        {
+          "num": "1",
+          "name": "商业公司",
+          "note": "数据来源：【打单商业申请表】"
+        },
+        {
+          "num": "2",
+          "name": "行政区域",
+          "note": "长度：500类型：字符串数据来源：【打单商业申请表】"
+        },
+        {
+          "num": "3",
+          "name": "信用代码",
+          "note": "长度：500类型：字符串数据来源：【打单商业申请表】"
+        },
+        {
+          "num": "4",
+          "name": "",
+          "note": "长度：1000类型：字符串"
+        },
+        {
+          "num": "5",
+          "name": "创建人",
+          "note": "数据来源：【打单商业申请表】处理人"
+        },
+        {
+          "num": "6",
+          "name": "创建日期",
+          "note": "数据来源：【打单商业申请表】第一次更新创建数据的时间"
+        },
+        {
+          "num": "7",
+          "name": "启用标记",
+          "note": "默认启用下来选择是、否是：原始流向正常根据此商业进行流向处理。否：原始流向不可根据此商业进行流向处理。"
+        },
+        {
+          "num": "8",
+          "name": "责任部门",
+          "note": "数据来源：当前操作人所属部门"
+        },
+        {
+          "num": "9",
+          "name": "责任人员",
+          "note": "数据来源：当前操作人姓名"
+        },
+        {
+          "num": "10",
+          "name": "流向提供人",
+          "note": "数据来源：【打单商业申请表】流向收集人"
+        }
+      ],
+      "rawText": "备注说明 元素说明 1商业公司 注释 数据来源：【打单商业申请表】2行政区域 注释 长度：500类型：字符串数据来源：【打单商业申请表】3信用代码 注释 长度：500类型：字符串数据来源：【打单商业申请表】4 注释 长度：1000类型：字符串5创建人 注释 数据来源：【打单商业申请表】处理人6创建日期 注释 数据来源：【打单商业申请表】第一次更新创建数据的时间7启用标记 注释 默认启用下来选择是、否是：原始流向正常根据此商业进行流向处理。否：原始流向不可根据此商业进行流向处理。8责任部门 注释 数据来源：当前操作人所属部门9责任人员 注释 数据来源：当前操作人姓名10流向提供人 注释 数据来源：【打单商业申请表】流向收集人"
+    }
+  }
+}

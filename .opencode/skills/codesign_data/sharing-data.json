@@ -1,0 +1,1058 @@
+{
+  "id": 686059816013115,
+  "creator_id": 340293,
+  "title": "基础数据",
+  "type": "prototypes",
+  "permissions": {
+    "commentable": true,
+    "linkvisible": true,
+    "downloadable": false
+  },
+  "password": "SRSZ",
+  "expired_at": "2027-05-24T16:00:00.000000Z",
+  "created_at": "2026-05-25T06:24:32.000000Z",
+  "updated_at": "2026-06-22T08:55:10.000000Z",
+  "deleted_at": null,
+  "is_tapd": false,
+  "external_access": true,
+  "from": "codesign",
+  "team_id": 673623562650574,
+  "cover_id": 0,
+  "cover_url": null,
+  "is_snapshot": false,
+  "context": {
+    "fitContent": null,
+    "isCanvasMode": false,
+    "sharePageList": []
+  },
+  "is_member": false,
+  "is_team_user": false,
+  "watermark_settings": {
+    "is_enabled": false,
+    "content": ""
+  },
+  "sharables": {
+    "prototypes": 1
+  },
+  "creator": {
+    "id": 340293,
+    "username": "u8617602264257",
+    "alias": null,
+    "nickname": "洺沅",
+    "avatar": "https://cdn4.codesign.qq.com/user-avatar/dqN2925bOajaBXe.png?imageMogr2/crop/96x96/gravity/north",
+    "status": "active",
+    "last_active_at": "2026-06-22T09:02:41.000000Z",
+    "password_need_update": false,
+    "display_name": "洺沅",
+    "default_display_name": "洺沅",
+    "team_display_name": null,
+    "company_display_name": null,
+    "model": "user",
+    "morph_type": "users"
+  },
+  "team": {
+    "id": 673623562650574,
+    "uuid": null,
+    "creator_id": 673623548256660,
+    "owner_id": 673623548256660,
+    "company_id": null,
+    "idp_id": null,
+    "parent_id": null,
+    "name": "营销系统改造项目的团队",
+    "visibility": "closed",
+    "logo": null,
+    "cache": {
+      "designs_count": 0,
+      "prototypes_count": 7,
+      "materials_count": 0,
+      "icon_projects_count": 0,
+      "libraries_count": 2,
+      "guests_count": 0,
+      "users_count": 17,
+      "screens_count": 0,
+      "icons_count": 0
+    },
+    "settings": {
+      "user_invitation": {
+        "need_review": true,
+        "invitation_lifetime": 3,
+        "allow_user_invite": true
+      }
+    },
+    "properties": [],
+    "created_at": "2026-04-20T03:01:17.000000Z",
+    "updated_at": "2026-06-17T08:58:45.000000Z",
+    "deleted_at": null,
+    "is_private": false,
+    "root_id": null,
+    "remark": null,
+    "industry": null,
+    "explore_plan_joined_at": null,
+    "is_sample": 0,
+    "banned_at": null,
+    "banned_reason": null,
+    "company": null,
+    "model": "team",
+    "morph_type": "teams"
+  },
+  "prototypes": [
+    {
+      "id": 684726537478280,
+      "team_id": 673623562650574,
+      "creator_id": 673623548256660,
+      "updater_id": 673623548256660,
+      "permission_id": 684726538589673,
+      "root_node_id": 681061312299654,
+      "node_id": 681061312299654,
+      "level": 2,
+      "name": "基础数据",
+      "description": null,
+      "type": "axure",
+      "cover_path": "/images/2026/05/22/aV96w26yK7Bd05AbN0P22/g1wvlqedfq3ccsvl/fa1a75bf-acda-4cf7-8365-eabd282aa1d6.png",
+      "meta_path": null,
+      "permission_type": "inherit",
+      "zip_path": null,
+      "pages_count": 50,
+      "tree": [
+        {
+          "id": "d4uowl",
+          "name": "修订历史记录",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/09a3f72e9ce4c83c1aebf11b55c62e8f.txt",
+          "type": "page"
+        },
+        {
+          "id": "y95zmq",
+          "name": "需求回应",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/50a058f005551afe013aa6188b751b99.txt",
+          "type": "page"
+        },
+        {
+          "id": "bfnamy",
+          "name": "功能清单",
+          "path": "/prototypes/2026/05/22/nZaDP26mWLYn05gpK0b22/lhmrcuc7pbd2p9jw/2091d82b8fa7f0693b81794aa4f82728.txt",
+          "type": "page"
+        },
+        {
+          "name": "系统公共参数",
+          "type": "folder",
+          "children": [
+            {
+              "name": "原型图",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "yiu5di",
+                  "name": "系统公共参数-列表",
+                  "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/redpogftpeub480o/d03ed4aa8b0141f77b4ed49f928e57b7.txt",
+                  "type": "page"
+                },
+                {
+                  "id": "2j4hp8",
+                  "name": "系统公共参数-制单",
+                  "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/535ba0438e14d6e72648fcd396149c86.txt",
+                  "type": "page"
+                },
+                {
+                  "id": "ruizcz",
+                  "name": "系统公共参数选择弹窗",
+                  "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/428632d95130c21347b667ef269a3f6b.txt",
+                  "type": "page"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "组织管理",
+          "type": "folder",
+          "children": [
+            {
+              "name": "业务流程",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "82i4z2",
+                  "name": "组织管理流程",
+                  "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/c3e1ff7da90ee301c3bbe51a6657ae25.txt",
+                  "type": "page"
+                }
+              ]
+            },
+            {
+              "name": "原型图",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "组织管理",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "kigbde",
+                      "name": "组织管理",
+                      "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/8d26b24f6a8c33ad045434a6f3ff6cd0.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "0ad95x",
+                      "name": "组织选择弹窗",
+                      "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/04fdf9b644c7d5e0ce7b7451d027de1d.txt",
+                      "type": "page"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "物料管理",
+          "type": "folder",
+          "children": [
+            {
+              "name": "业务流程",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "1p9fv3",
+                  "name": "成药、大健康产品管理流程",
+                  "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/fd2955490eee71bcd916c6bf0fc58100.txt",
+                  "type": "page"
+                },
+                {
+                  "id": "fmc1wt",
+                  "name": "宣传资料管理流程",
+                  "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/f48e3cfc9619e10a452b4fb1b4fc941d.txt",
+                  "type": "page"
+                }
+              ]
+            },
+            {
+              "name": "原型图",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "物料基本分类",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "321r51",
+                      "name": "物料基本分类",
+                      "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/d1aa8730c94cc838e4d46f3f55ad7f80.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "czr4wm",
+                      "name": "物料基本分类选择弹窗",
+                      "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/2cc6462e5e0730014e006c21cefe07ef.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "物料产品线",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "vi4p6v",
+                      "name": "物料产品线",
+                      "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/ffa1a2fc0c2f2a988a88a9fe78aa21b8.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "ocy1f0",
+                      "name": "物料产品线选择弹窗",
+                      "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/3f6374a596de3f4fe8b51ac4e0693d49.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "规格简化物料档案",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "jkixm3",
+                      "name": "规格简化物料档案",
+                      "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/2a5ddeaa89c8276787ed43c179ec1372.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "nqcadv",
+                      "name": "规格简化物料档案选择弹窗",
+                      "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/068c3fed3ac7205dd9c8b9b000ea9f15.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "物料管理",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "ceovqo",
+                      "name": "物料管理（列表）",
+                      "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/4e44717fcfeeab3cd3e7d44ece9e699d.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "8rgv55",
+                      "name": "物料管理（制单）",
+                      "path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/ee79bad7e9c11cfa852deb48118a69bf.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "7tg3va",
+                      "name": "物料选择弹窗",
+                      "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/ae9c934b1564086c6d5ac47d5eadf481.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "宣传资料档案管理",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "mbzs8i",
+                      "name": "宣传物料档案管理（列表）",
+                      "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/1b0d3ade4f46cc23bb333c6f8d2a3d82.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "5p3sfq",
+                      "name": "宣传物料档案管理（制单）",
+                      "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/3pfa1lp6tha1bply/6d2db71f7778b4547987fef552f95e64.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "3s6ft6",
+                      "name": "宣传物料选择弹窗",
+                      "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/577e3e0c0ac682b9332ea92687044684.txt",
+                      "type": "page"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "客户管理",
+          "type": "folder",
+          "children": [
+            {
+              "name": "业务流程",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "41jo26",
+                  "name": "客户管理流程图",
+                  "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/fc5a06c2bfa734b33f1d5e693c0a79c3.txt",
+                  "type": "page"
+                }
+              ]
+            },
+            {
+              "name": "原型图",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "客户类别",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "46xrbz",
+                      "name": "客户类别",
+                      "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/3pfa1lp6tha1bply/93473fcf54e473e21fc06a0901ee0c15.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "80nik9",
+                      "name": "客户类别选择弹窗",
+                      "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/0b9c42b0083f6b72d4e4e0449735c27f.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "客户属性",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "2xah76",
+                      "name": "客户属性",
+                      "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/3pfa1lp6tha1bply/e4a3da68567719f3895b28c24ade4d23.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "g6nfkm",
+                      "name": "客户属性选择弹窗",
+                      "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/2ecdce3f9940600db9619dd05940cd24.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "连锁体系",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "mjtnkc",
+                      "name": "连锁体系",
+                      "path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/4e845eb5e06debce50d605e7682b2373.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "1o5kfg",
+                      "name": "连锁体系选择弹窗",
+                      "path": "/prototypes/2026/05/29/nZaDP26mWLYn05gpK0b29/9iyymhdo7lh0ls6j/dc506bf679639d734eeb86937eb06bda.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "客户管理（全功能）",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "rbbgk0",
+                      "name": "客户管理（全功能）-列表",
+                      "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/077f64151a317887755ec6551320a2b2.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "jmr3py",
+                      "name": "客户管理（全功能）-制单",
+                      "path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/2ee23019e6735607a4b02c7beda51d00.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "sumnpp",
+                      "name": "客户管理选择弹窗",
+                      "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/8b4f4a8a2079d00ebdbaa6096b133a11.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "客户管理",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "i0b0y2",
+                      "name": "客户管理-列表",
+                      "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/d9fc91131149d958097bdc9a425ff710.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "zloebr",
+                      "name": "客户管理-制单",
+                      "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/209f21dc104138c514e6f43f95f91bdb.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "客户查询单",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "c6f2by",
+                      "name": "客户查询单-列表",
+                      "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/xeom7toxv1pchbsg/1751c43ee81de26cf2d29473ac7892f2.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "x4rf5z",
+                      "name": "客户查询单-制单",
+                      "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/f9c9be9f1eee772794b0899a92bda37c.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "客户变更申请",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "ndseri",
+                      "name": "待定",
+                      "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/c5bfe35dcd534e4fb42d323fdbd5f6e6.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "客户查询表（销区）",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "vsx38g",
+                      "name": "客户查询单（销区）",
+                      "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/93854de0abff67020390a638dd81dd64.txt",
+                      "type": "page"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "行政区域管理",
+          "type": "folder",
+          "children": [
+            {
+              "name": "原型图",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "行政区域管理",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "xt7q2d",
+                      "name": "行政区域管理",
+                      "path": "/prototypes/2026/06/11/nZaDP26mWLYn06gpK0b11/oak8ynldqkwdslwc/e62c34c782b5ed661cf2138df3049b56.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "d7khhh",
+                      "name": "行政区域选择弹窗",
+                      "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/91c9dce5446715ae63a1b9ed061dc832.txt",
+                      "type": "page"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "人员管理",
+          "type": "folder",
+          "children": [
+            {
+              "name": "流程图",
+              "type": "folder",
+              "children": [
+                {
+                  "id": "zo6h0b",
+                  "name": "人员管理流程图",
+                  "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/c0693b71fd6c08233bd484ee1719bbc0.txt",
+                  "type": "page"
+                }
+              ]
+            },
+            {
+              "name": "原型图",
+              "type": "folder",
+              "children": [
+                {
+                  "name": "人员同步定义",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "fa0nuj",
+                      "name": "人员同步定义",
+                      "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/9cfb1e25193d69854deadcda62e07f6a.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "人员管理",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "qoyw08",
+                      "name": "人员管理-列表",
+                      "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/fe8e77e8f84cdb4b358038c70b6df9d1.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "dw9mt6",
+                      "name": "人员管理-制单",
+                      "path": "/prototypes/2026/06/11/nZaDP26mWLYn06gpK0b11/oak8ynldqkwdslwc/30952f5a3bf00266ceafbc60ebcd0155.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "m874bh",
+                      "name": "人员选择弹窗",
+                      "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/f458b6c9f9d1192dc20a3e008b94ea36.txt",
+                      "type": "page"
+                    }
+                  ]
+                },
+                {
+                  "name": "人员账号管理",
+                  "type": "folder",
+                  "children": [
+                    {
+                      "id": "tixswv",
+                      "name": "人员账号管理-列表",
+                      "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/3pfa1lp6tha1bply/46fa19c1d533e6b23ccdf8bbe358eb05.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "nu8lnn",
+                      "name": "人员账号管理-制单",
+                      "path": "/prototypes/2026/06/11/nZaDP26mWLYn06gpK0b11/oak8ynldqkwdslwc/7687be3c2f874ed84d3592ef75871caf.txt",
+                      "type": "page"
+                    },
+                    {
+                      "id": "h7zmwj",
+                      "name": "人员账号弹窗",
+                      "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/5eaf1d33d38b2a560eeb6b44f051134f.txt",
+                      "type": "page"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "OA预研点原型图",
+          "type": "folder",
+          "children": [
+            {
+              "id": "x7yysy",
+              "name": "预研",
+              "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/983ffd664a057f6b1c1d91b43ed818a2.txt",
+              "type": "page"
+            }
+          ]
+        }
+      ],
+      "pages": {
+        "待定.html": {
+          "id": "ndseri",
+          "hash": "4d5048afe8b0072e1adf004a40ba89b4",
+          "name": "待定",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/c5bfe35dcd534e4fb42d323fdbd5f6e6.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/7f8245278a7a1c9161c706c7a26c7d8c.json"
+        },
+        "预研.html": {
+          "id": "x7yysy",
+          "hash": "e3a460726aa10fbd227991a16a365aef",
+          "name": "预研",
+          "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/983ffd664a057f6b1c1d91b43ed818a2.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/bc064f8d5183dfa4976e66eea12b6d50.json"
+        },
+        "功能清单.html": {
+          "id": "bfnamy",
+          "hash": "7c89ff7000fc4968eeff67e07cb31816",
+          "name": "功能清单",
+          "path": "/prototypes/2026/05/22/nZaDP26mWLYn05gpK0b22/lhmrcuc7pbd2p9jw/2091d82b8fa7f0693b81794aa4f82728.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/32a9aff5deaf3f8e196a14783ace2cd0.json"
+        },
+        "客户属性.html": {
+          "id": "2xah76",
+          "hash": "3b98f46291eb3c4b11158eb0e405b772",
+          "name": "客户属性",
+          "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/3pfa1lp6tha1bply/e4a3da68567719f3895b28c24ade4d23.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/0debd7589a82487274fad5c947254741.json"
+        },
+        "客户类别.html": {
+          "id": "46xrbz",
+          "hash": "270982cd39e017fc3a0a2a70b1f27ef6",
+          "name": "客户类别",
+          "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/3pfa1lp6tha1bply/93473fcf54e473e21fc06a0901ee0c15.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/1f4fb425231bec669fe901dc426978eb.json"
+        },
+        "组织管理.html": {
+          "id": "kigbde",
+          "hash": "70d167fab0b806e743757b8da330b9f9",
+          "name": "组织管理",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/8d26b24f6a8c33ad045434a6f3ff6cd0.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/5a42700c06289dfcc499c24724c01a6e.json"
+        },
+        "连锁体系.html": {
+          "id": "mjtnkc",
+          "hash": "0047fdc1750967c7c0563a9171005534",
+          "name": "连锁体系",
+          "path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/4e845eb5e06debce50d605e7682b2373.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/9431e6e9f435723527acc42b8e2651de.json"
+        },
+        "需求回应.html": {
+          "id": "y95zmq",
+          "hash": "cd912a1f9fe62f67215c8a3bf3487b62",
+          "name": "需求回应",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/50a058f005551afe013aa6188b751b99.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/77a3c9465f6a18548bb37413a3c9648e.json"
+        },
+        "物料产品线.html": {
+          "id": "vi4p6v",
+          "hash": "390d846c795a9933e9c4a01a0b7b71d3",
+          "name": "物料产品线",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/ffa1a2fc0c2f2a988a88a9fe78aa21b8.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/54db24a857c4709f6a879497e17c07f5.json"
+        },
+        "人员同步定义.html": {
+          "id": "fa0nuj",
+          "hash": "732de851649d54d211e0932f664e250f",
+          "name": "人员同步定义",
+          "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/9cfb1e25193d69854deadcda62e07f6a.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/b79d4737e1167eafd53a2a1ea5b1aa3d.json"
+        },
+        "人员账号弹窗.html": {
+          "id": "h7zmwj",
+          "hash": "d28c737c8b226c2a15b8b4c88df7bb13",
+          "name": "人员账号弹窗",
+          "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/5eaf1d33d38b2a560eeb6b44f051134f.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/64c89f4655277828681124f6b7385c0d.json"
+        },
+        "人员选择弹窗.html": {
+          "id": "m874bh",
+          "hash": "13ce2383f95b7136071e69bc74bb564b",
+          "name": "人员选择弹窗",
+          "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/f458b6c9f9d1192dc20a3e008b94ea36.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/28ea51bd298bc8fb943cbbbc879427f8.json"
+        },
+        "修订历史记录.html": {
+          "id": "d4uowl",
+          "hash": "134ad1e9858755e294b9edb409a494d9",
+          "name": "修订历史记录",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/09a3f72e9ce4c83c1aebf11b55c62e8f.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/331aa479db0d6774dabf046931da9c36.json"
+        },
+        "物料基本分类.html": {
+          "id": "321r51",
+          "hash": "8930364c02721d8880833febf8148bf6",
+          "name": "物料基本分类",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/d1aa8730c94cc838e4d46f3f55ad7f80.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/e01707103773295a00bec320f50a701c.json"
+        },
+        "物料选择弹窗.html": {
+          "id": "7tg3va",
+          "hash": "c72e71d467e6c32a12aaa6f5c9ad5453",
+          "name": "物料选择弹窗",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/ae9c934b1564086c6d5ac47d5eadf481.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/2fc0713ee5db71796b5c320a05fd69dd.json"
+        },
+        "组织管理流程.html": {
+          "id": "82i4z2",
+          "hash": "7405da10bd5af981799e38e197d52f98",
+          "name": "组织管理流程",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/c3e1ff7da90ee301c3bbe51a6657ae25.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/2cadec55fcac60fbab1abdb0926f286e.json"
+        },
+        "组织选择弹窗.html": {
+          "id": "0ad95x",
+          "hash": "357d551ac36e0d2199dd9b816fc49cf0",
+          "name": "组织选择弹窗",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/04fdf9b644c7d5e0ce7b7451d027de1d.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/2e57c630327beff75a5ce39d378c7151.json"
+        },
+        "行政区域管理.html": {
+          "id": "xt7q2d",
+          "hash": "0d566abda634dcade3c4fff6fad4f08a",
+          "name": "行政区域管理",
+          "path": "/prototypes/2026/06/11/nZaDP26mWLYn06gpK0b11/oak8ynldqkwdslwc/e62c34c782b5ed661cf2138df3049b56.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/5bffb59f4eb2a680b5a5c0d7d27066a1.json"
+        },
+        "人员管理-列表.html": {
+          "id": "qoyw08",
+          "hash": "7ede6d1b5dc4e0701f6361bd48e254e3",
+          "name": "人员管理-列表",
+          "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/fe8e77e8f84cdb4b358038c70b6df9d1.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/8b13f97eb27730444c7bb364fef39045.json"
+        },
+        "人员管理-制单.html": {
+          "id": "dw9mt6",
+          "hash": "ada22b19e80c9d17e76970e43c0cee68",
+          "name": "人员管理-制单",
+          "path": "/prototypes/2026/06/11/nZaDP26mWLYn06gpK0b11/oak8ynldqkwdslwc/30952f5a3bf00266ceafbc60ebcd0155.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/8055973a3d653c2a27f29aa08ba80510.json"
+        },
+        "客户管理-列表.html": {
+          "id": "i0b0y2",
+          "hash": "5d0da97700119bf77d26022f03fc75e5",
+          "name": "客户管理-列表",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/d9fc91131149d958097bdc9a425ff710.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/2c47515f9ee17f6674bd6a3e9c7669ff.json"
+        },
+        "客户管理-制单.html": {
+          "id": "zloebr",
+          "hash": "ad4fb6ca58ab0cdb48d49d01a89d52df",
+          "name": "客户管理-制单",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/209f21dc104138c514e6f43f95f91bdb.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/b9b595a6ee4028e119caef81ef619592.json"
+        },
+        "人员管理流程图.html": {
+          "id": "zo6h0b",
+          "hash": "862dfadd538e489063b9ded37875e513",
+          "name": "人员管理流程图",
+          "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/c0693b71fd6c08233bd484ee1719bbc0.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/24655898682397865b09deb3d8895852.json"
+        },
+        "客户管理流程图.html": {
+          "id": "41jo26",
+          "hash": "3fb05e7fad507a4eb7d4212bdf960f53",
+          "name": "客户管理流程图",
+          "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/fc5a06c2bfa734b33f1d5e693c0a79c3.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/f186a8d0c1e5db617bfe2d1a391c5ab5.json"
+        },
+        "客户查询单-列表.html": {
+          "id": "c6f2by",
+          "hash": "2c35a66409c5e907230fd11d0fad1335",
+          "name": "客户查询单-列表",
+          "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/xeom7toxv1pchbsg/1751c43ee81de26cf2d29473ac7892f2.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/a686869e9984849595339545e3ccc203.json"
+        },
+        "客户查询单-制单.html": {
+          "id": "x4rf5z",
+          "hash": "38d500c30b30e4d17f07e4d0e0271728",
+          "name": "客户查询单-制单",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/f9c9be9f1eee772794b0899a92bda37c.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/4daef32a5703ab054c962e55dccd8c87.json"
+        },
+        "客户属性选择弹窗.html": {
+          "id": "g6nfkm",
+          "hash": "b3882e16730553255f3bbaaca08be828",
+          "name": "客户属性选择弹窗",
+          "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/2ecdce3f9940600db9619dd05940cd24.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/d594a0747b7744cf489dcb2f9ffb0395.json"
+        },
+        "客户管理选择弹窗.html": {
+          "id": "sumnpp",
+          "hash": "51a17b5db97047f850617da740413a3c",
+          "name": "客户管理选择弹窗",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/8b4f4a8a2079d00ebdbaa6096b133a11.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/f53e92e92fb93a9ae08a2ecf42372980.json"
+        },
+        "客户类别选择弹窗.html": {
+          "id": "80nik9",
+          "hash": "ed137dab9ceaa32cab35d8f928cd7dac",
+          "name": "客户类别选择弹窗",
+          "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/0b9c42b0083f6b72d4e4e0449735c27f.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/ed9a2f56b86afa21b271a930917f1931.json"
+        },
+        "宣传物料选择弹窗.html": {
+          "id": "3s6ft6",
+          "hash": "227efb9a179eaf5c1889bc6f8601d9e3",
+          "name": "宣传物料选择弹窗",
+          "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/577e3e0c0ac682b9332ea92687044684.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/c71226028a03470f74ee74cbd45ff920.json"
+        },
+        "宣传资料管理流程.html": {
+          "id": "fmc1wt",
+          "hash": "ef487dc8d85ba6bd3a492ab687d5c76d",
+          "name": "宣传资料管理流程",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/f48e3cfc9619e10a452b4fb1b4fc941d.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/7d4bfc2078dba30d0effaa752429c8b5.json"
+        },
+        "物料管理（列表）.html": {
+          "id": "ceovqo",
+          "hash": "fe8fb1c57e75cfa526a878069c208b23",
+          "name": "物料管理（列表）",
+          "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/4e44717fcfeeab3cd3e7d44ece9e699d.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/2a0b407434b9f276d2555f2987e0b25a.json"
+        },
+        "物料管理（制单）.html": {
+          "id": "8rgv55",
+          "hash": "92171d7e69d1d3f09fb81c0ea506f9cc",
+          "name": "物料管理（制单）",
+          "path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/ee79bad7e9c11cfa852deb48118a69bf.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/197aa64f1b0cd1de0b77b5b7cb2278c8.json"
+        },
+        "行政区域选择弹窗.html": {
+          "id": "d7khhh",
+          "hash": "fa647361fdff2303930de6e692c3e043",
+          "name": "行政区域选择弹窗",
+          "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/91c9dce5446715ae63a1b9ed061dc832.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/4cea386c9d586e5cf15f94bd56dff417.json"
+        },
+        "规格简化物料档案.html": {
+          "id": "jkixm3",
+          "hash": "c44ee0dc19f045f7f3a66663ea35cd35",
+          "name": "规格简化物料档案",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/2a5ddeaa89c8276787ed43c179ec1372.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/f9783ec0c8ef9d45c9905052fb35077f.json"
+        },
+        "连锁体系选择弹窗.html": {
+          "id": "1o5kfg",
+          "hash": "64be6b45b12ede29a3005d85a0998d1a",
+          "name": "连锁体系选择弹窗",
+          "path": "/prototypes/2026/05/29/nZaDP26mWLYn05gpK0b29/9iyymhdo7lh0ls6j/dc506bf679639d734eeb86937eb06bda.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/a15f17fd4a6e6678d96a8b5d9ef421c3.json"
+        },
+        "人员账号管理-列表.html": {
+          "id": "tixswv",
+          "hash": "54212bbd96062f167ea113e2f637191f",
+          "name": "人员账号管理-列表",
+          "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/3pfa1lp6tha1bply/46fa19c1d533e6b23ccdf8bbe358eb05.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/5bae59974a0a6e7ae50f28fdee615a2c.json"
+        },
+        "人员账号管理-制单.html": {
+          "id": "nu8lnn",
+          "hash": "e9ccfa4618106d16a782f0a4c10fd0de",
+          "name": "人员账号管理-制单",
+          "path": "/prototypes/2026/06/11/nZaDP26mWLYn06gpK0b11/oak8ynldqkwdslwc/7687be3c2f874ed84d3592ef75871caf.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/c070379ef2b26d8e4c73dc4ad5266390.json"
+        },
+        "系统公共参数-列表.html": {
+          "id": "yiu5di",
+          "hash": "aa8b177f313db099e3358be74b9b15a5",
+          "name": "系统公共参数-列表",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/redpogftpeub480o/d03ed4aa8b0141f77b4ed49f928e57b7.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/45b8f39c9766690fc3b05e45a0adf92e.json"
+        },
+        "系统公共参数-制单.html": {
+          "id": "2j4hp8",
+          "hash": "84da60a5cb51c2bbfffbb014d0e687f7",
+          "name": "系统公共参数-制单",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/535ba0438e14d6e72648fcd396149c86.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/115007627a9d9fba14a93d35b6643884.json"
+        },
+        "客户查询单（销区）.html": {
+          "id": "vsx38g",
+          "hash": "188caba609435e312b41ae63fd0dc73f",
+          "name": "客户查询单（销区）",
+          "path": "/prototypes/2026/05/25/nZaDP26mWLYn05gpK0b25/bgajf4lndkcoig7c/93854de0abff67020390a638dd81dd64.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/5af0b40798c39fdbb7852c24752dfd3a.json"
+        },
+        "物料产品线选择弹窗.html": {
+          "id": "ocy1f0",
+          "hash": "865a83a1ef095a78c68766b0f5e9e02f",
+          "name": "物料产品线选择弹窗",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/3f6374a596de3f4fe8b51ac4e0693d49.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/c2aeec39ada418381e0c8c893608d141.json"
+        },
+        "物料基本分类选择弹窗.html": {
+          "id": "czr4wm",
+          "hash": "b4687b2663cfde94ee355abb50c1a433",
+          "name": "物料基本分类选择弹窗",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/2cc6462e5e0730014e006c21cefe07ef.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/a05d195530e65d72a6a4e8bfbb933c14.json"
+        },
+        "系统公共参数选择弹窗.html": {
+          "id": "ruizcz",
+          "hash": "601aea093e767778cbf86f3cb7cefd0e",
+          "name": "系统公共参数选择弹窗",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/428632d95130c21347b667ef269a3f6b.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/f32397c54c6cf33ba4625609c18cc4f0.json"
+        },
+        "客户管理（全功能）-列表.html": {
+          "id": "rbbgk0",
+          "hash": "29b81a1e427d3f92b845a0b9c94d1fe3",
+          "name": "客户管理（全功能）-列表",
+          "path": "/prototypes/2026/06/12/nZaDP26mWLYn06gpK0b12/gq5jyqphhjnwafvc/077f64151a317887755ec6551320a2b2.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/a449dcf2f8292d6c7331a790bf90abf9.json"
+        },
+        "客户管理（全功能）-制单.html": {
+          "id": "jmr3py",
+          "hash": "c6c6efe158837ed5593db2482b8e5f6d",
+          "name": "客户管理（全功能）-制单",
+          "path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/2ee23019e6735607a4b02c7beda51d00.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/86dfcd50790c44aa7ae4f7891f9967bc.json"
+        },
+        "宣传物料档案管理（列表）.html": {
+          "id": "mbzs8i",
+          "hash": "337b59741510f23eab5351a47f8e06a2",
+          "name": "宣传物料档案管理（列表）",
+          "path": "/prototypes/2026/05/27/nZaDP26mWLYn05gpK0b27/3kh6tbxiz3wx2l6a/1b0d3ade4f46cc23bb333c6f8d2a3d82.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/fee2281cf1ae7bac46c8a8a4d1ba053d.json"
+        },
+        "宣传物料档案管理（制单）.html": {
+          "id": "5p3sfq",
+          "hash": "29f6176d525433eae213dc0f225383bc",
+          "name": "宣传物料档案管理（制单）",
+          "path": "/prototypes/2026/06/16/nZaDP26mWLYn06gpK0b16/3pfa1lp6tha1bply/6d2db71f7778b4547987fef552f95e64.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/7866619a741b530c35991bc6558a327e.json"
+        },
+        "成药、大健康产品管理流程.html": {
+          "id": "1p9fv3",
+          "hash": "37e9e4a86918e84444453a1e6f6ba2d4",
+          "name": "成药、大健康产品管理流程",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/fd2955490eee71bcd916c6bf0fc58100.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/7f28396c30a41d7058b8f8bc5457863f.json"
+        },
+        "规格简化物料档案选择弹窗.html": {
+          "id": "nqcadv",
+          "hash": "103bc16d9055fe5568dec562d5c0ee98",
+          "name": "规格简化物料档案选择弹窗",
+          "path": "/prototypes/2026/05/21/nZaDP26mWLYn05gpK0b21/qgupmzoubtmb1sqj/068c3fed3ac7205dd9c8b9b000ea9f15.txt",
+          "meta_path": "/prototypes/2026/06/18/nZaDP26mWLYn06gpK0b18/fhnznggrfgpscjwb/c2d2dad77e2025327f08903c30bbad1b.json"
+        }
+      },
+      "remark": null,
+      "status": "success",
+      "banned_reason": null,
+      "is_sample": false,
+      "created_at": "2026-05-21T11:59:24.000000Z",
+      "updated_at": "2026-06-18T01:41:47.000000Z",
+      "deleted_at": null,
+      "banned_at": null,
+      "notes": null,
+      "settings": [],
+      "size": 0,
+      "storage_size": 27393346,
+      "visibility": "closed",
+      "owner_id": 673623548256660,
+      "cover_url": "https://cdn4.codesign.qq.com/images/2026/05/22/aV96w26yK7Bd05AbN0P22/g1wvlqedfq3ccsvl/fa1a75bf-acda-4cf7-8365-eabd282aa1d6.png",
+      "meta_url": null,
+      "display_status": "成功",
+      "parent_id": 681061312299654,
+      "resource_base_url": "https://cdn4.codesign.qq.com/",
+      "pivot": {
+        "sharable_type": "prototypes",
+        "sharing_id": 686059816013115,
+        "sharable_id": 684726537478280
+      },
+      "creator": {
+        "id": 673623548256660,
+        "username": "u69e596fa1503f",
+        "alias": null,
+        "nickname": "LJJ（嘉健）",
+        "avatar": "https://cdn4.codesign.qq.com/profile-avatars/7ZRGKvwQJWyAgjA.png?imageMogr2/crop/96x96/gravity/north",
+        "status": "active",
+        "last_active_at": "2026-06-22T09:06:23.000000Z",
+        "password_need_update": false,
+        "display_name": "LJJ（嘉健）",
+        "default_display_name": "LJJ（嘉健）",
+        "team_display_name": null,
+        "company_display_name": null,
+        "model": "user",
+        "morph_type": "users"
+      },
+      "updater": {
+        "id": 673623548256660,
+        "username": "u69e596fa1503f",
+        "alias": null,
+        "nickname": "LJJ（嘉健）",
+        "avatar": "https://cdn4.codesign.qq.com/profile-avatars/7ZRGKvwQJWyAgjA.png?imageMogr2/crop/96x96/gravity/north",
+        "status": "active",
+        "last_active_at": "2026-06-22T09:06:23.000000Z",
+        "password_need_update": false,
+        "display_name": "LJJ（嘉健）",
+        "default_display_name": "LJJ（嘉健）",
+        "team_display_name": null,
+        "company_display_name": null,
+        "model": "user",
+        "morph_type": "users"
+      },
+      "owner": {
+        "id": 673623548256660,
+        "username": "u69e596fa1503f",
+        "alias": null,
+        "nickname": "LJJ（嘉健）",
+        "avatar": "https://cdn4.codesign.qq.com/profile-avatars/7ZRGKvwQJWyAgjA.png?imageMogr2/crop/96x96/gravity/north",
+        "status": "active",
+        "last_active_at": "2026-06-22T09:06:23.000000Z",
+        "password_need_update": false,
+        "display_name": "LJJ（嘉健）",
+        "default_display_name": "LJJ（嘉健）",
+        "team_display_name": null,
+        "company_display_name": null,
+        "model": "user",
+        "morph_type": "users"
+      },
+      "model": "prototype",
+      "morph_type": "prototypes"
+    }
+  ],
+  "model": "sharing",
+  "morph_type": "sharings"
+}

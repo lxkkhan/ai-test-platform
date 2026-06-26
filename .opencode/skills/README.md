@@ -64,7 +64,7 @@
 
 | # | Skill | 功能 | 输入 | 输出 | 写TAPD |
 |---|-------|------|------|------|--------|
-| 1 | **design-analyze** | 从CoDesign/JSDesign设计稿提取规格→AI分析→回写TAPD | story_id / 设计链接 | JSON + HTML追加到TAPD | ✅ |
+| 1 | **design-analyze** | 从CoDesign/JSDesign设计稿提取规格→AI分析→回写TAPD，可选衔接playwright-mind生成XMind | story_id / 设计链接 | JSON + HTML追加到TAPD + 可选XMind | ✅ |
 | 2 | **tapd-analyze** | 从TAPD拉取需求→AI分析功能点/风险/验收标准 | story_id | JSON分析报告 | ❌ (只读) |
 | 3 | **tapd-gen** | AI生成测试用例→创建测试计划→写入TAPD→关联需求 | story_id / 分析JSON | Plan ID + Case IDs | ✅ |
 | 4 | **template-engine** | 模板库管理+四级匹配+组装生成Playwright脚本 | 标签化用例JSON | .spec.ts文件 | ❌ |
@@ -85,6 +85,7 @@
 |---|-------|------|--------------|
 | 10 | **dom-recorder** | 纯Playwright Selector录制+用例边界标记+模板自动拆解 | 为 template-engine 提供模板库数据源 |
 | 11 | **tapd-bug** | 浏览器功能测试手动提Bug | tapd-sync 内部调用，也可手动使用 |
+| 12 | **playwright-mind** | 从TAPD需求/测试用例自动生成结构化XMind思维导图文件，含需求关联(TAPD story URL) | design-analyze 第九步引用；全流程归档用 |
 
 ### 内部 Skill（不改动）
 
@@ -92,6 +93,16 @@
 |-------|------|
 | **auto-record-replay** | VLM视觉模式录制和回放 |
 | **nl-test-generator** | 自然语言→MidsceneJS .spec.ts |
+
+### 新增 Skill：playwright-mind（XMind 思维导图生成）
+
+| 属性 | 说明 |
+|------|------|
+| 目录 | `.opencode/skills/playwright-mind/` |
+| 核心脚本 | `gen_xmind_v5.js` |
+| 依赖 | `xmind` npm包 + `adm-zip`（均已安装） |
+| 输出目录 | `test_pool/` |
+| XMind结构 | Root → 需求节点(含TAPD href) → 模块 → 测试点 → 用例(前置/步骤/预期) |
 
 ## 全流程详解
 
@@ -206,6 +217,10 @@ dom-recorder ──→ template-extractor ──→ template-library ──→ t
   tapd-test/SKILL.md                           # 旧版VLM全流程
   tapd-test/config.json
 
+  playwright-mind/SKILL.md                     # XMind思维导图生成
+  playwright-mind/gen_xmind_v5.js              # 标准生成脚本(推荐)
+  playwright-mind/node_modules/xmind/          # xmind npm包(已安装)
+
 opencode.jsonc                                 # MCP配置(playwright+codesign-mcp)
 ```
 
@@ -224,8 +239,8 @@ cp .opencode/skills/_shared/tapd-config.example.json .opencode/skills/_shared/ta
 
 ```bash
 cd .opencode/skills/playwright-mind
-npm install
-npx playwright install chromium
+npm install                     # 安装 xmind、adm-zip 等依赖
+npx playwright install chromium # 安装 Playwright 浏览器
 ```
 
 ### 3. 配置 MCP（opencode.jsonc 已预配）

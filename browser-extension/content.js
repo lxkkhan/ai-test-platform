@@ -1140,6 +1140,50 @@
     return fields;
   }
 
+  function showImagePreview(dataUrl) {
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:1000001;display:flex;align-items:center;justify-content:center;cursor:pointer;';
+    overlay.addEventListener('click', function() { overlay.remove(); });
+
+    var closeBtn = document.createElement('button');
+    closeBtn.textContent = '✕';
+    closeBtn.style.cssText = 'position:absolute;top:16px;right:16px;width:36px;height:36px;border:none;border-radius:50%;background:rgba(0,0,0,0.5);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;';
+    closeBtn.addEventListener('click', function() { overlay.remove(); });
+    overlay.appendChild(closeBtn);
+
+    var container = document.createElement('div');
+    container.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:12px;';
+    container.addEventListener('click', function(e) { e.stopPropagation(); });
+
+    var img = document.createElement('img');
+    img.src = dataUrl;
+    img.style.cssText = 'max-width:90vw;max-height:85vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.5);object-fit:contain;';
+
+    container.appendChild(img);
+    overlay.appendChild(container);
+    document.body.appendChild(overlay);
+  }
+
+  function clearMediaAttachments() {
+    screenshotDataUrl = '';
+    pastedImages = [];
+    recordedChunks = [];
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+      mediaRecorder.stop();
+      clearInterval(recordingTimer);
+    }
+    var preview = document.getElementById('tapd-screenshot-preview');
+    if (preview) preview.style.display = 'none';
+    var img = document.getElementById('tapd-screenshot-img');
+    if (img) img.src = '';
+    var recStatus = document.getElementById('tapd-recording-status');
+    if (recStatus) recStatus.style.display = 'none';
+    var recBtn = document.getElementById('tapd-btn-record-start');
+    if (recBtn) recBtn.style.display = '';
+    var pasteContainer = document.getElementById('tapd-pasted-previews');
+    if (pasteContainer) pasteContainer.innerHTML = '';
+  }
+
   function showToast(msg, type) {
     var old = document.querySelector('.tapd-toast');
     if (old) old.remove();
@@ -1238,6 +1282,16 @@
               }
             } else {
               showToast('Bug 已提交！ID: ' + bugId);
+            }
+            // 上传完成预览：截图和粘贴图片保留3秒供查看，再清空
+            var hasMedia = screenshotDataUrl || pastedImages.some(function(p) { return p !== null; });
+            if (hasMedia) {
+              showToast('Bug #' + bugId + ' 已提交！图片预览将在3秒后自动清除');
+              setTimeout(function() {
+                clearMediaAttachments();
+              }, 3000);
+            } else {
+              clearMediaAttachments();
             }
           } else {
             var errMsg = resp ? resp.error : '请检查TAPD配置';
@@ -1339,6 +1393,8 @@
           var img = document.getElementById('tapd-screenshot-img');
           preview.style.display = 'block';
           img.src = screenshotDataUrl;
+          img.style.cursor = 'pointer';
+          img.onclick = function() { showImagePreview(screenshotDataUrl); };
           showToast('截图已捕获！已嵌入Bug描述中');
         } else {
           showToast('截图失败: ' + (resp ? resp.error : '未知错误'), 'error');
@@ -1532,6 +1588,8 @@
     img.style.width = '100%';
     img.style.height = '100%';
     img.style.objectFit = 'cover';
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', function() { showImagePreview(dataUrl); });
 
     var del = document.createElement('button');
     del.textContent = '✕';
@@ -1547,7 +1605,8 @@
     del.style.borderRadius = '50%';
     del.style.cursor = 'pointer';
     del.style.lineHeight = '1';
-    del.addEventListener('click', function() {
+    del.addEventListener('click', function(e) {
+      e.stopPropagation();
       pastedImages[index] = null;
       wrapper.remove();
     });

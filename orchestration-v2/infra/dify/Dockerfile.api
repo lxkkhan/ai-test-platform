@@ -1,0 +1,8 @@
+FROM langgenius/dify-api:latest
+RUN python3 << 'EOF'
+p = "/app/api/.venv/lib/python3.12/site-packages/fastopenapi/error_handler.py"
+c = open(p).read()
+c = c.replace("HTTPStatus(status_code), ErrorType", "HTTPStatus(int(str(status_code).lstrip('f'))), ErrorType")
+open(p, "w").write(c)
+print("Fix applied")
+EOF
