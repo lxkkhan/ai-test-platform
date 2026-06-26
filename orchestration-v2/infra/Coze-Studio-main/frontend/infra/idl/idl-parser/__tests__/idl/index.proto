@@ -1,5 +1,0 @@
-syntax = "proto3";
-
-service Foo {
-  option (api.uri_prefix) = "//example.com";
-}
