@@ -152,6 +152,46 @@ CoDesign 分享链接有两种类型，提取方式不同：
 
 > **注意**：`codesign-mcp` 的 `list_artboards`/`get_artboard_spec` 不支持 Axure 原型类型，会返回 `SHARING_NOT_FOUND`。
 
+#### VLM 视觉识别增强（推荐）
+
+DOM 提取的按钮/字段顺序可能与设计稿视觉顺序不一致（多 tab 重复、iframeText 顺序错乱），VLM（视觉语言模型）直接从截图识别视觉顺序，更准确且能自动发现 DOM 遗漏的按钮。
+
+**流程**：
+1. **截图**：用 Playwright 打开 CoDesign 分享链接，逐页切换并截图
+   - 截图前自动展开折叠区域（高级查询、展开按钮等）
+   - 内容超出视口时分段截图（纵向滚动）
+   - 截图保存到 `codesign_data/screenshots/{pageName}.png`
+   - 支持手动截图模式：如果目录下已有同名 png 则跳过自动截图
+2. **VLM 识别**：调用 Midscene 配置的 qwen3-vl-plus 模型识别截图
+   - 按视觉顺序输出工具栏按钮、搜索字段、表格列
+   - 多段截图逐张识别后按顺序合并去重
+   - VLM 结果保存到 `codesign_data/vlm_results.json`
+3. **合并 DOM + VLM**：
+   - **按钮**：VLM 顺序优先，DOM 提取的按钮作为白名单补充
+   - **字段**：VLM 顺序优先，DOM 提取的字段类型/备注说明作为属性补充
+   - **表格列**：VLM 顺序优先，手动定义的 tableFields 作为白名单过滤噪音
+
+**关键模块**：
+- `playwright-mind/vlm-extract.js`：VLM 识别模块，直接调 qwen3-vl-plus API
+- `playwright-mind/codesign-screenshot.js`：Playwright 自动截图模块
+- `playwright-mind/merge-extractions.js`：`mergeWithVLM` 函数合并 DOM + VLM 结果
+- `playwright-mind/run_vlm_pipeline.js`：一键运行截图 + VLM 识别的入口脚本
+
+**使用方式**：
+```bash
+cd .opencode/skills/playwright-mind
+# 全部页面
+node run_vlm_pipeline.js
+# 只处理包含"业绩确认单"的页面
+node run_vlm_pipeline.js 业绩确认单
+```
+
+**注意事项**：
+- VLM 识别结果可能包含噪音（分页文字、导航元素等），需在合并阶段用 DOM 白名单过滤
+- 截图前必须展开折叠区域，否则会丢失搜索字段
+- 内容超出视口时必须分段截图，否则会丢失底部按钮/字段
+- 如果 CoDesign 访问失败，用户可手动截图放入 `screenshots/` 目录
+
 #### CoDesign 备注说明提取（核心流程）
 
 原型文件中的**备注说明（元素注释）**是生成测试用例的关键数据源，必须逐页提取：
@@ -606,13 +646,28 @@ Root（需求标题）
 
 #### 生成步骤
 
-1. 从 TAPD story 获取标题和 ID，构建 story URL
-2. 根据分析报告中的测试要点（第四部分）生成测试用例数据
-3. 调用 `playwright-mind` Skill 的 `gen_xmind_v5.js`，生成合法 `.xmind` 文件
-4. 输出的 `.xmind` 文件保存到 `test_pool/` 目录
-5. 文件命名格式：`{需求名称}.xmind`
+**方式一：从 TAPD 自动拉取用例生成（推荐）**
+```bash
+cd .opencode/skills/playwright-mind
+node gen_xmind_from_tapd.js {story_id}
+```
 
-> XMind 文件由 [playwright-mind](../playwright-mind/SKILL.md) Skill 生成，所有新脚本必须遵循上述结构规范，确保 `href` 关联到 TAPD story。
+自动从 TAPD 获取需求名称和已关联的测试用例，生成带 TAPD URL 关联的 XMind 文件。
+
+**方式二：从当前分析数据生成（内置测试要点）**
+```bash
+cd .opencode/skills/playwright-mind
+node gen_xmind_from_analysis.js {story_id}
+```
+
+基于本分析报告中的测试要点数据直接生成 XMind 文件，无需等待用例创建后再执行。
+
+**输出**：
+- `.xmind` 文件保存到 `test_pool/` 目录
+- 文件命名格式：`{需求名称}.xmind`
+- 自动关联 TAPD story URL
+
+> XMind 文件由 [playwright-mind](../playwright-mind/SKILL.md) Skill 生成，所有生成脚本遵循 XMind 结构规范，确保 `href` 关联到 TAPD story。
 
 ## 错误处理
 
@@ -721,3 +776,36 @@ tapd-notify（企微通知）
 11. 中文字段必须通过 `curl.exe --data-urlencode` 传入，避免编码乱码
 12. 分析结果会保存到 `output_dir` 目录（默认 `design-analysis/`），JSON 文件命名格式：`{story_id}_{platform}_{timestamp}.json`
 13. `config.json` 中的 TAPD 凭证（`workspace_id`、`api_user`、`api_password` 等）与 `tapd-analyze` 和 `tapd-gen` 共享，修改时需同步
+
+## 代码规范与反偷懒规则
+
+以下规则基于多次踩坑总结，所有 AI 生成/修改的提取代码必须遵守：
+
+### 禁用项
+
+| 规则 | 踩坑案例 | 正确做法 |
+|------|---------|---------|
+| ❌ 禁止对提取结果用 `.slice()` 硬截断 | `inputs.slice(0, 10)` 把"生成业绩""导出"等按钮截掉了 | 全量提取后过滤噪声，而非限制数量 |
+| ❌ 禁止用 ID 黑名单过滤字段 | 排除 `u5_`/`u8_`/`u11_` 等 ID 前缀，把正常字段也误过滤了 | 用白名单（匹配位置/父容器）或正规则 |
+| ❌ 禁止启发式 ID 匹配替代真实数据 | `input.id.replace('_input','_text')` 猜字段标签，结果对不上 | 直接读 iframe 中控件旁边的实际文本内容 |
+| ❌ 禁止代码中留临时调试限制 | `// 先取前10个看看` 忘了删变成最终逻辑 | 提效前必须去掉所有调试限制和桩代码 |
+| ❌ 禁止写泛泛的测试要点 | "按XX搜索→筛选匹配记录" 这种描述 | 必须按高级测试工程师标准：字段校验/状态流转/业务规则/权限/异常 |
+| ❌ 禁止手动定义按钮列表 | 手写 `buttons: ['查询','重置']` 遗漏了原型中的按钮 | 从 iframe DOM 自动提取 + 关键词去重合并 |
+
+### 提取后必查清单
+
+```
+□ 所有操作按钮是否都已提取？（对比页面截图或完整 iframe 文本）
+□ 字段名是否与设计稿备注说明一致？
+□ 控件类型是否正确（文本框/下拉选择/日期选择/复选框）？
+□ 测试要点是否覆盖：字段校验、唯一性约束、状态流转、业务规则、权限控制、异常场景？
+```
+
+### 流程规范
+
+```
+提取数据 → 先保存 JSON 手动检查 → 确认完整后 → 再写入 TAPD
+          ↑—————— 不准跳过 ——————↑
+```
+
+每次生成 TAPD 更新前必须将原始提取数据保存为 JSON，人工确认后再提交。
