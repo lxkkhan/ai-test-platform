@@ -166,7 +166,7 @@ DOM 提取的按钮/字段顺序可能与设计稿视觉顺序不一致（多 ta
    - 按视觉顺序输出工具栏按钮、搜索字段、表格列
    - 多段截图逐张识别后按顺序合并去重
    - VLM 结果保存到 `codesign_data/vlm_results.json`
-3. **合并 DOM + VLM**：
+3. **合并 DOM + VLM**（`merge-extractions.js` 的 `mergeWithVLM` 函数）：
    - **按钮**：VLM 顺序优先，DOM 提取的按钮作为白名单补充
    - **字段**：VLM 顺序优先，DOM 提取的字段类型/备注说明作为属性补充
    - **表格列**：VLM 顺序优先，手动定义的 tableFields 作为白名单过滤噪音
@@ -176,6 +176,7 @@ DOM 提取的按钮/字段顺序可能与设计稿视觉顺序不一致（多 ta
 - `playwright-mind/codesign-screenshot.js`：Playwright 自动截图模块
 - `playwright-mind/merge-extractions.js`：`mergeWithVLM` 函数合并 DOM + VLM 结果
 - `playwright-mind/run_vlm_pipeline.js`：一键运行截图 + VLM 识别的入口脚本
+- `playwright-mind/verify_budget_fields.js`：字段验证（CDP 登录→DOM 扫描→校验）
 
 **使用方式**：
 ```bash
@@ -184,6 +185,31 @@ cd .opencode/skills/playwright-mind
 node run_vlm_pipeline.js
 # 只处理包含"业绩确认单"的页面
 node run_vlm_pipeline.js 业绩确认单
+# 验证系统 vs 设计稿字段
+node verify_budget_fields.js
+```
+
+**CDP 登录（系统验证时使用）**：
+- 启动真实 Chrome 进程 + `--remote-debugging-port=9222`
+- 通过 `chromium.connectOverCDP()` 连接，绕过 WebDriver 检测
+- 自动填写账号密码，调用 Python + OpenCV 自动解决滑块验证码
+- 登录态持久化到 `.auth/chrome-profile-yxxt` 或独立 profile 目录
+- 侧边栏搜索框输入菜单名，键盘方向键选择后回车导航
+
+**Ant Design 表单字段检查要点**：
+- 必填标记：检查 `.ant-form-item-required` CSS 类（Ant Design 用 CSS 伪元素渲染 `*`，DOM 文本中不可见）
+- 控件类型检测：
+  - `.ant-select` → 下拉选择/参照选择
+  - `.ant-picker` → 日期选择
+  - `input[type="number"]` → 数值输入
+  - `textarea` → 多行文本
+- 只读检测：检查 `ant-select-disabled` / `ant-picker-disabled` / `input[readonly]`
+- 错误提示：`.ant-form-item-explain-error` / `.ant-message-error`
+
+**完成 TAPD 更新后自动生成 XMind**：
+```bash
+cd .opencode/skills/playwright-mind
+node gen_xmind_from_story_desc.js <story_id1> <story_id2> ...
 ```
 
 **注意事项**：
@@ -191,6 +217,8 @@ node run_vlm_pipeline.js 业绩确认单
 - 截图前必须展开折叠区域，否则会丢失搜索字段
 - 内容超出视口时必须分段截图，否则会丢失底部按钮/字段
 - 如果 CoDesign 访问失败，用户可手动截图放入 `screenshots/` 目录
+- 系统验证时 CDP 端口 9222 可能与其他脚本冲突，改用独立 profile 目录
+- 不同系统（配送中心 vs 营销系统）使用独立的 profile 目录，避免登录态串扰
 
 #### CoDesign 备注说明提取（核心流程）
 
@@ -628,9 +656,9 @@ Root（需求标题）
         ├── 模块：{模块名称1}
         │     ├── 测试点：{测试点名称}
         │     │     └── 用例：{用例名称} #{优先级}
-        │     │           ├── 前置条件：{条件}
-        │     │           └── 步骤：{步骤描述}
-        │     │                 └── 预期：{预期结果}
+        │     │           ├── 前置条件：{菜单导航路径}
+        │     │           ├── 步骤：{步骤描述}
+        │     │           └── 预期：{预期结果}
         │     └── ...
         ├── 模块：{模块名称2}
         └── ...
@@ -639,10 +667,12 @@ Root（需求标题）
 > **关键约束**：
 > 1. `需求：` 节点的 `href` 属性必须设置为 TAPD story URL（格式：`https://www.tapd.cn/{workspace_id}/prong/stories/view/{story_id}`），这是 XMind 中关联需求的标准方式
 > 2. `Root` 节点标题为需求标题（不带`需求：`前缀），`需求：`节点作为 Root 的第一子节点
-> 3. 模块按功能区域组织（搜索条件、操作按钮、表格列头等）
-> 4. 测试点对应具体测试场景
-> 5. 用例节点包含前置条件/步骤/预期 3 个子节点
-> 6. XMind 文件使用 `xmind` npm 包生成，需包含 `content.json`、`metadata.json`、`manifest.json`、`content.xml`
+> 3. 模块按功能区域组织（制单表单、操作按钮、搜索/筛选、状态流转、唯一性约束、业务规则、流程集成、数据权限、异常场景等）
+> 4. **每条用例必须包含**：前置条件（含菜单导航路径）、步骤、预期三个子节点
+> 5. 前置条件格式：`登录系统，进入菜单：{一级} → {二级} → {三级}；`
+> 6. 菜单路径从需求名称自动提取（`getMenuPath(storyName)` 函数：按 `-` 分割取前段）
+> 7. 测试点按类型自动展开为多条用例（通过 `test-case-engine.js` 的 `expandTestPoint` 函数）
+> 8. XMind 文件使用 `xmind` npm 包生成，需包含 `content.json`、`metadata.json`、`manifest.json`、`content.xml`
 
 #### 生成步骤
 
